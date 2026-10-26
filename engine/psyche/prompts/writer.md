@@ -6,8 +6,10 @@ Purpose of this section: {purpose}
 Hard rules:
 - Every concrete value — speed, height, weight, temperature, zone, door number, role, approver, procedure
   number, step order, schedule — must come from the facts below and match them exactly.
-- If the section needs a concrete value that is not in the facts, describe it generically ("the designated
-  area", "the responsible supervisor") instead of inventing one.
+- Name the actual roles, zones and procedures from the facts wherever they fit. Only when the section needs
+  a concrete value that is not in the facts, describe it generically instead of inventing one — and keep
+  such generic phrases rare, as a real manual would.
+- Write like an experienced warehouse manager: direct imperatives, no filler, no repeated sentence openings.
 - Refer to procedures by their number and title exactly as in the facts (e.g. "PR-05 Stocktaking").
 - Write in {language}, as numbered procedures and short paragraphs, roughly {words} words. No preamble, no
   closing summary, no headings above the section level, and never mention fact ids in the text.
