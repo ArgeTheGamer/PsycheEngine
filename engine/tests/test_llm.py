@@ -82,3 +82,13 @@ def test_strict_schema_requires_all_properties_and_forbids_extras():
     schema = strict_schema(Verdict.model_json_schema())
     assert schema["additionalProperties"] is False
     assert schema["required"] == ["ok", "reasons"]
+
+
+def test_open_critic_without_host_settings_fails_loudly(monkeypatch):
+    from psyche.config import provider_for
+
+    monkeypatch.setenv("CRITIC_PROVIDER", "open")
+    monkeypatch.setenv("OPEN_WEIGHTS_BASE_URL", "")
+    with pytest.raises(RuntimeError, match="OPEN_WEIGHTS_BASE_URL"):
+        provider_for("critic")
+    assert provider_for("writer").name == "meta"

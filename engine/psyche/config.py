@@ -63,7 +63,10 @@ def open_weights_provider() -> Provider:
 def provider_for(agent: str) -> Provider:
     """Pick the provider for an agent; only the critic can be switched to open weights."""
     if agent == "critic" and os.environ.get("CRITIC_PROVIDER", "meta") == "open":
-        return open_weights_provider()
+        provider = open_weights_provider()
+        if not (provider.base_url and provider.api_key):
+            raise RuntimeError("CRITIC_PROVIDER=open needs OPEN_WEIGHTS_BASE_URL and OPEN_WEIGHTS_API_KEY")
+        return provider
     return meta_provider()
 
 
