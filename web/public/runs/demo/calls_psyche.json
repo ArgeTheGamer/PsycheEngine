@@ -1,0 +1,337 @@
+[
+  {
+    "agent": "planner",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2200,
+    "completion_tokens": 400,
+    "cost_usd": 0.00152
+  },
+  {
+    "agent": "canon_editor",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 800,
+    "completion_tokens": 100,
+    "cost_usd": 0.00048,
+    "tags": {}
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 3100,
+    "completion_tokens": 1250,
+    "cost_usd": 0.00324,
+    "tags": {
+      "chapter": 1
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1400,
+    "completion_tokens": 180,
+    "cost_usd": 0.000848,
+    "tags": {
+      "chapter": 1
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2950,
+    "completion_tokens": 1180,
+    "cost_usd": 0.003068,
+    "tags": {
+      "chapter": 2
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1380,
+    "completion_tokens": 170,
+    "cost_usd": 0.000824,
+    "tags": {
+      "chapter": 2
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2800,
+    "completion_tokens": 1100,
+    "cost_usd": 0.00288,
+    "tags": {
+      "chapter": 3
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1350,
+    "completion_tokens": 165,
+    "cost_usd": 0.000804,
+    "tags": {
+      "chapter": 3
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2750,
+    "completion_tokens": 1050,
+    "cost_usd": 0.00278,
+    "tags": {
+      "chapter": 4
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1330,
+    "completion_tokens": 160,
+    "cost_usd": 0.000788,
+    "tags": {
+      "chapter": 4
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2600,
+    "completion_tokens": 980,
+    "cost_usd": 0.002608,
+    "tags": {
+      "chapter": 5
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1300,
+    "completion_tokens": 155,
+    "cost_usd": 0.000768,
+    "tags": {
+      "chapter": 5
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 3400,
+    "completion_tokens": 1420,
+    "cost_usd": 0.003632,
+    "tags": {
+      "chapter": 6
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1600,
+    "completion_tokens": 220,
+    "cost_usd": 0.000992,
+    "tags": {
+      "chapter": 6
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 1800,
+    "completion_tokens": 700,
+    "cost_usd": 0.00184,
+    "tags": {
+      "chapter": 6
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2700,
+    "completion_tokens": 1020,
+    "cost_usd": 0.002712,
+    "tags": {
+      "chapter": 7
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1320,
+    "completion_tokens": 158,
+    "cost_usd": 0.000781,
+    "tags": {
+      "chapter": 7
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 3200,
+    "completion_tokens": 1350,
+    "cost_usd": 0.00344,
+    "tags": {
+      "chapter": 8
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1500,
+    "completion_tokens": 200,
+    "cost_usd": 0.00092,
+    "tags": {
+      "chapter": 8
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2550,
+    "completion_tokens": 940,
+    "cost_usd": 0.002524,
+    "tags": {
+      "chapter": 9
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1280,
+    "completion_tokens": 150,
+    "cost_usd": 0.000752,
+    "tags": {
+      "chapter": 9
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2650,
+    "completion_tokens": 990,
+    "cost_usd": 0.002644,
+    "tags": {
+      "chapter": 10
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1310,
+    "completion_tokens": 156,
+    "cost_usd": 0.000774,
+    "tags": {
+      "chapter": 10
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2500,
+    "completion_tokens": 900,
+    "cost_usd": 0.00244,
+    "tags": {
+      "chapter": 11
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1260,
+    "completion_tokens": 148,
+    "cost_usd": 0.000741,
+    "tags": {
+      "chapter": 11
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2700,
+    "completion_tokens": 1040,
+    "cost_usd": 0.002744,
+    "tags": {
+      "chapter": 12
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1320,
+    "completion_tokens": 160,
+    "cost_usd": 0.000784,
+    "tags": {
+      "chapter": 12
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2650,
+    "completion_tokens": 1000,
+    "cost_usd": 0.00266,
+    "tags": {
+      "chapter": 13
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1550,
+    "completion_tokens": 210,
+    "cost_usd": 0.000956,
+    "tags": {
+      "chapter": 13
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 1500,
+    "completion_tokens": 600,
+    "cost_usd": 0.00156,
+    "tags": {
+      "chapter": 13
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2750,
+    "completion_tokens": 1060,
+    "cost_usd": 0.002796,
+    "tags": {
+      "chapter": 14
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1330,
+    "completion_tokens": 162,
+    "cost_usd": 0.000791,
+    "tags": {
+      "chapter": 14
+    }
+  },
+  {
+    "agent": "writer",
+    "model": "muse-spark-1.3",
+    "prompt_tokens": 2400,
+    "completion_tokens": 860,
+    "cost_usd": 0.002336,
+    "tags": {
+      "chapter": 15
+    }
+  },
+  {
+    "agent": "critic",
+    "model": "Muse Spark Open",
+    "prompt_tokens": 1240,
+    "completion_tokens": 145,
+    "cost_usd": 0.000728,
+    "tags": {
+      "chapter": 15
+    }
+  }
+]
