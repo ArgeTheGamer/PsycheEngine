@@ -13,7 +13,9 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-Category = Literal["limit", "zone", "role", "responsibility", "procedure", "step_order", "equipment", "schedule"]
+Category = Literal[
+    "limit", "zone", "role", "responsibility", "procedure", "step_order", "equipment", "schedule", "rule"
+]
 
 
 class Fact(BaseModel):
