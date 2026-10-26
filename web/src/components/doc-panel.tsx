@@ -178,29 +178,48 @@ export function DocPanel({
   canonFacts: Fact[];
 }) {
   const [tab, setTab] = useState<RunId>("psyche");
-  const [chapter, setChapter] = useState(1);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const sections = tab === "psyche" ? sectionsPsyche : sectionsBaseline;
   const contradictions =
     tab === "psyche" ? contradictionsPsyche : contradictionsBaseline;
-  const section = sections.find((s) => s.chapter === chapter) ?? sections[0];
+  const section =
+    sections.find((s) => s.id === selectedId) ?? sections[0] ?? null;
   const factById = useMemo(
     () => new Map(canonFacts.map((f) => [f.id, f])),
     [canonFacts],
   );
-  const chaptersWithContra = useMemo(() => {
-    const ids = new Set(
-      contradictions.flatMap((c) => [c.section_a, c.section_b]),
-    );
-    return new Set(
-      sections.filter((s) => ids.has(s.id)).map((s) => s.chapter),
-    );
-  }, [contradictions, sections]);
-  const chapterContras = section
+  const groups = useMemo(() => {
+    const byChapter = new Map<number, Section[]>();
+    for (const s of [...sections].sort((a, b) => a.id.localeCompare(b.id))) {
+      const list = byChapter.get(s.chapter) ?? [];
+      list.push(s);
+      byChapter.set(s.chapter, list);
+    }
+    return [...byChapter.entries()].sort((a, b) => a[0] - b[0]);
+  }, [sections]);
+  const sectionsWithContra = useMemo(
+    () =>
+      new Set(contradictions.flatMap((c) => [c.section_a, c.section_b])),
+    [contradictions],
+  );
+  const sectionContras = section
     ? contradictions.filter(
         (c) => c.section_a === section.id || c.section_b === section.id,
       )
     : [];
+
+  function switchTab(v: RunId) {
+    const nextSections = v === "psyche" ? sectionsPsyche : sectionsBaseline;
+    const chapter = section?.chapter;
+    const next =
+      (chapter !== undefined &&
+        nextSections.find((s) => s.chapter === chapter)) ??
+      nextSections[0] ??
+      null;
+    setTab(v);
+    setSelectedId(next?.id ?? null);
+  }
 
   return (
     <Card className="min-h-[440px] xl:h-[calc((100vh-112px)/2)] xl:min-h-[400px]">
@@ -208,7 +227,7 @@ export function DocPanel({
         <CardTitle>Document</CardTitle>
         <Tabs
           value={tab}
-          onValueChange={(v) => setTab(v as RunId)}
+          onValueChange={(v) => switchTab(v as RunId)}
           className="ml-auto"
         >
           <TabsList>
@@ -224,45 +243,60 @@ export function DocPanel({
         </Tabs>
       </CardHeader>
       <CardContent className="min-h-0 flex-1 flex-row gap-3">
-        <div className="flex w-40 shrink-0 flex-col gap-0.5 overflow-auto pr-1">
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setChapter(s.chapter)}
-              className={cn(
-                "flex items-center gap-1.5 rounded-md px-2 py-1.5 text-left text-xs outline-none",
-                s.chapter === chapter
-                  ? "bg-zinc-800 text-zinc-100"
-                  : "text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200",
-              )}
-            >
-              <span className="font-mono text-[11px] text-zinc-500">
-                {String(s.chapter).padStart(2, "0")}
-              </span>
-              <span className="truncate">{s.title}</span>
-              {chaptersWithContra.has(s.chapter) && (
-                <span className="ml-auto size-1.5 shrink-0 rounded-full bg-rose-400" />
-              )}
-            </button>
+        <div className="flex w-44 shrink-0 flex-col gap-1 overflow-auto pr-1">
+          {groups.map(([chapter, list]) => (
+            <div key={chapter}>
+              <div className="px-2 pt-1 pb-0.5 text-xs font-semibold text-zinc-300">
+                {chapter}. {list[0]?.chapter_title ?? ""}
+              </div>
+              {list.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => setSelectedId(s.id)}
+                  className={cn(
+                    "flex w-full items-center gap-1.5 rounded-md px-2 py-1.5 pl-4 text-left text-xs outline-none",
+                    s.id === section?.id
+                      ? "bg-zinc-800 text-zinc-100"
+                      : "text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200",
+                  )}
+                >
+                  <span className="truncate">{s.title}</span>
+                  {sectionsWithContra.has(s.id) && (
+                    <span className="ml-auto size-1.5 shrink-0 rounded-full bg-rose-400" />
+                  )}
+                </button>
+              ))}
+            </div>
           ))}
+          {groups.length === 0 && (
+            <p className="px-2 py-4 text-xs text-zinc-500">
+              No sections in this run.
+            </p>
+          )}
         </div>
         <div className="min-h-0 min-w-0 flex-1 overflow-auto rounded-md border border-zinc-800 p-3">
+          {!section && (
+            <p className="text-xs text-zinc-500">No sections in this run.</p>
+          )}
           {section && (
             <>
-              <h3 className="mb-2 text-sm font-semibold">
-                <span className="mr-2 font-mono text-xs text-zinc-500">
-                  Ch {section.chapter}
-                </span>
+              <div className="mb-1 text-xs text-zinc-500">
+                Ch {section.chapter} · {section.chapter_title}
+              </div>
+              <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold">
                 {section.title}
+                {section.attempts > 1 && (
+                  <Badge variant="warn">rewritten {section.attempts}×</Badge>
+                )}
               </h3>
               <SectionText
                 section={section}
                 contradictions={contradictions}
                 factById={factById}
               />
-              {chapterContras.length > 0 && (
+              {sectionContras.length > 0 && (
                 <div className="mt-3 flex flex-col gap-2 border-t border-zinc-800 pt-2">
-                  {chapterContras.map((c) => (
+                  {sectionContras.map((c) => (
                     <div
                       key={c.id}
                       className="rounded-md border border-rose-500/30 bg-rose-500/5 p-2 text-xs"
