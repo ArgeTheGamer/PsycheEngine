@@ -25,10 +25,13 @@ def propagate(
 ) -> Path:
     store = CanonStore(run_dir / "canon")
     canon = store.latest()
-    sections = [AcceptedSection(**s) for s in json.loads((run_dir / "sections.json").read_text(encoding="utf-8"))]
     plan = {s["id"]: Section(**s) for s in json.loads((run_dir / "plan.json").read_text(encoding="utf-8"))}
 
+    # Changes stack: each one starts from the documents as the previous change left them.
     changes = run_dir / "changes"
+    previous = sorted(changes.glob("*/sections.json")) if changes.exists() else []
+    current_file = previous[-1] if previous else run_dir / "sections.json"
+    sections = [AcceptedSection(**s) for s in json.loads(current_file.read_text(encoding="utf-8"))]
     n = len(list(changes.glob("*"))) + 1 if changes.exists() else 1
     out = changes / f"{n:02d}"
     out.mkdir(parents=True)
