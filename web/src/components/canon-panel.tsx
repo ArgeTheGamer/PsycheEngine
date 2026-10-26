@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import type {
   CanonVersion,
+  DocumentInfo,
   Fact,
   FactChangeRecord,
   Section,
@@ -35,11 +36,13 @@ function versionLabel(v: number) {
 
 export function CanonPanel({
   canon,
+  documents,
   sections,
   changes,
   onReplay,
 }: {
   canon: CanonVersion[];
+  documents: DocumentInfo[];
   sections: Section[];
   changes: FactChangeRecord[];
   onReplay: (change: FactChangeRecord) => void;
@@ -74,6 +77,23 @@ export function CanonPanel({
         .map((id) => sectionById.get(id))
         .filter((s): s is Section => s !== undefined)
     : [];
+  const docTitleById = useMemo(
+    () => new Map(documents.map((d) => [d.id, d.title])),
+    [documents],
+  );
+  const usageByDoc = useMemo(() => {
+    const groups = new Map<string, Section[]>();
+    for (const s of selectedUsage) {
+      const d = s.doc ?? "ops";
+      const list = groups.get(d) ?? [];
+      list.push(s);
+      groups.set(d, list);
+    }
+    const order = new Map(documents.map((d, i) => [d.id, i]));
+    return [...groups.entries()].sort(
+      (a, b) => (order.get(a[0]) ?? 99) - (order.get(b[0]) ?? 99),
+    );
+  }, [selectedUsage, documents]);
 
   if (!current) {
     return (
@@ -237,17 +257,26 @@ export function CanonPanel({
                   {selectedUsage.length === 1 ? "section" : "sections"}
                 </h3>
                 {selectedUsage.length > 0 ? (
-                  <ul className="flex flex-col gap-1 overflow-auto">
-                    {selectedUsage.map((s) => (
-                      <li
-                        key={s.id}
-                        className="flex items-center gap-2 rounded-md border border-zinc-800 px-2 py-1.5 text-xs"
-                      >
-                        <Badge variant="outline">Ch {s.chapter}</Badge>
-                        <span className="truncate">{s.title}</span>
-                      </li>
+                  <div className="flex flex-col gap-2 overflow-auto">
+                    {usageByDoc.map(([doc, list]) => (
+                      <div key={doc}>
+                        <div className="mb-1 text-[11px] font-semibold text-zinc-400">
+                          {docTitleById.get(doc) ?? doc} ({list.length})
+                        </div>
+                        <ul className="flex flex-col gap-1">
+                          {list.map((s) => (
+                            <li
+                              key={s.id}
+                              className="flex items-center gap-2 rounded-md border border-zinc-800 px-2 py-1.5 text-xs"
+                            >
+                              <Badge variant="outline">Ch {s.chapter}</Badge>
+                              <span className="truncate">{s.title}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
                   <p className="text-xs text-zinc-500">
                     Not referenced by any section yet.

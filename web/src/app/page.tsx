@@ -92,6 +92,7 @@ export default function Home() {
           <>
             <CanonPanel
               canon={data.canon}
+              documents={data.documents}
               sections={data.sectionsPsyche}
               changes={data.changes}
               onReplay={setReplay}
@@ -124,6 +125,7 @@ export default function Home() {
             (f) => f.id === replay.change.fact_id,
           )}
           sections={data.sectionsPsyche}
+          documents={data.documents}
           onClose={() => setReplay(null)}
         />
       )}
