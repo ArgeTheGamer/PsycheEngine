@@ -4,10 +4,10 @@
     "agent": "planner",
     "model": "muse-spark-1.3",
     "kind": "plan",
-    "message": "Split the manual into 15 chapters and assigned a canon slice to each."
+    "message": "Split 4 documents into 14 chapters and assigned canon slices."
   },
   {
-    "ts": 1793091635,
+    "ts": 1793091640,
     "agent": "canon_editor",
     "model": "muse-spark-1.3",
     "kind": "canon_update",
@@ -17,306 +17,288 @@
     "ts": 1793091720,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch01.s1",
+    "section_id": "ops.ch01.s1",
     "kind": "draft",
-    "message": "Drafted chapter 1 (Receiving goods)."
+    "message": "Drafted ops chapter 1 (Receiving goods)."
   },
   {
     "ts": 1793091775,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch01.s1",
+    "section_id": "ops.ch01.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 1 accepted: 10 facts match canon.",
-    "quote": "All quoted limits match F-LIM-02 and F-LIM-09."
+    "message": "ops chapter 1 accepted: 11 facts match canon.",
+    "quote": "Dock doors and booking order match F-ZON-10 and F-ORD-01."
   },
   {
     "ts": 1793091830,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch02.s1",
+    "section_id": "ops.ch02.s1",
     "kind": "draft",
-    "message": "Drafted chapter 2 (Storage and racking)."
+    "message": "Drafted ops chapter 2 (Storage and racking)."
   },
   {
     "ts": 1793091885,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch02.s1",
+    "section_id": "ops.ch02.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 2 accepted: 10 facts match canon.",
+    "message": "ops chapter 2 accepted: 10 facts match canon.",
     "quote": "Bay load and stacking limits match F-LIM-05 to F-LIM-07."
   },
   {
     "ts": 1793091940,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch03.s1",
+    "section_id": "ops.ch03.s1",
     "kind": "draft",
-    "message": "Drafted chapter 3 (Picking)."
+    "message": "Drafted ops chapter 3 (Picking)."
   },
   {
     "ts": 1793091995,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch03.s1",
+    "section_id": "ops.ch03.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 3 accepted: 8 facts match canon.",
+    "message": "ops chapter 3 accepted: 8 facts match canon.",
     "quote": "Step orderings agree with F-ORD-04 and F-ORD-05."
   },
   {
     "ts": 1793092050,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch04.s1",
+    "section_id": "ops.ch04.s1",
     "kind": "draft",
-    "message": "Drafted chapter 4 (Dispatch)."
+    "message": "Drafted ops chapter 4 (Dispatch)."
   },
   {
     "ts": 1793092105,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch04.s1",
+    "section_id": "ops.ch04.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 4 accepted: 8 facts match canon.",
+    "message": "ops chapter 4 accepted: 8 facts match canon.",
     "quote": "Dock doors and staging match F-ZON-04 and F-ZON-11."
   },
   {
     "ts": 1793092160,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch05.s1",
+    "section_id": "ops.ch05.s1",
     "kind": "draft",
-    "message": "Drafted chapter 5 (Stocktaking and cycle counts)."
+    "message": "Drafted ops chapter 5 (Stocktaking and cycle counts)."
   },
   {
     "ts": 1793092215,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch05.s1",
+    "section_id": "ops.ch05.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 5 accepted: 6 facts match canon.",
+    "message": "ops chapter 5 accepted: 6 facts match canon.",
     "quote": "Frequencies and sign-off match F-SCH-03, F-SCH-04, F-RSP-01."
   },
   {
     "ts": 1793092270,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch06.s1",
+    "section_id": "ops.ch06.s1",
     "kind": "draft",
-    "message": "Drafted chapter 6 (Internal transport and forklifts)."
+    "message": "Drafted ops chapter 6 (Internal transport and forklifts)."
   },
   {
     "ts": 1793092325,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch06.s1",
+    "section_id": "ops.ch06.s1",
     "kind": "verdict",
     "accepted": false,
-    "message": "Chapter 6 rejected: indoor speed drifted.",
+    "message": "ops chapter 6 rejected on first pass.",
     "quote": "Draft states 12 km/h indoors; F-LIM-01 requires 10 km/h."
   },
   {
     "ts": 1793092380,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch06.s1",
+    "section_id": "ops.ch06.s1",
     "kind": "rewrite",
-    "message": "Rewrote chapter 6 from the locked canon slice; resubmitted."
+    "message": "Rewrote ops chapter 6 from the locked canon slice."
   },
   {
     "ts": 1793092435,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch06.s1",
+    "section_id": "ops.ch06.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 6 accepted after rewrite: 16 facts match canon.",
+    "message": "ops chapter 6 accepted: 17 facts match canon.",
     "quote": "Speed ladder 10/15/5 confirmed against F-LIM-01 to F-LIM-04."
   },
   {
     "ts": 1793092490,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch07.s1",
+    "section_id": "hs.ch01.s1",
     "kind": "draft",
-    "message": "Drafted chapter 7 (Returns handling)."
+    "message": "Drafted hs chapter 1 (Pedestrian safety)."
   },
   {
     "ts": 1793092545,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch07.s1",
+    "section_id": "hs.ch01.s1",
     "kind": "verdict",
-    "accepted": true,
-    "message": "Chapter 7 accepted: 7 facts match canon.",
-    "quote": "Zone F placement and 14-day window confirmed."
+    "accepted": false,
+    "message": "hs chapter 1 rejected on first pass.",
+    "quote": "Draft states walkways are 1.5 m; F-LIM-13 requires 1.2 m."
   },
   {
     "ts": 1793092600,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch08.s1",
-    "kind": "draft",
-    "message": "Drafted chapter 8 (Roles and responsibilities)."
+    "section_id": "hs.ch01.s1",
+    "kind": "rewrite",
+    "message": "Rewrote hs chapter 1 from the locked canon slice."
   },
   {
     "ts": 1793092655,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch08.s1",
+    "section_id": "hs.ch01.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 8 accepted: 13 facts match canon.",
-    "quote": "Approval ladder matches F-RSP-01 to F-RSP-08."
+    "message": "hs chapter 1 accepted: 6 facts match canon.",
+    "quote": "Walkway width and PPE rules confirmed."
   },
   {
     "ts": 1793092710,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch09.s1",
+    "section_id": "hs.ch02.s1",
     "kind": "draft",
-    "message": "Drafted chapter 9 (Emergencies and evacuation)."
+    "message": "Drafted hs chapter 2 (Emergencies and evacuation)."
   },
   {
     "ts": 1793092765,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch09.s1",
+    "section_id": "hs.ch02.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 9 accepted: 5 facts match canon.",
+    "message": "hs chapter 2 accepted: 6 facts match canon.",
     "quote": "Roll-call ordering matches F-ORD-09."
   },
   {
     "ts": 1793092820,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch10.s1",
+    "section_id": "hs.ch03.s1",
     "kind": "draft",
-    "message": "Drafted chapter 10 (Cold-chain handling)."
+    "message": "Drafted hs chapter 3 (Hazmat storage)."
   },
   {
     "ts": 1793092875,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch10.s1",
+    "section_id": "hs.ch03.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 10 accepted: 5 facts match canon.",
-    "quote": "Temperature band matches F-LIM-08 and F-LIM-09."
+    "message": "hs chapter 3 accepted: 4 facts match canon.",
+    "quote": "Cage limits match F-LIM-10 and F-ZON-12."
   },
   {
     "ts": 1793092930,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch11.s1",
+    "section_id": "roles.ch01.s1",
     "kind": "draft",
-    "message": "Drafted chapter 11 (Hazmat storage)."
+    "message": "Drafted roles chapter 1 (Roles and responsibilities)."
   },
   {
     "ts": 1793092985,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch11.s1",
+    "section_id": "roles.ch01.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 11 accepted: 4 facts match canon.",
-    "quote": "Cage limits match F-LIM-10 and F-ZON-12."
+    "message": "roles chapter 1 accepted: 14 facts match canon.",
+    "quote": "Approval ladder matches F-RSP-01 to F-RSP-08."
   },
   {
     "ts": 1793093040,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch12.s1",
+    "section_id": "roles.ch02.s1",
     "kind": "draft",
-    "message": "Drafted chapter 12 (Packing and labelling)."
+    "message": "Drafted roles chapter 2 (Packing and labelling)."
   },
   {
     "ts": 1793093095,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch12.s1",
+    "section_id": "roles.ch02.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 12 accepted: 6 facts match canon.",
+    "message": "roles chapter 2 accepted: 6 facts match canon.",
     "quote": "Scan-before-pack ordering matches F-ORD-05."
   },
   {
     "ts": 1793093150,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch13.s1",
+    "section_id": "roles.ch03.s1",
     "kind": "draft",
-    "message": "Drafted chapter 13 (Pedestrian safety)."
+    "message": "Drafted roles chapter 3 (Shift duties and handover)."
   },
   {
     "ts": 1793093205,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch13.s1",
+    "section_id": "roles.ch03.s1",
     "kind": "verdict",
-    "accepted": false,
-    "message": "Chapter 13 rejected: walkway width drifted.",
-    "quote": "Draft states walkways are 1.5 m; F-LIM-13 requires 1.2 m."
+    "accepted": true,
+    "message": "roles chapter 3 accepted: 4 facts match canon.",
+    "quote": "Shift hours match F-SCH-01 and F-SCH-02."
   },
   {
     "ts": 1793093260,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch13.s1",
-    "kind": "rewrite",
-    "message": "Rewrote chapter 13 from the locked canon slice; resubmitted."
+    "section_id": "sla.ch01.s1",
+    "kind": "draft",
+    "message": "Drafted sla chapter 1 (Service levels)."
   },
   {
     "ts": 1793093315,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch13.s1",
+    "section_id": "sla.ch01.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 13 accepted after rewrite: 6 facts match canon.",
-    "quote": "Walkway width and PPE rules confirmed."
+    "message": "sla chapter 1 accepted: 7 facts match canon.",
+    "quote": "Service levels match F-SCH-03, F-SCH-04 and F-SCH-08."
   },
   {
     "ts": 1793093370,
     "agent": "writer",
     "model": "muse-spark-1.3",
-    "section_id": "psy-ch14.s1",
+    "section_id": "sla.ch02.s1",
     "kind": "draft",
-    "message": "Drafted chapter 14 (Damaged goods and quarantine)."
+    "message": "Drafted sla chapter 2 (Cold-chain guarantees)."
   },
   {
     "ts": 1793093425,
     "agent": "critic",
     "model": "Muse Spark Open",
-    "section_id": "psy-ch14.s1",
+    "section_id": "sla.ch02.s1",
     "kind": "verdict",
     "accepted": true,
-    "message": "Chapter 14 accepted: 6 facts match canon.",
-    "quote": "Write-off ladder matches F-RSP-02 and F-RSP-03."
-  },
-  {
-    "ts": 1793093480,
-    "agent": "writer",
-    "model": "muse-spark-1.3",
-    "section_id": "psy-ch15.s1",
-    "kind": "draft",
-    "message": "Drafted chapter 15 (Shift handover)."
-  },
-  {
-    "ts": 1793093535,
-    "agent": "critic",
-    "model": "Muse Spark Open",
-    "section_id": "psy-ch15.s1",
-    "kind": "verdict",
-    "accepted": true,
-    "message": "Chapter 15 accepted: 4 facts match canon.",
-    "quote": "Shift hours match F-SCH-01 and F-SCH-02."
+    "message": "sla chapter 2 accepted: 3 facts match canon.",
+    "quote": "Temperature band matches F-LIM-08 and F-LIM-09."
   }
 ]

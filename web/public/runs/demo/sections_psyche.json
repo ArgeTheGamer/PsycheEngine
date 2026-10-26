@@ -1,6 +1,95 @@
 [
   {
-    "id": "psy-ch01.s1",
+    "id": "hs.ch01.s1",
+    "doc": "hs",
+    "chapter": 1,
+    "chapter_title": "Pedestrian safety",
+    "title": "Walkways and limits",
+    "text": "Pedestrian safety follows PR-11 [F-PRC-11]. Segregated pedestrian walkways are 1.2 m wide [F-LIM-13], separated from truck lanes by yellow barriers. Trucks slow to 5 km/h in marked pedestrian zones [F-LIM-03]; the general indoor limit is 10 km/h [F-LIM-01].",
+    "fact_ids": [
+      "F-PRC-11",
+      "F-LIM-13",
+      "F-LIM-03",
+      "F-LIM-01"
+    ],
+    "attempts": 2,
+    "unresolved_issues": []
+  },
+  {
+    "id": "hs.ch01.s2",
+    "doc": "hs",
+    "chapter": 1,
+    "chapter_title": "Pedestrian safety",
+    "title": "Protective equipment",
+    "text": "High-visibility vests are mandatory for everyone on the floor [F-RUL-01], and safety footwear class S3 is mandatory [F-RUL-02].",
+    "fact_ids": [
+      "F-RUL-01",
+      "F-RUL-02"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "hs.ch02.s1",
+    "doc": "hs",
+    "chapter": 2,
+    "chapter_title": "Emergencies and evacuation",
+    "title": "Evacuation procedure",
+    "text": "Emergency evacuation follows PR-14 [F-PRC-14]. On the alarm, everyone leaves by the marked routes and gathers at the assembly point by the north fence. Roll call happens before anyone re-enters the building [F-ORD-09]. Outside drills, indoor traffic keeps to the 10 km/h limit [F-LIM-01].",
+    "fact_ids": [
+      "F-PRC-14",
+      "F-ORD-09",
+      "F-LIM-01"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "hs.ch02.s2",
+    "doc": "hs",
+    "chapter": 2,
+    "chapter_title": "Emergencies and evacuation",
+    "title": "Drills and walkways",
+    "text": "An evacuation drill runs every quarter [F-SCH-07], and the shift supervisor reviews every incident report [F-RSP-07]. Segregated pedestrian walkways are 1.2 m wide [F-LIM-13] and must stay clear at all times.",
+    "fact_ids": [
+      "F-SCH-07",
+      "F-RSP-07",
+      "F-LIM-13"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "hs.ch03.s1",
+    "doc": "hs",
+    "chapter": 3,
+    "chapter_title": "Hazmat storage",
+    "title": "Cage storage",
+    "text": "Hazmat is stored only in the hazmat cage [F-ZON-15] inside Zone F, under PR-13 [F-PRC-13]. The cage covers 60 m2 [F-ZON-12] and is ventilated and locked.",
+    "fact_ids": [
+      "F-ZON-15",
+      "F-PRC-13",
+      "F-ZON-12"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "hs.ch03.s2",
+    "doc": "hs",
+    "chapter": 3,
+    "chapter_title": "Hazmat storage",
+    "title": "Limits and spills",
+    "text": "No more than 4,000 kg of hazmat may be stored in the cage at one time [F-LIM-10]. Spill kits stand at the cage entrance, and any spill is contained before clean-up begins.",
+    "fact_ids": [
+      "F-LIM-10"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "ops.ch01.s1",
+    "doc": "ops",
     "chapter": 1,
     "chapter_title": "Receiving goods",
     "title": "Dock assignment",
@@ -15,7 +104,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch01.s2",
+    "id": "ops.ch01.s2",
+    "doc": "ops",
     "chapter": 1,
     "chapter_title": "Receiving goods",
     "title": "Inspection and booking",
@@ -33,7 +123,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch02.s1",
+    "id": "ops.ch02.s1",
+    "doc": "ops",
     "chapter": 2,
     "chapter_title": "Storage and racking",
     "title": "Bulk put-away",
@@ -49,7 +140,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch02.s2",
+    "id": "ops.ch02.s2",
+    "doc": "ops",
     "chapter": 2,
     "chapter_title": "Storage and racking",
     "title": "Load and aisle limits",
@@ -65,7 +157,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch03.s1",
+    "id": "ops.ch03.s1",
+    "doc": "ops",
     "chapter": 3,
     "chapter_title": "Picking",
     "title": "Pick execution",
@@ -81,7 +174,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch03.s2",
+    "id": "ops.ch03.s2",
+    "doc": "ops",
     "chapter": 3,
     "chapter_title": "Picking",
     "title": "Replenishment and verification",
@@ -95,7 +189,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch04.s1",
+    "id": "ops.ch04.s1",
+    "doc": "ops",
     "chapter": 4,
     "chapter_title": "Dispatch",
     "title": "Outbound staging",
@@ -110,7 +205,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch04.s2",
+    "id": "ops.ch04.s2",
+    "doc": "ops",
     "chapter": 4,
     "chapter_title": "Dispatch",
     "title": "Load release",
@@ -125,7 +221,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch05.s1",
+    "id": "ops.ch05.s1",
+    "doc": "ops",
     "chapter": 5,
     "chapter_title": "Stocktaking and cycle counts",
     "title": "Cycle counts",
@@ -140,7 +237,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch05.s2",
+    "id": "ops.ch05.s2",
+    "doc": "ops",
     "chapter": 5,
     "chapter_title": "Stocktaking and cycle counts",
     "title": "Adjustments and sign-off",
@@ -153,7 +251,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch06.s1",
+    "id": "ops.ch06.s1",
+    "doc": "ops",
     "chapter": 6,
     "chapter_title": "Internal transport and forklifts",
     "title": "Speed limits",
@@ -170,7 +269,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch06.s2",
+    "id": "ops.ch06.s2",
+    "doc": "ops",
     "chapter": 6,
     "chapter_title": "Internal transport and forklifts",
     "title": "Truck fleet",
@@ -185,7 +285,8 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch06.s3",
+    "id": "ops.ch06.s3",
+    "doc": "ops",
     "chapter": 6,
     "chapter_title": "Internal transport and forklifts",
     "title": "Operators and daily checks",
@@ -203,37 +304,9 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch07.s1",
-    "chapter": 7,
-    "chapter_title": "Returns handling",
-    "title": "Returns intake",
-    "text": "Returns are handled in Zone F [F-ZON-06], where the returns inspection area sits [F-ZON-14], under PR-07 [F-PRC-07]. Returns are accepted within 14 days of delivery [F-SCH-08].",
-    "fact_ids": [
-      "F-ZON-06",
-      "F-ZON-14",
-      "F-PRC-07",
-      "F-SCH-08"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch07.s2",
-    "chapter": 7,
-    "chapter_title": "Returns handling",
-    "title": "Inspection and disposition",
-    "text": "Returns specialists [F-ROL-07] inspect every unit: returns are inspected before any restock, rework or scrap decision [F-ORD-06]. The shift supervisor approves the final disposition of inspected returns [F-RSP-04].",
-    "fact_ids": [
-      "F-ROL-07",
-      "F-ORD-06",
-      "F-RSP-04"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch08.s1",
-    "chapter": 8,
+    "id": "roles.ch01.s1",
+    "doc": "roles",
+    "chapter": 1,
     "chapter_title": "Roles and responsibilities",
     "title": "Warehouse manager",
     "text": "The warehouse manager [F-ROL-01] owns site operations, safety and stock accuracy. The manager signs off stocktake results [F-RSP-01], approves overtime [F-RSP-05], authorises new forklift operators [F-RSP-08] and approves damaged-goods write-offs above 500 EUR [F-RSP-03] [F-LIM-14].",
@@ -249,23 +322,26 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch08.s2",
-    "chapter": 8,
+    "id": "roles.ch01.s2",
+    "doc": "roles",
+    "chapter": 1,
     "chapter_title": "Roles and responsibilities",
     "title": "Shift supervisors",
-    "text": "The shift supervisor [F-ROL-02] runs one shift: approving write-offs up to 500 EUR [F-RSP-02], returns dispositions [F-RSP-04] and reviewing every incident and near-miss report [F-RSP-07].",
+    "text": "The shift supervisor [F-ROL-02] runs one shift: approving write-offs up to 500 EUR [F-RSP-02], returns dispositions [F-RSP-04] and reviewing every incident and near-miss report [F-RSP-07]. Supervisors enforce the 10 km/h indoor limit on their shift [F-LIM-01].",
     "fact_ids": [
       "F-ROL-02",
       "F-RSP-02",
       "F-RSP-04",
-      "F-RSP-07"
+      "F-RSP-07",
+      "F-LIM-01"
     ],
     "attempts": 1,
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch08.s3",
-    "chapter": 8,
+    "id": "roles.ch01.s3",
+    "doc": "roles",
+    "chapter": 1,
     "chapter_title": "Roles and responsibilities",
     "title": "Dispatch and support",
     "text": "The dispatcher assigns dock doors and time slots to carriers [F-RSP-06]. Packing and services run in Zone F [F-ZON-06], whose teams also support the PR-08 cycle counts [F-PRC-08].",
@@ -278,89 +354,9 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch09.s1",
-    "chapter": 9,
-    "chapter_title": "Emergencies and evacuation",
-    "title": "Evacuation procedure",
-    "text": "Emergency evacuation follows PR-14 [F-PRC-14]. On the alarm, everyone leaves by the marked routes and gathers at the assembly point by the north fence. Roll call happens before anyone re-enters the building [F-ORD-09]. Outside drills, indoor traffic keeps to the 10 km/h limit [F-LIM-01].",
-    "fact_ids": [
-      "F-PRC-14",
-      "F-ORD-09",
-      "F-LIM-01"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch09.s2",
-    "chapter": 9,
-    "chapter_title": "Emergencies and evacuation",
-    "title": "Drills and walkways",
-    "text": "An evacuation drill runs every quarter [F-SCH-07], and the shift supervisor reviews every incident report [F-RSP-07]. Segregated pedestrian walkways are 1.2 m wide [F-LIM-13] and must stay clear at all times.",
-    "fact_ids": [
-      "F-SCH-07",
-      "F-RSP-07",
-      "F-LIM-13"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch10.s1",
-    "chapter": 10,
-    "chapter_title": "Cold-chain handling",
-    "title": "Temperature band",
-    "text": "Chilled goods are stored in Zone E [F-ZON-05] under PR-12 [F-PRC-12]. The cold zone must stay at or above +2 °C [F-LIM-08] and at or below +8 °C [F-LIM-09]; the zone never rises above +8 °C.",
-    "fact_ids": [
-      "F-ZON-05",
-      "F-PRC-12",
-      "F-LIM-08",
-      "F-LIM-09"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch10.s2",
-    "chapter": 10,
-    "chapter_title": "Cold-chain handling",
-    "title": "Monitoring",
-    "text": "Cold-zone temperature is manually verified each shift [F-SCH-09], on top of continuous alarming. Any excursion is quarantined and reported immediately.",
-    "fact_ids": [
-      "F-SCH-09"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch11.s1",
-    "chapter": 11,
-    "chapter_title": "Hazmat storage",
-    "title": "Cage storage",
-    "text": "Hazmat is stored only in the hazmat cage [F-ZON-15] inside Zone F, under PR-13 [F-PRC-13]. The cage covers 60 m2 [F-ZON-12] and is ventilated and locked.",
-    "fact_ids": [
-      "F-ZON-15",
-      "F-PRC-13",
-      "F-ZON-12"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch11.s2",
-    "chapter": 11,
-    "chapter_title": "Hazmat storage",
-    "title": "Limits and spills",
-    "text": "No more than 4,000 kg of hazmat may be stored in the cage at one time [F-LIM-10]. Spill kits stand at the cage entrance, and any spill is contained before clean-up begins.",
-    "fact_ids": [
-      "F-LIM-10"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch12.s1",
-    "chapter": 12,
+    "id": "roles.ch02.s1",
+    "doc": "roles",
+    "chapter": 2,
     "chapter_title": "Packing and labelling",
     "title": "Scan and label",
     "text": "Packing and labelling follow PR-05 [F-PRC-05]. Picked items are scan-verified before packing [F-ORD-05]; each parcel gets a shipping label before it moves to Zone D [F-ZON-04].",
@@ -373,8 +369,9 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch12.s2",
-    "chapter": 12,
+    "id": "roles.ch02.s2",
+    "doc": "roles",
+    "chapter": 2,
     "chapter_title": "Packing and labelling",
     "title": "Wrapping and waste",
     "text": "The line uses 2 semi-automatic stretch wrappers [F-EQP-07] and 12 hand pallet jacks [F-EQP-06] for small moves. Waste cardboard goes straight to the site baler [F-EQP-08].",
@@ -387,65 +384,10 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch13.s1",
-    "chapter": 13,
-    "chapter_title": "Pedestrian safety",
-    "title": "Walkways and limits",
-    "text": "Pedestrian safety follows PR-11 [F-PRC-11]. Segregated pedestrian walkways are 1.2 m wide [F-LIM-13], separated from truck lanes by yellow barriers. Trucks slow to 5 km/h in marked pedestrian zones [F-LIM-03]; the general indoor limit is 10 km/h [F-LIM-01].",
-    "fact_ids": [
-      "F-PRC-11",
-      "F-LIM-13",
-      "F-LIM-03",
-      "F-LIM-01"
-    ],
-    "attempts": 2,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch13.s2",
-    "chapter": 13,
-    "chapter_title": "Pedestrian safety",
-    "title": "Protective equipment",
-    "text": "High-visibility vests are mandatory for everyone on the floor [F-RUL-01], and safety footwear class S3 is mandatory [F-RUL-02].",
-    "fact_ids": [
-      "F-RUL-01",
-      "F-RUL-02"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch14.s1",
-    "chapter": 14,
-    "chapter_title": "Damaged goods and quarantine",
-    "title": "Quarantine",
-    "text": "Damaged goods are moved to the quarantine area in Zone F [F-ZON-13] the same day they are found, under PR-09 [F-PRC-09]. Quarantined pallets never return to the racks; bays keep their 2,700 kg rating [F-LIM-07].",
-    "fact_ids": [
-      "F-ZON-13",
-      "F-PRC-09",
-      "F-LIM-07"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch14.s2",
-    "chapter": 14,
-    "chapter_title": "Damaged goods and quarantine",
-    "title": "Write-offs and credit",
-    "text": "The shift supervisor approves write-offs up to 500 EUR [F-RSP-02]; write-offs above 500 EUR need the warehouse manager [F-RSP-03] [F-LIM-14]. No credit is issued before the inspection is complete.",
-    "fact_ids": [
-      "F-RSP-02",
-      "F-RSP-03",
-      "F-LIM-14"
-    ],
-    "attempts": 1,
-    "unresolved_issues": []
-  },
-  {
-    "id": "psy-ch15.s1",
-    "chapter": 15,
-    "chapter_title": "Shift handover",
+    "id": "roles.ch03.s1",
+    "doc": "roles",
+    "chapter": 3,
+    "chapter_title": "Shift duties and handover",
     "title": "Shift hours",
     "text": "End-of-shift handover follows PR-15 [F-PRC-15]. Shift 1 runs 06:00-14:00 [F-SCH-01] and shift 2 runs 14:00-22:00 [F-SCH-02], Monday to Friday.",
     "fact_ids": [
@@ -457,13 +399,72 @@
     "unresolved_issues": []
   },
   {
-    "id": "psy-ch15.s2",
-    "chapter": 15,
-    "chapter_title": "Shift handover",
+    "id": "roles.ch03.s2",
+    "doc": "roles",
+    "chapter": 3,
+    "chapter_title": "Shift duties and handover",
     "title": "Handover briefing",
     "text": "The outgoing shift supervisor [F-ROL-02] briefs the incoming supervisor on open loads, quarantined stock and incidents. Nothing carries over undocumented.",
     "fact_ids": [
       "F-ROL-02"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "sla.ch01.s1",
+    "doc": "sla",
+    "chapter": 1,
+    "chapter_title": "Service levels",
+    "title": "Stock accuracy",
+    "text": "Harborwick counts stock every working day [F-SCH-03] and runs a full wall-to-wall stocktake once a year [F-SCH-04], signed off by the warehouse manager [F-RSP-01]. Write-offs above 500 EUR need the warehouse manager [F-RSP-03] [F-LIM-14].",
+    "fact_ids": [
+      "F-SCH-03",
+      "F-SCH-04",
+      "F-RSP-01",
+      "F-RSP-03",
+      "F-LIM-14"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "sla.ch01.s2",
+    "doc": "sla",
+    "chapter": 1,
+    "chapter_title": "Service levels",
+    "title": "Returns window",
+    "text": "Clients may return goods within 14 days of delivery [F-SCH-08]. Returns are inspected in Zone F [F-ZON-14] before any restock decision.",
+    "fact_ids": [
+      "F-SCH-08",
+      "F-ZON-14"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "sla.ch02.s1",
+    "doc": "sla",
+    "chapter": 2,
+    "chapter_title": "Cold-chain guarantees",
+    "title": "Temperature promise",
+    "text": "Chilled goods are held between +2 °C and +8 °C [F-LIM-08] [F-LIM-09]. The cold zone never rises above +8 °C.",
+    "fact_ids": [
+      "F-LIM-08",
+      "F-LIM-09"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "id": "sla.ch02.s2",
+    "doc": "sla",
+    "chapter": 2,
+    "chapter_title": "Cold-chain guarantees",
+    "title": "Monitoring",
+    "text": "Cold-zone temperature is manually verified each shift [F-SCH-09], with continuous alarming on every excursion.",
+    "fact_ids": [
+      "F-SCH-09"
     ],
     "attempts": 1,
     "unresolved_issues": []

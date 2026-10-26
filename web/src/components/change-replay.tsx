@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
-import type { AgentEvent, Fact, FactChangeRecord, Section } from "@/lib/types";
+import type {
+  AgentEvent,
+  DocumentInfo,
+  Fact,
+  FactChangeRecord,
+  Section,
+} from "@/lib/types";
 import { Badge, Button } from "./ui";
 import { ChangeGraph } from "./change-graph";
 import { ChangeDiff } from "./change-diff";
@@ -93,11 +99,13 @@ export function ChangeReplay({
   record,
   fact,
   sections,
+  documents,
   onClose,
 }: {
   record: FactChangeRecord;
   fact: Fact | undefined;
   sections: Section[];
+  documents: DocumentInfo[];
   onClose: () => void;
 }) {
   const [step, setStep] = useState(0);
@@ -193,6 +201,7 @@ export function ChangeReplay({
                 }
                 affected={change.affected_sections}
                 sections={sections}
+                documents={documents}
               />
             </div>
           )}

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type {
   Contradiction,
+  DocumentInfo,
   Fact,
   RunId,
   Section,
@@ -165,12 +166,14 @@ function SectionText({
 }
 
 export function DocPanel({
+  documents,
   sectionsPsyche,
   sectionsBaseline,
   contradictionsPsyche,
   contradictionsBaseline,
   canonFacts,
 }: {
+  documents: DocumentInfo[];
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
@@ -178,26 +181,39 @@ export function DocPanel({
   canonFacts: Fact[];
 }) {
   const [tab, setTab] = useState<RunId>("psyche");
+  const [docId, setDocId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const sections = tab === "psyche" ? sectionsPsyche : sectionsBaseline;
   const contradictions =
     tab === "psyche" ? contradictionsPsyche : contradictionsBaseline;
+  const docTitleById = useMemo(
+    () => new Map(documents.map((d) => [d.id, d.title])),
+    [documents],
+  );
+  // Older runs lack Section.doc — treat those sections as "ops".
+  const docOf = (s: Section) => s.doc ?? "ops";
+  const doc = docId ?? documents[0]?.id ?? "ops";
+  const docSections = sections.filter((s) => docOf(s) === doc);
   const section =
-    sections.find((s) => s.id === selectedId) ?? sections[0] ?? null;
+    docSections.find((s) => s.id === selectedId) ?? docSections[0] ?? null;
   const factById = useMemo(
     () => new Map(canonFacts.map((f) => [f.id, f])),
     [canonFacts],
   );
+  const sectionById = useMemo(
+    () => new Map(sections.map((s) => [s.id, s])),
+    [sections],
+  );
   const groups = useMemo(() => {
     const byChapter = new Map<number, Section[]>();
-    for (const s of [...sections].sort((a, b) => a.id.localeCompare(b.id))) {
+    for (const s of [...docSections].sort((a, b) => a.id.localeCompare(b.id))) {
       const list = byChapter.get(s.chapter) ?? [];
       list.push(s);
       byChapter.set(s.chapter, list);
     }
     return [...byChapter.entries()].sort((a, b) => a[0] - b[0]);
-  }, [sections]);
+  }, [docSections]);
   const sectionsWithContra = useMemo(
     () =>
       new Set(contradictions.flatMap((c) => [c.section_a, c.section_b])),
@@ -214,10 +230,22 @@ export function DocPanel({
     const chapter = section?.chapter;
     const inChapter =
       chapter !== undefined
-        ? nextSections.find((s) => s.chapter === chapter)
+        ? nextSections.find(
+            (s) => (s.doc ?? "ops") === doc && s.chapter === chapter,
+          )
         : undefined;
-    const next = inChapter ?? nextSections[0] ?? null;
+    const next =
+      inChapter ??
+      nextSections.find((s) => (s.doc ?? "ops") === doc) ??
+      nextSections[0] ??
+      null;
     setTab(v);
+    setSelectedId(next?.id ?? null);
+  }
+
+  function switchDoc(d: string) {
+    const next = sections.find((s) => docOf(s) === d) ?? null;
+    setDocId(d);
     setSelectedId(next?.id ?? null);
   }
 
@@ -242,7 +270,25 @@ export function DocPanel({
           </TabsList>
         </Tabs>
       </CardHeader>
-      <CardContent className="min-h-0 flex-1 flex-row gap-3">
+      <CardContent className="min-h-0 flex-1 gap-2">
+        <div className="flex gap-1 rounded-md bg-zinc-800/70 p-1">
+          {documents.map((d) => (
+            <button
+              key={d.id}
+              onClick={() => switchDoc(d.id)}
+              title={d.title}
+              className={cn(
+                "min-w-0 flex-1 truncate rounded px-2 py-1 text-xs font-medium outline-none",
+                d.id === doc
+                  ? "bg-zinc-950 text-zinc-100 shadow-sm"
+                  : "text-zinc-400 hover:text-zinc-200",
+              )}
+            >
+              {d.title}
+            </button>
+          ))}
+        </div>
+        <div className="flex min-h-0 flex-1 flex-row gap-3">
         <div className="flex w-44 shrink-0 flex-col gap-1 overflow-auto pr-1">
           {groups.map(([chapter, list]) => (
             <div key={chapter}>
@@ -296,22 +342,44 @@ export function DocPanel({
               />
               {sectionContras.length > 0 && (
                 <div className="mt-3 flex flex-col gap-2 border-t border-zinc-800 pt-2">
-                  {sectionContras.map((c) => (
-                    <div
-                      key={c.id}
-                      className="rounded-md border border-rose-500/30 bg-rose-500/5 p-2 text-xs"
-                    >
-                      <div className="mb-1 flex items-center gap-1.5">
-                        <Badge variant="danger">{c.id}</Badge>
-                        <Badge variant="outline">{c.category}</Badge>
+                  {sectionContras.map((c) => {
+                    const otherId =
+                      c.section_a === section.id ? c.section_b : c.section_a;
+                    const other = sectionById.get(otherId);
+                    const otherDoc = other ? docOf(other) : null;
+                    const crossDoc = otherDoc !== null && otherDoc !== doc;
+                    return (
+                      <div
+                        key={c.id}
+                        className="rounded-md border border-rose-500/30 bg-rose-500/5 p-2 text-xs"
+                      >
+                        <div className="mb-1 flex items-center gap-1.5">
+                          <Badge variant="danger">{c.id}</Badge>
+                          <Badge variant="outline">{c.category}</Badge>
+                          {crossDoc && <Badge variant="warn">cross-doc</Badge>}
+                        </div>
+                        <p className="text-zinc-300">{c.explanation}</p>
+                        {other && (
+                          <button
+                            onClick={() => {
+                              setDocId(otherDoc);
+                              setSelectedId(other.id);
+                            }}
+                            className="mt-1 text-left text-rose-300 underline decoration-rose-400/50 underline-offset-2 hover:text-rose-200"
+                          >
+                            {crossDoc
+                              ? `conflicts with ${docTitleById.get(otherDoc ?? "") ?? otherDoc} › ${other.title}`
+                              : `see also ${other.title}`}
+                          </button>
+                        )}
                       </div>
-                      <p className="text-zinc-300">{c.explanation}</p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </>
           )}
+        </div>
         </div>
       </CardContent>
     </Card>

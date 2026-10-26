@@ -69,6 +69,7 @@ export default function Home() {
         untouched={
           hasChanges ? sectionIds.size - rewrittenIds.size : undefined
         }
+        docCount={data?.documents.length}
       />
       <main className="grid gap-4 p-4 lg:grid-cols-2">
         {error && (
@@ -91,11 +92,13 @@ export default function Home() {
           <>
             <CanonPanel
               canon={data.canon}
+              documents={data.documents}
               sections={data.sectionsPsyche}
               changes={data.changes}
               onReplay={setReplay}
             />
             <DocPanel
+              documents={data.documents}
               sectionsPsyche={data.sectionsPsyche}
               sectionsBaseline={data.sectionsBaseline}
               contradictionsPsyche={data.contradictionsPsyche}
@@ -103,6 +106,7 @@ export default function Home() {
               canonFacts={data.canon[data.canon.length - 1]?.facts ?? []}
             />
             <ChartsPanel
+              documents={data.documents}
               sectionsPsyche={data.sectionsPsyche}
               sectionsBaseline={data.sectionsBaseline}
               contradictionsPsyche={data.contradictionsPsyche}
@@ -121,6 +125,7 @@ export default function Home() {
             (f) => f.id === replay.change.fact_id,
           )}
           sections={data.sectionsPsyche}
+          documents={data.documents}
           onClose={() => setReplay(null)}
         />
       )}
