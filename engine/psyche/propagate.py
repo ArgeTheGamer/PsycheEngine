@@ -38,14 +38,19 @@ def propagate(
     store.save(canon)
     (out / "change.json").write_text(change.model_dump_json(indent=2), encoding="utf-8")
 
+    # Knock-on changes of derived facts (computed in code) are spelled out for the writer.
+    knock_on = "".join(
+        f"\nAs a result, {d.fact_id} changed from {d.old_value} to {d.new_value}: {canon.fact(d.fact_id).statement}"
+        for d in change.derived
+    )
     diff = []
     for i, current in enumerate(sections):
         if current.id not in change.affected_sections:
             continue
         revision = (
             f"\nThis section was already written and approved. The company has changed one fact: {fact_id} "
-            f"was {change.old_value}, it is now: {new_statement}\nRevise the section below so it is consistent with the "
-            "new fact. Change only what the new fact requires and keep all other wording."
+            f"was {change.old_value}, it is now: {new_statement}{knock_on}\nRevise the section below so it is "
+            "consistent with the canon. Change only what these changes require and keep all other wording."
             f"\n<current_section>\n{current.text}\n</current_section>\n"
         )
         contents = agents.toc([plan[s.id] for s in sections if s.doc == current.doc])
