@@ -82,3 +82,25 @@ def test_unresolved_section_is_kept_after_max_attempts(tmp_path):
     assert section.attempts == 2
     assert section.unresolved_issues[0].fact_id == "F-LIM-01"
     assert "NewFacts" not in client.prompts  # rejected values never reach the canon editor
+
+
+def test_fact_change_rewrites_only_dependent_sections(tmp_path):
+    from psyche.propagate import propagate
+
+    outline = {"chapters": [{"title": "Transport", "sections": [
+        {"title": "Speeds", "purpose": "p", "fact_ids": ["F-LIM-01"]},
+        {"title": "Receiving", "purpose": "p", "fact_ids": ["F-ZON-01"]}]}]}
+    zone = {"text": "Unload in Zone A.", "cited_fact_ids": ["F-ZON-01"]}
+    client = ScriptedClient({"Outline": [outline], "Draft": [GOOD, zone], "Verdict": [ACCEPT, ACCEPT],
+                             "NewFacts": [{"facts": []}, {"facts": []}]})
+    team = make_team(client)
+    run("brief", CANON, tmp_path, Settings(chapters=1), team)
+
+    slower = {"text": "Drive at no more than 8 km/h inside the hall.", "cited_fact_ids": ["F-LIM-01"]}
+    client.script.update({"Draft": [slower], "Verdict": [ACCEPT]})
+    out = propagate(tmp_path, "F-LIM-01", "8", "Forklifts must not exceed 8 km/h indoors.", team, Settings())
+
+    diff = json.loads((out / "diff.json").read_text())
+    assert [d["section_id"] for d in diff] == ["ch01.s1"]  # the zone section was not touched
+    assert "was 10, it is now" in client.prompts["Draft"][-1] and GOOD["text"] in client.prompts["Draft"][-1]
+    assert CanonStore(tmp_path / "canon").latest().fact("F-LIM-01").value == "8"
