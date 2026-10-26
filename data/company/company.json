@@ -1,0 +1,810 @@
+{
+  "company": {
+    "name": "Harborwick 3PL Ltd.",
+    "location": "Port Sellow, Alveria",
+    "summary": "Fictional 3PL/distribution warehouse: 6,000 m2, about 40 staff, two shifts, six zones A-F, electric MHE fleet."
+  },
+  "facts": [
+    {
+      "id": "F-LIM-01",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_indoor",
+      "value": "10",
+      "unit": "km/h",
+      "statement": "Forklifts must not exceed 10 km/h inside the building."
+    },
+    {
+      "id": "F-LIM-02",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_outdoor",
+      "value": "15",
+      "unit": "km/h",
+      "statement": "Forklifts must not exceed 15 km/h in the outdoor yard."
+    },
+    {
+      "id": "F-LIM-03",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_pedestrian_zone",
+      "value": "5",
+      "unit": "km/h",
+      "statement": "Forklifts must slow to 5 km/h in marked pedestrian zones and crossings."
+    },
+    {
+      "id": "F-LIM-04",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_dock_ramp",
+      "value": "5",
+      "unit": "km/h",
+      "statement": "Forklifts must not exceed 5 km/h on dock ramps and leveller approaches."
+    },
+    {
+      "id": "F-LIM-05",
+      "category": "limit",
+      "subject": "pallet_stack",
+      "attribute": "max_height",
+      "value": "4.0",
+      "unit": "m",
+      "statement": "Free block-stacked pallets must not exceed 4.0 m in height."
+    },
+    {
+      "id": "F-LIM-06",
+      "category": "limit",
+      "subject": "pallet_stack",
+      "attribute": "max_pallets",
+      "value": "3",
+      "unit": "pallets",
+      "statement": "Free block-stacked pallets must not exceed 3 pallets high."
+    },
+    {
+      "id": "F-LIM-07",
+      "category": "limit",
+      "subject": "rack_bay",
+      "attribute": "max_load",
+      "value": "2700",
+      "unit": "kg",
+      "statement": "Each rack bay may carry at most 2,700 kg."
+    },
+    {
+      "id": "F-LIM-08",
+      "category": "limit",
+      "subject": "cold_zone",
+      "attribute": "min_temperature",
+      "value": "2",
+      "unit": "°C",
+      "statement": "The cold zone must stay at or above +2 °C."
+    },
+    {
+      "id": "F-LIM-09",
+      "category": "limit",
+      "subject": "cold_zone",
+      "attribute": "max_temperature",
+      "value": "8",
+      "unit": "°C",
+      "statement": "The cold zone must stay at or below +8 °C."
+    },
+    {
+      "id": "F-LIM-10",
+      "category": "limit",
+      "subject": "hazmat_cage",
+      "attribute": "max_stock",
+      "value": "4000",
+      "unit": "kg",
+      "statement": "No more than 4,000 kg of hazmat may be stored in the hazmat cage at one time."
+    },
+    {
+      "id": "F-LIM-11",
+      "category": "limit",
+      "subject": "main_aisle",
+      "attribute": "width",
+      "value": "4.0",
+      "unit": "m",
+      "statement": "Main transport aisles are 4.0 m wide."
+    },
+    {
+      "id": "F-LIM-12",
+      "category": "limit",
+      "subject": "storage_aisle",
+      "attribute": "width",
+      "value": "3.0",
+      "unit": "m",
+      "statement": "Rack storage aisles are 3.0 m wide."
+    },
+    {
+      "id": "F-LIM-13",
+      "category": "limit",
+      "subject": "pedestrian_walkway",
+      "attribute": "width",
+      "value": "1.2",
+      "unit": "m",
+      "statement": "Segregated pedestrian walkways are 1.2 m wide."
+    },
+    {
+      "id": "F-LIM-14",
+      "category": "limit",
+      "subject": "damaged_goods",
+      "attribute": "write_off_threshold",
+      "value": "500",
+      "unit": "EUR",
+      "statement": "Damaged-goods write-offs above 500 EUR need warehouse-manager approval."
+    },
+    {
+      "id": "F-ZON-01",
+      "category": "zone",
+      "subject": "zone_a",
+      "attribute": "purpose",
+      "value": "receiving",
+      "unit": "",
+      "statement": "Zone A is the receiving zone: inbound docks 1-4, unloading and goods inspection."
+    },
+    {
+      "id": "F-ZON-02",
+      "category": "zone",
+      "subject": "zone_b",
+      "attribute": "purpose",
+      "value": "bulk_storage",
+      "unit": "",
+      "statement": "Zone B is the bulk storage zone: high-bay pallet racking."
+    },
+    {
+      "id": "F-ZON-03",
+      "category": "zone",
+      "subject": "zone_c",
+      "attribute": "purpose",
+      "value": "picking",
+      "unit": "",
+      "statement": "Zone C is the picking zone: ground-level pick faces and flow racks."
+    },
+    {
+      "id": "F-ZON-04",
+      "category": "zone",
+      "subject": "zone_d",
+      "attribute": "purpose",
+      "value": "dispatch",
+      "unit": "",
+      "statement": "Zone D is the dispatch zone: outbound staging in front of docks 5-8."
+    },
+    {
+      "id": "F-ZON-05",
+      "category": "zone",
+      "subject": "zone_e",
+      "attribute": "purpose",
+      "value": "cold_storage",
+      "unit": "",
+      "statement": "Zone E is the cold zone: chilled storage held at +2 to +8 °C."
+    },
+    {
+      "id": "F-ZON-06",
+      "category": "zone",
+      "subject": "zone_f",
+      "attribute": "purpose",
+      "value": "vas_quarantine_returns",
+      "unit": "",
+      "statement": "Zone F holds value-added services, quarantine, returns inspection and the hazmat cage."
+    },
+    {
+      "id": "F-ZON-07",
+      "category": "zone",
+      "subject": "warehouse",
+      "attribute": "total_floor_area",
+      "value": "6000",
+      "unit": "m2",
+      "statement": "The warehouse floor covers 6,000 m2."
+    },
+    {
+      "id": "F-ZON-08",
+      "category": "zone",
+      "subject": "racking",
+      "attribute": "pallet_positions",
+      "value": "2400",
+      "unit": "positions",
+      "statement": "The high-bay racking provides 2,400 pallet positions."
+    },
+    {
+      "id": "F-ZON-09",
+      "category": "zone",
+      "subject": "docks",
+      "attribute": "door_count",
+      "value": "8",
+      "unit": "doors",
+      "statement": "The building has 8 dock doors."
+    },
+    {
+      "id": "F-ZON-10",
+      "category": "zone",
+      "subject": "docks",
+      "attribute": "inbound_doors",
+      "value": "1-4",
+      "unit": "",
+      "statement": "Dock doors 1-4 serve inbound receiving."
+    },
+    {
+      "id": "F-ZON-11",
+      "category": "zone",
+      "subject": "docks",
+      "attribute": "outbound_doors",
+      "value": "5-8",
+      "unit": "",
+      "statement": "Dock doors 5-8 serve outbound dispatch."
+    },
+    {
+      "id": "F-ZON-12",
+      "category": "zone",
+      "subject": "hazmat_cage",
+      "attribute": "floor_area",
+      "value": "60",
+      "unit": "m2",
+      "statement": "The hazmat cage inside Zone F covers 60 m2."
+    },
+    {
+      "id": "F-ROL-01",
+      "category": "role",
+      "subject": "warehouse_manager",
+      "attribute": "duty",
+      "value": "Site-wide responsibility for operations, safety and stock accuracy.",
+      "unit": "",
+      "statement": "The warehouse manager owns site operations, safety and stock accuracy."
+    },
+    {
+      "id": "F-ROL-02",
+      "category": "role",
+      "subject": "shift_supervisor",
+      "attribute": "duty",
+      "value": "Runs one shift: staff, docks and incident response.",
+      "unit": "",
+      "statement": "The shift supervisor runs one shift: staff, docks and incident response."
+    },
+    {
+      "id": "F-ROL-03",
+      "category": "role",
+      "subject": "forklift_operator",
+      "attribute": "duty",
+      "value": "Operates forklifts, reach trucks and pallet jacks.",
+      "unit": "",
+      "statement": "Forklift operators operate forklifts, reach trucks and pallet jacks."
+    },
+    {
+      "id": "F-ROL-04",
+      "category": "role",
+      "subject": "picker",
+      "attribute": "duty",
+      "value": "Picks customer orders in Zone C against scanner tasks.",
+      "unit": "",
+      "statement": "Pickers pick customer orders in Zone C against scanner tasks."
+    },
+    {
+      "id": "F-ROL-05",
+      "category": "role",
+      "subject": "inbound_operator",
+      "attribute": "duty",
+      "value": "Unloads, counts and inspects inbound goods in Zone A.",
+      "unit": "",
+      "statement": "Inbound operators unload, count and inspect inbound goods in Zone A."
+    },
+    {
+      "id": "F-ROL-06",
+      "category": "role",
+      "subject": "stock_controller",
+      "attribute": "duty",
+      "value": "Owns inventory accuracy: cycle counts, recounts and adjustments.",
+      "unit": "",
+      "statement": "Stock controllers own inventory accuracy: cycle counts, recounts and adjustments."
+    },
+    {
+      "id": "F-ROL-07",
+      "category": "role",
+      "subject": "returns_specialist",
+      "attribute": "duty",
+      "value": "Inspects returns in Zone F and proposes restock, rework or scrap.",
+      "unit": "",
+      "statement": "Returns specialists inspect returns in Zone F and propose restock, rework or scrap."
+    },
+    {
+      "id": "F-ROL-08",
+      "category": "role",
+      "subject": "maintenance_technician",
+      "attribute": "duty",
+      "value": "Maintains MHE, racking and dock equipment and logs all repairs.",
+      "unit": "",
+      "statement": "The maintenance technician maintains MHE, racking and dock equipment and logs all repairs."
+    },
+    {
+      "id": "F-ROL-09",
+      "category": "role",
+      "subject": "dispatcher",
+      "attribute": "duty",
+      "value": "Books transport, assigns dock doors and releases outbound loads.",
+      "unit": "",
+      "statement": "Dispatchers book transport, assign dock doors and release outbound loads."
+    },
+    {
+      "id": "F-RSP-01",
+      "category": "responsibility",
+      "subject": "stocktake",
+      "attribute": "sign_off_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Only the warehouse manager may sign off stocktake results."
+    },
+    {
+      "id": "F-RSP-02",
+      "category": "responsibility",
+      "subject": "damaged_goods",
+      "attribute": "write_off_approver_small",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "The shift supervisor approves damaged-goods write-offs up to 500 EUR."
+    },
+    {
+      "id": "F-RSP-03",
+      "category": "responsibility",
+      "subject": "damaged_goods",
+      "attribute": "write_off_approver_large",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "The warehouse manager approves damaged-goods write-offs above 500 EUR."
+    },
+    {
+      "id": "F-RSP-04",
+      "category": "responsibility",
+      "subject": "returns",
+      "attribute": "disposition_approver",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "The shift supervisor approves the final disposition of inspected returns."
+    },
+    {
+      "id": "F-RSP-05",
+      "category": "responsibility",
+      "subject": "overtime",
+      "attribute": "approval_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Only the warehouse manager may approve overtime."
+    },
+    {
+      "id": "F-RSP-06",
+      "category": "responsibility",
+      "subject": "docks",
+      "attribute": "scheduling_owner",
+      "value": "dispatcher",
+      "unit": "",
+      "statement": "The dispatcher assigns dock doors and time slots to carriers."
+    },
+    {
+      "id": "F-RSP-07",
+      "category": "responsibility",
+      "subject": "incidents",
+      "attribute": "review_owner",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "The shift supervisor reviews every incident and near-miss report."
+    },
+    {
+      "id": "F-RSP-08",
+      "category": "responsibility",
+      "subject": "forklift",
+      "attribute": "authorisation_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Only the warehouse manager may authorise new forklift operators."
+    },
+    {
+      "id": "F-PRC-01",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-01",
+      "value": "Inbound receiving",
+      "unit": "",
+      "statement": "Procedure PR-01 is titled Inbound receiving."
+    },
+    {
+      "id": "F-PRC-02",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-02",
+      "value": "Put-away to storage",
+      "unit": "",
+      "statement": "Procedure PR-02 is titled Put-away to storage."
+    },
+    {
+      "id": "F-PRC-03",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-03",
+      "value": "Replenishment of pick faces",
+      "unit": "",
+      "statement": "Procedure PR-03 is titled Replenishment of pick faces."
+    },
+    {
+      "id": "F-PRC-04",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-04",
+      "value": "Order picking",
+      "unit": "",
+      "statement": "Procedure PR-04 is titled Order picking."
+    },
+    {
+      "id": "F-PRC-05",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-05",
+      "value": "Packing and labelling",
+      "unit": "",
+      "statement": "Procedure PR-05 is titled Packing and labelling."
+    },
+    {
+      "id": "F-PRC-06",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-06",
+      "value": "Outbound dispatch",
+      "unit": "",
+      "statement": "Procedure PR-06 is titled Outbound dispatch."
+    },
+    {
+      "id": "F-PRC-07",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-07",
+      "value": "Returns handling",
+      "unit": "",
+      "statement": "Procedure PR-07 is titled Returns handling."
+    },
+    {
+      "id": "F-PRC-08",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-08",
+      "value": "Stocktaking and cycle counts",
+      "unit": "",
+      "statement": "Procedure PR-08 is titled Stocktaking and cycle counts."
+    },
+    {
+      "id": "F-PRC-09",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-09",
+      "value": "Damaged-goods handling",
+      "unit": "",
+      "statement": "Procedure PR-09 is titled Damaged-goods handling."
+    },
+    {
+      "id": "F-PRC-10",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-10",
+      "value": "Forklift and MHE operation",
+      "unit": "",
+      "statement": "Procedure PR-10 is titled Forklift and MHE operation."
+    },
+    {
+      "id": "F-PRC-11",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-11",
+      "value": "Pedestrian safety in the warehouse",
+      "unit": "",
+      "statement": "Procedure PR-11 is titled Pedestrian safety in the warehouse."
+    },
+    {
+      "id": "F-PRC-12",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-12",
+      "value": "Cold-chain handling",
+      "unit": "",
+      "statement": "Procedure PR-12 is titled Cold-chain handling."
+    },
+    {
+      "id": "F-PRC-13",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-13",
+      "value": "Hazmat handling and spill response",
+      "unit": "",
+      "statement": "Procedure PR-13 is titled Hazmat handling and spill response."
+    },
+    {
+      "id": "F-PRC-14",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-14",
+      "value": "Emergency evacuation",
+      "unit": "",
+      "statement": "Procedure PR-14 is titled Emergency evacuation."
+    },
+    {
+      "id": "F-PRC-15",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-15",
+      "value": "End-of-shift handover",
+      "unit": "",
+      "statement": "Procedure PR-15 is titled End-of-shift handover."
+    },
+    {
+      "id": "F-PRC-16",
+      "category": "procedure",
+      "subject": "ppe",
+      "attribute": "hi_vis_vest",
+      "value": "mandatory",
+      "unit": "",
+      "statement": "High-visibility vests are mandatory for everyone on the warehouse floor."
+    },
+    {
+      "id": "F-PRC-17",
+      "category": "procedure",
+      "subject": "ppe",
+      "attribute": "safety_footwear",
+      "value": "S3",
+      "unit": "",
+      "statement": "Safety footwear class S3 is mandatory on the warehouse floor."
+    },
+    {
+      "id": "F-PRC-18",
+      "category": "procedure",
+      "subject": "forklift",
+      "attribute": "seatbelt",
+      "value": "mandatory",
+      "unit": "",
+      "statement": "Forklift operators must wear seat belts whenever the truck is moving."
+    },
+    {
+      "id": "F-ORD-01",
+      "category": "step_order",
+      "subject": "receiving",
+      "attribute": "unloading_order",
+      "value": "Document check, then unloading",
+      "unit": "",
+      "statement": "At receiving, the document check happens BEFORE unloading (PR-01)."
+    },
+    {
+      "id": "F-ORD-02",
+      "category": "step_order",
+      "subject": "receiving",
+      "attribute": "booking_order",
+      "value": "Inspection, then system booking",
+      "unit": "",
+      "statement": "Inbound goods are inspected BEFORE they are booked into the system (PR-01)."
+    },
+    {
+      "id": "F-ORD-03",
+      "category": "step_order",
+      "subject": "putaway",
+      "attribute": "release_order",
+      "value": "System booking, then put-away",
+      "unit": "",
+      "statement": "Goods are booked into the system BEFORE put-away to storage (PR-02)."
+    },
+    {
+      "id": "F-ORD-04",
+      "category": "step_order",
+      "subject": "picking",
+      "attribute": "replenishment_order",
+      "value": "Replenishment, then picking",
+      "unit": "",
+      "statement": "Pick faces are replenished BEFORE the picking shift starts (PR-03)."
+    },
+    {
+      "id": "F-ORD-05",
+      "category": "step_order",
+      "subject": "packing",
+      "attribute": "verification_order",
+      "value": "Scan verification, then packing",
+      "unit": "",
+      "statement": "Picked items are scan-verified BEFORE packing (PR-04, PR-05)."
+    },
+    {
+      "id": "F-ORD-06",
+      "category": "step_order",
+      "subject": "returns",
+      "attribute": "decision_order",
+      "value": "Inspection, then disposition",
+      "unit": "",
+      "statement": "Returns are inspected BEFORE any restock, rework or scrap decision (PR-07)."
+    },
+    {
+      "id": "F-ORD-07",
+      "category": "step_order",
+      "subject": "stocktaking",
+      "attribute": "adjustment_order",
+      "value": "Recount, then adjustment",
+      "unit": "",
+      "statement": "A second count happens BEFORE any stock adjustment is posted (PR-08)."
+    },
+    {
+      "id": "F-ORD-08",
+      "category": "step_order",
+      "subject": "forklift",
+      "attribute": "inspection_order",
+      "value": "Daily check, then first use",
+      "unit": "",
+      "statement": "The daily forklift check happens BEFORE first use each day (PR-10)."
+    },
+    {
+      "id": "F-ORD-09",
+      "category": "step_order",
+      "subject": "evacuation",
+      "attribute": "reentry_order",
+      "value": "Roll call, then re-entry",
+      "unit": "",
+      "statement": "Roll call at the assembly point happens BEFORE anyone re-enters the building (PR-14)."
+    },
+    {
+      "id": "F-EQP-01",
+      "category": "equipment",
+      "subject": "forklift",
+      "attribute": "counterbalance_count",
+      "value": "6",
+      "unit": "trucks",
+      "statement": "The fleet has 6 electric counterbalance forklifts."
+    },
+    {
+      "id": "F-EQP-02",
+      "category": "equipment",
+      "subject": "forklift",
+      "attribute": "counterbalance_capacity",
+      "value": "2.5",
+      "unit": "t",
+      "statement": "Counterbalance forklifts are rated at 2.5 t."
+    },
+    {
+      "id": "F-EQP-03",
+      "category": "equipment",
+      "subject": "reach_truck",
+      "attribute": "count",
+      "value": "4",
+      "unit": "trucks",
+      "statement": "The fleet has 4 reach trucks for the high bays."
+    },
+    {
+      "id": "F-EQP-04",
+      "category": "equipment",
+      "subject": "reach_truck",
+      "attribute": "capacity",
+      "value": "1.6",
+      "unit": "t",
+      "statement": "Reach trucks are rated at 1.6 t."
+    },
+    {
+      "id": "F-EQP-05",
+      "category": "equipment",
+      "subject": "pallet_jack",
+      "attribute": "electric_count",
+      "value": "8",
+      "unit": "trucks",
+      "statement": "The fleet has 8 electric pallet jacks."
+    },
+    {
+      "id": "F-EQP-06",
+      "category": "equipment",
+      "subject": "pallet_jack",
+      "attribute": "hand_count",
+      "value": "12",
+      "unit": "trucks",
+      "statement": "The site has 12 hand pallet jacks."
+    },
+    {
+      "id": "F-EQP-07",
+      "category": "equipment",
+      "subject": "wrapper",
+      "attribute": "stretch_count",
+      "value": "2",
+      "unit": "units",
+      "statement": "Dispatch uses 2 semi-automatic stretch wrappers."
+    },
+    {
+      "id": "F-EQP-08",
+      "category": "equipment",
+      "subject": "baler",
+      "attribute": "count",
+      "value": "1",
+      "unit": "units",
+      "statement": "The site has 1 cardboard baler."
+    },
+    {
+      "id": "F-EQP-09",
+      "category": "equipment",
+      "subject": "dock",
+      "attribute": "leveller_count",
+      "value": "8",
+      "unit": "units",
+      "statement": "Each of the 8 dock doors has a dock leveller."
+    },
+    {
+      "id": "F-EQP-10",
+      "category": "equipment",
+      "subject": "scanner",
+      "attribute": "handheld_count",
+      "value": "20",
+      "unit": "units",
+      "statement": "Pickers and inbound staff share 20 handheld WMS scanners."
+    },
+    {
+      "id": "F-SCH-01",
+      "category": "schedule",
+      "subject": "shift_1",
+      "attribute": "hours",
+      "value": "06:00-14:00",
+      "unit": "",
+      "statement": "Shift 1 runs 06:00-14:00, Monday to Friday."
+    },
+    {
+      "id": "F-SCH-02",
+      "category": "schedule",
+      "subject": "shift_2",
+      "attribute": "hours",
+      "value": "14:00-22:00",
+      "unit": "",
+      "statement": "Shift 2 runs 14:00-22:00, Monday to Friday."
+    },
+    {
+      "id": "F-SCH-03",
+      "category": "schedule",
+      "subject": "cycle_count",
+      "attribute": "frequency",
+      "value": "daily",
+      "unit": "",
+      "statement": "Cycle counts run every working day on a rotating zone schedule."
+    },
+    {
+      "id": "F-SCH-04",
+      "category": "schedule",
+      "subject": "stocktake",
+      "attribute": "full_frequency",
+      "value": "annual",
+      "unit": "",
+      "statement": "A full wall-to-wall stocktake runs once a year."
+    },
+    {
+      "id": "F-SCH-05",
+      "category": "schedule",
+      "subject": "forklift",
+      "attribute": "daily_check",
+      "value": "daily",
+      "unit": "",
+      "statement": "Every forklift gets a documented pre-use check each day."
+    },
+    {
+      "id": "F-SCH-06",
+      "category": "schedule",
+      "subject": "racking",
+      "attribute": "safety_inspection",
+      "value": "monthly",
+      "unit": "",
+      "statement": "Racking gets a documented safety inspection every month."
+    },
+    {
+      "id": "F-SCH-07",
+      "category": "schedule",
+      "subject": "evacuation",
+      "attribute": "drill",
+      "value": "quarterly",
+      "unit": "",
+      "statement": "An evacuation drill runs every quarter."
+    },
+    {
+      "id": "F-SCH-08",
+      "category": "schedule",
+      "subject": "returns",
+      "attribute": "acceptance_window",
+      "value": "14",
+      "unit": "days",
+      "statement": "Returns are accepted within 14 days of delivery."
+    },
+    {
+      "id": "F-SCH-09",
+      "category": "schedule",
+      "subject": "cold_zone",
+      "attribute": "temp_verification",
+      "value": "each shift",
+      "unit": "",
+      "statement": "Cold-zone temperature is manually verified each shift."
+    }
+  ]
+}
