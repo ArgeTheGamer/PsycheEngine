@@ -105,6 +105,7 @@ export default function Home() {
               canonFacts={data.canon[data.canon.length - 1]?.facts ?? []}
             />
             <ChartsPanel
+              documents={data.documents}
               sectionsPsyche={data.sectionsPsyche}
               sectionsBaseline={data.sectionsBaseline}
               contradictionsPsyche={data.contradictionsPsyche}
