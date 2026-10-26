@@ -832,6 +832,109 @@
       "value": "each shift",
       "unit": "",
       "statement": "Cold-zone temperature is manually verified each shift."
+    },
+    {
+      "id": "F-LIM-15",
+      "category": "limit",
+      "subject": "pallet",
+      "attribute": "max_gross_weight",
+      "value": "1000",
+      "unit": "kg",
+      "statement": "A pallet, including its load, may weigh at most 1000 kg."
+    },
+    {
+      "id": "F-EQP-11",
+      "category": "equipment",
+      "subject": "trailer",
+      "attribute": "payload",
+      "value": "24000",
+      "unit": "kg",
+      "statement": "Our contracted curtain-side trailers carry a payload of 24000 kg."
+    },
+    {
+      "id": "F-EQP-12",
+      "category": "equipment",
+      "subject": "trailer",
+      "attribute": "pallet_positions",
+      "value": "33",
+      "unit": "pallets",
+      "statement": "A trailer has 33 floor pallet positions."
+    },
+    {
+      "id": "F-EQP-13",
+      "category": "equipment",
+      "subject": "van",
+      "attribute": "payload",
+      "value": "1200",
+      "unit": "kg",
+      "statement": "Our delivery van carries a payload of 1200 kg."
+    },
+    {
+      "id": "F-EQP-14",
+      "category": "equipment",
+      "subject": "van",
+      "attribute": "pallet_positions",
+      "value": "6",
+      "unit": "pallets",
+      "statement": "The delivery van has 6 pallet positions."
+    },
+    {
+      "id": "F-SCH-10",
+      "category": "schedule",
+      "subject": "outbound_door",
+      "attribute": "loads_per_shift",
+      "value": "3",
+      "unit": "loads",
+      "statement": "Each outbound door handles 3 trailer loads per shift."
+    },
+    {
+      "id": "F-EQP-15",
+      "category": "equipment",
+      "subject": "docks",
+      "attribute": "outbound_door_count",
+      "value": "4",
+      "unit": "doors",
+      "statement": "There are 4 outbound dock doors."
+    },
+    {
+      "id": "F-DRV-01",
+      "category": "limit",
+      "subject": "trailer",
+      "attribute": "max_full_pallets",
+      "value": "24",
+      "unit": "pallets",
+      "statement": "A trailer takes at most 24 full-weight pallets (payload divided by maximum pallet weight, capped by floor positions).",
+      "formula": "min(floor({F-EQP-11} / {F-LIM-15}), {F-EQP-12})"
+    },
+    {
+      "id": "F-DRV-02",
+      "category": "limit",
+      "subject": "van",
+      "attribute": "max_full_pallets",
+      "value": "1",
+      "unit": "pallets",
+      "statement": "The van takes at most 1 full-weight pallets; heavier orders go by trailer.",
+      "formula": "min(floor({F-EQP-13} / {F-LIM-15}), {F-EQP-14})"
+    },
+    {
+      "id": "F-DRV-03",
+      "category": "limit",
+      "subject": "dispatch",
+      "attribute": "max_pallets_per_shift",
+      "value": "288",
+      "unit": "pallets",
+      "statement": "Outbound capacity is at most 288 full-weight pallets per shift (doors x loads per shift x pallets per trailer).",
+      "formula": "{F-EQP-15} * {F-SCH-10} * {F-DRV-01}"
+    },
+    {
+      "id": "F-DRV-04",
+      "category": "limit",
+      "subject": "hazmat_cage",
+      "attribute": "max_full_pallets",
+      "value": "4",
+      "unit": "pallets",
+      "statement": "The hazmat cage holds at most 4 full-weight pallets (hazmat stock limit divided by maximum pallet weight).",
+      "formula": "floor({F-LIM-10} / {F-LIM-15})"
     }
   ]
 }

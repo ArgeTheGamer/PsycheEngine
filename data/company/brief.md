@@ -84,6 +84,17 @@ write-offs up to 500 EUR, the final disposition of inspected returns, and
 reviews every incident report. The dispatcher owns dock scheduling.
 Only I approve overtime.
 
+## Transport and loads
+
+A pallet, load included, may weigh at most 1,000 kg — that is the number every
+capacity on site is built on. Our contracted curtain-side trailers carry 24,000
+kg on 33 floor positions, so a trailer takes 24 full-weight pallets. The
+delivery van carries 1,200 kg on 6 positions: one full-weight pallet, and
+anything heavier goes by trailer. We run 4 outbound doors, each handling 3
+trailer loads per shift, which makes 288 full-weight pallets per shift the
+most we can promise a client. The hazmat cage's 4,000 kg limit means at most
+4 full-weight pallets in the cage.
+
 ## How goods flow
 
 A truck arrives at its assigned inbound door. First the documents are
