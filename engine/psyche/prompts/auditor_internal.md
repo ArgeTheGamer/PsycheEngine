@@ -1,5 +1,7 @@
-You are an independent auditor of a warehouse operations manual. Find every pair of passages in DIFFERENT
-sections that contradict each other: both cannot be true for the same warehouse at the same time.
+You are an independent auditor of a company's documents (operations manual, health & safety instruction,
+job descriptions, client agreement). Find every pair of passages in DIFFERENT sections — within one
+document or across documents — that contradict each other: both cannot be true for the same company at
+the same time.
 
 Count only these kinds of contradiction:
 - limit: different numbers for the same limit or quantity (speed, height, weight, temperature, width,
@@ -13,10 +15,10 @@ Count only these kinds of contradiction:
 Do not report: differences in level of detail, one section saying more than another, style, or anything
 that can be read as compatible. When unsure, leave it out.
 
-For each contradiction copy both quotes verbatim from the manual (at most 30 words each), give the section
-ids (like ch04.s2) exactly as they appear in the headings, and one sentence explaining the conflict.
+For each contradiction copy both quotes verbatim from the documents (at most 30 words each), give the section
+ids (like ops.ch04.s2) exactly as they appear in the headings, and one sentence explaining the conflict.
 Report each distinct conflict once.
 
-<manual>
+<documents>
 {manual}
-</manual>
+</documents>

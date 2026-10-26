@@ -52,7 +52,7 @@ def test_rejected_draft_is_rewritten_with_critic_feedback(tmp_path):
     client = ScriptedClient({"Outline": [OUTLINE], "Draft": [BAD, GOOD], "Verdict": [REJECT, ACCEPT], "NewFacts": [NEW]})
     [section] = run("brief", CANON, tmp_path, Settings(chapters=1), make_team(client))
 
-    assert (section.id, section.attempts, section.unresolved_issues) == ("ch01.s1", 2, [])
+    assert (section.id, section.attempts, section.unresolved_issues) == ("ops.ch01.s1", 2, [])
     assert "no more than 12 km/h inside the hall" in client.prompts["Draft"][1]  # feedback reached the writer
 
     events = [json.loads(line) for line in (tmp_path / "events.jsonl").read_text().splitlines()]
@@ -62,16 +62,16 @@ def test_rejected_draft_is_rewritten_with_critic_feedback(tmp_path):
     store = CanonStore(tmp_path / "canon")
     assert store.versions() == list(range(1, len(store.versions()) + 1))  # no version skipped on disk
     canon = store.latest()
-    assert canon.sections_using("F-LIM-01") == ["ch01.s1"]
-    assert canon.fact("F-LIM-02").source == "section:ch01.s1"  # new fact got the next free id
-    assert canon.sections_using("F-LIM-02") == ["ch01.s1"]
+    assert canon.sections_using("F-LIM-01") == ["ops.ch01.s1"]
+    assert canon.fact("F-LIM-02").source == "section:ops.ch01.s1"  # new fact got the next free id
+    assert canon.sections_using("F-LIM-02") == ["ops.ch01.s1"]
     assert not canon.has("F-XXX-99")  # planner's invented id was dropped
 
 
 def test_critic_issue_with_quote_not_in_text_is_ignored():
     hallucinated = {"accepted": False, "issues": [{**REJECT["issues"][0], "quote": "15 km/h on ramps"}]}
     llm = LLM(PROVIDER, Budget(1.0), client=ScriptedClient({"Verdict": [hallucinated]}))
-    section = agents.Section(id="ch01.s1", chapter=1, chapter_title="T", title="S", purpose="p", fact_ids=[])
+    section = agents.Section(id="ops.ch01.s1", chapter=1, chapter_title="T", title="S", purpose="p", fact_ids=[])
     assert agents.critique(llm, CANON, section, GOOD["text"]).accepted
 
 
@@ -101,6 +101,6 @@ def test_fact_change_rewrites_only_dependent_sections(tmp_path):
     out = propagate(tmp_path, "F-LIM-01", "8", "Forklifts must not exceed 8 km/h indoors.", team, Settings())
 
     diff = json.loads((out / "diff.json").read_text())
-    assert [d["section_id"] for d in diff] == ["ch01.s1"]  # the zone section was not touched
+    assert [d["section_id"] for d in diff] == ["ops.ch01.s1"]  # the zone section was not touched
     assert "was 10, it is now" in client.prompts["Draft"][-1] and GOOD["text"] in client.prompts["Draft"][-1]
     assert CanonStore(tmp_path / "canon").latest().fact("F-LIM-01").value == "8"

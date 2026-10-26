@@ -27,7 +27,6 @@ def propagate(
     canon = store.latest()
     sections = [AcceptedSection(**s) for s in json.loads((run_dir / "sections.json").read_text(encoding="utf-8"))]
     plan = {s["id"]: Section(**s) for s in json.loads((run_dir / "plan.json").read_text(encoding="utf-8"))}
-    contents = agents.toc([plan[s.id] for s in sections])
 
     changes = run_dir / "changes"
     n = len(list(changes.glob("*"))) + 1 if changes.exists() else 1
@@ -49,6 +48,7 @@ def propagate(
             "new fact. Change only what the new fact requires and keep all other wording."
             f"\n<current_section>\n{current.text}\n</current_section>\n"
         )
+        contents = agents.toc([plan[s.id] for s in sections if s.doc == current.doc])
         done, canon = write_section(team, canon, plan[current.id], contents, settings, events, revision)
         store.save(canon)
         diff.append({"section_id": current.id, "title": current.title, "before": current.text, "after": done.text})

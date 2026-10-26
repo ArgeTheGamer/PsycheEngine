@@ -1,4 +1,4 @@
-You are the canon editor. A section of the warehouse manual was just accepted. Find concrete, checkable
+You are the canon editor. A section of a company document was just accepted. Find concrete, checkable
 facts the section states that are NOT already in the canon, so later sections must stay consistent with
 them.
 

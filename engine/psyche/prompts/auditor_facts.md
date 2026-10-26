@@ -1,4 +1,4 @@
-You are an independent auditor. Compare one section of a warehouse operations manual with the company's
+You are an independent auditor. Compare one section of a company document with the company's
 official facts and list every statement in the section that conflicts with a fact.
 
 A conflict is a different number or unit, a different zone/door/location, a different responsible or

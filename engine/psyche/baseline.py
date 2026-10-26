@@ -1,11 +1,11 @@
 """Baseline: the same model writes the same sections with everything in the prompt.
 
-Two variants share the engine's table of contents, section purposes, length
-and the complete text written so far:
-- "brief": the owner's description only, as a typical user would prompt;
-- "brief+facts": additionally the full structured fact list, the strongest
-  baseline we can build.
-What both lack is the engine's loop: no canon updates and no critic.
+Variants share the engine's plan (tables of contents, section purposes, length):
+- separate sessions (default): each document is written in its own session from
+  the owner's brief and its own text so far, the way a company really produces them;
+- shared context: every document also sees all documents written before it;
+- with_facts: additionally the full structured fact list.
+What all lack is the engine's loop: no canon updates and no critic.
 """
 
 from __future__ import annotations
@@ -20,8 +20,11 @@ from .engine import AcceptedSection, Settings, Team
 
 
 def render_manual(sections: list[AcceptedSection]) -> str:
-    parts, chapter = [], 0
+    parts, doc, chapter = [], "", 0
     for s in sections:
+        if s.doc != doc:
+            doc, chapter = s.doc, 0
+            parts.append(f"# {s.doc_title}")
         if s.chapter != chapter:
             chapter = s.chapter
             parts.append(f"## Chapter {s.chapter}: {s.chapter_title}")
@@ -37,11 +40,14 @@ def run_baseline(
     settings: Settings,
     team: Team,
     with_facts: bool = False,
+    shared_context: bool = False,
 ) -> list[AcceptedSection]:
+    """Write the planned sections in order. Each document is its own session (it sees only its own text so
+    far) unless shared_context is set, in which case every document sees everything written before it."""
     out.mkdir(parents=True, exist_ok=True)
     if settings.only_chapters:
         plan = [s for s in plan if s.chapter <= settings.only_chapters]
-    contents = agents.toc(plan)
+    contents = {doc: agents.toc([s for s in plan if s.doc == doc]) for doc in dict.fromkeys(s.doc for s in plan)}
     llm = team("baseline")
     facts_block = f"Company facts (authoritative):\n<facts>\n{canon.render()}\n</facts>\n\n" if with_facts else ""
     written: list[AcceptedSection] = []
@@ -57,8 +63,11 @@ def run_baseline(
                         brief=brief,
                         facts_block=facts_block,
                         facts_note=", the facts" if with_facts else "",
-                        toc=contents,
-                        manual=render_manual(written) or "(nothing written yet)",
+                        document=section.doc_title,
+                        toc=contents[section.doc],
+                        context_title="Everything written so far:" if shared_context else "This document so far:",
+                        manual=render_manual(written if shared_context else [w for w in written if w.doc == section.doc])
+                        or "(nothing written yet)",
                         section_id=section.id,
                         section_title=section.title,
                         chapter_number=section.chapter,
@@ -70,11 +79,13 @@ def run_baseline(
                 }
             ],
             reasoning_effort="low",
-            tags={"chapter": section.chapter, "section": section.id},
+            tags={"doc": section.doc, "chapter": section.chapter, "section": section.id},
         )
         written.append(
             AcceptedSection(
                 id=section.id,
+                doc=section.doc,
+                doc_title=section.doc_title,
                 chapter=section.chapter,
                 chapter_title=section.chapter_title,
                 title=section.title,
