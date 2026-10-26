@@ -67,10 +67,22 @@ operators, 6 inbound operators, 10 pickers, 2 stock controllers,
 4 returns and packing staff, 1 maintenance technician, 2 dispatchers,
 and 2 floaters who cover absence — about 38-40 of us in total.
 
+Who does what: I am accountable for the whole site — operations, safety
+and the final sign-offs. A shift supervisor runs each shift: the floor
+staff and incident response. Forklift operators drive our forklifts, reach
+trucks and pallet jacks. Inbound operators unload, count and inspect goods
+in Zone A. Pickers pick customer orders in Zone C against scanner tasks.
+Stock controllers own inventory accuracy day to day: cycle counts,
+recounts and adjustments. Returns staff inspect returns in Zone F and
+propose restock, rework or scrap. The maintenance technician maintains our
+trucks, racking and dock equipment and logs every repair. Dispatchers book
+transport, assign dock doors and release outbound loads.
+
 Responsibilities are fixed: I sign off the stocktake results and any
 damaged-goods write-off above 500 EUR; the shift supervisor approves
 write-offs up to 500 EUR, the final disposition of inspected returns, and
 reviews every incident report. The dispatcher owns dock scheduling.
+Only I approve overtime.
 
 ## How goods flow
 

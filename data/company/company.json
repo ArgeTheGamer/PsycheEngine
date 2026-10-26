@@ -181,9 +181,9 @@
       "category": "zone",
       "subject": "zone_f",
       "attribute": "purpose",
-      "value": "vas_quarantine_returns",
+      "value": "value_added_services",
       "unit": "",
-      "statement": "Zone F holds value-added services, quarantine, returns inspection and the hazmat cage."
+      "statement": "Zone F holds the value-added services area."
     },
     {
       "id": "F-ZON-07",
@@ -240,22 +240,49 @@
       "statement": "The hazmat cage inside Zone F covers 60 m2."
     },
     {
+      "id": "F-ZON-13",
+      "category": "zone",
+      "subject": "quarantine_area",
+      "attribute": "location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "The quarantine area is in Zone F."
+    },
+    {
+      "id": "F-ZON-14",
+      "category": "zone",
+      "subject": "returns_inspection",
+      "attribute": "location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "Returns are inspected in Zone F."
+    },
+    {
+      "id": "F-ZON-15",
+      "category": "zone",
+      "subject": "hazmat_cage",
+      "attribute": "location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "The hazmat cage is inside Zone F."
+    },
+    {
       "id": "F-ROL-01",
       "category": "role",
       "subject": "warehouse_manager",
       "attribute": "duty",
-      "value": "Site-wide responsibility for operations, safety and stock accuracy.",
+      "value": "Accountable for the whole site: operations, safety and final sign-offs.",
       "unit": "",
-      "statement": "The warehouse manager owns site operations, safety and stock accuracy."
+      "statement": "The warehouse manager is accountable for the whole site: operations, safety and final sign-offs."
     },
     {
       "id": "F-ROL-02",
       "category": "role",
       "subject": "shift_supervisor",
       "attribute": "duty",
-      "value": "Runs one shift: staff, docks and incident response.",
+      "value": "Runs one shift: floor staff and incident response.",
       "unit": "",
-      "statement": "The shift supervisor runs one shift: staff, docks and incident response."
+      "statement": "The shift supervisor runs one shift: floor staff and incident response."
     },
     {
       "id": "F-ROL-03",
@@ -296,11 +323,11 @@
     {
       "id": "F-ROL-07",
       "category": "role",
-      "subject": "returns_specialist",
+      "subject": "returns_staff",
       "attribute": "duty",
       "value": "Inspects returns in Zone F and proposes restock, rework or scrap.",
       "unit": "",
-      "statement": "Returns specialists inspect returns in Zone F and propose restock, rework or scrap."
+      "statement": "Returns staff inspect returns in Zone F and propose restock, rework or scrap."
     },
     {
       "id": "F-ROL-08",
@@ -381,7 +408,7 @@
       "attribute": "review_owner",
       "value": "shift_supervisor",
       "unit": "",
-      "statement": "The shift supervisor reviews every incident and near-miss report."
+      "statement": "The shift supervisor reviews every incident report."
     },
     {
       "id": "F-RSP-08",
@@ -528,8 +555,8 @@
       "statement": "Procedure PR-15 is titled End-of-shift handover."
     },
     {
-      "id": "F-PRC-16",
-      "category": "procedure",
+      "id": "F-RUL-01",
+      "category": "rule",
       "subject": "ppe",
       "attribute": "hi_vis_vest",
       "value": "mandatory",
@@ -537,8 +564,8 @@
       "statement": "High-visibility vests are mandatory for everyone on the warehouse floor."
     },
     {
-      "id": "F-PRC-17",
-      "category": "procedure",
+      "id": "F-RUL-02",
+      "category": "rule",
       "subject": "ppe",
       "attribute": "safety_footwear",
       "value": "S3",
@@ -546,8 +573,8 @@
       "statement": "Safety footwear class S3 is mandatory on the warehouse floor."
     },
     {
-      "id": "F-PRC-18",
-      "category": "procedure",
+      "id": "F-RUL-03",
+      "category": "rule",
       "subject": "forklift",
       "attribute": "seatbelt",
       "value": "mandatory",
