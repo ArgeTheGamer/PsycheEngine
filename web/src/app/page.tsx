@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Header } from "@/components/header";
 import { CanonPanel } from "@/components/canon-panel";
+import { DocPanel } from "@/components/doc-panel";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
 import { loadRun, loadRuns, type RunData } from "@/lib/data";
 import type { RunInfo } from "@/lib/types";
@@ -73,7 +74,13 @@ export default function Home() {
         {data && (
           <>
             <CanonPanel canon={data.canon} sections={data.sectionsPsyche} />
-            <Placeholder title="Document" />
+            <DocPanel
+              sectionsPsyche={data.sectionsPsyche}
+              sectionsBaseline={data.sectionsBaseline}
+              contradictionsPsyche={data.contradictionsPsyche}
+              contradictionsBaseline={data.contradictionsBaseline}
+              canonFacts={data.canon[data.canon.length - 1].facts}
+            />
             <Placeholder title="Charts" />
             <Placeholder title="Agent log" />
           </>
