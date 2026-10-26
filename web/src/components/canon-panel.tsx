@@ -2,9 +2,15 @@
 
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import type { CanonVersion, Fact, Section } from "@/lib/types";
+import type {
+  CanonVersion,
+  Fact,
+  FactChangeRecord,
+  Section,
+} from "@/lib/types";
 import {
   Badge,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -30,9 +36,13 @@ function versionLabel(v: number) {
 export function CanonPanel({
   canon,
   sections,
+  changes,
+  onReplay,
 }: {
   canon: CanonVersion[];
   sections: Section[];
+  changes: FactChangeRecord[];
+  onReplay: (change: FactChangeRecord) => void;
 }) {
   const [version, setVersion] = useState(canon.length);
   const [query, setQuery] = useState("");
@@ -56,6 +66,9 @@ export function CanonPanel({
   }, [current, query]);
   const selected: Fact | null =
     current?.facts.find((f) => f.id === selectedId) ?? null;
+  const selectedChange = selected
+    ? (changes.find((c) => c.change.fact_id === selected.id) ?? null)
+    : null;
   const selectedUsage = selected
     ? ((current?.usage ?? {})[selected.id] ?? [])
         .map((id) => sectionById.get(id))
@@ -206,6 +219,18 @@ export function CanonPanel({
                   <dd>{selected.source}</dd>
                 </div>
               </dl>
+              {selectedChange && (
+                <Button
+                  onClick={() => {
+                    setSelectedId(null);
+                    onReplay(selectedChange);
+                  }}
+                >
+                  Replay change: {selectedChange.change.old_value} →{" "}
+                  {selectedChange.change.new_value}
+                  {selected.unit ? ` ${selected.unit}` : ""}
+                </Button>
+              )}
               <div>
                 <h3 className="mb-1.5 text-xs font-semibold text-zinc-300">
                   Used in {selectedUsage.length}{" "}
