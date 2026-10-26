@@ -66,11 +66,9 @@ def _quoted(quote: str, text: str) -> bool:
     return bool(q) and q in normalize(text)
 
 
-def audit(llm: LLM, label: str, sections: list[AcceptedSection], facts: Canon) -> Audit:
+def _internal(llm: LLM, label: str, sections: list[AcceptedSection]) -> tuple[int, Contradictions]:
+    """One pass over the whole manual; returns (reports made, reports whose quotes check out)."""
     by_id = {s.id: s for s in sections}
-    chapter_of = {s.id: s.chapter for s in sections}
-    chapters = max(chapter_of.values())
-
     found = llm.structured(
         agent="auditor",
         messages=[{"role": "user", "content": prompt("auditor_internal", manual=render_manual(sections))}],
@@ -78,7 +76,7 @@ def audit(llm: LLM, label: str, sections: list[AcceptedSection], facts: Canon) -
         reasoning_effort="high",
         tags={"audit": label, "pass": "internal"},
     ).contradictions
-    contradictions = [
+    kept = [
         c
         for c in found
         if c.section_a != c.section_b
@@ -87,7 +85,20 @@ def audit(llm: LLM, label: str, sections: list[AcceptedSection], facts: Canon) -
         and _quoted(c.quote_a, by_id[c.section_a].text)
         and _quoted(c.quote_b, by_id[c.section_b].text)
     ]
-    discarded = len(found) - len(contradictions)
+    return len(found), Contradictions(contradictions=kept)
+
+
+def audit_internal(llm: LLM, label: str, sections: list[AcceptedSection]) -> Contradictions:
+    return _internal(llm, label, sections)[1]
+
+
+def audit(llm: LLM, label: str, sections: list[AcceptedSection], facts: Canon) -> Audit:
+    chapter_of = {s.id: s.chapter for s in sections}
+    chapters = max(chapter_of.values())
+
+    raw, kept = _internal(llm, label, sections)
+    contradictions = kept.contradictions
+    discarded = raw - len(contradictions)
 
     violations: list[SectionViolation] = []
     for s in sections:
