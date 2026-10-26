@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Re-include dashboard sources: repo-root patterns `lib/` and `runs/`
+# (meant for engine artifacts) also match these dashboard paths.
+!/src/lib/
+!/public/runs/

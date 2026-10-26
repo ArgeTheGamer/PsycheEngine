@@ -1,0 +1,107 @@
+[
+  {
+    "id": "psy-ch01",
+    "chapter": 1,
+    "title": "Receiving goods",
+    "text": "Every inbound delivery arrives at Zone A [F-ZON-01] through dock doors 1-4 [F-ZON-10]. The site has 8 dock doors in total [F-ZON-09], each fitted with its own leveller [F-EQP-09].\n\nInbound operators [F-ROL-05] run procedure PR-01 [F-PRC-01]: the document check happens before unloading [F-ORD-01], and goods are inspected before they are booked into the system [F-ORD-02]. In the yard, trucks keep to 15 km/h [F-LIM-02]. Chilled deliveries are only accepted at or below +8 °C [F-LIM-09].",
+    "fact_ids": ["F-LIM-02", "F-LIM-09", "F-ZON-01", "F-ZON-09", "F-ZON-10", "F-ORD-01", "F-ORD-02", "F-PRC-01", "F-ROL-05", "F-EQP-09"]
+  },
+  {
+    "id": "psy-ch02",
+    "chapter": 2,
+    "title": "Storage and racking",
+    "text": "Bulk stock lives in Zone B [F-ZON-02], the high-bay racking hall with 2,400 pallet positions [F-ZON-08] inside the 6,000 m2 warehouse floor [F-ZON-07]. Goods are booked into the system before put-away [F-ORD-03] under procedure PR-02 [F-PRC-02].\n\nEach rack bay carries at most 2,700 kg [F-LIM-07]. Free block-stacking outside the racks is limited to 4.0 m [F-LIM-05] and 3 pallets high [F-LIM-06]. Rack storage aisles are 3.0 m wide [F-LIM-12], and racking gets a documented safety inspection every month [F-SCH-06].",
+    "fact_ids": ["F-LIM-05", "F-LIM-06", "F-LIM-07", "F-LIM-12", "F-ZON-02", "F-ZON-07", "F-ZON-08", "F-PRC-02", "F-ORD-03", "F-SCH-06"]
+  },
+  {
+    "id": "psy-ch03",
+    "chapter": 3,
+    "title": "Picking",
+    "text": "Customer orders are picked in Zone C [F-ZON-03] under procedure PR-04 [F-PRC-04]. Pickers [F-ROL-04] work scanner tasks on 20 shared handheld WMS scanners [F-EQP-10], moving pallets with the 8 electric pallet jacks [F-EQP-05].\n\nPick faces are replenished from bulk storage before the picking shift starts [F-ORD-04] under PR-03 [F-PRC-03]. Picked items are scan-verified before packing [F-ORD-05] — no scan, no pack.",
+    "fact_ids": ["F-ZON-03", "F-ROL-04", "F-PRC-03", "F-PRC-04", "F-ORD-04", "F-ORD-05", "F-EQP-05", "F-EQP-10"]
+  },
+  {
+    "id": "psy-ch04",
+    "chapter": 4,
+    "title": "Dispatch",
+    "text": "Outbound pallets are staged in Zone D [F-ZON-04] in front of dock doors 5-8 [F-ZON-11], part of the site's 8 dock doors [F-ZON-09], each with its own leveller [F-EQP-09]. Only wrapped and labelled pallets enter the staging lanes.\n\nDispatchers [F-ROL-09] release every load under PR-06 [F-PRC-06]; the dispatcher assigns dock doors and time slots to carriers [F-RSP-06]. Both semi-automatic stretch wrappers [F-EQP-07] stand ready at the Zone D packing line.",
+    "fact_ids": ["F-ZON-04", "F-ZON-09", "F-ZON-11", "F-PRC-06", "F-ROL-09", "F-RSP-06", "F-EQP-07", "F-EQP-09"]
+  },
+  {
+    "id": "psy-ch05",
+    "chapter": 5,
+    "title": "Stocktaking and cycle counts",
+    "text": "Inventory accuracy is owned by the stock controllers [F-ROL-06] under PR-08 [F-PRC-08]. Cycle counts run every working day [F-SCH-03] on a rotating zone schedule, and a full wall-to-wall stocktake runs once a year [F-SCH-04].\n\nA second count happens before any stock adjustment is posted [F-ORD-07]. Only the warehouse manager may sign off stocktake results [F-RSP-01].",
+    "fact_ids": ["F-PRC-08", "F-SCH-03", "F-SCH-04", "F-ORD-07", "F-RSP-01", "F-ROL-06"]
+  },
+  {
+    "id": "psy-ch06",
+    "chapter": 6,
+    "title": "Internal transport and forklifts",
+    "text": "All internal transport follows PR-10 [F-PRC-10]. Forklifts must not exceed 10 km/h inside the building [F-LIM-01] and 15 km/h in the yard [F-LIM-02]; in marked pedestrian zones [F-LIM-03] and on dock ramps [F-LIM-04] the limit is 5 km/h. Main transport aisles are 4.0 m wide [F-LIM-11].\n\nThe fleet has 6 electric counterbalance forklifts [F-EQP-01] rated at 2.5 t [F-EQP-02] and 4 reach trucks [F-EQP-03] rated at 1.6 t [F-EQP-04] for the high bays. Forklift operators [F-ROL-03] are authorised by the warehouse manager only [F-RSP-08]; every truck gets a documented pre-use check each day [F-SCH-05], and the daily check happens before first use [F-ORD-08]. Seat belts are mandatory whenever the truck is moving [F-RUL-03]. The maintenance technician [F-ROL-08] logs all repairs.",
+    "fact_ids": ["F-LIM-01", "F-LIM-02", "F-LIM-03", "F-LIM-04", "F-LIM-11", "F-EQP-01", "F-EQP-02", "F-EQP-03", "F-EQP-04", "F-SCH-05", "F-ORD-08", "F-RUL-03", "F-RSP-08", "F-PRC-10", "F-ROL-03", "F-ROL-08"]
+  },
+  {
+    "id": "psy-ch07",
+    "chapter": 7,
+    "title": "Returns handling",
+    "text": "Returns are handled in Zone F [F-ZON-06], where the returns inspection area sits [F-ZON-14], under PR-07 [F-PRC-07]. Returns are accepted within 14 days of delivery [F-SCH-08].\n\nReturns specialists [F-ROL-07] inspect every unit: returns are inspected before any restock, rework or scrap decision [F-ORD-06]. The shift supervisor approves the final disposition of inspected returns [F-RSP-04].",
+    "fact_ids": ["F-ZON-06", "F-ZON-14", "F-SCH-08", "F-ORD-06", "F-RSP-04", "F-PRC-07", "F-ROL-07"]
+  },
+  {
+    "id": "psy-ch08",
+    "chapter": 8,
+    "title": "Roles and responsibilities",
+    "text": "The warehouse manager [F-ROL-01] owns site operations, safety and stock accuracy. The manager signs off stocktake results [F-RSP-01], approves overtime [F-RSP-05], authorises new forklift operators [F-RSP-08] and approves damaged-goods write-offs above 500 EUR [F-RSP-03] [F-LIM-14].\n\nThe shift supervisor [F-ROL-02] runs one shift: approving write-offs up to 500 EUR [F-RSP-02], returns dispositions [F-RSP-04] and reviewing every incident and near-miss report [F-RSP-07]. The dispatcher assigns dock doors and time slots to carriers [F-RSP-06]. Packing and services run in Zone F [F-ZON-06], whose teams also support the PR-08 cycle counts [F-PRC-08].",
+    "fact_ids": ["F-ROL-01", "F-ROL-02", "F-RSP-01", "F-RSP-02", "F-RSP-03", "F-RSP-04", "F-RSP-05", "F-RSP-06", "F-RSP-07", "F-RSP-08", "F-LIM-14", "F-PRC-08", "F-ZON-06"]
+  },
+  {
+    "id": "psy-ch09",
+    "chapter": 9,
+    "title": "Emergencies and evacuation",
+    "text": "Emergency evacuation follows PR-14 [F-PRC-14]. On the alarm, everyone leaves by the marked routes and gathers at the assembly point by the north fence. Roll call happens before anyone re-enters the building [F-ORD-09].\n\nAn evacuation drill runs every quarter [F-SCH-07], and the shift supervisor reviews every incident report [F-RSP-07]. Segregated pedestrian walkways are 1.2 m wide [F-LIM-13] and must stay clear at all times.",
+    "fact_ids": ["F-ORD-09", "F-SCH-07", "F-PRC-14", "F-LIM-13", "F-RSP-07"]
+  },
+  {
+    "id": "psy-ch10",
+    "chapter": 10,
+    "title": "Cold-chain handling",
+    "text": "Chilled goods are stored in Zone E [F-ZON-05] under PR-12 [F-PRC-12]. The cold zone must stay at or above +2 °C [F-LIM-08] and at or below +8 °C [F-LIM-09]; the zone never rises above +8 °C.\n\nCold-zone temperature is manually verified each shift [F-SCH-09], on top of continuous alarming. Any excursion is quarantined and reported immediately.",
+    "fact_ids": ["F-ZON-05", "F-LIM-08", "F-LIM-09", "F-SCH-09", "F-PRC-12"]
+  },
+  {
+    "id": "psy-ch11",
+    "chapter": 11,
+    "title": "Hazmat storage",
+    "text": "Hazmat is stored only in the hazmat cage [F-ZON-15] inside Zone F, under PR-13 [F-PRC-13]. The cage covers 60 m2 [F-ZON-12] and is ventilated and locked.\n\nNo more than 4,000 kg of hazmat may be stored in the cage at one time [F-LIM-10]. Spill kits stand at the cage entrance, and any spill is contained before clean-up begins.",
+    "fact_ids": ["F-ZON-12", "F-ZON-15", "F-LIM-10", "F-PRC-13"]
+  },
+  {
+    "id": "psy-ch12",
+    "chapter": 12,
+    "title": "Packing and labelling",
+    "text": "Packing and labelling follow PR-05 [F-PRC-05]. Picked items are scan-verified before packing [F-ORD-05]; each parcel gets a shipping label before it moves to Zone D [F-ZON-04].\n\nThe line uses 2 semi-automatic stretch wrappers [F-EQP-07] and 12 hand pallet jacks [F-EQP-06] for small moves. Waste cardboard goes straight to the site baler [F-EQP-08].",
+    "fact_ids": ["F-PRC-05", "F-ORD-05", "F-EQP-06", "F-EQP-07", "F-EQP-08", "F-ZON-04"]
+  },
+  {
+    "id": "psy-ch13",
+    "chapter": 13,
+    "title": "Pedestrian safety",
+    "text": "Pedestrian safety follows PR-11 [F-PRC-11]. Segregated pedestrian walkways are 1.2 m wide [F-LIM-13], separated from truck lanes by yellow barriers. Trucks slow to 5 km/h in marked pedestrian zones [F-LIM-03]; the general indoor limit is 10 km/h [F-LIM-01].\n\nHigh-visibility vests are mandatory for everyone on the floor [F-RUL-01], and safety footwear class S3 is mandatory [F-RUL-02].",
+    "fact_ids": ["F-LIM-13", "F-LIM-03", "F-LIM-01", "F-RUL-01", "F-RUL-02", "F-PRC-11"]
+  },
+  {
+    "id": "psy-ch14",
+    "chapter": 14,
+    "title": "Damaged goods and quarantine",
+    "text": "Damaged goods are moved to the quarantine area in Zone F [F-ZON-13] the same day they are found, under PR-09 [F-PRC-09]. Quarantined pallets never return to the racks; bays keep their 2,700 kg rating [F-LIM-07].\n\nThe shift supervisor approves write-offs up to 500 EUR [F-RSP-02]; write-offs above 500 EUR need the warehouse manager [F-RSP-03] [F-LIM-14]. No credit is issued before the inspection is complete.",
+    "fact_ids": ["F-ZON-13", "F-PRC-09", "F-RSP-02", "F-RSP-03", "F-LIM-14", "F-LIM-07"]
+  },
+  {
+    "id": "psy-ch15",
+    "chapter": 15,
+    "title": "Shift handover",
+    "text": "End-of-shift handover follows PR-15 [F-PRC-15]. Shift 1 runs 06:00-14:00 [F-SCH-01] and shift 2 runs 14:00-22:00 [F-SCH-02], Monday to Friday.\n\nThe outgoing shift supervisor [F-ROL-02] briefs the incoming supervisor on open loads, quarantined stock and incidents. Nothing carries over undocumented.",
+    "fact_ids": ["F-PRC-15", "F-SCH-01", "F-SCH-02", "F-ROL-02"]
+  }
+]
