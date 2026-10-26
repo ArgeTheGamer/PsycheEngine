@@ -1,0 +1,23 @@
+[project]
+name = "psyche"
+version = "0.1.0"
+description = "Multi-agent runtime that keeps long operational documents consistent with a fact canon."
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.60",
+    "pydantic>=2.9",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["psyche*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
