@@ -57,6 +57,17 @@ export type CallRecord = {
   tags?: { chapter?: number };
 };
 
+export type FactChangeRecord = {
+  change: {
+    fact_id: string;
+    old_value: string;
+    new_value: string;
+    affected_sections: string[];
+  };
+  diff: { section_id: string; title: string; before: string; after: string }[];
+  events: AgentEvent[];
+};
+
 export type RunInfo = {
   id: string;
   label: string;

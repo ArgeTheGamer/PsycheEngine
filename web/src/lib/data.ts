@@ -3,6 +3,7 @@ import type {
   CallRecord,
   CanonVersion,
   Contradiction,
+  FactChangeRecord,
   RunId,
   RunsFile,
   Section,
@@ -60,6 +61,15 @@ export async function loadCalls(
   return data ?? [];
 }
 
+export async function loadChanges(
+  runId: string,
+): Promise<FactChangeRecord[]> {
+  const data = await getOptionalJSON<FactChangeRecord[]>(
+    `/runs/${runId}/changes.json`,
+  );
+  return data ?? [];
+}
+
 export type RunData = {
   canon: CanonVersion[];
   sectionsPsyche: Section[];
@@ -69,6 +79,7 @@ export type RunData = {
   events: AgentEvent[];
   callsPsyche: CallRecord[];
   callsBaseline: CallRecord[];
+  changes: FactChangeRecord[];
 };
 
 export async function loadRun(runId: string): Promise<RunData> {
@@ -81,6 +92,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     events,
     callsPsyche,
     callsBaseline,
+    changes,
   ] = await Promise.all([
     loadCanon(runId),
     loadSections(runId, "psyche"),
@@ -90,6 +102,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     loadEvents(runId),
     loadCalls(runId, "psyche"),
     loadCalls(runId, "baseline"),
+    loadChanges(runId),
   ]);
   return {
     canon,
@@ -100,5 +113,6 @@ export async function loadRun(runId: string): Promise<RunData> {
     events,
     callsPsyche,
     callsBaseline,
+    changes,
   };
 }
