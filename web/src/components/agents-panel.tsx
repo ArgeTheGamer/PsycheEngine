@@ -31,10 +31,12 @@ function formatTs(ts: number): string {
 
 function EventRow({
   event,
+  t0,
   expanded,
   onToggle,
 }: {
   event: AgentEvent;
+  t0: number;
   expanded: boolean;
   onToggle: () => void;
 }) {
@@ -45,8 +47,11 @@ function EventRow({
         style={{ background: dotColor(event) }}
       />
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="font-mono text-[11px] text-zinc-500">
-          {formatTs(event.ts)}
+        <span
+          className="font-mono text-[11px] text-zinc-500"
+          title={new Date(event.ts * 1000).toISOString()}
+        >
+          {formatTs(Math.max(0, event.ts - t0))}
         </span>
         <Badge variant={AGENT_VARIANT[event.agent] ?? "secondary"}>
           {event.agent}
@@ -88,6 +93,7 @@ function EventRow({
 
 export function AgentsPanel({ events }: { events: AgentEvent[] }) {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const t0 = events.length > 0 ? events[0].ts : 0;
   const verdicts = events.filter((e) => e.kind === "verdict");
   const accepted = verdicts.filter((e) => e.accepted).length;
 
@@ -109,6 +115,7 @@ export function AgentsPanel({ events }: { events: AgentEvent[] }) {
             <EventRow
               key={`${e.ts}-${i}`}
               event={e}
+              t0={t0}
               expanded={expanded === i}
               onToggle={() => setExpanded(expanded === i ? null : i)}
             />
