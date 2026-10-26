@@ -5,22 +5,10 @@ import { Header } from "@/components/header";
 import { CanonPanel } from "@/components/canon-panel";
 import { DocPanel } from "@/components/doc-panel";
 import { ChartsPanel } from "@/components/charts-panel";
+import { AgentsPanel } from "@/components/agents-panel";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
 import { loadRun, loadRuns, type RunData } from "@/lib/data";
 import type { RunInfo } from "@/lib/types";
-
-function Placeholder({ title }: { title: string }) {
-  return (
-    <Card className="min-h-[440px] xl:h-[calc((100vh-112px)/2)] xl:min-h-[400px]">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-xs text-zinc-500">Coming in the next commit.</p>
-      </CardContent>
-    </Card>
-  );
-}
 
 export default function Home() {
   const [runs, setRuns] = useState<RunInfo[]>([]);
@@ -89,7 +77,7 @@ export default function Home() {
               callsPsyche={data.callsPsyche}
               callsBaseline={data.callsBaseline}
             />
-            <Placeholder title="Agent log" />
+            <AgentsPanel events={data.events} />
           </>
         )}
       </main>
