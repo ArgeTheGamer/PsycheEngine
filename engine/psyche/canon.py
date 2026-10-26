@@ -84,6 +84,10 @@ class Canon(BaseModel):
     def sections_using(self, fact_id: str) -> list[str]:
         return list(self.usage.get(fact_id, []))
 
+    def usage_of(self, section_id: str) -> list[str]:
+        """Fact ids a section relies on (inverse of sections_using)."""
+        return [fact_id for fact_id, sections in self.usage.items() if section_id in sections]
+
     # Mutations return a new canon with version + 1, so every step stays on disk.
 
     def next(self, note: str) -> Canon:
