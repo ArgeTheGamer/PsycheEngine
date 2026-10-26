@@ -32,6 +32,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", required=True)
     parser.add_argument("--label", required=True)
+    parser.add_argument("--baseline", choices=["brief", "facts"], default="brief",
+                        help="which baseline variant the dashboard shows")
     parser.add_argument("--out", default=str(REPO_ROOT / "web" / "public" / "runs"))
     args = parser.parse_args()
 
@@ -45,11 +47,11 @@ def main() -> int:
     write(dst / "canon.json", [c.model_dump(exclude={"company"}) for c in canons])
     write(dst / "events.json", read_jsonl(src / "events.jsonl"))
     write(dst / "calls_psyche.json", read_jsonl(src / "calls.jsonl"))
-    write(dst / "calls_baseline.json", read_jsonl(src / "calls_baseline.jsonl"))
+    write(dst / "calls_baseline.json", read_jsonl(src / f"calls_baseline_{args.baseline}.jsonl"))
 
     for which, sections, audit in [
         ("psyche", src / "sections.json", src / "audit_engine.json"),
-        ("baseline", src / "baseline" / "sections.json", src / "audit_baseline.json"),
+        ("baseline", src / f"baseline_{args.baseline}" / "sections.json", src / f"audit_baseline_{args.baseline}.json"),
     ]:
         write(dst / f"sections_{which}.json", json.loads(sections.read_text(encoding="utf-8")) if sections.exists() else [])
         found = json.loads(audit.read_text(encoding="utf-8")) if audit.exists() else {"contradictions": [], "violations": []}

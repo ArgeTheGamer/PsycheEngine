@@ -5,11 +5,7 @@ Company description from the owner:
 {brief}
 </brief>
 
-Company facts (authoritative):
-<facts>
-{facts}
-</facts>
-
+{facts_block}
 Table of contents:
 <toc>
 {toc}
@@ -23,6 +19,6 @@ The manual so far:
 Now write section {section_id} "{section_title}" in chapter {chapter_number} "{chapter_title}".
 Purpose of this section: {purpose}
 
-Keep it consistent with the company description, the facts and everything already written. Write in
+Keep it consistent with the company description{facts_note} and everything already written. Write in
 {language}, as numbered procedures and short paragraphs, roughly {words} words. Return only the section
 text: no heading, no preamble, no closing summary.

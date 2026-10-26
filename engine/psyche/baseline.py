@@ -1,9 +1,11 @@
 """Baseline: the same model writes the same sections with everything in the prompt.
 
-To keep the comparison fair the baseline gets MORE context than any engine
-agent: the owner's brief, the full fact list, the same table of contents, the
-same section purposes and length, and the complete text written so far. What
-it lacks is the engine's loop: no canon updates and no critic.
+Two variants share the engine's table of contents, section purposes, length
+and the complete text written so far:
+- "brief": the owner's description only, as a typical user would prompt;
+- "brief+facts": additionally the full structured fact list, the strongest
+  baseline we can build.
+What both lack is the engine's loop: no canon updates and no critic.
 """
 
 from __future__ import annotations
@@ -28,13 +30,20 @@ def render_manual(sections: list[AcceptedSection]) -> str:
 
 
 def run_baseline(
-    brief: str, canon: Canon, plan: list[Section], out: Path, settings: Settings, team: Team
+    brief: str,
+    canon: Canon,
+    plan: list[Section],
+    out: Path,
+    settings: Settings,
+    team: Team,
+    with_facts: bool = False,
 ) -> list[AcceptedSection]:
     out.mkdir(parents=True, exist_ok=True)
     if settings.only_chapters:
         plan = [s for s in plan if s.chapter <= settings.only_chapters]
     contents = agents.toc(plan)
     llm = team("baseline")
+    facts_block = f"Company facts (authoritative):\n<facts>\n{canon.render()}\n</facts>\n\n" if with_facts else ""
     written: list[AcceptedSection] = []
     for section in plan:
         text = llm.complete(
@@ -46,7 +55,8 @@ def run_baseline(
                         "baseline",
                         company=canon.company.name,
                         brief=brief,
-                        facts=canon.render(),
+                        facts_block=facts_block,
+                        facts_note=", the facts" if with_facts else "",
                         toc=contents,
                         manual=render_manual(written) or "(nothing written yet)",
                         section_id=section.id,
