@@ -23,7 +23,8 @@ function dotColor(e: AgentEvent): string {
   return "#a1a1aa";
 }
 
-function formatTs(ts: number): string {
+function formatTs(seconds: number): string {
+  const ts = Math.floor(seconds); // engine timestamps are float epoch seconds
   const m = Math.floor(ts / 60);
   const s = ts % 60;
   return `T+${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
