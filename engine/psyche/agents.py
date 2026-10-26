@@ -132,7 +132,7 @@ def write(
                     language=language,
                     words=words,
                     facts=canon.render(section.fact_ids),
-                    rest=canon.render([f.id for f in canon.facts if f.id not in section.fact_ids]),
+                    canon=canon.render(),
                     toc=contents,
                     feedback=feedback,
                 ),
