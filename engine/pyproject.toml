@@ -21,3 +21,6 @@ include = ["psyche*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+psyche = ["prompts/*.md"]
