@@ -44,7 +44,7 @@ function cumulative(
 function costPerChapter(calls: CallRecord[], chapters: number): number[] {
   const out = new Array<number>(chapters).fill(0);
   for (const c of calls) {
-    const ch = c.tags.chapter;
+    const ch = c.tags?.chapter;
     if (ch !== undefined && ch >= 1 && ch <= chapters) out[ch - 1] += c.cost_usd;
   }
   return out.map((v) => Math.round(v * 1e6) / 1e6);
