@@ -3,6 +3,7 @@
 import { Boxes } from "lucide-react";
 import type { RunInfo } from "@/lib/types";
 import {
+  Badge,
   Select,
   SelectContent,
   SelectItem,
@@ -16,12 +17,14 @@ export function Header({
   onRunChange,
   rewritten,
   untouched,
+  docCount,
 }: {
   runs: RunInfo[];
   runId: string;
   onRunChange: (id: string) => void;
   rewritten?: number;
   untouched?: number;
+  docCount?: number;
 }) {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
@@ -37,6 +40,11 @@ export function Header({
             Consistent warehouse manuals on Muse Spark
           </p>
         </div>
+        {docCount !== undefined && (
+          <Badge variant="secondary" className="ml-2 hidden sm:inline-flex">
+            {docCount} document{docCount === 1 ? "" : "s"} · 1 canon
+          </Badge>
+        )}
         {rewritten !== undefined && untouched !== undefined && (
           <p className="ml-auto hidden text-xs text-zinc-400 md:block">
             Rewritten{" "}

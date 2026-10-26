@@ -69,6 +69,7 @@ export default function Home() {
         untouched={
           hasChanges ? sectionIds.size - rewrittenIds.size : undefined
         }
+        docCount={data?.documents.length}
       />
       <main className="grid gap-4 p-4 lg:grid-cols-2">
         {error && (
@@ -96,6 +97,7 @@ export default function Home() {
               onReplay={setReplay}
             />
             <DocPanel
+              documents={data.documents}
               sectionsPsyche={data.sectionsPsyche}
               sectionsBaseline={data.sectionsBaseline}
               contradictionsPsyche={data.contradictionsPsyche}
