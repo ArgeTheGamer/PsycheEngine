@@ -1,0 +1,80 @@
+"""Baseline: the same model writes the same sections with everything in the prompt.
+
+To keep the comparison fair the baseline gets MORE context than any engine
+agent: the owner's brief, the full fact list, the same table of contents, the
+same section purposes and length, and the complete text written so far. What
+it lacks is the engine's loop: no canon updates and no critic.
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from . import agents
+from .agents import Section, prompt
+from .canon import Canon
+from .engine import AcceptedSection, Settings, Team
+
+
+def render_manual(sections: list[AcceptedSection]) -> str:
+    parts, chapter = [], 0
+    for s in sections:
+        if s.chapter != chapter:
+            chapter = s.chapter
+            parts.append(f"## Chapter {s.chapter}: {s.chapter_title}")
+        parts.append(f"### {s.id} {s.title}\n\n{s.text}")
+    return "\n\n".join(parts)
+
+
+def run_baseline(
+    brief: str, canon: Canon, plan: list[Section], out: Path, settings: Settings, team: Team
+) -> list[AcceptedSection]:
+    out.mkdir(parents=True, exist_ok=True)
+    if settings.only_chapters:
+        plan = [s for s in plan if s.chapter <= settings.only_chapters]
+    contents = agents.toc(plan)
+    llm = team("baseline")
+    written: list[AcceptedSection] = []
+    for section in plan:
+        text = llm.complete(
+            agent="baseline",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt(
+                        "baseline",
+                        company=canon.company.name,
+                        brief=brief,
+                        facts=canon.render(),
+                        toc=contents,
+                        manual=render_manual(written) or "(nothing written yet)",
+                        section_id=section.id,
+                        section_title=section.title,
+                        chapter_number=section.chapter,
+                        chapter_title=section.chapter_title,
+                        purpose=section.purpose,
+                        language=settings.language,
+                        words=settings.words_per_section,
+                    ),
+                }
+            ],
+            reasoning_effort="low",
+            tags={"chapter": section.chapter, "section": section.id},
+        )
+        written.append(
+            AcceptedSection(
+                id=section.id,
+                chapter=section.chapter,
+                chapter_title=section.chapter_title,
+                title=section.title,
+                text=text.strip(),
+                fact_ids=[],
+                attempts=1,
+                unresolved_issues=[],
+            )
+        )
+        (out / "sections.json").write_text(
+            json.dumps([w.model_dump() for w in written], indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+    return written
