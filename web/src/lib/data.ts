@@ -3,6 +3,7 @@ import type {
   CallRecord,
   CanonVersion,
   Contradiction,
+  DocumentInfo,
   FactChangeRecord,
   RunId,
   RunsFile,
@@ -70,8 +71,22 @@ export async function loadChanges(
   return data ?? [];
 }
 
+export const DEFAULT_DOCUMENTS: DocumentInfo[] = [
+  { id: "ops", title: "Operations Manual" },
+];
+
+export async function loadDocuments(
+  runId: string,
+): Promise<DocumentInfo[]> {
+  const data = await getOptionalJSON<DocumentInfo[]>(
+    `/runs/${runId}/documents.json`,
+  );
+  return data && data.length > 0 ? data : DEFAULT_DOCUMENTS;
+}
+
 export type RunData = {
   canon: CanonVersion[];
+  documents: DocumentInfo[];
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
@@ -85,6 +100,7 @@ export type RunData = {
 export async function loadRun(runId: string): Promise<RunData> {
   const [
     canon,
+    documents,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
@@ -95,6 +111,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     changes,
   ] = await Promise.all([
     loadCanon(runId),
+    loadDocuments(runId),
     loadSections(runId, "psyche"),
     loadSections(runId, "baseline"),
     loadContradictions(runId, "psyche"),
@@ -106,6 +123,7 @@ export async function loadRun(runId: string): Promise<RunData> {
   ]);
   return {
     canon,
+    documents,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
