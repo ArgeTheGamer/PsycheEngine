@@ -104,8 +104,11 @@ def run(brief: str, canon: Canon, out: Path, settings: Settings, team: Team | No
     for section in sections:
         done, canon = write_section(team, canon, section, contents, settings, events)
         store.save(canon)
-        canon = absorb_new_facts(team, canon, section, done.text, events)
-        store.save(canon)
+        if done.unresolved_issues:
+            # Never let the canon editor promote values the critic rejected.
+            events.emit(Event("canon_editor", "-", "canon_update", "skipped: section has unresolved issues", section.id))
+        else:
+            canon = absorb_new_facts(team, canon, section, done.text, events, store)
         accepted.append(done)
         (out / "sections.json").write_text(
             json.dumps([a.model_dump() for a in accepted], indent=2, ensure_ascii=False), encoding="utf-8"
@@ -150,14 +153,18 @@ def write_section(
     return done, canon
 
 
-def absorb_new_facts(team: Team, canon: Canon, section: Section, text: str, events: EventLog) -> Canon:
+def absorb_new_facts(
+    team: Team, canon: Canon, section: Section, text: str, events: EventLog, store: CanonStore
+) -> Canon:
     editor = team("canon_editor")
     new = agents.extract_new_facts(editor, canon, section, text)
     if not new:
         return canon
-    canon = canon.with_new_facts(section.id, new).with_usage(
-        section.id, [*canon.usage_of(section.id), *(f.id for f in new)]
-    )
+    used = canon.usage_of(section.id)
+    canon = canon.with_new_facts(section.id, new)
+    store.save(canon)
+    canon = canon.with_usage(section.id, [*used, *(f.id for f in new)])
+    store.save(canon)
     events.emit(
         Event("canon_editor", editor.provider.model, "canon_update", "; ".join(f.render() for f in new), section.id)
     )

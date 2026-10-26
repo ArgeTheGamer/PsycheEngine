@@ -59,7 +59,9 @@ def test_rejected_draft_is_rewritten_with_critic_feedback(tmp_path):
     assert [e["kind"] for e in events] == ["plan", "draft", "verdict", "rewrite", "verdict", "canon_update"]
     assert events[2]["accepted"] is False and events[2]["quote"] == "no more than 12 km/h inside the hall"
 
-    canon = CanonStore(tmp_path / "canon").latest()
+    store = CanonStore(tmp_path / "canon")
+    assert store.versions() == list(range(1, len(store.versions()) + 1))  # no version skipped on disk
+    canon = store.latest()
     assert canon.sections_using("F-LIM-01") == ["ch01.s1"]
     assert canon.fact("F-LIM-02").source == "section:ch01.s1"  # new fact got the next free id
     assert canon.sections_using("F-LIM-02") == ["ch01.s1"]
@@ -79,3 +81,4 @@ def test_unresolved_section_is_kept_after_max_attempts(tmp_path):
     [section] = run("brief", CANON, tmp_path, Settings(chapters=1, max_attempts=2), make_team(client))
     assert section.attempts == 2
     assert section.unresolved_issues[0].fact_id == "F-LIM-01"
+    assert "NewFacts" not in client.prompts  # rejected values never reach the canon editor
