@@ -14,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
   Tabs,
-  TabsContent,
   TabsList,
   TabsTrigger,
 } from "./ui";

@@ -6,7 +6,7 @@ import { CanonPanel } from "@/components/canon-panel";
 import { DocPanel } from "@/components/doc-panel";
 import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
+import { Card, CardContent } from "@/components/ui";
 import { loadRun, loadRuns, type RunData } from "@/lib/data";
 import type { RunInfo } from "@/lib/types";
 

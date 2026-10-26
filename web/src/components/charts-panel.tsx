@@ -11,7 +11,6 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  type TooltipProps,
 } from "recharts";
 import type { CallRecord, Contradiction, Section } from "@/lib/types";
 import { Badge, Card, CardContent, CardHeader, CardTitle } from "./ui";
@@ -51,7 +50,22 @@ function costPerChapter(calls: CallRecord[], chapters: number): number[] {
   return out.map((v) => Math.round(v * 1e6) / 1e6);
 }
 
-function ChartTip({ active, payload, label }: TooltipProps<number, string>) {
+type TipEntry = {
+  dataKey?: string | number;
+  name?: string;
+  value?: number | string;
+  color?: string;
+};
+
+function ChartTip({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean;
+  payload?: TipEntry[];
+  label?: number | string;
+}) {
   if (!active || !payload || payload.length === 0) return null;
   return (
     <div className="rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 text-xs shadow-xl">
@@ -60,7 +74,7 @@ function ChartTip({ active, payload, label }: TooltipProps<number, string>) {
         <div key={String(p.dataKey)} className="flex items-center gap-1.5">
           <span
             className="size-2 rounded-full"
-            style={{ background: String(p.color ?? p.payload?.fill ?? "#888") }}
+            style={{ background: p.color ?? "#888" }}
           />
           <span className="text-zinc-400">{p.name}</span>
           <span className="ml-auto pl-3 font-mono">
