@@ -14,10 +14,14 @@ export function Header({
   runs,
   runId,
   onRunChange,
+  rewritten,
+  untouched,
 }: {
   runs: RunInfo[];
   runId: string;
   onRunChange: (id: string) => void;
+  rewritten?: number;
+  untouched?: number;
 }) {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
@@ -33,7 +37,23 @@ export function Header({
             Consistent warehouse manuals on Muse Spark
           </p>
         </div>
-        <div className="ml-auto flex items-center gap-2">
+        {rewritten !== undefined && untouched !== undefined && (
+          <p className="ml-auto hidden text-xs text-zinc-400 md:block">
+            Rewritten{" "}
+            <span className="font-mono font-semibold text-emerald-300">
+              {rewritten}
+            </span>{" "}
+            sections, untouched{" "}
+            <span className="font-mono font-semibold text-zinc-200">
+              {untouched}
+            </span>
+          </p>
+        )}
+        <div
+          className={
+            rewritten === undefined ? "ml-auto flex items-center gap-2" : "flex items-center gap-2"
+          }
+        >
           <span className="text-xs text-zinc-400">Run</span>
           <Select value={runId} onValueChange={onRunChange}>
             <SelectTrigger className="w-64">
