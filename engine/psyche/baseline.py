@@ -39,15 +39,13 @@ REFUSED = "[No text: the model provider's content filter refused this section.]"
 
 def _complete_or_refusal(llm, messages: list[dict[str, str]], tags: dict) -> tuple[str, int]:
     """Plain completion; a provider content-filter refusal is retried once, then recorded instead of crashing."""
-    for attempt in (1, 2):
+    for _ in range(2):
         try:
             return llm.complete(agent="baseline", messages=messages, reasoning_effort="low", tags=tags), 1
         except openai.BadRequestError as e:
-            if "content management policy" not in str(e) or attempt == 2:
-                if "content management policy" in str(e):
-                    return REFUSED, 0  # attempts=0 marks a refused section
+            if "content management policy" not in str(e):
                 raise
-    raise AssertionError("unreachable")
+    return REFUSED, 0  # attempts=0 marks a refused section
 
 
 def run_baseline(
