@@ -166,12 +166,12 @@ def critique(llm: LLM, canon: Canon, section: Section, text: str) -> Verdict:
         tags={"chapter": section.chapter, "section": section.id},
     )
     # A quote that is not in the text is a hallucinated issue; drop it rather than force a rewrite.
-    haystack = _normalize(text)
-    issues = [i for i in verdict.issues if _normalize(i.quote) and _normalize(i.quote) in haystack]
+    haystack = normalize(text)
+    issues = [i for i in verdict.issues if normalize(i.quote) and normalize(i.quote) in haystack]
     return Verdict(accepted=not issues, issues=issues)
 
 
-def _normalize(s: str) -> str:
+def normalize(s: str) -> str:
     s = s.replace("’", "'").replace("“", '"').replace("”", '"').replace("–", "-")
     return " ".join(s.lower().split()).strip(" .\"'")
 
