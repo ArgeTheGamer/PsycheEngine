@@ -107,11 +107,12 @@ def write(
     language: str = "English",
     words: int = 450,
     issues: list[Issue] | None = None,
+    revision: str = "",
 ) -> Draft:
-    feedback = ""
+    feedback = revision
     if issues:
         listed = "\n".join(f'- "{i.quote}": {i.problem}' for i in issues)
-        feedback = (
+        feedback += (
             "\nYour previous draft was rejected by the consistency critic. Fix every point below and keep the rest:"
             f"\n<rejected>\n{listed}\n</rejected>\n"
         )

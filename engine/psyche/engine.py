@@ -117,13 +117,19 @@ def run(brief: str, canon: Canon, out: Path, settings: Settings, team: Team | No
 
 
 def write_section(
-    team: Team, canon: Canon, section: Section, contents: str, settings: Settings, events: EventLog
+    team: Team,
+    canon: Canon,
+    section: Section,
+    contents: str,
+    settings: Settings,
+    events: EventLog,
+    revision: str = "",
 ) -> tuple[AcceptedSection, Canon]:
     writer, critic = team("writer"), team("critic")
     issues: list[agents.Issue] = []
     for attempt in range(1, settings.max_attempts + 1):
         draft = agents.write(
-            writer, canon, section, contents, settings.language, settings.words_per_section, issues or None
+            writer, canon, section, contents, settings.language, settings.words_per_section, issues or None, revision
         )
         kind = "rewrite" if attempt > 1 else "draft"
         events.emit(Event("writer", writer.provider.model, kind, f"{section.title} ({len(draft.text.split())} words)", section.id))
