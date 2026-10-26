@@ -72,11 +72,15 @@ export function CanonPanel({
   const selectedChange = selected
     ? (changes.find((c) => c.change.fact_id === selected.id) ?? null)
     : null;
-  const selectedUsage = selected
-    ? ((current?.usage ?? {})[selected.id] ?? [])
-        .map((id) => sectionById.get(id))
-        .filter((s): s is Section => s !== undefined)
-    : [];
+  const selectedUsage = useMemo(
+    () =>
+      selected
+        ? (((current?.usage ?? {})[selected.id] ?? [])
+            .map((id) => sectionById.get(id))
+            .filter((s): s is Section => s !== undefined))
+        : [],
+    [selected, current, sectionById],
+  );
   const docTitleById = useMemo(
     () => new Map(documents.map((d) => [d.id, d.title])),
     [documents],
