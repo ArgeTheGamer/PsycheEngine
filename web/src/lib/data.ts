@@ -3,6 +3,8 @@ import type {
   CallRecord,
   CanonVersion,
   Contradiction,
+  DocumentInfo,
+  FactChangeRecord,
   RunId,
   RunsFile,
   Section,
@@ -60,8 +62,31 @@ export async function loadCalls(
   return data ?? [];
 }
 
+export async function loadChanges(
+  runId: string,
+): Promise<FactChangeRecord[]> {
+  const data = await getOptionalJSON<FactChangeRecord[]>(
+    `/runs/${runId}/changes.json`,
+  );
+  return data ?? [];
+}
+
+export const DEFAULT_DOCUMENTS: DocumentInfo[] = [
+  { id: "ops", title: "Operations Manual" },
+];
+
+export async function loadDocuments(
+  runId: string,
+): Promise<DocumentInfo[]> {
+  const data = await getOptionalJSON<DocumentInfo[]>(
+    `/runs/${runId}/documents.json`,
+  );
+  return data && data.length > 0 ? data : DEFAULT_DOCUMENTS;
+}
+
 export type RunData = {
   canon: CanonVersion[];
+  documents: DocumentInfo[];
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
@@ -69,11 +94,13 @@ export type RunData = {
   events: AgentEvent[];
   callsPsyche: CallRecord[];
   callsBaseline: CallRecord[];
+  changes: FactChangeRecord[];
 };
 
 export async function loadRun(runId: string): Promise<RunData> {
   const [
     canon,
+    documents,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
@@ -81,8 +108,10 @@ export async function loadRun(runId: string): Promise<RunData> {
     events,
     callsPsyche,
     callsBaseline,
+    changes,
   ] = await Promise.all([
     loadCanon(runId),
+    loadDocuments(runId),
     loadSections(runId, "psyche"),
     loadSections(runId, "baseline"),
     loadContradictions(runId, "psyche"),
@@ -90,9 +119,11 @@ export async function loadRun(runId: string): Promise<RunData> {
     loadEvents(runId),
     loadCalls(runId, "psyche"),
     loadCalls(runId, "baseline"),
+    loadChanges(runId),
   ]);
   return {
     canon,
+    documents,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
@@ -100,5 +131,6 @@ export async function loadRun(runId: string): Promise<RunData> {
     events,
     callsPsyche,
     callsBaseline,
+    changes,
   };
 }

@@ -16,8 +16,14 @@ export type CanonVersion = {
   usage: Record<string, string[]>; // fact id -> section ids
 };
 
+export type DocumentInfo = {
+  id: string;
+  title: string;
+};
+
 export type Section = {
   id: string;
+  doc: string;
   chapter: number;
   chapter_title: string;
   title: string;
@@ -54,7 +60,18 @@ export type CallRecord = {
   prompt_tokens: number;
   completion_tokens: number;
   cost_usd: number;
-  tags?: { chapter?: number };
+  tags?: { doc?: string; chapter?: number };
+};
+
+export type FactChangeRecord = {
+  change: {
+    fact_id: string;
+    old_value: string;
+    new_value: string;
+    affected_sections: string[];
+  };
+  diff: { section_id: string; title: string; before: string; after: string }[];
+  events: AgentEvent[];
 };
 
 export type RunInfo = {
