@@ -212,11 +212,11 @@ export function DocPanel({
   function switchTab(v: RunId) {
     const nextSections = v === "psyche" ? sectionsPsyche : sectionsBaseline;
     const chapter = section?.chapter;
-    const next =
-      (chapter !== undefined &&
-        nextSections.find((s) => s.chapter === chapter)) ??
-      nextSections[0] ??
-      null;
+    const inChapter =
+      chapter !== undefined
+        ? nextSections.find((s) => s.chapter === chapter)
+        : undefined;
+    const next = inChapter ?? nextSections[0] ?? null;
     setTab(v);
     setSelectedId(next?.id ?? null);
   }
