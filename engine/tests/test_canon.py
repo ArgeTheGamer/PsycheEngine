@@ -62,3 +62,22 @@ def test_store_round_trip_and_latest(tmp_path, canon):
     assert store.versions() == [1, 2]
     assert (tmp_path / "canon" / "v02.json").exists()
     assert store.latest().usage == {"F-LIM-01": ["ch01.s1"]}
+
+
+def test_usage_ignores_repeated_citations(canon):
+    v2 = canon.with_usage("ch04.s1", ["F-LIM-01", "F-LIM-01"])
+    _, change = v2.with_change("F-LIM-01", "8", "Forklifts must not exceed 8 km/h indoors.")
+    assert change.affected_sections == ["ch04.s1"]
+
+
+def test_new_facts_reject_duplicates_within_batch(canon):
+    with pytest.raises(ValueError, match="F-LIM-60"):
+        canon.with_new_facts("ch07.s2", [fact("F-LIM-60"), fact("F-LIM-60", "2")])
+
+
+def test_store_refuses_to_overwrite_history(tmp_path, canon):
+    store = CanonStore(tmp_path)
+    store.save(canon.with_usage("ch01.s1", ["F-LIM-01"]))
+    store.save(canon.with_usage("ch01.s1", ["F-LIM-01"]))  # identical re-save is fine
+    with pytest.raises(FileExistsError):
+        store.save(canon.with_usage("ch02.s1", ["F-ZON-01"]))  # branching from v1 again would clobber v2

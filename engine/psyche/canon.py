@@ -62,10 +62,7 @@ class Canon(BaseModel):
 
     @classmethod
     def from_spec(cls, spec: CompanySpec) -> Canon:
-        ids = [f.id for f in spec.facts]
-        duplicates = sorted({i for i in ids if ids.count(i) > 1})
-        if duplicates:
-            raise ValueError(f"duplicate fact ids: {duplicates}")
+        _reject_duplicates(spec.facts)
         return cls(company=spec.company, facts=spec.facts, note="seeded from company description")
 
     def fact(self, fact_id: str) -> Fact:
@@ -91,19 +88,19 @@ class Canon(BaseModel):
         return self.model_copy(deep=True, update={"version": self.version + 1, "note": note})
 
     def with_usage(self, section_id: str, fact_ids: list[str]) -> Canon:
+        fact_ids = list(dict.fromkeys(fact_ids))  # models sometimes cite the same fact twice
         unknown = [i for i in fact_ids if not self.has(i)]
         if unknown:
             raise KeyError(f"section {section_id} cites unknown facts: {unknown}")
         canon = self.next(f"section {section_id} accepted")
-        for used in canon.usage.values():
-            if section_id in used:
-                used.remove(section_id)
+        canon.usage = {k: [s for s in v if s != section_id] for k, v in canon.usage.items()}
         for fact_id in fact_ids:
             canon.usage.setdefault(fact_id, []).append(section_id)
         canon.usage = {k: v for k, v in canon.usage.items() if v}
         return canon
 
     def with_new_facts(self, section_id: str, facts: list[Fact]) -> Canon:
+        _reject_duplicates(facts)
         clashes = [f.id for f in facts if self.has(f.id)]
         if clashes:
             raise ValueError(f"fact ids already in canon: {clashes}")
@@ -135,9 +132,13 @@ class CanonStore:
         return self.directory / f"v{version:02d}.json"
 
     def save(self, canon: Canon) -> Path:
+        """Write a new version; refuses to replace a different canon already saved under that number."""
         self.directory.mkdir(parents=True, exist_ok=True)
         path = self.path(canon.version)
-        path.write_text(canon.model_dump_json(indent=2), encoding="utf-8")
+        text = canon.model_dump_json(indent=2)
+        if path.exists() and path.read_text(encoding="utf-8") != text:
+            raise FileExistsError(f"{path.name} already holds a different canon; branch from the latest version")
+        path.write_text(text, encoding="utf-8")
         return path
 
     def load(self, version: int) -> Canon:
@@ -151,6 +152,13 @@ class CanonStore:
         if not versions:
             raise FileNotFoundError(f"no canon versions in {self.directory}")
         return self.load(versions[-1])
+
+
+def _reject_duplicates(facts: list[Fact]) -> None:
+    ids = [f.id for f in facts]
+    duplicates = sorted({i for i in ids if ids.count(i) > 1})
+    if duplicates:
+        raise ValueError(f"duplicate fact ids: {duplicates}")
 
 
 def load_spec(path: Path) -> CompanySpec:
