@@ -47,12 +47,12 @@ def meta_provider() -> Provider:
 
 
 def open_weights_provider() -> Provider:
-    """Muse Spark Open on a third-party host (Baseten, Modal, Fireworks...). Launch pricing matches Muse Spark."""
+    """Muse Spark Open on a third-party host (we use a Modal shared endpoint). Launch pricing matches Muse Spark."""
     return Provider(
         name="open",
         base_url=os.environ.get("OPEN_WEIGHTS_BASE_URL", ""),
         api_key=os.environ.get("OPEN_WEIGHTS_API_KEY", ""),
-        model=os.environ.get("OPEN_WEIGHTS_MODEL", "meta-models/muse-spark-open-1026"),
+        model=os.environ.get("OPEN_WEIGHTS_MODEL", "meta-models/Muse-Spark-Open-816B-A42B"),
         input_per_m=1.25,
         cached_input_per_m=0.15,
         output_per_m=4.25,
