@@ -102,23 +102,34 @@ def run(
     store = CanonStore(out / "canon")
     events = EventLog(out / "events.jsonl")
     team = team or Team(Budget(budget_usd()), Tracer(out / "calls.jsonl"))
-    store.save(canon)
 
-    planner = team("planner")
-    sections: list[Section] = []
-    for doc in documents:
-        planned = agents.plan(planner, brief, canon, doc)
-        sections += planned
-        events.emit(Event("planner", planner.provider.model, "plan", f"{doc.title}: {len(planned)} sections in {doc.chapters} chapters"))
-    (out / "plan.json").write_text(json.dumps([s.model_dump() for s in sections], indent=2), encoding="utf-8")
-    (out / "documents.json").write_text(json.dumps([d.model_dump() for d in documents], indent=2), encoding="utf-8")
+    accepted: list[AcceptedSection] = []
+    if (out / "plan.json").exists():
+        # Resume an interrupted run: same plan, latest canon, skip sections already accepted.
+        sections = [Section(**s) for s in json.loads((out / "plan.json").read_text(encoding="utf-8"))]
+        documents = [agents.Document(**d) for d in json.loads((out / "documents.json").read_text(encoding="utf-8"))]
+        if (out / "sections.json").exists():
+            accepted = [AcceptedSection(**s) for s in json.loads((out / "sections.json").read_text(encoding="utf-8"))]
+        canon = store.latest()
+    else:
+        store.save(canon)
+        planner = team("planner")
+        sections = []
+        for doc in documents:
+            planned = agents.plan(planner, brief, canon, doc)
+            sections += planned
+            events.emit(Event("planner", planner.provider.model, "plan", f"{doc.title}: {len(planned)} sections in {doc.chapters} chapters"))
+        (out / "plan.json").write_text(json.dumps([s.model_dump() for s in sections], indent=2), encoding="utf-8")
+        (out / "documents.json").write_text(json.dumps([d.model_dump() for d in documents], indent=2), encoding="utf-8")
 
     if settings.only_chapters:
         sections = [s for s in sections if s.chapter <= settings.only_chapters]
     contents = {doc.id: agents.toc([s for s in sections if s.doc == doc.id]) for doc in documents}
 
-    accepted: list[AcceptedSection] = []
+    done_ids = {a.id for a in accepted}
     for section in sections:
+        if section.id in done_ids:
+            continue
         done, canon = write_section(team, canon, section, contents[section.doc], settings, events)
         store.save(canon)
         if done.unresolved_issues:

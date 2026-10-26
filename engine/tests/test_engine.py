@@ -104,3 +104,18 @@ def test_fact_change_rewrites_only_dependent_sections(tmp_path):
     assert [d["section_id"] for d in diff] == ["ops.ch01.s1"]  # the zone section was not touched
     assert "was 10, it is now" in client.prompts["Draft"][-1] and GOOD["text"] in client.prompts["Draft"][-1]
     assert CanonStore(tmp_path / "canon").latest().fact("F-LIM-01").value == "8"
+
+
+def test_interrupted_run_resumes_without_redoing_accepted_sections(tmp_path):
+    outline = {"chapters": [{"title": "T", "sections": [
+        {"title": "A", "purpose": "p", "fact_ids": ["F-LIM-01"]}, {"title": "B", "purpose": "p", "fact_ids": ["F-ZON-01"]}]}]}
+    zone = {"text": "Unload in Zone A.", "cited_fact_ids": ["F-ZON-01"]}
+    first = ScriptedClient({"Outline": [outline], "Draft": [GOOD], "Verdict": [ACCEPT], "NewFacts": [{"facts": []}]})
+    try:
+        run("brief", CANON, tmp_path, Settings(chapters=1), make_team(first))
+    except IndexError:  # script runs dry on the second section, like a dropped connection
+        pass
+    second = ScriptedClient({"Draft": [zone], "Verdict": [ACCEPT], "NewFacts": [{"facts": []}]})
+    sections = run("brief", CANON, tmp_path, Settings(chapters=1), make_team(second))
+    assert [s.id for s in sections] == ["ops.ch01.s1", "ops.ch01.s2"]
+    assert "Outline" not in second.prompts and len(second.prompts["Draft"]) == 1

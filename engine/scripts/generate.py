@@ -22,14 +22,15 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", required=True, help="run name, output goes to runs/<run>/")
     parser.add_argument("--only-chapters", type=int, default=None, help="only the first N chapters of each document")
+    parser.add_argument("--resume", action="store_true", help="continue an interrupted run in place")
     parser.add_argument("--docs", default=None, help="comma-separated document ids to write (default: all)")
     parser.add_argument("--language", default="English")
     parser.add_argument("--words", type=int, default=450, help="target words per section")
     args = parser.parse_args()
 
     out = REPO_ROOT / "runs" / args.run
-    if out.exists() and any(out.iterdir()):
-        print(f"{out} already exists; pick another --run name")
+    if out.exists() and any(out.iterdir()) and not args.resume:
+        print(f"{out} already exists; pick another --run name or pass --resume")
         return 1
 
     company = REPO_ROOT / "data" / "company"

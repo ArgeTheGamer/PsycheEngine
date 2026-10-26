@@ -93,7 +93,8 @@ class LLM:
         self.provider = provider
         self.budget = budget
         self.tracer = tracer or Tracer()
-        self.client = client or OpenAI(base_url=provider.base_url, api_key=provider.api_key)
+        # Long runs hit transient connection drops (seen on the open-weights host); retry with backoff.
+        self.client = client or OpenAI(base_url=provider.base_url, api_key=provider.api_key, max_retries=6, timeout=300)
 
     def complete(
         self,
