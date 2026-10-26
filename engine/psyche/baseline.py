@@ -13,6 +13,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import openai
+
 from . import agents
 from .agents import Section, prompt
 from .canon import Canon
@@ -30,6 +32,22 @@ def render_manual(sections: list[AcceptedSection]) -> str:
             parts.append(f"## Chapter {s.chapter}: {s.chapter_title}")
         parts.append(f"### {s.id} {s.title}\n\n{s.text}")
     return "\n\n".join(parts)
+
+
+REFUSED = "[No text: the model provider's content filter refused this section.]"
+
+
+def _complete_or_refusal(llm, messages: list[dict[str, str]], tags: dict) -> tuple[str, int]:
+    """Plain completion; a provider content-filter refusal is retried once, then recorded instead of crashing."""
+    for attempt in (1, 2):
+        try:
+            return llm.complete(agent="baseline", messages=messages, reasoning_effort="low", tags=tags), 1
+        except openai.BadRequestError as e:
+            if "content management policy" not in str(e) or attempt == 2:
+                if "content management policy" in str(e):
+                    return REFUSED, 0  # attempts=0 marks a refused section
+                raise
+    raise AssertionError("unreachable")
 
 
 def run_baseline(
@@ -51,10 +69,13 @@ def run_baseline(
     llm = team("baseline")
     facts_block = f"Company facts (authoritative):\n<facts>\n{canon.render()}\n</facts>\n\n" if with_facts else ""
     written: list[AcceptedSection] = []
+    if (out / "sections.json").exists():  # resume an interrupted baseline
+        written = [AcceptedSection(**s) for s in json.loads((out / "sections.json").read_text(encoding="utf-8"))]
+    done = {w.id for w in written}
     for section in plan:
-        text = llm.complete(
-            agent="baseline",
-            messages=[
+        if section.id in done:
+            continue
+        messages = [
                 {
                     "role": "user",
                     "content": prompt(
@@ -77,10 +98,8 @@ def run_baseline(
                         words=settings.words_per_section,
                     ),
                 }
-            ],
-            reasoning_effort="low",
-            tags={"doc": section.doc, "chapter": section.chapter, "section": section.id},
-        )
+            ]
+        text, attempts = _complete_or_refusal(llm, messages, {"doc": section.doc, "chapter": section.chapter, "section": section.id})
         written.append(
             AcceptedSection(
                 id=section.id,
@@ -91,7 +110,7 @@ def run_baseline(
                 title=section.title,
                 text=text.strip(),
                 fact_ids=[],
-                attempts=1,
+                attempts=attempts,
                 unresolved_issues=[],
             )
         )
