@@ -1,7 +1,8 @@
 """Benchmark auditor, independent from the engine.
 
 Two measurements, same prompts for both manuals:
-1. internal contradictions: one pass over the whole manual, pairs of conflicting quotes;
+1. contradictions: one pass over all documents together, pairs of conflicting quotes,
+   counted within each document and between documents;
 2. fact violations: each section against the company's input facts (not the engine's canon).
 
 Every reported quote must appear verbatim in the cited section, otherwise the
@@ -10,6 +11,7 @@ report is discarded, so the auditor cannot inflate the count with invented text.
 
 from __future__ import annotations
 
+from collections import Counter
 from typing import Literal
 
 from pydantic import BaseModel
@@ -53,12 +55,12 @@ class SectionViolation(Violation):
 
 class Audit(BaseModel):
     label: str
-    chapters: int
     contradictions: list[Contradiction]
     violations: list[SectionViolation]
     discarded: int  # reports whose quotes were not found in the text
-    contradictions_per_chapter: list[int]
-    violations_per_chapter: list[int]
+    within: dict[str, int]  # document id -> contradictions inside that document
+    between: dict[str, int]  # "docA|docB" (sorted) -> contradictions across the two documents
+    violations_per_doc: dict[str, int]
 
 
 def _quoted(quote: str, text: str) -> bool:
@@ -93,8 +95,7 @@ def audit_internal(llm: LLM, label: str, sections: list[AcceptedSection]) -> Con
 
 
 def audit(llm: LLM, label: str, sections: list[AcceptedSection], facts: Canon) -> Audit:
-    chapter_of = {s.id: s.chapter for s in sections}
-    chapters = max(chapter_of.values())
+    doc_of = {s.id: s.doc for s in sections}
 
     raw, kept = _internal(llm, label, sections)
     contradictions = kept.contradictions
@@ -120,20 +121,21 @@ def audit(llm: LLM, label: str, sections: list[AcceptedSection], facts: Canon) -
         discarded += len(reported) - len(kept)
         violations += [SectionViolation(section_id=s.id, **v.model_dump()) for v in kept]
 
-    # A contradiction becomes visible when its later passage is written.
-    per_c = [0] * chapters
+    within: Counter[str] = Counter()
+    between: Counter[str] = Counter()
     for c in contradictions:
-        per_c[max(chapter_of[c.section_a], chapter_of[c.section_b]) - 1] += 1
-    per_v = [0] * chapters
-    for v in violations:
-        per_v[chapter_of[v.section_id] - 1] += 1
+        a, b = doc_of[c.section_a], doc_of[c.section_b]
+        if a == b:
+            within[a] += 1
+        else:
+            between["|".join(sorted((a, b)))] += 1
 
     return Audit(
         label=label,
-        chapters=chapters,
         contradictions=contradictions,
         violations=violations,
         discarded=discarded,
-        contradictions_per_chapter=per_c,
-        violations_per_chapter=per_v,
+        within=dict(within),
+        between=dict(between),
+        violations_per_doc=dict(Counter(doc_of[v.section_id] for v in violations)),
     )
