@@ -16,6 +16,14 @@ async function getJSON<T>(path: string): Promise<T> {
   return (await res.json()) as T;
 }
 
+async function getOptionalJSON<T>(path: string): Promise<T | null> {
+  const res = await fetch(path);
+  if (!res.ok) {
+    return null;
+  }
+  return (await res.json()) as T;
+}
+
 export function loadRuns(): Promise<RunsFile> {
   return getJSON<RunsFile>("/runs/runs.json");
 }
@@ -28,24 +36,28 @@ export function loadSections(runId: string, which: RunId): Promise<Section[]> {
   return getJSON<Section[]>(`/runs/${runId}/sections_${which}.json`);
 }
 
-export function loadContradictions(
+export async function loadContradictions(
   runId: string,
   which: RunId,
 ): Promise<Contradiction[]> {
-  return getJSON<Contradiction[]>(
+  const data = await getOptionalJSON<Contradiction[]>(
     `/runs/${runId}/contradictions_${which}.json`,
   );
+  return data ?? [];
 }
 
 export function loadEvents(runId: string): Promise<AgentEvent[]> {
   return getJSON<AgentEvent[]>(`/runs/${runId}/events.json`);
 }
 
-export function loadCalls(
+export async function loadCalls(
   runId: string,
   which: RunId,
 ): Promise<CallRecord[]> {
-  return getJSON<CallRecord[]>(`/runs/${runId}/calls_${which}.json`);
+  const data = await getOptionalJSON<CallRecord[]>(
+    `/runs/${runId}/calls_${which}.json`,
+  );
+  return data ?? [];
 }
 
 export type RunData = {

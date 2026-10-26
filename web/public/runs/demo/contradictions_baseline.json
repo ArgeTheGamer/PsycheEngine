@@ -2,81 +2,81 @@
   {
     "id": "C-01",
     "category": "limit",
-    "section_a": "base-ch06",
+    "section_a": "base-ch06.s1",
     "quote_a": "The indoor speed limit is 12 km/h",
-    "section_b": "base-ch13",
+    "section_b": "base-ch13.s1",
     "quote_b": "Inside the building the limit is 10 km/h",
     "explanation": "Chapter 6 sets the indoor limit at 12 km/h while chapter 13 sets it at 10 km/h; the canon (F-LIM-01) says 10 km/h."
   },
   {
     "id": "C-02",
     "category": "limit",
-    "section_a": "base-ch01",
+    "section_a": "base-ch01.s2",
     "quote_a": "Chilled deliveries are accepted at up to +10 °C",
-    "section_b": "base-ch10",
+    "section_b": "base-ch10.s1",
     "quote_b": "The cold zone never rises above +8 °C",
     "explanation": "Receiving accepts chilled goods up to +10 °C, but storage never allows above +8 °C (F-LIM-09)."
   },
   {
     "id": "C-03",
     "category": "zone",
-    "section_a": "base-ch07",
+    "section_a": "base-ch07.s1",
     "quote_a": "Returns are inspected in Zone D",
-    "section_b": "base-ch08",
+    "section_b": "base-ch08.s3",
     "quote_b": "Returns staff inspect goods in Zone F",
     "explanation": "Returns inspection is placed in Zone D in chapter 7 and in Zone F in chapter 8; the canon (F-ZON-14) says Zone F."
   },
   {
     "id": "C-04",
     "category": "role",
-    "section_a": "base-ch08",
+    "section_a": "base-ch08.s2",
     "quote_a": "The shift supervisor approves all write-offs",
-    "section_b": "base-ch14",
+    "section_b": "base-ch14.s2",
     "quote_b": "Write-offs above 500 EUR need the warehouse manager",
     "explanation": "Chapter 8 gives all write-offs to the supervisor, but chapter 14 requires the manager above 500 EUR (F-RSP-02, F-RSP-03)."
   },
   {
     "id": "C-05",
     "category": "step_order",
-    "section_a": "base-ch12",
+    "section_a": "base-ch12.s1",
     "quote_a": "Items are packed first and scanned afterwards",
-    "section_b": "base-ch03",
+    "section_b": "base-ch03.s2",
     "quote_b": "Picked items are scanned before they are packed",
     "explanation": "Chapter 12 packs before scanning while chapter 3 scans before packing; the canon (F-ORD-05) requires scan first."
   },
   {
     "id": "C-06",
     "category": "limit",
-    "section_a": "base-ch02",
+    "section_a": "base-ch02.s2",
     "quote_a": "Each rack bay carries up to 3,000 kg",
-    "section_b": "base-ch06",
+    "section_b": "base-ch06.s2",
     "quote_b": "Never place more than 2,700 kg in a single bay",
     "explanation": "Bay capacity is 3,000 kg in chapter 2 but 2,700 kg in chapter 6; the canon (F-LIM-07) says 2,700 kg."
   },
   {
     "id": "C-07",
     "category": "reference",
-    "section_a": "base-ch05",
+    "section_a": "base-ch05.s1",
     "quote_a": "Cycle counts follow PR-09",
-    "section_b": "base-ch08",
+    "section_b": "base-ch08.s3",
     "quote_b": "Stock controllers run the PR-08 cycle counts",
     "explanation": "Chapter 5 points cycle counts at PR-09 (damaged goods) while chapter 8 correctly points at PR-08."
   },
   {
     "id": "C-08",
     "category": "limit",
-    "section_a": "base-ch09",
+    "section_a": "base-ch09.s2",
     "quote_a": "Evacuation walkways keep their full 1.2 m width",
-    "section_b": "base-ch13",
+    "section_b": "base-ch13.s1",
     "quote_b": "Pedestrian walkways are 1.5 m wide",
     "explanation": "Walkway width is 1.2 m in chapter 9 but 1.5 m in chapter 13; the canon (F-LIM-13) says 1.2 m."
   },
   {
     "id": "C-09",
     "category": "step_order",
-    "section_a": "base-ch07",
+    "section_a": "base-ch07.s2",
     "quote_a": "The credit note is issued before inspection",
-    "section_b": "base-ch14",
+    "section_b": "base-ch14.s2",
     "quote_b": "No credit is issued before the inspection is complete",
     "explanation": "Chapter 7 issues credit before inspection while chapter 14 forbids it; the canon (F-ORD-06) requires inspection first."
   }

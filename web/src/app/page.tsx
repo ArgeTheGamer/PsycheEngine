@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/header";
 import { CanonPanel } from "@/components/canon-panel";
 import { DocPanel } from "@/components/doc-panel";
@@ -28,17 +28,21 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const reload = useCallback((id: string) => {
+  useEffect(() => {
+    let alive = true;
     setData(null);
     setError(null);
-    loadRun(id)
-      .then(setData)
-      .catch((e: unknown) => setError(String(e)));
-  }, []);
-
-  useEffect(() => {
-    reload(runId);
-  }, [runId, reload]);
+    loadRun(runId)
+      .then((d) => {
+        if (alive) setData(d);
+      })
+      .catch((e: unknown) => {
+        if (alive) setError(String(e));
+      });
+    return () => {
+      alive = false;
+    };
+  }, [runId]);
 
   return (
     <div className="min-h-screen">
@@ -68,10 +72,11 @@ export default function Home() {
               sectionsBaseline={data.sectionsBaseline}
               contradictionsPsyche={data.contradictionsPsyche}
               contradictionsBaseline={data.contradictionsBaseline}
-              canonFacts={data.canon[data.canon.length - 1].facts}
+              canonFacts={data.canon[data.canon.length - 1]?.facts ?? []}
             />
             <ChartsPanel
-              sections={data.sectionsPsyche}
+              sectionsPsyche={data.sectionsPsyche}
+              sectionsBaseline={data.sectionsBaseline}
               contradictionsPsyche={data.contradictionsPsyche}
               contradictionsBaseline={data.contradictionsBaseline}
               callsPsyche={data.callsPsyche}

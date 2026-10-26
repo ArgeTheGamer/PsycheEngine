@@ -38,15 +38,16 @@ export function CanonPanel({
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const current = canon[version - 1] ?? canon[canon.length - 1];
+  const current = canon[version - 1] ?? canon[canon.length - 1] ?? null;
   const sectionById = useMemo(
     () => new Map(sections.map((s) => [s.id, s])),
     [sections],
   );
   const rows = useMemo(() => {
+    const facts = current?.facts ?? [];
     const q = query.trim().toLowerCase();
-    if (!q) return current.facts;
-    return current.facts.filter((f) =>
+    if (!q) return facts;
+    return facts.filter((f) =>
       [f.id, f.subject, f.attribute, f.value, f.unit, f.statement, f.category]
         .join(" ")
         .toLowerCase()
@@ -54,12 +55,27 @@ export function CanonPanel({
     );
   }, [current, query]);
   const selected: Fact | null =
-    current.facts.find((f) => f.id === selectedId) ?? null;
+    current?.facts.find((f) => f.id === selectedId) ?? null;
   const selectedUsage = selected
-    ? (current.usage[selected.id] ?? [])
+    ? ((current?.usage ?? {})[selected.id] ?? [])
         .map((id) => sectionById.get(id))
         .filter((s): s is Section => s !== undefined)
     : [];
+
+  if (!current) {
+    return (
+      <Card className="min-h-[440px] xl:h-[calc((100vh-112px)/2)] xl:min-h-[400px]">
+        <CardHeader>
+          <CardTitle>Canon</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-xs text-zinc-500">
+            No canon versions in this run.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="min-h-[440px] xl:h-[calc((100vh-112px)/2)] xl:min-h-[400px]">

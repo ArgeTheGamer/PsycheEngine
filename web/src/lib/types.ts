@@ -19,9 +19,12 @@ export type CanonVersion = {
 export type Section = {
   id: string;
   chapter: number;
+  chapter_title: string;
   title: string;
   text: string;
   fact_ids: string[];
+  attempts: number;
+  unresolved_issues: unknown[];
 };
 
 export type Contradiction = {
@@ -51,7 +54,7 @@ export type CallRecord = {
   prompt_tokens: number;
   completion_tokens: number;
   cost_usd: number;
-  tags: { chapter?: number };
+  tags?: { chapter?: number };
 };
 
 export type RunInfo = {

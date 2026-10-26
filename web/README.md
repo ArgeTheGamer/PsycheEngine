@@ -35,4 +35,6 @@ All panels read mock JSON through typed loaders in `src/lib/data.ts`:
 - `public/runs/demo/events.json` — agent timeline events
 - `public/runs/demo/calls_psyche.json`, `calls_baseline.json` — per-chapter LLM cost records
 
-Types live in `src/lib/types.ts`. No backend, no database, no auth.
+Types live in `src/lib/types.ts`. Sections come 2–3 per chapter
+(ids like `psy-ch04.s2`) and carry `chapter_title`, `attempts` and
+`unresolved_issues`. No backend, no database, no auth.
