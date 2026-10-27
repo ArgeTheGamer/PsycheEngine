@@ -88,7 +88,13 @@ def main() -> int:
     )
 
     if (src / "mutation_benchmark.json").exists():
-        write(dst / "mutations.json", json.loads((src / "mutation_benchmark.json").read_text(encoding="utf-8")))
+        mutations = json.loads((src / "mutation_benchmark.json").read_text(encoding="utf-8"))
+        # Stale hits and final-audit quotes refer to the baseline as it stood after the last change,
+        # which is a different variant from sections_baseline.json; ship that text alongside.
+        steps = sorted((src / f"mutations_baseline_{mutations['baseline_variant']}").glob("[0-9][0-9].json"))
+        if steps:
+            mutations["baseline_sections_after"] = json.loads(steps[-1].read_text(encoding="utf-8"))
+        write(dst / "mutations.json", mutations)
 
     manifest = root / "runs.json"
     runs = json.loads(manifest.read_text(encoding="utf-8"))["runs"] if manifest.exists() else []
