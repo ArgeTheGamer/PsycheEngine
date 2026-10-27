@@ -5,6 +5,7 @@ import type {
   Contradiction,
   DocumentInfo,
   FactChangeRecord,
+  MutationsFile,
   RunId,
   RunsFile,
   Section,
@@ -84,9 +85,22 @@ export async function loadDocuments(
   return data && data.length > 0 ? data : DEFAULT_DOCUMENTS;
 }
 
+export async function loadMutations(
+  runId: string,
+): Promise<MutationsFile | null> {
+  const data = await getOptionalJSON<MutationsFile>(
+    `/runs/${runId}/mutations.json`,
+  );
+  if (!data || !Array.isArray(data.steps) || data.steps.length === 0) {
+    return null;
+  }
+  return data;
+}
+
 export type RunData = {
   canon: CanonVersion[];
   documents: DocumentInfo[];
+  mutations: MutationsFile | null;
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
@@ -101,6 +115,7 @@ export async function loadRun(runId: string): Promise<RunData> {
   const [
     canon,
     documents,
+    mutations,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
@@ -112,6 +127,7 @@ export async function loadRun(runId: string): Promise<RunData> {
   ] = await Promise.all([
     loadCanon(runId),
     loadDocuments(runId),
+    loadMutations(runId),
     loadSections(runId, "psyche"),
     loadSections(runId, "baseline"),
     loadContradictions(runId, "psyche"),
@@ -124,6 +140,7 @@ export async function loadRun(runId: string): Promise<RunData> {
   return {
     canon,
     documents,
+    mutations,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,

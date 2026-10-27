@@ -13,7 +13,7 @@ import type { FactChangeRecord, RunInfo } from "@/lib/types";
 
 export default function Home() {
   const [runs, setRuns] = useState<RunInfo[]>([]);
-  const [runId, setRunId] = useState("demo");
+  const [runId, setRunId] = useState("md-v2m");
   const [data, setData] = useState<RunData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
