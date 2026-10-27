@@ -69,7 +69,8 @@ export function PlaybackView({
     let raf = 0;
     let last = performance.now();
     const tick = (now: number) => {
-      const dt = (now - last) / 1000;
+      // Cap the step: after a hidden tab rAF resumes with a huge gap that would jump to the end card.
+      const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
       headRef.current = Math.min(duration, headRef.current + dt * speed);
       setPlayhead(headRef.current);
