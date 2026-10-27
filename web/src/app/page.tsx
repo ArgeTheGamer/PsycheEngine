@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/header";
 import { CanonPanel } from "@/components/canon-panel";
-import { DocPanel } from "@/components/doc-panel";
+import { DocPanel, type DocFocus } from "@/components/doc-panel";
 import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
 import { ChangeReplay } from "@/components/change-replay";
@@ -17,6 +17,7 @@ export default function Home() {
   const [data, setData] = useState<RunData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
+  const [docFocus, setDocFocus] = useState<DocFocus | null>(null);
 
   useEffect(() => {
     loadRuns()
@@ -104,6 +105,7 @@ export default function Home() {
               contradictionsPsyche={data.contradictionsPsyche}
               contradictionsBaseline={data.contradictionsBaseline}
               canonFacts={data.canon[data.canon.length - 1]?.facts ?? []}
+              focus={docFocus}
             />
             <ChartsPanel
               documents={data.documents}
@@ -113,6 +115,11 @@ export default function Home() {
               contradictionsBaseline={data.contradictionsBaseline}
               callsPsyche={data.callsPsyche}
               callsBaseline={data.callsBaseline}
+              mutations={data.mutations}
+              canon={data.canon}
+              onOpenSection={(run, doc, sectionId) =>
+                setDocFocus({ run, doc, sectionId })
+              }
             />
             <AgentsPanel events={data.events} />
           </>

@@ -12,12 +12,24 @@ import {
 } from "recharts";
 import type {
   CallRecord,
+  CanonVersion,
   Contradiction,
   DocumentInfo,
+  MutationsFile,
   RunId,
   Section,
 } from "@/lib/types";
-import { Badge, Card, CardContent, CardHeader, CardTitle } from "./ui";
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from "./ui";
+import { MaintenanceTab, type OpenSection } from "./maintenance-tab";
 import { cn } from "@/lib/utils";
 
 const PSYCHE = "#34d399";
@@ -143,6 +155,9 @@ export function ChartsPanel({
   contradictionsBaseline,
   callsPsyche,
   callsBaseline,
+  mutations,
+  canon,
+  onOpenSection,
 }: {
   documents: DocumentInfo[];
   sectionsPsyche: Section[];
@@ -151,8 +166,13 @@ export function ChartsPanel({
   contradictionsBaseline: Contradiction[];
   callsPsyche: CallRecord[];
   callsBaseline: CallRecord[];
+  mutations: MutationsFile | null;
+  canon: CanonVersion[];
+  onOpenSection: OpenSection;
 }) {
   const [version, setVersion] = useState<RunId>("baseline");
+  const [view, setView] = useState<"benchmark" | "maintenance">("benchmark");
+  const showMaintenance = view === "maintenance" && mutations !== null;
 
   const maps = useMemo(
     () => docMaps(sectionsPsyche, sectionsBaseline),
@@ -203,17 +223,42 @@ export function ChartsPanel({
     <Card className="min-h-[440px] xl:h-[calc((100vh-112px)/2)] xl:min-h-[400px]">
       <CardHeader>
         <CardTitle>Benchmark</CardTitle>
-        <div className="ml-auto flex items-center gap-1.5">
-          <Badge variant="danger">
-            {contradictionsBaseline.length} baseline contradictions
-          </Badge>
-          <Badge variant="default">
-            {contradictionsPsyche.length} PsycheEngine
-          </Badge>
-        </div>
+        <Tabs
+          value={showMaintenance ? "maintenance" : "benchmark"}
+          onValueChange={(v) =>
+            setView(v as "benchmark" | "maintenance")
+          }
+          className="ml-auto"
+        >
+          <TabsList>
+            <TabsTrigger value="benchmark">Benchmark</TabsTrigger>
+            {mutations !== null && (
+              <TabsTrigger value="maintenance">Maintenance</TabsTrigger>
+            )}
+          </TabsList>
+        </Tabs>
       </CardHeader>
       <CardContent className="min-h-0 flex-1 gap-3 overflow-auto">
-        <div className="min-h-[170px]">
+        {showMaintenance && mutations ? (
+          <MaintenanceTab
+            mutations={mutations}
+            canon={canon}
+            documents={documents}
+            sectionsPsyche={sectionsPsyche}
+            sectionsBaseline={sectionsBaseline}
+            onOpenSection={onOpenSection}
+          />
+        ) : (
+          <>
+            <div className="flex items-center gap-1.5">
+              <Badge variant="danger">
+                {contradictionsBaseline.length} baseline contradictions
+              </Badge>
+              <Badge variant="default">
+                {contradictionsPsyche.length} PsycheEngine
+              </Badge>
+            </div>
+            <div className="min-h-[170px]">
           <div className="mb-1 flex items-center gap-3">
             <h3 className="text-xs font-semibold text-zinc-300">
               Contradictions
@@ -401,7 +446,9 @@ export function ChartsPanel({
               Baseline
             </p>
           )}
-        </div>
+            </div>
+          </>
+        )}
       </CardContent>
     </Card>
   );

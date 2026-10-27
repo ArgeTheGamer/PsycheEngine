@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type {
   Contradiction,
   DocumentInfo,
@@ -165,6 +165,12 @@ function SectionText({
   );
 }
 
+export type DocFocus = {
+  run: RunId;
+  doc: string;
+  sectionId: string;
+};
+
 export function DocPanel({
   documents,
   sectionsPsyche,
@@ -172,6 +178,7 @@ export function DocPanel({
   contradictionsPsyche,
   contradictionsBaseline,
   canonFacts,
+  focus,
 }: {
   documents: DocumentInfo[];
   sectionsPsyche: Section[];
@@ -179,10 +186,19 @@ export function DocPanel({
   contradictionsPsyche: Contradiction[];
   contradictionsBaseline: Contradiction[];
   canonFacts: Fact[];
+  focus: DocFocus | null;
 }) {
   const [tab, setTab] = useState<RunId>("psyche");
   const [docId, setDocId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (focus) {
+      setTab(focus.run);
+      setDocId(focus.doc);
+      setSelectedId(focus.sectionId);
+    }
+  }, [focus]);
 
   const sections = tab === "psyche" ? sectionsPsyche : sectionsBaseline;
   const contradictions =
