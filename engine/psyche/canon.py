@@ -34,6 +34,8 @@ class Fact(BaseModel):
     # Derived facts carry a formula over other facts, e.g. "min(floor({F-EQP-11} / {F-LIM-15}), {F-EQP-12})".
     # Their value is always computed in code, never by a model.
     formula: str = ""
+    # Facts whose value this fact's statement quotes, e.g. an approval rule that names the write-off threshold.
+    refs: list[str] = Field(default_factory=list)
 
     def render(self) -> str:
         value = f"{self.value} {self.unit}".strip()
@@ -65,6 +67,7 @@ class FactChange(BaseModel):
     new_value: str
     affected_sections: list[str]  # sections using the changed fact or any derived fact whose value moved
     derived: list[DerivedChange] = Field(default_factory=list)
+    quoting: list[str] = Field(default_factory=list)  # facts whose statements quote a changed value and were updated
 
 
 class Canon(BaseModel):
@@ -155,11 +158,24 @@ class Canon(BaseModel):
         index = next(i for i, f in enumerate(canon.facts) if f.id == fact_id)
         canon.facts[index] = old.model_copy(update={"value": new_value, "statement": new_statement})
         derived = canon.recompute()
+        moved = {fact_id: (old.value, new_value), **{d.fact_id: (d.old_value, d.new_value) for d in derived}}
+        quoting = []
+        for i, f in enumerate(canon.facts):
+            for ref in f.refs:
+                if ref in moved and moved[ref][0] in f.statement:
+                    f = f.model_copy(update={"statement": f.statement.replace(moved[ref][0], moved[ref][1])})
+                    canon.facts[i] = f
+                    quoting.append(f.id)
         affected = self.sections_using(fact_id)
-        for d in derived:
-            affected += [s for s in self.sections_using(d.fact_id) if s not in affected]
+        for other in [d.fact_id for d in derived] + quoting:
+            affected += [s for s in self.sections_using(other) if s not in affected]
         change = FactChange(
-            fact_id=fact_id, old_value=old.value, new_value=new_value, affected_sections=affected, derived=derived
+            fact_id=fact_id,
+            old_value=old.value,
+            new_value=new_value,
+            affected_sections=affected,
+            derived=derived,
+            quoting=list(dict.fromkeys(quoting)),
         )
         return canon, change
 

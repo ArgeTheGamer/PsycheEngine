@@ -174,7 +174,11 @@
       "attribute": "purpose",
       "value": "cold_storage",
       "unit": "",
-      "statement": "Zone E is the cold zone: chilled storage held at +2 to +8 °C."
+      "statement": "Zone E is the cold zone: chilled storage held at +2 to +8 °C.",
+      "refs": [
+        "F-LIM-08",
+        "F-LIM-09"
+      ]
     },
     {
       "id": "F-ZON-06",
@@ -363,7 +367,10 @@
       "attribute": "write_off_approver_small",
       "value": "shift_supervisor",
       "unit": "",
-      "statement": "The shift supervisor approves damaged-goods write-offs up to 500 EUR."
+      "statement": "The shift supervisor approves damaged-goods write-offs up to 500 EUR.",
+      "refs": [
+        "F-LIM-14"
+      ]
     },
     {
       "id": "F-RSP-03",
@@ -372,7 +379,10 @@
       "attribute": "write_off_approver_large",
       "value": "warehouse_manager",
       "unit": "",
-      "statement": "The warehouse manager approves damaged-goods write-offs above 500 EUR."
+      "statement": "The warehouse manager approves damaged-goods write-offs above 500 EUR.",
+      "refs": [
+        "F-LIM-14"
+      ]
     },
     {
       "id": "F-RSP-04",

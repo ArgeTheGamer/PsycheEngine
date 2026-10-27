@@ -45,7 +45,8 @@ def propagate(
     knock_on = "".join(
         f"\nAs a result, {d.fact_id} changed from {d.old_value} to {d.new_value}: {canon.fact(d.fact_id).statement}"
         for d in change.derived
-    )
+    ) + "".join(f"
+Also updated: {canon.fact(q).statement}" for q in change.quoting)
     diff = []
     for i, current in enumerate(sections):
         if current.id not in change.affected_sections:

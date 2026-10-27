@@ -108,3 +108,13 @@ def test_formula_rejects_anything_but_arithmetic():
 
     with pytest.raises(ValueError):
         evaluate("__import__('os').system('x')", {})
+
+
+def test_facts_quoting_a_changed_value_are_updated_and_their_sections_affected():
+    threshold = fact("F-LIM-14", "500", subject="write_off", attribute="threshold", unit="EUR", statement="Above 500 EUR.")
+    rule = fact("F-RSP-02", "shift_supervisor", category="responsibility", subject="write_off", attribute="approver",
+                unit="", statement="The shift supervisor approves write-offs up to 500 EUR.", refs=["F-LIM-14"])
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[threshold, rule])).with_usage("ops.ch02.s1", ["F-RSP-02"])
+    changed, change = canon.with_change("F-LIM-14", "750", "Above 750 EUR.")
+    assert changed.fact("F-RSP-02").statement == "The shift supervisor approves write-offs up to 750 EUR."
+    assert change.quoting == ["F-RSP-02"] and change.affected_sections == ["ops.ch02.s1"]
