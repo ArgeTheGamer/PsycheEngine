@@ -26,9 +26,9 @@ The numbers below come from real runs. An independent auditor scores every versi
 
 | | contradictions within a document | contradictions between documents | violations of company facts | cost |
 |---|---|---|---|---|
-| PsycheEngine | 0 | **0** | 0 | $2.07 |
-| Muse Spark, each document in its own session | 1 | **5** | 1 | $0.53 |
-| Muse Spark, all earlier documents in one long context | 0 | 0 | 3 | $0.97 |
+| PsycheEngine | 0 | **0** | 0 | $2.33 |
+| Muse Spark, each document in its own session | 1 | **5** | 1 | $0.63 |
+| Muse Spark, all earlier documents in one long context | 0 | 0 | 3 | $1.05 |
 
 These are single runs (md-v2). An earlier run (md-v1) showed the same split, 0 versus 5 between documents. Repeat runs are in progress and this table will report ranges.
 
@@ -102,7 +102,7 @@ The prompts are plain Markdown in [`engine/psyche/prompts/`](engine/psyche/promp
 ```bash
 python -m venv engine/.venv
 engine/.venv/Scripts/python -m pip install -e "engine[dev]"     # macOS/Linux: engine/.venv/bin/python
-cp .env.example .env                                             # MODEL_API_KEY; optional open-weights endpoint for the critic
+cp .env.example .env                                             # MODEL_API_KEY; see the note below for the critic
 engine/.venv/Scripts/python -m pytest engine                     # offline tests
 engine/.venv/Scripts/python engine/scripts/smoke_test.py         # one real call per provider (< $0.01)
 
@@ -123,6 +123,8 @@ engine/.venv/Scripts/python engine/scripts/mutate.py --run demo-copy --audit
 engine/.venv/Scripts/python engine/scripts/export_web.py --run demo --label "my run"
 cd web && npm install && npm run dev
 ```
+
+The critic runs on Muse Spark 1.3 by default. The reported runs used Muse Spark Open: set `CRITIC_PROVIDER=open`, `OPEN_WEIGHTS_BASE_URL` and `OPEN_WEIGHTS_API_KEY` in `.env` to reproduce them.
 
 The company lives in [`data/company/`](data/company/): `brief.md` is how the owner describes the site, `company.json` holds the facts (computed ones included), `documents.json` lists the documents to write and `mutations.json` the five changes.
 
