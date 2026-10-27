@@ -7,6 +7,7 @@ critic again against the updated canon. Output: runs/<run>/changes/<n>/
     sections.json    the full manual after the change
     diff.json        before/after text of every rewritten section
     events.jsonl     agent log of the propagation
+    notices.json     client notice and staff memo about the change, critic-checked
 """
 
 from __future__ import annotations
@@ -18,10 +19,17 @@ from . import agents
 from .agents import Section
 from .canon import CanonStore
 from .engine import AcceptedSection, EventLog, Settings, Team, write_section
+from .notices import write_notices
 
 
 def propagate(
-    run_dir: Path, fact_id: str, new_value: str, new_statement: str, team: Team, settings: Settings
+    run_dir: Path,
+    fact_id: str,
+    new_value: str,
+    new_statement: str,
+    team: Team,
+    settings: Settings,
+    notices: bool = True,
 ) -> Path:
     store = CanonStore(run_dir / "canon")
     canon = store.latest()
@@ -66,4 +74,10 @@ def propagate(
         json.dumps([s.model_dump() for s in sections], indent=2, ensure_ascii=False), encoding="utf-8"
     )
     (out / "diff.json").write_text(json.dumps(diff, indent=2, ensure_ascii=False), encoding="utf-8")
+    if notices:
+        rewritten = [s for s in sections if s.id in {d["section_id"] for d in diff}]
+        written = write_notices(team, canon, change, rewritten, events)
+        (out / "notices.json").write_text(
+            json.dumps([n.model_dump() for n in written], indent=2, ensure_ascii=False), encoding="utf-8"
+        )
     return out
