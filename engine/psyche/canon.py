@@ -98,7 +98,7 @@ class Canon(BaseModel):
                 if new != f.value:
                     first = changes.get(f.id, DerivedChange(fact_id=f.id, old_value=f.value, new_value=new))
                     changes[f.id] = first.model_copy(update={"new_value": new})
-                    self.facts[i] = f.model_copy(update={"value": new, "statement": f.statement.replace(f.value, new)})
+                    self.facts[i] = f.model_copy(update={"value": new, "statement": replace_number(f.statement, f.value, new)})
                     values[f.id] = new
                     moved = True
             if not moved:
@@ -162,8 +162,8 @@ class Canon(BaseModel):
         quoting = []
         for i, f in enumerate(canon.facts):
             for ref in f.refs:
-                if ref in moved and moved[ref][0] in f.statement:
-                    f = f.model_copy(update={"statement": f.statement.replace(moved[ref][0], moved[ref][1])})
+                if ref in moved and replace_number(f.statement, *moved[ref]) != f.statement:
+                    f = f.model_copy(update={"statement": replace_number(f.statement, *moved[ref])})
                     canon.facts[i] = f
                     quoting.append(f.id)
         affected = self.sections_using(fact_id)
@@ -249,6 +249,14 @@ def evaluate(formula: str, values: dict[str, str]) -> float:
 
 def _number(value: str) -> float:
     return float(value.replace(",", "").strip())
+
+
+def replace_number(text: str, old: str, new: str) -> str:
+    """Replace a whole number in text ("10" but not inside "100"), tolerating thousands separators."""
+    digits = re.escape(old)
+    if len(old) > 3 and old.isdigit():
+        digits = re.escape(old[:-3]) + r"[,\s]?" + re.escape(old[-3:])
+    return re.sub(rf"(?<![\d.,]){digits}(?![\d]|[.,]\d)", new, text)
 
 
 def format_number(x: float) -> str:

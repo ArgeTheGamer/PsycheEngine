@@ -1,4 +1,4 @@
-"""Baseline: the same model writes the same sections with everything in the prompt.
+"""Baseline: the same model writes the same sections without the engine's loop.
 
 Variants share the engine's plan (tables of contents, section purposes, length):
 - separate sessions (default): each document is written in its own session from

@@ -4,8 +4,9 @@
 
 PsycheEngine applies each change through the canon (derived facts recomputed in
 code, only dependent sections rewritten, every rewrite checked by the critic).
-The baseline is one long chat: it gets all current documents plus the owner's
-change notice and returns the sections it decides to update.
+The baseline makes one long-context request per change: it gets the owner's
+brief, all current documents and the change notice, and returns the sections it
+decides to update (no conversation history between changes).
 
 After every change both versions are scanned for stale values: any earlier value
 of a changed fact (including derived ones) still written with its unit. This
@@ -93,6 +94,11 @@ def main() -> int:
     args = parser.parse_args()
 
     run_dir = REPO_ROOT / "runs" / args.run
+    if (run_dir / "changes").exists():
+        # propagate() stacks on disk; a second pass would start the engine from mutated documents
+        # while the baseline restarts from the originals. Always mutate a fresh copy of the run.
+        print(f"{run_dir} already has fact changes; copy the original run to a new name and mutate that")
+        return 1
     company = REPO_ROOT / "data" / "company"
     brief = (company / "brief.md").read_text(encoding="utf-8")
     mutations = json.loads((REPO_ROOT / args.mutations).read_text(encoding="utf-8"))

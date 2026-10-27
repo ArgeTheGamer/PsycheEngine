@@ -118,3 +118,10 @@ def test_facts_quoting_a_changed_value_are_updated_and_their_sections_affected()
     changed, change = canon.with_change("F-LIM-14", "750", "Above 750 EUR.")
     assert changed.fact("F-RSP-02").statement == "The shift supervisor approves write-offs up to 750 EUR."
     assert change.quoting == ["F-RSP-02"] and change.affected_sections == ["ops.ch02.s1"]
+
+
+def test_replace_number_only_touches_whole_numbers():
+    from psyche.canon import replace_number
+
+    assert replace_number("Up to 10 km/h, not 100 km/h.", "10", "8") == "Up to 8 km/h, not 100 km/h."
+    assert replace_number("Payload 24,000 kg.", "24000", "22000") == "Payload 22000 kg."
