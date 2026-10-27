@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import type {
   AgentEvent,
+  ChangeNotice,
   DocumentInfo,
   Fact,
   FactChangeRecord,
@@ -12,9 +13,85 @@ import type {
 import { Badge, Button } from "./ui";
 import { ChangeGraph } from "./change-graph";
 import { ChangeDiff } from "./change-diff";
+import type { OpenSection } from "./maintenance-tab";
 import { cn } from "@/lib/utils";
 
-const STEPS = ["Dependencies", "Rewrite log", "Before / after"] as const;
+const BASE_STEPS = ["Dependencies", "Rewrite log", "Before / after"] as const;
+
+function NoticesStep({
+  notices,
+  sections,
+  onOpenSection,
+  onClose,
+}: {
+  notices: ChangeNotice[];
+  sections: Section[];
+  onOpenSection: OpenSection;
+  onClose: () => void;
+}) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      {notices.map((n, i) => {
+        const issues = n.unresolved_issues.length;
+        return (
+          <article
+            key={`${n.audience}-${i}`}
+            className="flex flex-col gap-3 rounded-lg bg-amber-50 p-5 text-stone-900 shadow-lg"
+          >
+            <div className="text-[11px] font-bold tracking-widest text-stone-500 uppercase">
+              {n.audience === "client" ? "For clients" : "For staff"}
+            </div>
+            <h4 className="text-base font-bold">{n.subject}</h4>
+            <p className="text-sm leading-relaxed whitespace-pre-line">
+              {n.body}
+            </p>
+            {n.cited_section_ids.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {n.cited_section_ids.map((sid) => {
+                  const section = sections.find((s) => s.id === sid);
+                  if (!section) {
+                    return (
+                      <span
+                        key={sid}
+                        className="rounded-full border border-stone-300 px-2 py-0.5 font-mono text-[11px] text-stone-500"
+                      >
+                        {sid}
+                      </span>
+                    );
+                  }
+                  return (
+                    <button
+                      key={sid}
+                      onClick={() => {
+                        onOpenSection("psyche", section.doc ?? "ops", sid);
+                        onClose();
+                      }}
+                      title={section.title}
+                      className="rounded-full border border-stone-400 px-2 py-0.5 font-mono text-[11px] text-stone-800 outline-none hover:bg-stone-900 hover:text-amber-50"
+                    >
+                      {sid}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            <div>
+              {issues === 0 ? (
+                <span className="inline-block rounded-full border border-emerald-700/50 bg-emerald-700/10 px-2 py-0.5 text-[11px] font-medium text-emerald-800">
+                  checked by critic ✓
+                </span>
+              ) : (
+                <span className="inline-block rounded-full border border-amber-700/50 bg-amber-700/10 px-2 py-0.5 text-[11px] font-medium text-amber-800">
+                  {issues} issue{issues === 1 ? "" : "s"}
+                </span>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
 
 function formatDelta(ts: number, t0: number): string {
   const d = Math.max(0, Math.floor(ts - t0));
@@ -101,26 +178,32 @@ export function ChangeReplay({
   sections,
   documents,
   onClose,
+  onOpenSection,
 }: {
   record: FactChangeRecord;
   fact: Fact | undefined;
   sections: Section[];
   documents: DocumentInfo[];
   onClose: () => void;
+  onOpenSection: OpenSection;
 }) {
   const [step, setStep] = useState(0);
   const { change } = record;
   const unit = fact?.unit ? ` ${fact.unit}` : "";
+  const notices = record.notices ?? [];
+  const steps: readonly string[] =
+    notices.length > 0 ? [...BASE_STEPS, "Notices"] : BASE_STEPS;
+  const lastStep = steps.length - 1;
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === "ArrowRight") setStep((s) => Math.min(2, s + 1));
+      if (e.key === "ArrowRight") setStep((s) => Math.min(lastStep, s + 1));
       if (e.key === "ArrowLeft") setStep((s) => Math.max(0, s - 1));
       if (e.key === "Escape") onClose();
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, lastStep]);
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -172,7 +255,7 @@ export function ChangeReplay({
         </div>
 
         <div className="flex items-center gap-2 border-b border-zinc-800 px-5 py-3">
-          {STEPS.map((label, i) => (
+          {steps.map((label, i) => (
             <button
               key={label}
               onClick={() => setStep(i)}
@@ -187,7 +270,7 @@ export function ChangeReplay({
             </button>
           ))}
           <span className="ml-auto text-sm text-zinc-500">
-            Step {step + 1} of 3
+            Step {step + 1} of {steps.length}
           </span>
         </div>
 
@@ -207,6 +290,14 @@ export function ChangeReplay({
           )}
           {step === 1 && <RewriteLog events={record.events} />}
           {step === 2 && <ChangeDiff diffs={record.diff} />}
+          {step === 3 && notices.length > 0 && (
+            <NoticesStep
+              notices={notices}
+              sections={sections}
+              onOpenSection={onOpenSection}
+              onClose={onClose}
+            />
+          )}
         </div>
 
         <div className="flex items-center justify-between border-t border-zinc-800 px-5 py-3">
@@ -221,8 +312,8 @@ export function ChangeReplay({
             ← → to step, Esc to close
           </span>
           <Button
-            onClick={() => setStep((s) => Math.min(2, s + 1))}
-            disabled={step === 2}
+            onClick={() => setStep((s) => Math.min(lastStep, s + 1))}
+            disabled={step === lastStep}
           >
             Next <ArrowRight />
           </Button>

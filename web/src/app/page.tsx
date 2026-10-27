@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/header";
 import { CanonPanel } from "@/components/canon-panel";
-import { DocPanel } from "@/components/doc-panel";
+import { DocPanel, type DocFocus } from "@/components/doc-panel";
 import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
 import { ChangeReplay } from "@/components/change-replay";
@@ -13,10 +13,11 @@ import type { FactChangeRecord, RunInfo } from "@/lib/types";
 
 export default function Home() {
   const [runs, setRuns] = useState<RunInfo[]>([]);
-  const [runId, setRunId] = useState("demo");
+  const [runId, setRunId] = useState("md-v2m");
   const [data, setData] = useState<RunData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
+  const [docFocus, setDocFocus] = useState<DocFocus | null>(null);
 
   useEffect(() => {
     loadRuns()
@@ -104,6 +105,7 @@ export default function Home() {
               contradictionsPsyche={data.contradictionsPsyche}
               contradictionsBaseline={data.contradictionsBaseline}
               canonFacts={data.canon[data.canon.length - 1]?.facts ?? []}
+              focus={docFocus}
             />
             <ChartsPanel
               documents={data.documents}
@@ -113,6 +115,11 @@ export default function Home() {
               contradictionsBaseline={data.contradictionsBaseline}
               callsPsyche={data.callsPsyche}
               callsBaseline={data.callsBaseline}
+              mutations={data.mutations}
+              canon={data.canon}
+              onOpenSection={(run, doc, sectionId) =>
+                setDocFocus({ run, doc, sectionId })
+              }
             />
             <AgentsPanel events={data.events} />
           </>
@@ -120,6 +127,7 @@ export default function Home() {
       </main>
       {data && replay && (
         <ChangeReplay
+          key={replay.change.fact_id}
           record={replay}
           fact={(data.canon[data.canon.length - 1]?.facts ?? []).find(
             (f) => f.id === replay.change.fact_id,
@@ -127,6 +135,10 @@ export default function Home() {
           sections={data.sectionsPsyche}
           documents={data.documents}
           onClose={() => setReplay(null)}
+          onOpenSection={(run, doc, sectionId) => {
+            setReplay(null);
+            setDocFocus({ run, doc, sectionId });
+          }}
         />
       )}
     </div>
