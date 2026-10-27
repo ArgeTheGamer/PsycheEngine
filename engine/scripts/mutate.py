@@ -123,7 +123,8 @@ def main() -> int:
             history.setdefault(fact_id, []).append(old)
 
         spent = eng_team.budget.spent_usd
-        out = propagate(run_dir, m["fact"], m["value"], m["statement"], eng_team, Settings())
+        # Notices are a product feature the baseline does not have; keep them out of the comparison.
+        out = propagate(run_dir, m["fact"], m["value"], m["statement"], eng_team, Settings(), notices=False)
         new_engine = load(out / "sections.json")
         eng_changed = changed_chars(engine_docs, new_engine)
         eng_cost = eng_team.budget.spent_usd - spent
