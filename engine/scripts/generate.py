@@ -1,4 +1,4 @@
-"""Generate the warehouse manual with the full agent loop.
+"""Generate the company documents from one shared canon with the full agent loop.
 
     engine/.venv/Scripts/python engine/scripts/generate.py --run demo --only-chapters 1
 
@@ -11,6 +11,7 @@ import argparse
 import sys
 from collections import Counter
 
+from psyche.agents import load_documents
 from psyche.canon import Canon, load_spec
 from psyche.config import REPO_ROOT, budget_usd
 from psyche.engine import Settings, Team, run
@@ -20,15 +21,16 @@ from psyche.llm import Budget, BudgetExceeded, Tracer
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", required=True, help="run name, output goes to runs/<run>/")
-    parser.add_argument("--chapters", type=int, default=14)
-    parser.add_argument("--only-chapters", type=int, default=None, help="stop after the first N chapters")
+    parser.add_argument("--only-chapters", type=int, default=None, help="only the first N chapters of each document")
+    parser.add_argument("--resume", action="store_true", help="continue an interrupted run in place")
+    parser.add_argument("--docs", default=None, help="comma-separated document ids to write (default: all)")
     parser.add_argument("--language", default="English")
     parser.add_argument("--words", type=int, default=450, help="target words per section")
     args = parser.parse_args()
 
     out = REPO_ROOT / "runs" / args.run
-    if out.exists() and any(out.iterdir()):
-        print(f"{out} already exists; pick another --run name")
+    if out.exists() and any(out.iterdir()) and not args.resume:
+        print(f"{out} already exists; pick another --run name or pass --resume")
         return 1
 
     company = REPO_ROOT / "data" / "company"
@@ -36,12 +38,13 @@ def main() -> int:
     canon = Canon.from_spec(load_spec(company / "company.json"))
     tracer = Tracer(out / "calls.jsonl")
     team = Team(Budget(budget_usd()), tracer)
-    settings = Settings(
-        chapters=args.chapters, only_chapters=args.only_chapters, language=args.language, words_per_section=args.words
-    )
+    documents = load_documents(company / "documents.json")
+    if args.docs:
+        documents = [d for d in documents if d.id in args.docs.split(",")]
+    settings = Settings(only_chapters=args.only_chapters, language=args.language, words_per_section=args.words)
 
     try:
-        sections = run(brief, canon, out, settings, team)
+        sections = run(brief, canon, out, settings, team, documents)
     except BudgetExceeded as e:
         print(f"stopped: {e}")
         return 2

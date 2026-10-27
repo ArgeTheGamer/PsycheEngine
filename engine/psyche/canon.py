@@ -7,7 +7,10 @@ map tells us exactly what to rewrite when a fact changes.
 
 from __future__ import annotations
 
+import ast
 import json
+import math
+import re
 from pathlib import Path
 from typing import Literal
 
@@ -28,6 +31,11 @@ class Fact(BaseModel):
     statement: str
     # "company" for facts from the input description, "section:<id>" for facts a section introduced.
     source: str = "company"
+    # Derived facts carry a formula over other facts, e.g. "min(floor({F-EQP-11} / {F-LIM-15}), {F-EQP-12})".
+    # Their value is always computed in code, never by a model.
+    formula: str = ""
+    # Facts whose value this fact's statement quotes, e.g. an approval rule that names the write-off threshold.
+    refs: list[str] = Field(default_factory=list)
 
     def render(self) -> str:
         value = f"{self.value} {self.unit}".strip()
@@ -47,11 +55,19 @@ class CompanySpec(BaseModel):
     facts: list[Fact]
 
 
+class DerivedChange(BaseModel):
+    fact_id: str
+    old_value: str
+    new_value: str
+
+
 class FactChange(BaseModel):
     fact_id: str
     old_value: str
     new_value: str
-    affected_sections: list[str]
+    affected_sections: list[str]  # sections using the changed fact or any derived fact whose value moved
+    derived: list[DerivedChange] = Field(default_factory=list)
+    quoting: list[str] = Field(default_factory=list)  # facts whose statements quote a changed value and were updated
 
 
 class Canon(BaseModel):
@@ -65,7 +81,29 @@ class Canon(BaseModel):
     @classmethod
     def from_spec(cls, spec: CompanySpec) -> Canon:
         _reject_duplicates(spec.facts)
-        return cls(company=spec.company, facts=spec.facts, note="seeded from company description")
+        canon = cls(company=spec.company, facts=spec.facts, note="seeded from company description")
+        canon.recompute()
+        return canon
+
+    def recompute(self) -> list[DerivedChange]:
+        """Re-evaluate every derived fact in place (formulas may build on other derived facts)."""
+        changes: dict[str, DerivedChange] = {}
+        for _ in range(len(self.facts)):
+            moved = False
+            values = {f.id: f.value for f in self.facts}
+            for i, f in enumerate(self.facts):
+                if not f.formula:
+                    continue
+                new = format_number(evaluate(f.formula, values))
+                if new != f.value:
+                    first = changes.get(f.id, DerivedChange(fact_id=f.id, old_value=f.value, new_value=new))
+                    changes[f.id] = first.model_copy(update={"new_value": new})
+                    self.facts[i] = f.model_copy(update={"value": new, "statement": replace_number(f.statement, f.value, new)})
+                    values[f.id] = new
+                    moved = True
+            if not moved:
+                break
+        return [c for c in changes.values() if c.old_value != c.new_value]
 
     def fact(self, fact_id: str) -> Fact:
         for f in self.facts:
@@ -119,11 +157,25 @@ class Canon(BaseModel):
         canon = self.next(f"{fact_id}: {old.value} -> {new_value}")
         index = next(i for i, f in enumerate(canon.facts) if f.id == fact_id)
         canon.facts[index] = old.model_copy(update={"value": new_value, "statement": new_statement})
+        derived = canon.recompute()
+        moved = {fact_id: (old.value, new_value), **{d.fact_id: (d.old_value, d.new_value) for d in derived}}
+        quoting = []
+        for i, f in enumerate(canon.facts):
+            for ref in f.refs:
+                if ref in moved and replace_number(f.statement, *moved[ref]) != f.statement:
+                    f = f.model_copy(update={"statement": replace_number(f.statement, *moved[ref])})
+                    canon.facts[i] = f
+                    quoting.append(f.id)
+        affected = self.sections_using(fact_id)
+        for other in [d.fact_id for d in derived] + quoting:
+            affected += [s for s in self.sections_using(other) if s not in affected]
         change = FactChange(
             fact_id=fact_id,
             old_value=old.value,
             new_value=new_value,
-            affected_sections=self.sections_using(fact_id),
+            affected_sections=affected,
+            derived=derived,
+            quoting=list(dict.fromkeys(quoting)),
         )
         return canon, change
 
@@ -165,6 +217,50 @@ def _reject_duplicates(facts: list[Fact]) -> None:
     duplicates = sorted({i for i in ids if ids.count(i) > 1})
     if duplicates:
         raise ValueError(f"duplicate fact ids: {duplicates}")
+
+
+_FUNCS = {"min": min, "max": max, "floor": math.floor, "ceil": math.ceil, "round": round}
+_OPS = {
+    ast.Add: lambda a, b: a + b,
+    ast.Sub: lambda a, b: a - b,
+    ast.Mult: lambda a, b: a * b,
+    ast.Div: lambda a, b: a / b,
+    ast.FloorDiv: lambda a, b: a // b,
+}
+
+
+def evaluate(formula: str, values: dict[str, str]) -> float:
+    """Evaluate a fact formula safely: numbers, + - * / //, parentheses and min/max/floor/ceil/round only."""
+    expr = re.sub(r"\{([A-Z]+-[A-Z]+-\d+)\}", lambda m: repr(_number(values[m.group(1)])), formula)
+
+    def ev(node: ast.AST) -> float:
+        if isinstance(node, ast.Expression):
+            return ev(node.body)
+        if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+            return node.value
+        if isinstance(node, ast.BinOp) and type(node.op) in _OPS:
+            return _OPS[type(node.op)](ev(node.left), ev(node.right))
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in _FUNCS:
+            return _FUNCS[node.func.id](*(ev(a) for a in node.args))
+        raise ValueError(f"unsupported expression in formula: {formula}")
+
+    return ev(ast.parse(expr, mode="eval"))
+
+
+def _number(value: str) -> float:
+    return float(value.replace(",", "").strip())
+
+
+def replace_number(text: str, old: str, new: str) -> str:
+    """Replace a whole number in text ("10" but not inside "100"), tolerating thousands separators."""
+    digits = re.escape(old)
+    if len(old) > 3 and old.isdigit():
+        digits = re.escape(old[:-3]) + r"[,\s]?" + re.escape(old[-3:])
+    return re.sub(rf"(?<![\d.,]){digits}(?![\d]|[.,]\d)", new, text)
+
+
+def format_number(x: float) -> str:
+    return str(int(x)) if float(x).is_integer() else f"{x:.2f}".rstrip("0").rstrip(".")
 
 
 def load_spec(path: Path) -> CompanySpec:

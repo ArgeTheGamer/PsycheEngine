@@ -7,6 +7,7 @@ strict JSON-schema decoding.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Literal
 
@@ -40,10 +41,25 @@ class Outline(BaseModel):
     chapters: list[PlannedChapter]
 
 
-class Section(BaseModel):
-    """A planned section with its stable id, e.g. ch04.s2."""
+class Document(BaseModel):
+    """One company document written from the shared canon (data/company/documents.json)."""
 
     id: str
+    title: str
+    scope: str
+    chapters: int
+
+
+def load_documents(path: Path) -> list[Document]:
+    return [Document(**d) for d in json.loads(path.read_text(encoding="utf-8"))]
+
+
+class Section(BaseModel):
+    """A planned section with its stable id, e.g. ops.ch04.s2 (chapters are numbered per document)."""
+
+    id: str
+    doc: str = "ops"
+    doc_title: str = "Operations Manual"
     chapter: int
     chapter_title: str
     title: str
@@ -51,19 +67,34 @@ class Section(BaseModel):
     fact_ids: list[str]
 
 
-def plan(llm: LLM, brief: str, canon: Canon, chapters: int) -> list[Section]:
+def plan(llm: LLM, brief: str, canon: Canon, doc: Document) -> list[Section]:
     outline = llm.structured(
         agent="planner",
-        messages=[{"role": "user", "content": prompt("planner", chapters=chapters, brief=brief, canon=canon.render())}],
+        messages=[
+            {
+                "role": "user",
+                "content": prompt(
+                    "planner",
+                    document=doc.title,
+                    scope=doc.scope,
+                    chapters=doc.chapters,
+                    brief=brief,
+                    canon=canon.render(),
+                ),
+            }
+        ],
         schema=Outline,
         reasoning_effort="medium",
+        tags={"doc": doc.id},
     )
     sections = []
     for c, chapter in enumerate(outline.chapters, 1):
         for s, planned in enumerate(chapter.sections, 1):
             sections.append(
                 Section(
-                    id=f"ch{c:02d}.s{s}",
+                    id=f"{doc.id}.ch{c:02d}.s{s}",
+                    doc=doc.id,
+                    doc_title=doc.title,
                     chapter=c,
                     chapter_title=chapter.title,
                     title=planned.title,
@@ -107,11 +138,12 @@ def write(
     language: str = "English",
     words: int = 450,
     issues: list[Issue] | None = None,
+    revision: str = "",
 ) -> Draft:
-    feedback = ""
+    feedback = revision
     if issues:
         listed = "\n".join(f'- "{i.quote}": {i.problem}' for i in issues)
-        feedback = (
+        feedback += (
             "\nYour previous draft was rejected by the consistency critic. Fix every point below and keep the rest:"
             f"\n<rejected>\n{listed}\n</rejected>\n"
         )
@@ -123,6 +155,7 @@ def write(
                 "content": prompt(
                     "writer",
                     company=canon.company.name,
+                    document=section.doc_title,
                     section_id=section.id,
                     section_title=section.title,
                     chapter_number=section.chapter,
@@ -131,6 +164,7 @@ def write(
                     language=language,
                     words=words,
                     facts=canon.render(section.fact_ids),
+                    canon=canon.render(),
                     toc=contents,
                     feedback=feedback,
                 ),
@@ -138,7 +172,7 @@ def write(
         ],
         schema=Draft,
         reasoning_effort="low",
-        tags={"chapter": section.chapter, "section": section.id},
+        tags={"doc": section.doc, "chapter": section.chapter, "section": section.id},
     )
 
 
@@ -163,15 +197,15 @@ def critique(llm: LLM, canon: Canon, section: Section, text: str) -> Verdict:
         ],
         schema=Verdict,
         reasoning_effort="medium",
-        tags={"chapter": section.chapter, "section": section.id},
+        tags={"doc": section.doc, "chapter": section.chapter, "section": section.id},
     )
     # A quote that is not in the text is a hallucinated issue; drop it rather than force a rewrite.
-    haystack = _normalize(text)
-    issues = [i for i in verdict.issues if _normalize(i.quote) and _normalize(i.quote) in haystack]
+    haystack = normalize(text)
+    issues = [i for i in verdict.issues if normalize(i.quote) and normalize(i.quote) in haystack]
     return Verdict(accepted=not issues, issues=issues)
 
 
-def _normalize(s: str) -> str:
+def normalize(s: str) -> str:
     s = s.replace("’", "'").replace("“", '"').replace("”", '"').replace("–", "-")
     return " ".join(s.lower().split()).strip(" .\"'")
 
@@ -213,7 +247,7 @@ def extract_new_facts(llm: LLM, canon: Canon, section: Section, text: str) -> li
         ],
         schema=NewFacts,
         reasoning_effort="low",
-        tags={"chapter": section.chapter, "section": section.id},
+        tags={"doc": section.doc, "chapter": section.chapter, "section": section.id},
     )
     taken = {f.id for f in canon.facts}
     facts = []

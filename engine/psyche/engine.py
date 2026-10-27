@@ -51,6 +51,8 @@ class EventLog:
 
 class AcceptedSection(BaseModel):
     id: str
+    doc: str = "ops"
+    doc_title: str = "Operations Manual"
     chapter: int
     chapter_title: str
     title: str
@@ -62,11 +64,11 @@ class AcceptedSection(BaseModel):
 
 @dataclass
 class Settings:
-    chapters: int = 14
+    chapters: int = 14  # used when no document list is given: one operations manual
     max_attempts: int = 3
     language: str = "English"
     words_per_section: int = 450
-    only_chapters: int | None = None  # generate just the first N chapters of the plan (live demo)
+    only_chapters: int | None = None  # generate just the first N chapters of each document (live demo)
 
 
 class Team:
@@ -84,25 +86,51 @@ class Team:
         return self._cache[agent]
 
 
-def run(brief: str, canon: Canon, out: Path, settings: Settings, team: Team | None = None) -> list[AcceptedSection]:
+def run(
+    brief: str,
+    canon: Canon,
+    out: Path,
+    settings: Settings,
+    team: Team | None = None,
+    documents: list[agents.Document] | None = None,
+) -> list[AcceptedSection]:
+    """Write every document from one shared canon, document by document, section by section."""
+    documents = documents or [
+        agents.Document(id="ops", title="Operations Manual", scope="the warehouse operations manual", chapters=settings.chapters)
+    ]
     out.mkdir(parents=True, exist_ok=True)
     store = CanonStore(out / "canon")
     events = EventLog(out / "events.jsonl")
     team = team or Team(Budget(budget_usd()), Tracer(out / "calls.jsonl"))
-    store.save(canon)
 
-    planner = team("planner")
-    sections = agents.plan(planner, brief, canon, settings.chapters)
-    (out / "plan.json").write_text(json.dumps([s.model_dump() for s in sections], indent=2), encoding="utf-8")
-    events.emit(Event("planner", planner.provider.model, "plan", f"{len(sections)} sections in {settings.chapters} chapters"))
+    accepted: list[AcceptedSection] = []
+    if (out / "plan.json").exists():
+        # Resume an interrupted run: same plan, latest canon, skip sections already accepted.
+        sections = [Section(**s) for s in json.loads((out / "plan.json").read_text(encoding="utf-8"))]
+        documents = [agents.Document(**d) for d in json.loads((out / "documents.json").read_text(encoding="utf-8"))]
+        if (out / "sections.json").exists():
+            accepted = [AcceptedSection(**s) for s in json.loads((out / "sections.json").read_text(encoding="utf-8"))]
+        canon = store.latest()
+    else:
+        store.save(canon)
+        planner = team("planner")
+        sections = []
+        for doc in documents:
+            planned = agents.plan(planner, brief, canon, doc)
+            sections += planned
+            events.emit(Event("planner", planner.provider.model, "plan", f"{doc.title}: {len(planned)} sections in {doc.chapters} chapters"))
+        (out / "plan.json").write_text(json.dumps([s.model_dump() for s in sections], indent=2), encoding="utf-8")
+        (out / "documents.json").write_text(json.dumps([d.model_dump() for d in documents], indent=2), encoding="utf-8")
 
     if settings.only_chapters:
         sections = [s for s in sections if s.chapter <= settings.only_chapters]
-    contents = agents.toc(sections)
+    contents = {doc.id: agents.toc([s for s in sections if s.doc == doc.id]) for doc in documents}
 
-    accepted: list[AcceptedSection] = []
+    done_ids = {a.id for a in accepted}
     for section in sections:
-        done, canon = write_section(team, canon, section, contents, settings, events)
+        if section.id in done_ids:
+            continue
+        done, canon = write_section(team, canon, section, contents[section.doc], settings, events)
         store.save(canon)
         if done.unresolved_issues:
             # Never let the canon editor promote values the critic rejected.
@@ -117,13 +145,19 @@ def run(brief: str, canon: Canon, out: Path, settings: Settings, team: Team | No
 
 
 def write_section(
-    team: Team, canon: Canon, section: Section, contents: str, settings: Settings, events: EventLog
+    team: Team,
+    canon: Canon,
+    section: Section,
+    contents: str,
+    settings: Settings,
+    events: EventLog,
+    revision: str = "",
 ) -> tuple[AcceptedSection, Canon]:
     writer, critic = team("writer"), team("critic")
     issues: list[agents.Issue] = []
     for attempt in range(1, settings.max_attempts + 1):
         draft = agents.write(
-            writer, canon, section, contents, settings.language, settings.words_per_section, issues or None
+            writer, canon, section, contents, settings.language, settings.words_per_section, issues or None, revision
         )
         kind = "rewrite" if attempt > 1 else "draft"
         events.emit(Event("writer", writer.provider.model, kind, f"{section.title} ({len(draft.text.split())} words)", section.id))
@@ -142,6 +176,8 @@ def write_section(
     canon = canon.with_usage(section.id, cited)
     done = AcceptedSection(
         id=section.id,
+        doc=section.doc,
+        doc_title=section.doc_title,
         chapter=section.chapter,
         chapter_title=section.chapter_title,
         title=section.title,

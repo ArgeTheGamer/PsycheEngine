@@ -1,0 +1,32 @@
+[
+  {
+    "fact": "F-LIM-15",
+    "value": "800",
+    "statement": "A pallet, including its load, may weigh at most 800 kg.",
+    "notice": "New insurance terms: from now on a pallet, load included, may weigh at most 800 kg (was 1,000 kg)."
+  },
+  {
+    "fact": "F-LIM-01",
+    "value": "8",
+    "statement": "Forklifts must not exceed 8 km/h inside the building.",
+    "notice": "After a near-miss we are lowering the indoor forklift speed limit to 8 km/h (was 10 km/h)."
+  },
+  {
+    "fact": "F-EQP-11",
+    "value": "22000",
+    "statement": "Our contracted curtain-side trailers carry a payload of 22000 kg.",
+    "notice": "Our haulier switched to a lighter trailer fleet: trailer payload is now 22,000 kg (was 24,000 kg)."
+  },
+  {
+    "fact": "F-LIM-14",
+    "value": "750",
+    "statement": "Damaged-goods write-offs above 750 EUR need warehouse-manager approval.",
+    "notice": "Shift supervisors may now approve damaged-goods write-offs up to 750 EUR; above that the warehouse manager approves (was 500 EUR)."
+  },
+  {
+    "fact": "F-SCH-10",
+    "value": "4",
+    "statement": "Each outbound door handles 4 trailer loads per shift.",
+    "notice": "With the new loading crew each outbound door now handles 4 trailer loads per shift (was 3)."
+  }
+]
