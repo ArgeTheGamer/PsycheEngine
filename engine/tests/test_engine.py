@@ -125,3 +125,21 @@ def test_interrupted_run_resumes_without_redoing_accepted_sections(tmp_path):
     sections = run("brief", CANON, tmp_path, Settings(chapters=1), make_team(second))
     assert [s.id for s in sections] == ["ops.ch01.s1", "ops.ch01.s2"]
     assert "Outline" not in second.prompts and len(second.prompts["Draft"]) == 1
+
+
+def test_stale_guard_sends_a_revision_back_until_old_values_are_gone(tmp_path):
+    from psyche.propagate import propagate
+
+    client = ScriptedClient({"Outline": [OUTLINE], "Draft": [GOOD], "Verdict": [ACCEPT], "NewFacts": [{"facts": []}]})
+    team = make_team(client)
+    run("brief", CANON, tmp_path, Settings(chapters=1), team)
+
+    half = {"text": "Drive at no more than 8 km/h inside the hall. Old signs saying 10 km/h stay up.", "cited_fact_ids": []}
+    fixed = {"text": "Drive at no more than 8 km/h inside the hall.", "cited_fact_ids": ["F-LIM-01"]}
+    client.script.update({"Draft": [half, fixed], "Verdict": [ACCEPT, ACCEPT]})
+    out = propagate(tmp_path, "F-LIM-01", "8", "Forklifts must not exceed 8 km/h indoors.", team, Settings(), notices=False)
+
+    assert json.loads((out / "diff.json").read_text())[0]["after"] == fixed["text"]
+    assert '"10 km/h" (old value of F-LIM-01)' in client.prompts["Draft"][-1]
+    guard = [json.loads(l) for l in (out / "events.jsonl").read_text().splitlines() if '"stale_guard"' in l]
+    assert guard[0]["quote"] == "10 km/h"

@@ -18,8 +18,9 @@ from pathlib import Path
 from . import agents
 from .agents import Section
 from .canon import CanonStore
-from .engine import AcceptedSection, EventLog, Settings, Team, write_section
+from .engine import AcceptedSection, Event, EventLog, Settings, Team, write_section
 from .notices import write_notices
+from .stale import find_stale
 
 
 def propagate(
@@ -54,19 +55,40 @@ def propagate(
         f"\nAs a result, {d.fact_id} changed from {d.old_value} to {d.new_value}: {canon.fact(d.fact_id).statement}"
         for d in change.derived
     ) + "".join(f"\nAlso updated: {canon.fact(q).statement}" for q in change.quoting)
+    old_values = [(fact_id, change.old_value, canon.fact(fact_id).unit)] + [
+        (d.fact_id, d.old_value, canon.fact(d.fact_id).unit) for d in change.derived
+    ]
+
+    def revision(text: str, leftovers: str = "") -> str:
+        return (
+            f"\nThis section was already written and approved. The company has changed one fact: {fact_id} "
+            f"was {change.old_value}, it is now: {new_statement}{knock_on}\nRevise the section below so it is "
+            "consistent with the canon. Change only what these changes require and keep all other wording."
+            f"{leftovers}\n<current_section>\n{text}\n</current_section>\n"
+        )
+
     diff = []
     for i, current in enumerate(sections):
         if current.id not in change.affected_sections:
             continue
-        revision = (
-            f"\nThis section was already written and approved. The company has changed one fact: {fact_id} "
-            f"was {change.old_value}, it is now: {new_statement}{knock_on}\nRevise the section below so it is "
-            "consistent with the canon. Change only what these changes require and keep all other wording."
-            f"\n<current_section>\n{current.text}\n</current_section>\n"
-        )
         contents = agents.toc([plan[s.id] for s in sections if s.doc == current.doc])
-        done, canon = write_section(team, canon, plan[current.id], contents, settings, events, revision)
+        done, canon = write_section(team, canon, plan[current.id], contents, settings, events, revision(current.text))
         store.save(canon)
+        # Stale guard: the engine knows every old value exactly, so code (not a model) checks the revision
+        # for leftovers and sends the section back with the offending words. The critic can miss these.
+        for _ in range(settings.max_attempts - 1):
+            hits = find_stale(done.text, old_values)
+            if not hits:
+                break
+            for fid, match in hits:
+                events.emit(Event("stale_guard", "code", "verdict", f"old value of {fid} still in text", current.id,
+                                  accepted=False, quote=match))
+            leftovers = "\nThese old values are still in the text and must be replaced with the canon values:\n" + "\n".join(
+                f'- "{match}" (old value of {fid})' for fid, match in hits
+            )
+            done, canon = write_section(team, canon, plan[current.id], contents, settings, events,
+                                        revision(done.text, leftovers))
+            store.save(canon)
         diff.append({"section_id": current.id, "title": current.title, "before": current.text, "after": done.text})
         sections[i] = done
 
