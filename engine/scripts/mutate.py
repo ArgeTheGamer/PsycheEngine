@@ -33,6 +33,7 @@ from psyche.config import REPO_ROOT, budget_usd
 from psyche.engine import AcceptedSection, Settings, Team
 from psyche.llm import Budget, Tracer
 from psyche.propagate import propagate
+from psyche.stale import value_pattern
 
 
 class SectionUpdate(BaseModel):
@@ -42,24 +43,6 @@ class SectionUpdate(BaseModel):
 
 class Updates(BaseModel):
     sections: list[SectionUpdate]
-
-
-def value_pattern(value: str, unit: str) -> re.Pattern[str]:
-    """Regex for a value written with its unit, tolerant to thousands separators and common phrasings."""
-    digits = re.escape(value)
-    if len(value) > 3 and value.isdigit():
-        digits = re.escape(value[:-3]) + r"[,\s.]?" + re.escape(value[-3:])
-    num = rf"(?<![\d.,]){digits}(?![\d.,]\d)"
-    unit_rx = {
-        "kg": r"\s*kg\b",
-        "km/h": r"\s*km/h",
-        "EUR": r"\s*(EUR|euro)",
-        "pallets": r"\s+(full[- ]weight\s+|full\s+)?pallets?\b",
-        "loads": r"\s+(trailer\s+)?loads?\b",
-    }.get(unit, r"\s*" + re.escape(unit))
-    if unit == "EUR":
-        return re.compile(rf"({num}{unit_rx}|(EUR|€)\s*{digits}(?![\d.,]\d))", re.IGNORECASE)
-    return re.compile(num + unit_rx, re.IGNORECASE)
 
 
 def stale_hits(sections: list[AcceptedSection], history: dict[str, list[str]], canon: Canon) -> list[dict]:
