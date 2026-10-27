@@ -97,13 +97,19 @@ def test_fact_change_rewrites_only_dependent_sections(tmp_path):
     run("brief", CANON, tmp_path, Settings(chapters=1), team)
 
     slower = {"text": "Drive at no more than 8 km/h inside the hall.", "cited_fact_ids": ["F-LIM-01"]}
-    client.script.update({"Draft": [slower], "Verdict": [ACCEPT]})
+    notice = {"subject": "Indoor speed now 8 km/h", "body": "Drive at no more than 8 km/h inside the hall.",
+              "cited_section_ids": ["ops.ch01.s1", "nope"], "cited_fact_ids": ["F-LIM-01"]}
+    client.script.update({"Draft": [slower], "Verdict": [ACCEPT, ACCEPT, ACCEPT], "NoticeDraft": [notice, notice]})
     out = propagate(tmp_path, "F-LIM-01", "8", "Forklifts must not exceed 8 km/h indoors.", team, Settings())
 
     diff = json.loads((out / "diff.json").read_text())
     assert [d["section_id"] for d in diff] == ["ops.ch01.s1"]  # the zone section was not touched
     assert "was 10, it is now" in client.prompts["Draft"][-1] and GOOD["text"] in client.prompts["Draft"][-1]
     assert CanonStore(tmp_path / "canon").latest().fact("F-LIM-01").value == "8"
+    notices = json.loads((out / "notices.json").read_text())
+    assert [n["audience"] for n in notices] == ["client", "staff"]
+    assert notices[0]["cited_section_ids"] == ["ops.ch01.s1"]  # unknown ids dropped
+    assert "10 -> 8" in client.prompts["NoticeDraft"][0]
 
 
 def test_interrupted_run_resumes_without_redoing_accepted_sections(tmp_path):

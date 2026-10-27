@@ -80,6 +80,7 @@ def main() -> int:
                 "change": json.loads((c / "change.json").read_text(encoding="utf-8")),
                 "diff": json.loads((c / "diff.json").read_text(encoding="utf-8")),
                 "events": read_jsonl(c / "events.jsonl"),
+                "notices": json.loads((c / "notices.json").read_text(encoding="utf-8")) if (c / "notices.json").exists() else [],
             }
             for c in changes
             if (c / "diff.json").exists()
