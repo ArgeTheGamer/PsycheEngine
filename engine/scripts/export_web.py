@@ -24,6 +24,17 @@ def read_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
+def thin(canons: list, limit: int) -> list:
+    """Keep the first and last version, every fact-change version, and an even sample of the rest."""
+    keep = {0, len(canons) - 1} | {i for i, c in enumerate(canons) if c.note.startswith("F-")}
+    rest = [i for i in range(len(canons)) if i not in keep]
+    room = max(limit - len(keep), 0)
+    if rest and room:
+        step = len(rest) / room
+        keep |= {rest[int(k * step)] for k in range(min(room, len(rest)))}
+    return [canons[i] for i in sorted(keep)]
+
+
 def write(path: Path, data: object) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
@@ -34,6 +45,7 @@ def main() -> int:
     parser.add_argument("--label", required=True)
     parser.add_argument("--baseline", default="separate",
                         help="which baseline variant the dashboard shows")
+    parser.add_argument("--max-versions", type=int, default=40, help="canon versions kept for the version slider")
     parser.add_argument("--out", default=str(REPO_ROOT / "web" / "public" / "runs"))
     args = parser.parse_args()
 
@@ -44,7 +56,7 @@ def main() -> int:
 
     store = CanonStore(src / "canon")
     canons = [store.load(v) for v in store.versions()]
-    write(dst / "canon.json", [c.model_dump(exclude={"company"}) for c in canons])
+    write(dst / "canon.json", [c.model_dump(exclude={"company"}) for c in thin(canons, args.max_versions)])
     write(dst / "events.json", read_jsonl(src / "events.jsonl"))
     if (src / "documents.json").exists():
         write(dst / "documents.json", [{"id": d["id"], "title": d["title"]} for d in json.loads((src / "documents.json").read_text(encoding="utf-8"))])
@@ -73,6 +85,9 @@ def main() -> int:
             if (c / "diff.json").exists()
         ],
     )
+
+    if (src / "mutation_benchmark.json").exists():
+        write(dst / "mutations.json", json.loads((src / "mutation_benchmark.json").read_text(encoding="utf-8")))
 
     manifest = root / "runs.json"
     runs = json.loads(manifest.read_text(encoding="utf-8"))["runs"] if manifest.exists() else []
