@@ -7,6 +7,7 @@ import { DocPanel, type DocFocus } from "@/components/doc-panel";
 import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
 import { ChangeReplay } from "@/components/change-replay";
+import { PlaybackView } from "@/components/playback-view";
 import { Card, CardContent } from "@/components/ui";
 import { loadRun, loadRuns, type RunData } from "@/lib/data";
 import type { FactChangeRecord, RunInfo } from "@/lib/types";
@@ -18,6 +19,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
   const [docFocus, setDocFocus] = useState<DocFocus | null>(null);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     loadRuns()
@@ -56,6 +58,16 @@ export default function Home() {
     ),
   );
   const hasChanges = (data?.changes.length ?? 0) > 0;
+  const psyDocOf = new Map(
+    (data?.sectionsPsyche ?? []).map((s) => [s.id, s.doc ?? "ops"]),
+  );
+  const betweenDocs = data?.audit
+    ? Object.values(data.audit.between).reduce((a, b) => a + b, 0)
+    : ((data?.contradictionsPsyche ?? []).filter((c) => {
+        const a = psyDocOf.get(c.section_a);
+        const b = psyDocOf.get(c.section_b);
+        return a !== undefined && b !== undefined && a !== b;
+      }).length);
 
   return (
     <div className="min-h-screen">
@@ -71,6 +83,8 @@ export default function Home() {
           hasChanges ? sectionIds.size - rewrittenIds.size : undefined
         }
         docCount={data?.documents.length}
+        onPlay={() => setPlaying(true)}
+        canPlay={(data?.events.length ?? 0) > 0}
       />
       <main className="grid gap-4 p-4 lg:grid-cols-2">
         {error && (
@@ -125,6 +139,18 @@ export default function Home() {
           </>
         )}
       </main>
+      {data && playing && (
+        <PlaybackView
+          runLabel={runs.find((r) => r.id === runId)?.label ?? runId}
+          events={data.events}
+          sections={data.sectionsPsyche}
+          canon={data.canon}
+          documents={data.documents}
+          calls={data.callsPsyche}
+          betweenDocs={betweenDocs}
+          onExit={() => setPlaying(false)}
+        />
+      )}
       {data && replay && (
         <ChangeReplay
           key={replay.change.fact_id}

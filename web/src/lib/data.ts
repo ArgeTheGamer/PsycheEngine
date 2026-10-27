@@ -5,6 +5,7 @@ import type {
   Contradiction,
   DocumentInfo,
   FactChangeRecord,
+  MutationAudit,
   MutationsFile,
   RunId,
   RunsFile,
@@ -97,10 +98,20 @@ export async function loadMutations(
   return data;
 }
 
+export async function loadAudit(
+  runId: string,
+): Promise<MutationAudit | null> {
+  const data = await getOptionalJSON<MutationAudit>(
+    `/runs/${runId}/audit_psyche.json`,
+  );
+  return data ?? null;
+}
+
 export type RunData = {
   canon: CanonVersion[];
   documents: DocumentInfo[];
   mutations: MutationsFile | null;
+  audit: MutationAudit | null;
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
@@ -116,6 +127,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     canon,
     documents,
     mutations,
+    audit,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
@@ -128,6 +140,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     loadCanon(runId),
     loadDocuments(runId),
     loadMutations(runId),
+    loadAudit(runId),
     loadSections(runId, "psyche"),
     loadSections(runId, "baseline"),
     loadContradictions(runId, "psyche"),
@@ -141,6 +154,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     canon,
     documents,
     mutations,
+    audit,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,

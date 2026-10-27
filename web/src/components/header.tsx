@@ -1,9 +1,10 @@
 "use client";
 
-import { Boxes } from "lucide-react";
+import { Boxes, Play } from "lucide-react";
 import type { RunInfo } from "@/lib/types";
 import {
   Badge,
+  Button,
   Select,
   SelectContent,
   SelectItem,
@@ -18,6 +19,8 @@ export function Header({
   rewritten,
   untouched,
   docCount,
+  onPlay,
+  canPlay,
 }: {
   runs: RunInfo[];
   runId: string;
@@ -25,6 +28,8 @@ export function Header({
   rewritten?: number;
   untouched?: number;
   docCount?: number;
+  onPlay?: () => void;
+  canPlay?: boolean;
 }) {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
@@ -62,6 +67,11 @@ export function Header({
             rewritten === undefined ? "ml-auto flex items-center gap-2" : "flex items-center gap-2"
           }
         >
+          {onPlay && (
+            <Button size="sm" onClick={onPlay} disabled={!canPlay}>
+              <Play /> Play run
+            </Button>
+          )}
           <span className="text-xs text-zinc-400">Run</span>
           <Select value={runId} onValueChange={onRunChange}>
             <SelectTrigger className="w-64">
