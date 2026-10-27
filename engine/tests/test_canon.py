@@ -125,3 +125,17 @@ def test_replace_number_only_touches_whole_numbers():
 
     assert replace_number("Up to 10 km/h, not 100 km/h.", "10", "8") == "Up to 8 km/h, not 100 km/h."
     assert replace_number("Payload 24,000 kg.", "24000", "22000") == "Payload 22000 kg."
+
+
+def test_section_facts_quoting_a_company_value_follow_its_change():
+    pallet = fact("F-LIM-15", "1000", subject="pallet", attribute="max_gross_weight", unit="kg", statement="Max 1000 kg.")
+    ped = fact("F-LIM-03", "5", attribute="pedestrian", statement="5 km/h near people.")
+    ramp = fact("F-LIM-04", "5", attribute="ramp", statement="5 km/h on ramps.")
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[pallet, ped, ramp]))
+    rule = fact("F-RUL-05", "prohibited", category="rule", subject="pallet", attribute="split", unit="",
+                statement="A 1,000 kg pallet must never be split; slow to 5 km/h when moving it.")
+    canon = canon.with_new_facts("ops.ch07.s3", [rule]).with_usage("ops.ch07.s3", ["F-RUL-05"])
+    assert canon.fact("F-RUL-05").refs == ["F-LIM-15"]  # 5 km/h is ambiguous, so not linked
+    changed, change = canon.with_change("F-LIM-15", "800", "Max 800 kg.")
+    assert changed.fact("F-RUL-05").statement == "A 800 kg pallet must never be split; slow to 5 km/h when moving it."
+    assert change.affected_sections == ["ops.ch07.s3"]

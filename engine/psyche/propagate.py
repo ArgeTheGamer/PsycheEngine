@@ -46,6 +46,7 @@ def propagate(
     out.mkdir(parents=True)
     events = EventLog(out / "events.jsonl")
 
+    canon.link_quotes()  # also covers canons written before quote linking existed
     canon, change = canon.with_change(fact_id, new_value, new_statement)
     store.save(canon)
     (out / "change.json").write_text(change.model_dump_json(indent=2), encoding="utf-8")

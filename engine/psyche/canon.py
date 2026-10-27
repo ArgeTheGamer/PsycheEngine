@@ -150,7 +150,30 @@ class Canon(BaseModel):
             raise ValueError(f"fact ids already in canon: {clashes}")
         canon = self.next(f"{len(facts)} new facts from section {section_id}")
         canon.facts.extend(f.model_copy(update={"source": f"section:{section_id}"}) for f in facts)
+        canon.link_quotes()
         return canon
+
+    def link_quotes(self) -> None:
+        """Give section-introduced facts a ref to every company fact whose value they quote.
+
+        The canon editor often restates a base value ("a 1000 kg pallet must never be split"). Without a ref
+        such a fact keeps the old number after a change and feeds it back to the writer. Only values that
+        identify a single company fact are linked, so two different limits that happen to share "5 km/h"
+        are never tied together.
+        """
+        from .stale import value_pattern
+
+        base = [f for f in self.facts if f.source == "company" and f.unit and f.value.replace(",", "").isdigit()]
+        counts: dict[tuple[str, str], int] = {}
+        for g in base:
+            counts[(g.value, g.unit)] = counts.get((g.value, g.unit), 0) + 1
+        distinct = [g for g in base if counts[(g.value, g.unit)] == 1]
+        for i, f in enumerate(self.facts):
+            if f.source == "company" or f.formula:
+                continue
+            refs = [g.id for g in distinct if g.id not in f.refs and value_pattern(g.value, g.unit).search(f.statement)]
+            if refs:
+                self.facts[i] = f.model_copy(update={"refs": f.refs + refs})
 
     def with_change(self, fact_id: str, new_value: str, new_statement: str) -> tuple[Canon, FactChange]:
         old = self.fact(fact_id)
