@@ -61,6 +61,7 @@ export type CallRecord = {
   completion_tokens: number;
   cost_usd: number;
   tags?: { doc?: string; chapter?: number };
+  ts?: number;
 };
 
 export type ChangeNotice = {

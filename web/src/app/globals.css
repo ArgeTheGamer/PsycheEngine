@@ -52,3 +52,23 @@ body {
     animation: none;
   }
 }
+
+@keyframes tile-flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.tile-flash {
+  animation: tile-flash 0.7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-flash {
+    animation: none;
+  }
+}
