@@ -127,6 +127,7 @@ export default function Home() {
       </main>
       {data && replay && (
         <ChangeReplay
+          key={replay.change.fact_id}
           record={replay}
           fact={(data.canon[data.canon.length - 1]?.facts ?? []).find(
             (f) => f.id === replay.change.fact_id,
@@ -134,6 +135,10 @@ export default function Home() {
           sections={data.sectionsPsyche}
           documents={data.documents}
           onClose={() => setReplay(null)}
+          onOpenSection={(run, doc, sectionId) => {
+            setReplay(null);
+            setDocFocus({ run, doc, sectionId });
+          }}
         />
       )}
     </div>
