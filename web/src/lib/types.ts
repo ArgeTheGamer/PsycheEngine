@@ -63,6 +63,16 @@ export type CallRecord = {
   tags?: { doc?: string; chapter?: number };
 };
 
+export type ChangeNotice = {
+  audience: "client" | "staff";
+  subject: string;
+  body: string;
+  cited_section_ids: string[];
+  cited_fact_ids: string[];
+  attempts: number;
+  unresolved_issues: unknown[];
+};
+
 export type FactChangeRecord = {
   change: {
     fact_id: string;
@@ -72,6 +82,7 @@ export type FactChangeRecord = {
   };
   diff: { section_id: string; title: string; before: string; after: string }[];
   events: AgentEvent[];
+  notices?: ChangeNotice[];
 };
 
 export type DerivedChange = {

@@ -178,6 +178,41 @@
         "message": "roles ch01.s2 accepted.",
         "quote": "Limit matches F-LIM-01 at 8 km/h."
       }
+    ],
+    "notices": [
+      {
+        "audience": "client",
+        "subject": "Notice: indoor forklift speed limit lowered to 8 km/h",
+        "body": "Dear clients,\n\nTo improve safety in shared aisles, forklifts on our site will travel at most 8 km/h indoors (previously 10 km/h). Yard traffic is unchanged at 15 km/h.\n\nDispatch slots and loading times are not affected. Drivers should continue to wait in the marked waiting area and never enter the hall.",
+        "cited_section_ids": [
+          "ops.ch06.s1",
+          "ops.ch01.s2"
+        ],
+        "cited_fact_ids": [
+          "F-LIM-01",
+          "F-LIM-02"
+        ],
+        "attempts": 1,
+        "unresolved_issues": []
+      },
+      {
+        "audience": "staff",
+        "subject": "New 8 km/h indoor limit - speed limiters to be rechecked",
+        "body": "Team,\n\nFrom Monday the indoor speed limit is 8 km/h. The pre-use check now includes verifying the speed limiter setting for the 8 km/h indoor limit.\n\nReach-truck aisles and pedestrian crossings keep their 5 km/h rule. Supervisors: brief both shifts and log the briefing.",
+        "cited_section_ids": [
+          "ops.ch06.s1",
+          "ops.ch06.s3",
+          "hs.ch01.s1"
+        ],
+        "cited_fact_ids": [
+          "F-LIM-01",
+          "F-RUL-03"
+        ],
+        "attempts": 2,
+        "unresolved_issues": [
+          "Forklift 3 limiter recalibration not confirmed"
+        ]
+      }
     ]
   }
 ]
