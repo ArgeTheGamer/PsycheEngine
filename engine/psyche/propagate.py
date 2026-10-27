@@ -20,7 +20,7 @@ from .agents import Section
 from .canon import CanonStore
 from .engine import AcceptedSection, Event, EventLog, Settings, Team, write_section
 from .notices import write_notices
-from .stale import find_stale
+from .stale import find_stale, replace_stale
 
 
 def propagate(
@@ -58,6 +58,7 @@ def propagate(
     old_values = [(fact_id, change.old_value, canon.fact(fact_id).unit)] + [
         (d.fact_id, d.old_value, canon.fact(d.fact_id).unit) for d in change.derived
     ]
+    new_values = {fact_id: change.new_value, **{d.fact_id: d.new_value for d in change.derived}}
 
     def revision(text: str, leftovers: str = "") -> str:
         return (
@@ -89,6 +90,14 @@ def propagate(
             done, canon = write_section(team, canon, plan[current.id], contents, settings, events,
                                         revision(done.text, leftovers))
             store.save(canon)
+        # Last resort: the model kept an old value through every retry (seen with phrasings like "never split
+        # a 1000 kg pallet"). The engine knows the exact old -> new mapping, so it substitutes in code.
+        hits = find_stale(done.text, old_values)
+        if hits:
+            done = done.model_copy(update={"text": replace_stale(done.text, old_values, new_values)})
+            for fid, match in hits:
+                events.emit(Event("stale_guard", "code", "canon_update", f"replaced old value of {fid} in code", current.id,
+                                  quote=match))
         diff.append({"section_id": current.id, "title": current.title, "before": current.text, "after": done.text})
         sections[i] = done
 

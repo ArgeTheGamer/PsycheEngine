@@ -38,3 +38,24 @@ def find_stale(text: str, old_values: list[tuple[str, str, str]]) -> list[tuple[
             continue  # a bare number is too ambiguous to call stale
         hits += [(fact_id, m.group(0)) for m in value_pattern(old, unit).finditer(text)]
     return hits
+
+
+def _number_rx(value: str) -> str:
+    if len(value) > 3 and value.isdigit():
+        return re.escape(value[:-3]) + r"[,\s.]?" + re.escape(value[-3:])
+    return re.escape(value)
+
+
+def replace_stale(text: str, old_values: list[tuple[str, str, str]], new_values: dict[str, str]) -> str:
+    """Rewrite every stale value with the current one, keeping the unit and the thousands-separator style."""
+    for fact_id, old, unit in old_values:
+        if not unit or fact_id not in new_values:
+            continue
+        new = new_values[fact_id]
+
+        def swap(m: re.Match[str]) -> str:
+            styled = f"{int(new):,}" if "," in m.group(0) and new.isdigit() and len(new) > 3 else new
+            return re.sub(_number_rx(old), styled, m.group(0), count=1)
+
+        text = value_pattern(old, unit).sub(swap, text)
+    return text

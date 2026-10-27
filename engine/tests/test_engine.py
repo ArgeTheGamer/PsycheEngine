@@ -143,3 +143,14 @@ def test_stale_guard_sends_a_revision_back_until_old_values_are_gone(tmp_path):
     assert '"10 km/h" (old value of F-LIM-01)' in client.prompts["Draft"][-1]
     guard = [json.loads(l) for l in (out / "events.jsonl").read_text().splitlines() if '"stale_guard"' in l]
     assert guard[0]["quote"] == "10 km/h"
+
+
+def test_replace_stale_keeps_units_and_separators():
+    from psyche.stale import replace_stale
+
+    olds = [("F-LIM-15", "1000", "kg"), ("F-EQP-11", "24000", "kg"), ("F-LIM-14", "500", "EUR")]
+    new = {"F-LIM-15": "800", "F-EQP-11": "22000", "F-LIM-14": "750"}
+    text = "Never split a 1000 kg pallet. Payload 24,000 kg. Above EUR 500 ask the manager; 15000 kg stays."
+    assert replace_stale(text, olds, new) == (
+        "Never split a 800 kg pallet. Payload 22,000 kg. Above EUR 750 ask the manager; 15000 kg stays."
+    )
