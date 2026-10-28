@@ -35,6 +35,18 @@ def value_pattern(value: str, unit: str) -> re.Pattern[str]:
     return re.compile(num + unit_rx, re.IGNORECASE)
 
 
+def current_values(facts) -> set[tuple[str, str]]:
+    """(value, unit) pairs that some fact currently holds; an old value equal to one of them is ambiguous."""
+    return {(f.value.replace(",", ""), f.unit) for f in facts if f.unit}
+
+
+def unambiguous(old_values: list[tuple[str, str, str]], facts) -> list[tuple[str, str, str]]:
+    """Drop old values that another fact still holds (e.g. stacking height 4.0 m vs aisle width 4.0 m):
+    text alone cannot tell which fact a "4.0 m" refers to, so code must not flag or rewrite it."""
+    taken = current_values(facts)
+    return [(fid, old, unit) for fid, old, unit in old_values if (old.replace(",", ""), unit) not in taken]
+
+
 def find_stale(text: str, old_values: list[tuple[str, str, str]]) -> list[tuple[str, str]]:
     """(fact_id, matched text) for every old value still present; old_values = [(fact_id, old, unit)]."""
     hits = []

@@ -34,7 +34,7 @@ from psyche.config import REPO_ROOT, budget_usd
 from psyche.engine import AcceptedSection, Settings, Team
 from psyche.llm import Budget, Tracer
 from psyche.propagate import propagate
-from psyche.stale import value_pattern
+from psyche.stale import current_values, value_pattern
 
 
 class SectionUpdate(BaseModel):
@@ -48,9 +48,12 @@ class Updates(BaseModel):
 
 def stale_hits(sections: list[AcceptedSection], history: dict[str, list[str]], canon: Canon) -> list[dict]:
     hits = []
+    taken = current_values(canon.facts)
     for fact_id, old_values in history.items():
         unit = canon.fact(fact_id).unit
         for old in old_values:
+            if (old.replace(",", ""), unit) in taken:
+                continue  # another fact still holds this value; the text cannot tell them apart
             rx = value_pattern(old, unit)
             for s in sections:
                 for m in rx.finditer(s.text):

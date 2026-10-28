@@ -154,3 +154,13 @@ def test_replace_stale_keeps_units_and_separators():
     assert replace_stale(text, olds, new) == (
         "Never split a 800 kg pallet. Payload 22,000 kg. Above EUR 750 ask the manager; 15000 kg stays."
     )
+
+
+def test_old_value_shared_with_another_fact_is_never_flagged_or_rewritten():
+    from psyche.canon import Fact
+    from psyche.stale import unambiguous
+
+    aisle = Fact(id="F-LIM-11", category="limit", subject="main_aisle", attribute="width", value="4.0", unit="m",
+                 statement="Main aisles are 4.0 m wide.")
+    olds = [("F-LIM-05", "4.0", "m"), ("F-LIM-15", "1000", "kg")]
+    assert unambiguous(olds, [aisle]) == [("F-LIM-15", "1000", "kg")]
