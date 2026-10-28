@@ -175,6 +175,7 @@ export function YearView({
         if (!finished) setPlaying((p) => !p);
       } else if (e.key === "ArrowLeft") {
         setPlaying(false);
+        setFinished(false);
         setRevealed((r) => Math.max(0, r - 1));
       } else if (e.key === "ArrowRight") {
         setPlaying(false);
@@ -246,19 +247,22 @@ export function YearView({
   }, [slots, revealed, hasPerDoc]);
 
   const summary = useMemo(() => {
-    let psy = 0;
-    let base = 0;
-    let per = 0;
+    // Stale lists are cumulative (each step holds every value still out of date at that point),
+    // so the year's result is the last step; only costs add up step by step.
+    const last = mutations.steps[mutations.steps.length - 1];
     let psyCost = 0;
     let baseCost = 0;
     for (const s of mutations.steps) {
-      psy += s.engine.stale.length;
-      base += s.baseline.stale.length;
       psyCost += s.engine.cost_usd;
       baseCost += s.baseline.cost_usd;
-      if (s.baseline_per_doc) per += s.baseline_per_doc.stale.length;
     }
-    return { psy, base, per, psyCost, baseCost };
+    return {
+      psy: last?.engine.stale.length ?? 0,
+      base: last?.baseline.stale.length ?? 0,
+      per: last?.baseline_per_doc?.stale.length ?? 0,
+      psyCost,
+      baseCost,
+    };
   }, [mutations]);
 
   const selectedStep =
@@ -478,8 +482,10 @@ export function YearView({
                     ) : (
                       <div className="grid grid-cols-1 gap-2 xl:grid-cols-3">
                         {g.hits.slice(0, 3).map((h, i) => {
+                          // Only show surrounding text if it really contains the match: the per-document
+                          // baseline's sections are a different text from the one loaded here.
                           const sec = sectionsBaseline.find(
-                            (x) => x.id === h.section_id
+                            (x) => x.id === h.section_id && x.text.includes(h.match)
                           );
                           return (
                             <div
