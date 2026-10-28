@@ -109,11 +109,13 @@ export type MutationResult = {
 
 export type MutationStep = {
   step: number;
-  fact: string;
+  fact?: string;
+  facts?: string[];
   notice: string;
   derived: DerivedChange[];
   engine: MutationResult;
   baseline: MutationResult;
+  baseline_per_doc?: MutationResult;
 };
 
 export type AuditViolation = {
@@ -145,8 +147,13 @@ export type MutationAudit = {
 
 export type MutationsFile = {
   baseline_variant: string;
+  per_doc_baseline_variant?: string | null;
   steps: MutationStep[];
-  final_audit: { engine: MutationAudit; baseline: MutationAudit };
+  final_audit: {
+    engine: MutationAudit;
+    baseline: MutationAudit;
+    baseline_per_doc?: MutationAudit;
+  };
 };
 
 export type RunInfo = {

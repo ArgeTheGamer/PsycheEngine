@@ -8,6 +8,7 @@ import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
 import { ChangeReplay } from "@/components/change-replay";
 import { PlaybackView } from "@/components/playback-view";
+import { YearView } from "@/components/year-view";
 import { Card, CardContent } from "@/components/ui";
 import { loadRun, loadRuns, type RunData } from "@/lib/data";
 import type { FactChangeRecord, RunInfo } from "@/lib/types";
@@ -20,6 +21,7 @@ export default function Home() {
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
   const [docFocus, setDocFocus] = useState<DocFocus | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [yearOpen, setYearOpen] = useState(false);
 
   useEffect(() => {
     loadRuns()
@@ -85,6 +87,8 @@ export default function Home() {
         docCount={data?.documents.length}
         onPlay={() => setPlaying(true)}
         canPlay={(data?.events.length ?? 0) > 0}
+        onYear={() => setYearOpen(true)}
+        canYear={(data?.mutations?.steps.length ?? 0) > 0}
       />
       <main className="grid gap-4 p-4 lg:grid-cols-2">
         {error && (
@@ -149,6 +153,14 @@ export default function Home() {
           calls={data.callsPsyche}
           betweenDocs={betweenDocs}
           onExit={() => setPlaying(false)}
+        />
+      )}
+      {data && yearOpen && data.mutations && (
+        <YearView
+          runLabel={runs.find((r) => r.id === runId)?.label ?? runId}
+          mutations={data.mutations}
+          sectionsBaseline={data.sectionsBaseline}
+          onExit={() => setYearOpen(false)}
         />
       )}
       {data && replay && (
