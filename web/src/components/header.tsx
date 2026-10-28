@@ -21,6 +21,8 @@ export function Header({
   docCount,
   onPlay,
   canPlay,
+  onYear,
+  canYear,
 }: {
   runs: RunInfo[];
   runId: string;
@@ -30,6 +32,8 @@ export function Header({
   docCount?: number;
   onPlay?: () => void;
   canPlay?: boolean;
+  onYear?: () => void;
+  canYear?: boolean;
 }) {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
@@ -70,6 +74,16 @@ export function Header({
           {onPlay && (
             <Button size="sm" onClick={onPlay} disabled={!canPlay}>
               <Play /> Play run
+            </Button>
+          )}
+          {onYear && (
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={onYear}
+              disabled={!canYear}
+            >
+              Year
             </Button>
           )}
           <span className="text-xs text-zinc-400">Run</span>
