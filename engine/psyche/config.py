@@ -35,14 +35,17 @@ class Provider:
 
 
 def meta_provider() -> Provider:
+    model = os.environ.get("META_MODEL", "muse-spark-1.3")
+    # The contributor tier is the same model at a discount, in exchange for Meta using prompts for training.
+    contributor = model.endswith("-contributor")
     return Provider(
         name="meta",
         base_url="https://api.meta.ai/v1",
         api_key=os.environ.get("MODEL_API_KEY", ""),
-        model=os.environ.get("META_MODEL", "muse-spark-1.3"),
-        input_per_m=1.25,
-        cached_input_per_m=0.15,
-        output_per_m=4.25,
+        model=model,
+        input_per_m=0.10 if contributor else 1.25,
+        cached_input_per_m=0.002 if contributor else 0.15,
+        output_per_m=0.20 if contributor else 4.25,
     )
 
 
