@@ -200,11 +200,22 @@ class Canon(BaseModel):
         canon.facts[index] = old.model_copy(update={"value": new_value, "statement": new_statement})
         derived = canon.recompute()
         moved = {fact_id: (old.value, new_value), **{d.fact_id: (d.old_value, d.new_value) for d in derived}}
+        from .stale import replace_stale
+
         quoting = []
         for i, f in enumerate(canon.facts):
             for ref in f.refs:
-                if ref in moved and replace_number(f.statement, *moved[ref]) != f.statement:
-                    f = f.model_copy(update={"statement": replace_number(f.statement, *moved[ref])})
+                if ref not in moved:
+                    continue
+                # Rewrite only the quoted value with its unit ("12 pallets"), never other numbers in the statement.
+                unit = canon.fact(ref).unit
+                rewritten = (
+                    replace_stale(f.statement, [(ref, moved[ref][0], unit)], {ref: moved[ref][1]})
+                    if unit
+                    else replace_number(f.statement, *moved[ref])
+                )
+                if rewritten != f.statement:
+                    f = f.model_copy(update={"statement": rewritten})
                     canon.facts[i] = f
                     quoting.append(f.id)
         affected = self.sections_using(fact_id)

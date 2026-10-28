@@ -163,3 +163,22 @@ def test_stale_scan_understands_counts_and_units():
     assert value_pattern("4", "doors").search("the 4 outbound dock doors")
     assert value_pattern("2.5", "t").search("rated at 2.5 t")
     assert value_pattern("8", "°C").search("held at +2 to +8 °C")
+
+
+def test_stale_patterns_do_not_cross_units_or_numbers():
+    from psyche.stale import value_pattern
+
+    assert not value_pattern("6", "trucks").search("6 dock doors serve all trucks")
+    assert not value_pattern("100", "EUR").search("above EUR 1000")
+    assert not value_pattern("5", "m").search("belts run at 5 m/s")
+    assert value_pattern("12", "pallets").search("max 12 pallets per run")
+
+
+def test_quoting_fact_rewrites_only_the_quoted_value():
+    cap = fact("F-LIM-06", "12", subject="run", attribute="max", unit="pallets", statement="Max 12 pallets.")
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[cap]))
+    rule = fact("F-SCH-50", "night", category="schedule", subject="shift", attribute="night", unit="",
+                statement="Night shift is 12 hours, max 12 pallets per run.")
+    canon = canon.with_new_facts("ops.ch01.s1", [rule])
+    changed, _ = canon.with_change("F-LIM-06", "14", "Max 14 pallets.")
+    assert changed.fact("F-SCH-50").statement == "Night shift is 12 hours, max 14 pallets per run."

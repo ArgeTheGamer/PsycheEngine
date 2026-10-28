@@ -59,7 +59,10 @@ def propagate(
         for d in change.derived
     ) + "".join(f"\nAlso updated: {canon.fact(q).statement}" for q in change.quoting)
     moved = [change.model_copy(), *change.also, *change.derived]  # every fact whose value changed
-    old_values = unambiguous([(m.fact_id, m.old_value, canon.fact(m.fact_id).unit) for m in moved], canon.facts)
+    olds = [(m.fact_id, m.old_value, canon.fact(m.fact_id).unit) for m in moved]
+    # Two facts that shared an old value in the same batch cannot be told apart in text either.
+    shared = {(o, u) for _, o, u in olds if sum(1 for _, o2, u2 in olds if (o2, u2) == (o, u)) > 1}
+    old_values = unambiguous([x for x in olds if (x[1], x[2]) not in shared], canon.facts)
     new_values = {m.fact_id: m.new_value for m in moved}
     stated = "".join(
         f"\n{a.fact_id} was {a.old_value}, it is now: {canon.fact(a.fact_id).statement}" for a in change.also
