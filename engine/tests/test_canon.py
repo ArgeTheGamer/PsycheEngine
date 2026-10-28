@@ -139,3 +139,27 @@ def test_section_facts_quoting_a_company_value_follow_its_change():
     changed, change = canon.with_change("F-LIM-15", "800", "Max 800 kg.")
     assert changed.fact("F-RUL-05").statement == "A 800 kg pallet must never be split; slow to 5 km/h when moving it."
     assert change.affected_sections == ["ops.ch07.s3"]
+
+
+def test_batch_change_merges_derived_values_and_sections():
+    payload = fact("F-EQP-11", "24000", subject="trailer", attribute="payload", unit="kg", statement="24000 kg.")
+    pallet = fact("F-LIM-15", "1000", subject="pallet", attribute="max", unit="kg", statement="1000 kg.")
+    full = fact("F-DRV-01", "0", subject="trailer", attribute="full", unit="pallets", statement="0 pallets.",
+                formula="floor({F-EQP-11} / {F-LIM-15})")
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[payload, pallet, full]))
+    canon = canon.with_usage("ops.ch01.s1", ["F-EQP-11"]).with_usage("sla.ch01.s1", ["F-DRV-01"])
+    changed, change = canon.with_changes([("F-EQP-11", "26000", "26000 kg."), ("F-LIM-15", "800", "800 kg.")])
+    assert [(a.fact_id, a.old_value, a.new_value) for a in change.also] == [("F-LIM-15", "1000", "800")]
+    assert [(d.fact_id, d.old_value, d.new_value) for d in change.derived] == [("F-DRV-01", "24", "32")]
+    assert change.affected_sections == ["ops.ch01.s1", "sla.ch01.s1"]
+    assert changed.fact("F-DRV-01").value == "32"
+
+
+def test_stale_scan_understands_counts_and_units():
+    from psyche.stale import value_pattern
+
+    assert value_pattern("6", "trucks").search("We run 6 counterbalance forklift trucks.")
+    assert not value_pattern("6", "trucks").search("We run 16 reach trucks.")
+    assert value_pattern("4", "doors").search("the 4 outbound dock doors")
+    assert value_pattern("2.5", "t").search("rated at 2.5 t")
+    assert value_pattern("8", "°C").search("held at +2 to +8 °C")

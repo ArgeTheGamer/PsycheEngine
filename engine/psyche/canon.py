@@ -68,6 +68,7 @@ class FactChange(BaseModel):
     affected_sections: list[str]  # sections using the changed fact or any derived fact whose value moved
     derived: list[DerivedChange] = Field(default_factory=list)
     quoting: list[str] = Field(default_factory=list)  # facts whose statements quote a changed value and were updated
+    also: list[DerivedChange] = Field(default_factory=list)  # further base facts changed in the same batch
 
 
 class Canon(BaseModel):
@@ -174,6 +175,23 @@ class Canon(BaseModel):
             refs = [g.id for g in distinct if g.id not in f.refs and value_pattern(g.value, g.unit).search(f.statement)]
             if refs:
                 self.facts[i] = f.model_copy(update={"refs": f.refs + refs})
+
+    def with_changes(self, changes: list[tuple[str, str, str]]) -> tuple[Canon, FactChange]:
+        """Apply several base-fact changes as one event (e.g. a fleet replacement) and merge their effects."""
+        canon, merged = self.with_change(*changes[0])
+        for fact_id, value, statement in changes[1:]:
+            canon, change = canon.with_change(fact_id, value, statement)
+            merged.also.append(DerivedChange(fact_id=fact_id, old_value=change.old_value, new_value=change.new_value))
+            known = {d.fact_id: i for i, d in enumerate(merged.derived)}
+            for d in change.derived:
+                if d.fact_id in known:
+                    merged.derived[known[d.fact_id]].new_value = d.new_value
+                else:
+                    merged.derived.append(d)
+            merged.quoting += [q for q in change.quoting if q not in merged.quoting]
+            merged.affected_sections += [s for s in change.affected_sections if s not in merged.affected_sections]
+        merged.derived = [d for d in merged.derived if d.old_value != d.new_value]
+        return canon, merged
 
     def with_change(self, fact_id: str, new_value: str, new_statement: str) -> tuple[Canon, FactChange]:
         old = self.fact(fact_id)

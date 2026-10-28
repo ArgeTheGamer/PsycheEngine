@@ -15,6 +15,11 @@ _UNITS = {
     "EUR": r"\s*(EUR|euro)",
     "pallets": r"\s+(full[- ]weight\s+|full\s+)?pallets?\b",
     "loads": r"\s+(trailer\s+)?loads?\b",
+    "trucks": r"\s+([\w-]+\s+){0,3}(trucks?|forklifts?|jacks?)\b",
+    "doors": r"\s+(\w+\s+){0,2}(dock\s+)?doors?\b",
+    "t": r"\s*(t|tonnes?|tons?)\b",
+    "m": r"\s*m\b",
+    "°C": r"\s*°\s*C",
 }
 
 

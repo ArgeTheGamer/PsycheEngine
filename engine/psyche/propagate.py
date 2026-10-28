@@ -31,7 +31,9 @@ def propagate(
     team: Team,
     settings: Settings,
     notices: bool = True,
+    extra: list[tuple[str, str, str]] = (),
 ) -> Path:
+    """Apply one fact change, or a batch (fact_id/new_value/new_statement plus `extra`), and rewrite dependents."""
     store = CanonStore(run_dir / "canon")
     canon = store.latest()
     plan = {s["id"]: Section(**s) for s in json.loads((run_dir / "plan.json").read_text(encoding="utf-8"))}
@@ -47,7 +49,7 @@ def propagate(
     events = EventLog(out / "events.jsonl")
 
     canon.link_quotes()  # also covers canons written before quote linking existed
-    canon, change = canon.with_change(fact_id, new_value, new_statement)
+    canon, change = canon.with_changes([(fact_id, new_value, new_statement), *extra])
     store.save(canon)
     (out / "change.json").write_text(change.model_dump_json(indent=2), encoding="utf-8")
 
@@ -56,15 +58,17 @@ def propagate(
         f"\nAs a result, {d.fact_id} changed from {d.old_value} to {d.new_value}: {canon.fact(d.fact_id).statement}"
         for d in change.derived
     ) + "".join(f"\nAlso updated: {canon.fact(q).statement}" for q in change.quoting)
-    old_values = [(fact_id, change.old_value, canon.fact(fact_id).unit)] + [
-        (d.fact_id, d.old_value, canon.fact(d.fact_id).unit) for d in change.derived
-    ]
-    new_values = {fact_id: change.new_value, **{d.fact_id: d.new_value for d in change.derived}}
+    moved = [change.model_copy(), *change.also, *change.derived]  # every fact whose value changed
+    old_values = [(m.fact_id, m.old_value, canon.fact(m.fact_id).unit) for m in moved]
+    new_values = {m.fact_id: m.new_value for m in moved}
+    stated = "".join(
+        f"\n{a.fact_id} was {a.old_value}, it is now: {canon.fact(a.fact_id).statement}" for a in change.also
+    )
 
     def revision(text: str, leftovers: str = "") -> str:
         return (
-            f"\nThis section was already written and approved. The company has changed one fact: {fact_id} "
-            f"was {change.old_value}, it is now: {new_statement}{knock_on}\nRevise the section below so it is "
+            f"\nThis section was already written and approved. The company has changed: {fact_id} "
+            f"was {change.old_value}, it is now: {new_statement}{stated}{knock_on}\nRevise the section below so it is "
             "consistent with the canon. Change only what these changes require and keep all other wording."
             f"{leftovers}\n<current_section>\n{text}\n</current_section>\n"
         )
