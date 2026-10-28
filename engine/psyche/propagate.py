@@ -18,8 +18,9 @@ from pathlib import Path
 from . import agents
 from .agents import Section
 from .canon import CanonStore
-from .engine import AcceptedSection, EventLog, Settings, Team, write_section
+from .engine import AcceptedSection, Event, EventLog, Settings, Team, write_section
 from .notices import write_notices
+from .stale import find_stale, replace_stale, unambiguous
 
 
 def propagate(
@@ -30,7 +31,9 @@ def propagate(
     team: Team,
     settings: Settings,
     notices: bool = True,
+    extra: list[tuple[str, str, str]] = (),
 ) -> Path:
+    """Apply one fact change, or a batch (fact_id/new_value/new_statement plus `extra`), and rewrite dependents."""
     store = CanonStore(run_dir / "canon")
     canon = store.latest()
     plan = {s["id"]: Section(**s) for s in json.loads((run_dir / "plan.json").read_text(encoding="utf-8"))}
@@ -45,7 +48,8 @@ def propagate(
     out.mkdir(parents=True)
     events = EventLog(out / "events.jsonl")
 
-    canon, change = canon.with_change(fact_id, new_value, new_statement)
+    canon.link_quotes()  # also covers canons written before quote linking existed
+    canon, change = canon.with_changes([(fact_id, new_value, new_statement), *extra])
     store.save(canon)
     (out / "change.json").write_text(change.model_dump_json(indent=2), encoding="utf-8")
 
@@ -54,19 +58,54 @@ def propagate(
         f"\nAs a result, {d.fact_id} changed from {d.old_value} to {d.new_value}: {canon.fact(d.fact_id).statement}"
         for d in change.derived
     ) + "".join(f"\nAlso updated: {canon.fact(q).statement}" for q in change.quoting)
+    moved = [change.model_copy(), *change.also, *change.derived]  # every fact whose value changed
+    olds = [(m.fact_id, m.old_value, canon.fact(m.fact_id).unit) for m in moved]
+    # Two facts that shared an old value in the same batch cannot be told apart in text either.
+    shared = {(o, u) for _, o, u in olds if sum(1 for _, o2, u2 in olds if (o2, u2) == (o, u)) > 1}
+    old_values = unambiguous([x for x in olds if (x[1], x[2]) not in shared], canon.facts)
+    new_values = {m.fact_id: m.new_value for m in moved}
+    stated = "".join(
+        f"\n{a.fact_id} was {a.old_value}, it is now: {canon.fact(a.fact_id).statement}" for a in change.also
+    )
+
+    def revision(text: str, leftovers: str = "") -> str:
+        return (
+            f"\nThis section was already written and approved. The company has changed: {fact_id} "
+            f"was {change.old_value}, it is now: {new_statement}{stated}{knock_on}\nRevise the section below so it is "
+            "consistent with the canon. Change only what these changes require and keep all other wording."
+            f"{leftovers}\n<current_section>\n{text}\n</current_section>\n"
+        )
+
     diff = []
     for i, current in enumerate(sections):
         if current.id not in change.affected_sections:
             continue
-        revision = (
-            f"\nThis section was already written and approved. The company has changed one fact: {fact_id} "
-            f"was {change.old_value}, it is now: {new_statement}{knock_on}\nRevise the section below so it is "
-            "consistent with the canon. Change only what these changes require and keep all other wording."
-            f"\n<current_section>\n{current.text}\n</current_section>\n"
-        )
         contents = agents.toc([plan[s.id] for s in sections if s.doc == current.doc])
-        done, canon = write_section(team, canon, plan[current.id], contents, settings, events, revision)
+        done, canon = write_section(team, canon, plan[current.id], contents, settings, events, revision(current.text))
         store.save(canon)
+        # Stale guard: the engine knows every old value exactly, so code (not a model) checks the revision
+        # for leftovers and sends the section back with the offending words. The critic can miss these.
+        for _ in range(settings.max_attempts - 1):
+            hits = find_stale(done.text, old_values)
+            if not hits:
+                break
+            for fid, match in hits:
+                events.emit(Event("stale_guard", "code", "verdict", f"old value of {fid} still in text", current.id,
+                                  accepted=False, quote=match))
+            leftovers = "\nThese old values are still in the text and must be replaced with the canon values:\n" + "\n".join(
+                f'- "{match}" (old value of {fid})' for fid, match in hits
+            )
+            done, canon = write_section(team, canon, plan[current.id], contents, settings, events,
+                                        revision(done.text, leftovers))
+            store.save(canon)
+        # Last resort: the model kept an old value through every retry (seen with phrasings like "never split
+        # a 1000 kg pallet"). The engine knows the exact old -> new mapping, so it substitutes in code.
+        hits = find_stale(done.text, old_values)
+        if hits:
+            done = done.model_copy(update={"text": replace_stale(done.text, old_values, new_values)})
+            for fid, match in hits:
+                events.emit(Event("stale_guard", "code", "canon_update", f"replaced old value of {fid} in code", current.id,
+                                  quote=match))
         diff.append({"section_id": current.id, "title": current.title, "before": current.text, "after": done.text})
         sections[i] = done
 

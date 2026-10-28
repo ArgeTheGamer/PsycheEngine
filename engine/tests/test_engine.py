@@ -125,3 +125,42 @@ def test_interrupted_run_resumes_without_redoing_accepted_sections(tmp_path):
     sections = run("brief", CANON, tmp_path, Settings(chapters=1), make_team(second))
     assert [s.id for s in sections] == ["ops.ch01.s1", "ops.ch01.s2"]
     assert "Outline" not in second.prompts and len(second.prompts["Draft"]) == 1
+
+
+def test_stale_guard_sends_a_revision_back_until_old_values_are_gone(tmp_path):
+    from psyche.propagate import propagate
+
+    client = ScriptedClient({"Outline": [OUTLINE], "Draft": [GOOD], "Verdict": [ACCEPT], "NewFacts": [{"facts": []}]})
+    team = make_team(client)
+    run("brief", CANON, tmp_path, Settings(chapters=1), team)
+
+    half = {"text": "Drive at no more than 8 km/h inside the hall. Old signs saying 10 km/h stay up.", "cited_fact_ids": []}
+    fixed = {"text": "Drive at no more than 8 km/h inside the hall.", "cited_fact_ids": ["F-LIM-01"]}
+    client.script.update({"Draft": [half, fixed], "Verdict": [ACCEPT, ACCEPT]})
+    out = propagate(tmp_path, "F-LIM-01", "8", "Forklifts must not exceed 8 km/h indoors.", team, Settings(), notices=False)
+
+    assert json.loads((out / "diff.json").read_text())[0]["after"] == fixed["text"]
+    assert '"10 km/h" (old value of F-LIM-01)' in client.prompts["Draft"][-1]
+    guard = [json.loads(l) for l in (out / "events.jsonl").read_text().splitlines() if '"stale_guard"' in l]
+    assert guard[0]["quote"] == "10 km/h"
+
+
+def test_replace_stale_keeps_units_and_separators():
+    from psyche.stale import replace_stale
+
+    olds = [("F-LIM-15", "1000", "kg"), ("F-EQP-11", "24000", "kg"), ("F-LIM-14", "500", "EUR")]
+    new = {"F-LIM-15": "800", "F-EQP-11": "22000", "F-LIM-14": "750"}
+    text = "Never split a 1000 kg pallet. Payload 24,000 kg. Above EUR 500 ask the manager; 15000 kg stays."
+    assert replace_stale(text, olds, new) == (
+        "Never split a 800 kg pallet. Payload 22,000 kg. Above EUR 750 ask the manager; 15000 kg stays."
+    )
+
+
+def test_old_value_shared_with_another_fact_is_never_flagged_or_rewritten():
+    from psyche.canon import Fact
+    from psyche.stale import unambiguous
+
+    aisle = Fact(id="F-LIM-11", category="limit", subject="main_aisle", attribute="width", value="4.0", unit="m",
+                 statement="Main aisles are 4.0 m wide.")
+    olds = [("F-LIM-05", "4.0", "m"), ("F-LIM-15", "1000", "kg")]
+    assert unambiguous(olds, [aisle]) == [("F-LIM-15", "1000", "kg")]

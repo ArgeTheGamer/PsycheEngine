@@ -125,3 +125,60 @@ def test_replace_number_only_touches_whole_numbers():
 
     assert replace_number("Up to 10 km/h, not 100 km/h.", "10", "8") == "Up to 8 km/h, not 100 km/h."
     assert replace_number("Payload 24,000 kg.", "24000", "22000") == "Payload 22000 kg."
+
+
+def test_section_facts_quoting_a_company_value_follow_its_change():
+    pallet = fact("F-LIM-15", "1000", subject="pallet", attribute="max_gross_weight", unit="kg", statement="Max 1000 kg.")
+    ped = fact("F-LIM-03", "5", attribute="pedestrian", statement="5 km/h near people.")
+    ramp = fact("F-LIM-04", "5", attribute="ramp", statement="5 km/h on ramps.")
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[pallet, ped, ramp]))
+    rule = fact("F-RUL-05", "prohibited", category="rule", subject="pallet", attribute="split", unit="",
+                statement="A 1,000 kg pallet must never be split; slow to 5 km/h when moving it.")
+    canon = canon.with_new_facts("ops.ch07.s3", [rule]).with_usage("ops.ch07.s3", ["F-RUL-05"])
+    assert canon.fact("F-RUL-05").refs == ["F-LIM-15"]  # 5 km/h is ambiguous, so not linked
+    changed, change = canon.with_change("F-LIM-15", "800", "Max 800 kg.")
+    assert changed.fact("F-RUL-05").statement == "A 800 kg pallet must never be split; slow to 5 km/h when moving it."
+    assert change.affected_sections == ["ops.ch07.s3"]
+
+
+def test_batch_change_merges_derived_values_and_sections():
+    payload = fact("F-EQP-11", "24000", subject="trailer", attribute="payload", unit="kg", statement="24000 kg.")
+    pallet = fact("F-LIM-15", "1000", subject="pallet", attribute="max", unit="kg", statement="1000 kg.")
+    full = fact("F-DRV-01", "0", subject="trailer", attribute="full", unit="pallets", statement="0 pallets.",
+                formula="floor({F-EQP-11} / {F-LIM-15})")
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[payload, pallet, full]))
+    canon = canon.with_usage("ops.ch01.s1", ["F-EQP-11"]).with_usage("sla.ch01.s1", ["F-DRV-01"])
+    changed, change = canon.with_changes([("F-EQP-11", "26000", "26000 kg."), ("F-LIM-15", "800", "800 kg.")])
+    assert [(a.fact_id, a.old_value, a.new_value) for a in change.also] == [("F-LIM-15", "1000", "800")]
+    assert [(d.fact_id, d.old_value, d.new_value) for d in change.derived] == [("F-DRV-01", "24", "32")]
+    assert change.affected_sections == ["ops.ch01.s1", "sla.ch01.s1"]
+    assert changed.fact("F-DRV-01").value == "32"
+
+
+def test_stale_scan_understands_counts_and_units():
+    from psyche.stale import value_pattern
+
+    assert value_pattern("6", "trucks").search("We run 6 counterbalance forklift trucks.")
+    assert not value_pattern("6", "trucks").search("We run 16 reach trucks.")
+    assert value_pattern("4", "doors").search("the 4 outbound dock doors")
+    assert value_pattern("2.5", "t").search("rated at 2.5 t")
+    assert value_pattern("8", "°C").search("held at +2 to +8 °C")
+
+
+def test_stale_patterns_do_not_cross_units_or_numbers():
+    from psyche.stale import value_pattern
+
+    assert not value_pattern("6", "trucks").search("6 dock doors serve all trucks")
+    assert not value_pattern("100", "EUR").search("above EUR 1000")
+    assert not value_pattern("5", "m").search("belts run at 5 m/s")
+    assert value_pattern("12", "pallets").search("max 12 pallets per run")
+
+
+def test_quoting_fact_rewrites_only_the_quoted_value():
+    cap = fact("F-LIM-06", "12", subject="run", attribute="max", unit="pallets", statement="Max 12 pallets.")
+    canon = Canon.from_spec(CompanySpec(company=COMPANY, facts=[cap]))
+    rule = fact("F-SCH-50", "night", category="schedule", subject="shift", attribute="night", unit="",
+                statement="Night shift is 12 hours, max 12 pallets per run.")
+    canon = canon.with_new_facts("ops.ch01.s1", [rule])
+    changed, _ = canon.with_change("F-LIM-06", "14", "Max 14 pallets.")
+    assert changed.fact("F-SCH-50").statement == "Night shift is 12 hours, max 14 pallets per run."

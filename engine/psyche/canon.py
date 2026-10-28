@@ -68,6 +68,7 @@ class FactChange(BaseModel):
     affected_sections: list[str]  # sections using the changed fact or any derived fact whose value moved
     derived: list[DerivedChange] = Field(default_factory=list)
     quoting: list[str] = Field(default_factory=list)  # facts whose statements quote a changed value and were updated
+    also: list[DerivedChange] = Field(default_factory=list)  # further base facts changed in the same batch
 
 
 class Canon(BaseModel):
@@ -150,7 +151,47 @@ class Canon(BaseModel):
             raise ValueError(f"fact ids already in canon: {clashes}")
         canon = self.next(f"{len(facts)} new facts from section {section_id}")
         canon.facts.extend(f.model_copy(update={"source": f"section:{section_id}"}) for f in facts)
+        canon.link_quotes()
         return canon
+
+    def link_quotes(self) -> None:
+        """Give section-introduced facts a ref to every company fact whose value they quote.
+
+        The canon editor often restates a base value ("a 1000 kg pallet must never be split"). Without a ref
+        such a fact keeps the old number after a change and feeds it back to the writer. Only values that
+        identify a single company fact are linked, so two different limits that happen to share "5 km/h"
+        are never tied together.
+        """
+        from .stale import value_pattern
+
+        base = [f for f in self.facts if f.source == "company" and f.unit and f.value.replace(",", "").isdigit()]
+        counts: dict[tuple[str, str], int] = {}
+        for g in base:
+            counts[(g.value, g.unit)] = counts.get((g.value, g.unit), 0) + 1
+        distinct = [g for g in base if counts[(g.value, g.unit)] == 1]
+        for i, f in enumerate(self.facts):
+            if f.source == "company" or f.formula:
+                continue
+            refs = [g.id for g in distinct if g.id not in f.refs and value_pattern(g.value, g.unit).search(f.statement)]
+            if refs:
+                self.facts[i] = f.model_copy(update={"refs": f.refs + refs})
+
+    def with_changes(self, changes: list[tuple[str, str, str]]) -> tuple[Canon, FactChange]:
+        """Apply several base-fact changes as one event (e.g. a fleet replacement) and merge their effects."""
+        canon, merged = self.with_change(*changes[0])
+        for fact_id, value, statement in changes[1:]:
+            canon, change = canon.with_change(fact_id, value, statement)
+            merged.also.append(DerivedChange(fact_id=fact_id, old_value=change.old_value, new_value=change.new_value))
+            known = {d.fact_id: i for i, d in enumerate(merged.derived)}
+            for d in change.derived:
+                if d.fact_id in known:
+                    merged.derived[known[d.fact_id]].new_value = d.new_value
+                else:
+                    merged.derived.append(d)
+            merged.quoting += [q for q in change.quoting if q not in merged.quoting]
+            merged.affected_sections += [s for s in change.affected_sections if s not in merged.affected_sections]
+        merged.derived = [d for d in merged.derived if d.old_value != d.new_value]
+        return canon, merged
 
     def with_change(self, fact_id: str, new_value: str, new_statement: str) -> tuple[Canon, FactChange]:
         old = self.fact(fact_id)
@@ -159,11 +200,22 @@ class Canon(BaseModel):
         canon.facts[index] = old.model_copy(update={"value": new_value, "statement": new_statement})
         derived = canon.recompute()
         moved = {fact_id: (old.value, new_value), **{d.fact_id: (d.old_value, d.new_value) for d in derived}}
+        from .stale import replace_stale
+
         quoting = []
         for i, f in enumerate(canon.facts):
             for ref in f.refs:
-                if ref in moved and replace_number(f.statement, *moved[ref]) != f.statement:
-                    f = f.model_copy(update={"statement": replace_number(f.statement, *moved[ref])})
+                if ref not in moved:
+                    continue
+                # Rewrite only the quoted value with its unit ("12 pallets"), never other numbers in the statement.
+                unit = canon.fact(ref).unit
+                rewritten = (
+                    replace_stale(f.statement, [(ref, moved[ref][0], unit)], {ref: moved[ref][1]})
+                    if unit
+                    else replace_number(f.statement, *moved[ref])
+                )
+                if rewritten != f.statement:
+                    f = f.model_copy(update={"statement": rewritten})
                     canon.facts[i] = f
                     quoting.append(f.id)
         affected = self.sections_using(fact_id)
