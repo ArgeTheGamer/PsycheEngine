@@ -143,7 +143,8 @@ engine/.venv/Scripts/python engine/scripts/change_fact.py --run demo --fact F-LI
     --statement "Forklifts must not exceed 8 km/h inside the building."
 
 # a year of changes against both baselines (always on a fresh copy of a run)
-engine/.venv/Scripts/python engine/scripts/mutate.py --run demo-copy --mutations data/company/mutations_year.json \n    --baseline shared --per-doc-baseline separate --audit
+engine/.venv/Scripts/python engine/scripts/mutate.py --run demo-copy --mutations data/company/mutations_year.json \
+    --baseline shared --per-doc-baseline separate --audit
 
 # dashboard
 engine/.venv/Scripts/python engine/scripts/export_web.py --run demo --label "my run"
