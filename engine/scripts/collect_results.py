@@ -39,7 +39,12 @@ def costs_writing(run_dir) -> dict:
 def main() -> int:
     runs, dst_root = REPO_ROOT / "runs", REPO_ROOT / "results"
     if dst_root.exists():
-        shutil.rmtree(dst_root)
+        # Rebuild the copied run data but keep hand-written files such as AUDITOR_CHECK.md.
+        for child in dst_root.iterdir():
+            if child.is_dir():
+                shutil.rmtree(child)
+            elif child.suffix == ".json":
+                child.unlink()
 
     def copy(src, dst):
         dst.parent.mkdir(parents=True, exist_ok=True)
