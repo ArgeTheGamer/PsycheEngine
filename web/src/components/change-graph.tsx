@@ -10,6 +10,7 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import type { DocumentInfo, Section } from "@/lib/types";
+import { useT } from "@/lib/i18n";
 
 const COLS = 2;
 const GROUP_W = 240;
@@ -34,6 +35,7 @@ export function ChangeGraph({
   sections: Section[];
   documents: DocumentInfo[];
 }) {
+  const { t, tn } = useT();
   const { nodes, edges, affectedDocs } = useMemo(() => {
     const affectedSet = new Set(affected);
     const docTitle = new Map(documents.map((d) => [d.id, d.title]));
@@ -77,22 +79,21 @@ export function ChangeGraph({
         data: {
           label: (
             <div>
-              <div className="font-mono text-[13px] font-bold text-emerald-300">
+              <div className="font-mono text-[13px] font-bold text-label">
                 {factId}
               </div>
-              <div className="truncate font-mono text-[10px] text-zinc-400">
+              <div className="truncate font-mono text-[10px] text-concrete-deep">
                 {factLabel}
               </div>
             </div>
           ),
         },
         style: {
-          background: "#064e3b",
-          border: "2px solid #34d399",
-          borderRadius: 8,
+          background: "var(--color-ink)",
+          border: "1.5px solid var(--color-ink)",
+          borderRadius: 0,
           width: 200,
           padding: 8,
-          boxShadow: "0 0 24px rgba(52, 211, 153, 0.35)",
         },
       },
     ];
@@ -108,15 +109,15 @@ export function ChangeGraph({
         position: { x: gx, y: gy },
         data: {
           label: (
-            <div className="px-1 pt-1 text-left text-[12px] font-semibold text-zinc-200">
+            <div className="px-1 pt-1 text-left text-[12px] font-semibold">
               {docTitle.get(docId) ?? docId}
             </div>
           ),
         },
         style: {
-          background: "rgba(24, 24, 27, 0.6)",
-          border: "1px solid #3f3f46",
-          borderRadius: 8,
+          background: "var(--color-label)",
+          border: "1.5px solid var(--color-ink)",
+          borderRadius: 0,
           width: GROUP_W,
           height: heights[i],
         },
@@ -132,7 +133,7 @@ export function ChangeGraph({
           position: { x: PAD, y: cy },
           data: {
             label: (
-              <div className="truncate text-left text-[10px] font-medium text-zinc-500">
+              <div className="truncate text-left text-[10px] font-medium text-ink-soft">
                 {chapter}. {list[0]?.chapter_title ?? ""}
               </div>
             ),
@@ -155,24 +156,29 @@ export function ChangeGraph({
             data: {
               label: (
                 <div className="truncate text-left">
-                  <span className="font-mono text-[10px] text-zinc-200">
+                  <span
+                    className={`font-mono text-[10px] ${hit ? "font-bold text-label" : ""}`}
+                  >
                     {s.id}
                   </span>{" "}
-                  <span className="text-[10px] text-zinc-500">{s.title}</span>
+                  <span
+                    className={`text-[10px] ${hit ? "text-concrete-deep" : "text-ink-soft"}`}
+                  >
+                    {s.title}
+                  </span>
                 </div>
               ),
             },
             style: {
-              background: hit ? "#064e3b" : "#18181b",
-              border: hit ? "1px solid #34d399" : "1px solid #3f3f46",
-              borderRadius: 5,
+              background: hit ? "var(--color-ink)" : "var(--color-concrete)",
+              border: hit
+                ? "1px solid var(--color-ink)"
+                : "1px solid var(--color-rule)",
+              borderRadius: 0,
               width: GROUP_W - PAD * 2,
               height: CHILD_H,
               padding: "2px 6px",
-              opacity: hit ? 1 : 0.35,
-              boxShadow: hit
-                ? "0 0 14px rgba(52, 211, 153, 0.45)"
-                : undefined,
+              opacity: hit ? 1 : 0.55,
             },
           });
           cy += CHILD_H + CHILD_GAP;
@@ -188,7 +194,7 @@ export function ChangeGraph({
         source: "__fact__",
         target: id,
         animated: true,
-        style: { stroke: "#34d399", strokeWidth: 1.5 },
+        style: { stroke: "var(--color-ink)", strokeWidth: 1.5 },
       }));
     const affectedDocs = new Set(
       affected.map((id) => sections.find((s) => s.id === id)?.doc ?? "ops"),
@@ -198,7 +204,7 @@ export function ChangeGraph({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
-      <div className="min-h-0 flex-1 overflow-hidden rounded-lg border border-zinc-800">
+      <div className="min-h-0 flex-1 overflow-hidden border border-rule bg-concrete">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -210,21 +216,17 @@ export function ChangeGraph({
           zoomOnScroll={false}
           panOnDrag={false}
           proOptions={{ hideAttribution: false }}
-          colorMode="dark"
+          colorMode="light"
         >
           <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
         </ReactFlow>
       </div>
-      <p className="text-center text-lg text-zinc-200">
-        <span className="font-mono font-bold text-emerald-300">
-          {affected.length}
-        </span>{" "}
-        sections in{" "}
-        <span className="font-mono font-bold text-emerald-300">
-          {affectedDocs}
-        </span>{" "}
-        document{affectedDocs === 1 ? "" : "s"} depend on{" "}
-        <span className="font-mono text-emerald-300">{factId}</span>
+      <p className="text-center text-[17px]">
+        <span className="font-mono font-bold">{affected.length}</span>{" "}
+        {tn("n.sections", affected.length)} {t("replay.in")}{" "}
+        <span className="font-mono font-bold">{affectedDocs}</span>{" "}
+        {tn("n.documents_loc", affectedDocs)} {t("replay.depend_on")}{" "}
+        <span className="font-mono font-bold">{factId}</span>
       </p>
     </div>
   );

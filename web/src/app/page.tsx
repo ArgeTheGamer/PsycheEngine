@@ -5,7 +5,7 @@ import { Shell, type Tab } from "@/components/shell";
 import { ProductionView } from "@/components/production-view";
 import { BenchmarkView } from "@/components/benchmark-view";
 import { UsageView } from "@/components/usage-view";
-import { CanonPanel } from "@/components/canon-panel";
+import { GraphView } from "@/components/graph-view";
 import { AgentsPanel } from "@/components/agents-panel";
 import { YearTab } from "@/components/year-tab";
 import { ChangeReplay } from "@/components/change-replay";
@@ -113,18 +113,19 @@ export default function Home() {
           onOpenSection={() => setTab("production")}
         />
       )}
+      {data && tab === "graph" && (
+        <GraphView
+          key={runId}
+          canon={data.canon}
+          documents={data.documents}
+          sections={data.sectionsPsyche}
+          changes={data.changes}
+          onReplay={setReplay}
+        />
+      )}
       {/* The tabs below reuse the previous panels until they are restyled to the new system. */}
-      {data && tab !== "production" && tab !== "benchmark" && tab !== "usage" && tab !== "year" && (
+      {data && tab !== "production" && tab !== "benchmark" && tab !== "usage" && tab !== "year" && tab !== "graph" && (
         <div className="dark grid gap-4 bg-zinc-950 p-4 text-zinc-200">
-          {tab === "graph" && (
-            <CanonPanel
-              canon={data.canon}
-              documents={data.documents}
-              sections={data.sectionsPsyche}
-              changes={data.changes}
-              onReplay={setReplay}
-            />
-          )}
           {tab === "logs" && <AgentsPanel events={data.events} />}
         </div>
       )}
