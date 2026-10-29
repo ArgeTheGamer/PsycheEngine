@@ -1,22 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
 import type {
   AgentEvent,
   ChangeNotice,
   DocumentInfo,
   Fact,
   FactChangeRecord,
+  OpenSection,
   Section,
 } from "@/lib/types";
-import { Badge, Button } from "./ui";
+import { useT } from "@/lib/i18n";
 import { ChangeGraph } from "./change-graph";
 import { ChangeDiff } from "./change-diff";
-import type { OpenSection } from "./maintenance-tab";
+import { LocLabel } from "./shell";
 import { cn } from "@/lib/utils";
-
-const BASE_STEPS = ["Dependencies", "Rewrite log", "Before / after"] as const;
 
 function NoticesStep({
   notices,
@@ -29,6 +28,7 @@ function NoticesStep({
   onOpenSection: OpenSection;
   onClose: () => void;
 }) {
+  const { t, tn } = useT();
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {notices.map((n, i) => {
@@ -36,15 +36,13 @@ function NoticesStep({
         return (
           <article
             key={`${n.audience}-${i}`}
-            className="flex flex-col gap-3 rounded-lg bg-amber-50 p-5 text-stone-900 shadow-lg"
+            className="flex flex-col gap-3 border-[1.5px] border-ink bg-label p-5"
           >
-            <div className="text-[11px] font-bold tracking-widest text-stone-500 uppercase">
-              {n.audience === "client" ? "For clients" : "For staff"}
+            <div className="font-display text-[14px] font-semibold uppercase tracking-[0.08em] text-ink-soft">
+              {n.audience === "client" ? t("replay.for_clients") : t("replay.for_staff")}
             </div>
-            <h4 className="text-base font-bold">{n.subject}</h4>
-            <p className="text-sm leading-relaxed whitespace-pre-line">
-              {n.body}
-            </p>
+            <h4 className="text-[17px] font-bold">{n.subject}</h4>
+            <p className="text-[14px] leading-relaxed whitespace-pre-line">{n.body}</p>
             {n.cited_section_ids.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {n.cited_section_ids.map((sid) => {
@@ -53,7 +51,7 @@ function NoticesStep({
                     return (
                       <span
                         key={sid}
-                        className="rounded-full border border-stone-300 px-2 py-0.5 font-mono text-[11px] text-stone-500"
+                        className="border border-rule px-2 py-0.5 font-mono text-[11px] text-ink-soft"
                       >
                         {sid}
                       </span>
@@ -67,9 +65,9 @@ function NoticesStep({
                         onClose();
                       }}
                       title={section.title}
-                      className="rounded-full border border-stone-400 px-2 py-0.5 font-mono text-[11px] text-stone-800 outline-none hover:bg-stone-900 hover:text-amber-50"
+                      className="underline decoration-rule underline-offset-2 hover:decoration-ink"
                     >
-                      {sid}
+                      <LocLabel id={sid} size={11} />
                     </button>
                   );
                 })}
@@ -77,12 +75,12 @@ function NoticesStep({
             )}
             <div>
               {issues === 0 ? (
-                <span className="inline-block rounded-full border border-emerald-700/50 bg-emerald-700/10 px-2 py-0.5 text-[11px] font-medium text-emerald-800">
-                  checked by critic ✓
+                <span className="inline-flex items-center gap-1.5 border border-ink px-2 py-0.5 text-[12px] font-medium">
+                  <Check size={13} aria-hidden /> {t("replay.checked")}
                 </span>
               ) : (
-                <span className="inline-block rounded-full border border-amber-700/50 bg-amber-700/10 px-2 py-0.5 text-[11px] font-medium text-amber-800">
-                  {issues} issue{issues === 1 ? "" : "s"}
+                <span className="inline-block bg-hazard px-2 py-0.5 text-[12px] font-medium text-label">
+                  {issues} {tn("n.issues", issues)}
                 </span>
               )}
             </div>
@@ -98,10 +96,18 @@ function formatDelta(ts: number, t0: number): string {
   return `T+${String(Math.floor(d / 60)).padStart(2, "0")}:${String(d % 60).padStart(2, "0")}`;
 }
 
+function dotClass(e: AgentEvent): string {
+  if (e.kind === "verdict") return e.accepted ? "bg-ink" : "bg-hazard";
+  if (e.kind === "rewrite") return "bg-hazard";
+  if (e.kind === "draft") return "bg-ink-soft";
+  return "bg-rule";
+}
+
 function RewriteLog({ events }: { events: AgentEvent[] }) {
+  const { t } = useT();
   const t0 = events.length > 0 ? events[0].ts : 0;
   return (
-    <ol className="relative ml-1 flex flex-col gap-4 border-l border-zinc-800 py-1 pl-5">
+    <ol className="relative ml-1 flex flex-col gap-4 border-l-[1.5px] border-ink py-1 pl-5">
       {events.map((e, i) => {
         const rejected = e.kind === "verdict" && e.accepted === false;
         return (
@@ -111,58 +117,42 @@ function RewriteLog({ events }: { events: AgentEvent[] }) {
             style={{ animationDelay: `${Math.min(i, 12) * 80}ms` }}
           >
             <span
-              className={cn(
-                "absolute top-1.5 -left-[26px] size-2.5 rounded-full",
-                e.kind === "verdict" && e.accepted && "bg-emerald-400",
-                rejected && "bg-rose-400",
-                e.kind === "draft" && "bg-emerald-400/70",
-                e.kind === "rewrite" && "bg-amber-400",
-                e.kind !== "verdict" &&
-                  e.kind !== "draft" &&
-                  e.kind !== "rewrite" &&
-                  "bg-zinc-500",
-              )}
+              className={cn("absolute top-1.5 -left-[27px] size-2.5", dotClass(e))}
+              aria-hidden
             />
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-xs text-zinc-500">
+              <span className="font-mono text-[12px] text-ink-soft">
                 {formatDelta(e.ts, t0)}
               </span>
-              <Badge
-                variant={
-                  e.agent === "writer"
-                    ? "default"
-                    : e.agent === "critic"
-                      ? "warn"
-                      : "secondary"
-                }
-              >
+              <span className="bg-ink px-1.5 py-0.5 font-mono text-[11px] uppercase text-label">
                 {e.agent}
-              </Badge>
-              <Badge variant="outline" className="font-mono text-[11px]">
+              </span>
+              <span className="border border-rule px-1.5 py-0.5 font-mono text-[11px] text-ink-soft">
                 {e.model}
-              </Badge>
-              {e.section_id && (
-                <Badge variant="outline" className="font-mono text-[11px]">
-                  {e.section_id}
-                </Badge>
-              )}
+              </span>
+              {e.section_id && <LocLabel id={e.section_id} size={11} />}
               {e.kind === "verdict" && (
-                <Badge variant={e.accepted ? "default" : "danger"}>
-                  {e.accepted ? "accepted" : "rejected"}
-                </Badge>
+                <span
+                  className={cn(
+                    "px-1.5 py-0.5 font-mono text-[11px] uppercase",
+                    e.accepted ? "bg-ink text-label" : "bg-hazard text-label",
+                  )}
+                >
+                  {e.accepted ? t("play.accepted") : t("play.rejected")}
+                </span>
               )}
             </div>
-            <p className="mt-1 text-base text-zinc-200">{e.message}</p>
+            <p className="mt-1 text-[15px]">{e.message}</p>
             {e.quote && (
               <blockquote
                 className={cn(
-                  "mt-1.5 rounded-md border-l-2 px-3 py-1.5 text-base italic",
+                  "mt-1.5 border-l-2 px-3 py-1.5 text-[15px] italic",
                   rejected
-                    ? "border-rose-400/70 bg-rose-500/10 text-rose-100"
-                    : "border-zinc-700 bg-zinc-800/50 text-zinc-300",
+                    ? "border-hazard bg-hazard-soft"
+                    : "border-rule bg-concrete",
                 )}
               >
-                “{e.quote}”
+                &ldquo;{e.quote}&rdquo;
               </blockquote>
             )}
           </li>
@@ -187,12 +177,17 @@ export function ChangeReplay({
   onClose: () => void;
   onOpenSection: OpenSection;
 }) {
+  const { t } = useT();
   const [step, setStep] = useState(0);
   const { change } = record;
   const unit = fact?.unit ? ` ${fact.unit}` : "";
   const notices = record.notices ?? [];
-  const steps: readonly string[] =
-    notices.length > 0 ? [...BASE_STEPS, "Notices"] : BASE_STEPS;
+  const steps: string[] = [
+    t("replay.step_deps"),
+    t("replay.step_log"),
+    t("replay.step_diff"),
+    ...(notices.length > 0 ? [t("replay.step_notices")] : []),
+  ];
   const lastStep = steps.length - 1;
 
   useEffect(() => {
@@ -215,62 +210,58 @@ export function ChangeReplay({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm sm:p-8"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4 sm:p-8"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Replay change ${change.fact_id}`}
+      aria-label={`${t("graph.replay")} ${change.fact_id}`}
     >
       <div
-        className="flex max-h-[92vh] w-full max-w-6xl flex-col rounded-xl border border-zinc-700 bg-zinc-950 shadow-2xl"
+        className="flex max-h-[92vh] w-full max-w-6xl flex-col border-[1.5px] border-ink bg-label"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start gap-4 border-b border-zinc-800 p-5 pb-4">
+        <div className="flex items-start gap-4 border-b-[1.5px] border-ink p-5 pb-4">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight">
-              Replay change:{" "}
-              <span className="font-mono text-emerald-300">
-                {change.fact_id}
-              </span>
+            <h2 className="font-display text-[26px] font-semibold uppercase leading-none tracking-[0.02em]">
+              {t("graph.replay")}: <span className="font-mono">{change.fact_id}</span>
             </h2>
-            <p className="mt-1 text-base text-zinc-300">
+            <p className="mt-2 text-[16px]">
               {fact ? `${fact.subject}.${fact.attribute}: ` : ""}
-              <span className="font-mono text-rose-300 line-through">
+              <span className="font-mono text-ink-soft line-through">
                 {change.old_value}
               </span>{" "}
-              <span className="text-zinc-500">→</span>{" "}
-              <span className="font-mono text-emerald-300">
-                {change.new_value}
-              </span>
+              <span className="text-ink-soft">→</span>{" "}
+              <span className="font-mono font-bold">{change.new_value}</span>
               {unit}
             </p>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="ml-auto rounded-md p-1.5 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-200"
-            aria-label="Close replay"
+            aria-label={t("replay.close")}
+            className="ml-auto border-[1.5px] border-ink p-1.5 hover:bg-concrete"
           >
-            <X className="size-5" />
+            <X size={18} aria-hidden />
           </button>
         </div>
 
-        <div className="flex items-center gap-2 border-b border-zinc-800 px-5 py-3">
+        <div className="flex flex-wrap items-center gap-2 border-b-[1.5px] border-ink px-5 py-3">
           {steps.map((label, i) => (
             <button
               key={label}
+              type="button"
               onClick={() => setStep(i)}
+              aria-current={step === i ? "step" : undefined}
               className={cn(
-                "rounded-md px-3 py-1.5 text-sm font-medium",
-                step === i
-                  ? "bg-zinc-800 text-zinc-100"
-                  : "text-zinc-500 hover:bg-zinc-800/60 hover:text-zinc-300",
+                "px-3 py-1.5 font-display text-[16px] font-semibold uppercase tracking-[0.04em]",
+                step === i ? "bg-ink text-label" : "hover:bg-concrete",
               )}
             >
               {i + 1}. {label}
             </button>
           ))}
-          <span className="ml-auto text-sm text-zinc-500">
-            Step {step + 1} of {steps.length}
+          <span className="ml-auto text-[14px] text-ink-soft">
+            {t("replay.step")} {step + 1} / {steps.length}
           </span>
         </div>
 
@@ -300,23 +291,24 @@ export function ChangeReplay({
           )}
         </div>
 
-        <div className="flex items-center justify-between border-t border-zinc-800 px-5 py-3">
-          <Button
-            variant="secondary"
+        <div className="flex items-center justify-between gap-2 border-t-[1.5px] border-ink px-5 py-3">
+          <button
+            type="button"
             onClick={() => setStep((s) => Math.max(0, s - 1))}
             disabled={step === 0}
+            className="flex items-center gap-2 border-[1.5px] border-ink bg-label px-4 py-2 font-display text-[16px] font-semibold uppercase tracking-[0.04em] disabled:opacity-40"
           >
-            <ArrowLeft /> Back
-          </Button>
-          <span className="text-xs text-zinc-600">
-            ← → to step, Esc to close
-          </span>
-          <Button
+            <ArrowLeft size={14} aria-hidden /> {t("replay.back")}
+          </button>
+          <span className="text-[13px] text-ink-soft">{t("replay.hint")}</span>
+          <button
+            type="button"
             onClick={() => setStep((s) => Math.min(lastStep, s + 1))}
             disabled={step === lastStep}
+            className="flex items-center gap-2 border-[1.5px] border-ink bg-ink px-4 py-2 font-display text-[16px] font-semibold uppercase tracking-[0.04em] text-label disabled:opacity-40"
           >
-            Next <ArrowRight />
-          </Button>
+            {t("replay.next")} <ArrowRight size={14} aria-hidden />
+          </button>
         </div>
       </div>
     </div>

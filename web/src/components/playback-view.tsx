@@ -9,7 +9,8 @@ import type {
   DocumentInfo,
   Section,
 } from "@/lib/types";
-import { Badge, Button } from "./ui";
+import { useT, type Lang } from "@/lib/i18n";
+import { LocLabel } from "./shell";
 import { cn } from "@/lib/utils";
 
 const SPEEDS = [10, 30, 60, 120] as const;
@@ -21,12 +22,19 @@ function sidOf(e: AgentEvent): string | null {
   return typeof e.section_id === "string" ? e.section_id : null;
 }
 
-function fmtDur(seconds: number): string {
+function fmtDur(seconds: number, lang: Lang): string {
   const s = Math.max(0, Math.floor(seconds));
   if (s < 60) return `${s} s`;
   const m = Math.floor(s / 60);
   if (m < 60) return `${m} min`;
-  return `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min`;
+  return `${Math.floor(m / 60)} ${lang === "pl" ? "g" : "h"} ${String(m % 60).padStart(2, "0")} min`;
+}
+
+function tileClass(st: Status): string {
+  if (st === "writing") return "bg-ink-soft motion-safe:animate-pulse";
+  if (st === "rejected") return "tile-flash bg-hazard";
+  if (st === "accepted") return "bg-ink";
+  return "border border-rule bg-label";
 }
 
 export function PlaybackView({
@@ -48,6 +56,7 @@ export function PlaybackView({
   betweenDocs: number;
   onExit: () => void;
 }) {
+  const { t, tn, lang } = useT();
   const sorted = useMemo(
     () => [...events].sort((a, b) => a.ts - b.ts),
     [events],
@@ -184,17 +193,21 @@ export function PlaybackView({
     [sorted],
   );
 
-  // Fast typing animation whenever a new accept lands.
+  // Fast typing animation whenever a new accept lands; skipped for reduced motion.
   const acceptKey = model.lastAccept
     ? `${model.lastAccept.sid}@${model.lastAccept.at}`
     : "";
   const [typed, setTyped] = useState(1);
   useEffect(() => {
-    setTyped(0);
     if (!acceptKey) {
       setTyped(1);
       return;
     }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTyped(1);
+      return;
+    }
+    setTyped(0);
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
@@ -230,46 +243,63 @@ export function PlaybackView({
     : "";
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-zinc-950">
-      <div className="flex items-center gap-3 border-b border-zinc-800 px-5 py-3">
-        <h2 className="text-xl font-bold tracking-tight">
-          Replaying <span className="text-emerald-300">{runLabel}</span>
+    <div
+      className="fixed inset-0 z-50 flex flex-col bg-concrete"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${t("play.replaying")} ${runLabel}`}
+    >
+      <div className="flex flex-wrap items-center gap-3 border-b-[1.5px] border-ink bg-label px-6 py-3">
+        <h2 className="font-display text-[24px] font-semibold uppercase leading-none tracking-[0.02em]">
+          {t("play.replaying")} {runLabel}
         </h2>
         <div className="ml-auto flex items-center gap-2">
-          <div className="flex gap-1 rounded-md bg-zinc-800/70 p-1">
+          <div className="flex border-[1.5px] border-ink" role="group" aria-label={`${SPEEDS.join(" / ")}×`}>
             {SPEEDS.map((s, i) => (
               <button
                 key={s}
+                type="button"
                 onClick={() => setSpeedIdx(i)}
+                aria-pressed={i === speedIdx}
                 className={cn(
-                  "rounded px-2.5 py-1 font-mono text-sm font-medium outline-none",
-                  i === speedIdx
-                    ? "bg-zinc-950 text-zinc-100 shadow-sm"
-                    : "text-zinc-400 hover:text-zinc-200",
+                  "px-3 py-1.5 font-mono text-[14px] font-semibold",
+                  i === speedIdx ? "bg-ink text-label" : "hover:bg-concrete",
                 )}
               >
                 {s}×
               </button>
             ))}
           </div>
-          <Button
-            variant="secondary"
-            size="sm"
+          <button
+            type="button"
             onClick={() => !finished && setPlaying((p) => !p)}
             disabled={finished}
+            className="flex items-center gap-2 border-[1.5px] border-ink bg-label px-3 py-1.5 font-display text-[16px] font-semibold uppercase tracking-[0.04em] disabled:opacity-40"
           >
-            {playing ? <Pause /> : <Play />}
-            {playing ? "Pause" : "Resume"}
-          </Button>
-          <Button variant="ghost" size="icon" onClick={onExit} aria-label="Exit playback">
-            <X />
-          </Button>
+            {playing ? (
+              <>
+                <Pause size={14} aria-hidden /> {t("yo.pause")}
+              </>
+            ) : (
+              <>
+                <Play size={14} aria-hidden /> {t("yo.play")}
+              </>
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={onExit}
+            aria-label={t("yo.exit")}
+            className="border-[1.5px] border-ink bg-ink p-2 text-label"
+          >
+            <X size={16} aria-hidden />
+          </button>
         </div>
       </div>
 
-      <div className="grid min-h-0 flex-1 grid-cols-[1.1fr_1.5fr_0.7fr] gap-4 p-4">
-        <div className="flex min-h-0 flex-col gap-3 overflow-auto rounded-lg border border-zinc-800 bg-zinc-900 p-4">
-          <div className="grid flex-1 grid-cols-4 content-start gap-3">
+      <div className="grid min-h-0 flex-1 grid-cols-[1.1fr_1.5fr_0.8fr] max-lg:grid-cols-1 max-lg:overflow-y-auto">
+        <div className="flex min-h-0 flex-col border-r-[1.5px] border-ink bg-label max-lg:border-r-0 max-lg:border-b-[1.5px]">
+          <div className="grid flex-1 content-start grid-cols-4 gap-3 overflow-auto p-4">
             {documents.map((d) => {
               const list = sections
                 .filter((s) => (s.doc ?? "ops") === d.id)
@@ -279,9 +309,9 @@ export function PlaybackView({
               ).length;
               return (
                 <div key={d.id} className="flex min-w-0 flex-col gap-2">
-                  <div className="truncate text-xs font-semibold text-zinc-300" title={d.title}>
-                    {d.id.toUpperCase()}{" "}
-                    <span className="font-mono font-normal text-zinc-500">
+                  <div className="truncate font-display text-[15px] font-semibold uppercase tracking-[0.05em]" title={d.title}>
+                    {d.id}{" "}
+                    <span className="font-mono font-normal normal-case text-ink-soft">
                       {done}/{list.length}
                     </span>
                   </div>
@@ -292,14 +322,7 @@ export function PlaybackView({
                         <span
                           key={s.id}
                           title={`${s.id} · ${s.title}`}
-                          className={cn(
-                            "size-3.5 rounded-[3px]",
-                            st === "idle" && "bg-zinc-700",
-                            st === "writing" &&
-                              "bg-sky-400 motion-safe:animate-pulse",
-                            st === "rejected" && "tile-flash bg-rose-500",
-                            st === "accepted" && "bg-emerald-500/80",
-                          )}
+                          className={cn("size-3.5", tileClass(st))}
                         />
                       );
                     })}
@@ -308,73 +331,76 @@ export function PlaybackView({
               );
             })}
           </div>
-          <div className="flex flex-wrap items-center gap-3 border-t border-zinc-800 pt-2 text-[11px] text-zinc-500">
+          <div className="flex flex-wrap items-center gap-3 border-t-[1.5px] border-ink px-4 py-2 text-[12px] text-ink-soft">
             <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-[2px] bg-zinc-700" /> queued
+              <span className="size-2.5 border border-rule bg-label" /> {t("play.queued")}
             </span>
             <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-[2px] bg-sky-400" /> writing
+              <span className="size-2.5 bg-ink-soft" /> {t("play.writing")}
             </span>
             <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-[2px] bg-rose-500" /> rejected
+              <span className="size-2.5 bg-hazard" /> {t("play.rejected")}
             </span>
             <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-[2px] bg-emerald-500/80" /> accepted
+              <span className="size-2.5 bg-ink" /> {t("play.accepted")}
             </span>
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-col gap-3 overflow-auto rounded-lg border border-zinc-800 bg-zinc-900 p-5">
+        <div className="flex min-h-0 flex-col gap-3 overflow-auto px-6 py-5">
           {currentSection ? (
             <>
-              <div className="text-sm text-zinc-500">
-                {docTitle(currentSection.doc ?? "ops")} · Ch{" "}
-                {currentSection.chapter} · {currentSection.chapter_title}
+              <div className="flex flex-wrap items-center gap-3">
+                <LocLabel id={currentSection.id} size={15} />
+                <span className="text-[14px] text-ink-soft">
+                  {docTitle(currentSection.doc ?? "ops")} · {t("play.chapter")}{" "}
+                  {currentSection.chapter} · {currentSection.chapter_title}
+                </span>
               </div>
-              <h3 className="text-xl font-bold">{currentSection.title}</h3>
-              <p className="text-base leading-relaxed whitespace-pre-wrap text-zinc-200">
+              <h3 className="font-display text-[28px] font-semibold uppercase leading-none tracking-[0.01em]">
+                {currentSection.title}
+              </h3>
+              <p className="max-w-[72ch] whitespace-pre-wrap text-[16px] leading-relaxed">
                 {typedText}
-                {typed < 1 && <span className="text-emerald-300">▍</span>}
+                {typed < 1 && <span aria-hidden>▍</span>}
               </p>
             </>
           ) : (
-            <p className="text-base text-zinc-500">
-              Waiting for the first draft…
-            </p>
+            <p className="text-[18px] text-ink-soft">{t("play.waiting")}</p>
           )}
           {showRejection && lastVerdict?.quote && (
-            <div className="rounded-lg border border-rose-500/50 bg-rose-500/10 p-4">
-              <div className="mb-1 flex items-center gap-2">
-                <Badge variant="danger">critic rejected</Badge>
-                <span className="font-mono text-xs text-zinc-400">
-                  {sidOf(lastVerdict) ?? ""}
+            <div className="border-[1.5px] border-hazard bg-label p-4">
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <span className="bg-hazard px-1.5 py-0.5 font-mono text-[11px] uppercase text-label">
+                  {t("play.critic_rejected")}
                 </span>
+                {sidOf(lastVerdict) && <LocLabel id={sidOf(lastVerdict) as string} size={12} />}
               </div>
-              <p className="text-base text-rose-100 italic">
-                “{lastVerdict.quote}”
+              <p className="border-l-2 border-hazard pl-2 text-[16px] italic">
+                &ldquo;{lastVerdict.quote}&rdquo;
               </p>
             </div>
           )}
         </div>
 
-        <div className="flex min-h-0 flex-col gap-3 overflow-auto">
+        <div className="flex min-h-0 flex-col overflow-auto border-l-[1.5px] border-ink bg-label max-lg:border-l-0 max-lg:border-t-[1.5px]">
           {[
             {
-              label: "Sections accepted",
+              label: t("play.sections_accepted"),
               value: `${model.accepted} / ${sections.length}`,
             },
-            { label: "Critic rejections", value: String(model.rejections) },
-            { label: "Canon facts", value: String(canonFacts) },
-            { label: "Cost so far", value: `$${costSoFar.toFixed(2)}` },
-          ].map((c) => (
+            { label: t("play.rejections"), value: String(model.rejections) },
+            { label: t("play.canon_facts"), value: String(canonFacts) },
+            { label: t("play.cost_so_far"), value: `$${costSoFar.toFixed(2)}` },
+          ].map((c, i, arr) => (
             <div
               key={c.label}
-              className="rounded-lg border border-zinc-800 bg-zinc-900 p-4"
+              className={`px-5 py-4 ${i < arr.length - 1 ? "border-b border-rule" : ""}`}
             >
-              <div className="text-xs tracking-wide text-zinc-500 uppercase">
+              <div className="font-display text-[15px] font-semibold uppercase tracking-[0.05em] text-ink-soft">
                 {c.label}
               </div>
-              <div className="mt-1 font-mono text-3xl font-bold">
+              <div className="mt-1 font-mono text-[32px] font-semibold leading-none tabular-nums">
                 {c.value}
               </div>
             </div>
@@ -382,43 +408,50 @@ export function PlaybackView({
         </div>
       </div>
 
-      <div className="flex items-center gap-4 border-t border-zinc-800 px-5 py-3">
-        <span className="text-sm whitespace-nowrap text-zinc-300">
-          {fmtDur(playhead)}{" "}
-          <span className="text-zinc-500">
-            of {fmtDur(duration)} of generation
+      <div className="flex items-center gap-4 border-t-[1.5px] border-ink bg-label px-6 py-3">
+        <span className="whitespace-nowrap text-[14px]">
+          {fmtDur(playhead, lang)}{" "}
+          <span className="text-ink-soft">
+            {t("yo.of")} {fmtDur(duration, lang)} {t("play.generation")}
           </span>
         </span>
-        <div className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-zinc-800">
-          <div
-            className="h-full rounded-full bg-emerald-500"
-            style={{ width: `${Math.round(progress * 100)}%` }}
-          />
+        <div className="h-2 min-w-0 flex-1 bg-concrete-deep">
+          <div className="h-full bg-ink" style={{ width: `${Math.round(progress * 100)}%` }} />
         </div>
-        <span className="font-mono text-sm text-zinc-500">
+        <span className="font-mono text-[14px] text-ink-soft">
           {Math.round(progress * 100)}%
         </span>
-        <span className="hidden text-xs text-zinc-600 lg:block">
-          Space pause · ←/→ speed · Esc exit
-        </span>
+        <span className="hidden text-[12px] text-ink-soft lg:block">{t("play.hint")}</span>
       </div>
 
       {finished && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/70 p-4">
-          <div className="w-full max-w-2xl rounded-xl border border-zinc-700 bg-zinc-950 p-8 text-center shadow-2xl">
-            <h3 className="text-2xl font-bold">Run complete</h3>
-            <p className="mt-3 text-lg leading-relaxed text-zinc-200">
-              {sections.length} sections · {documents.length} documents ·{" "}
-              {totalRejections} rejection
-              {totalRejections === 1 ? "" : "s"} caught by the critic · $
-              {totalCost.toFixed(2)} · {betweenDocs} contradictions between
-              documents
+        <div className="absolute inset-0 flex items-center justify-center bg-ink/70 p-4">
+          <div className="w-full max-w-2xl border-[1.5px] border-ink bg-label p-8 text-center">
+            <h3 className="font-display text-[28px] font-semibold uppercase tracking-[0.02em]">
+              {t("play.complete")}
+            </h3>
+            <p className="mt-3 text-[18px] leading-relaxed">
+              {sections.length} {tn("n.sections", sections.length)} ·{" "}
+              {documents.length} {tn("n.documents", documents.length)} ·{" "}
+              {totalRejections} {tn("n.rejections_caught", totalRejections)} · $
+              {totalCost.toFixed(2)} · {betweenDocs}{" "}
+              {tn("n.contradictions_between", betweenDocs)}
             </p>
             <div className="mt-5 flex items-center justify-center gap-2">
-              <Button variant="secondary" onClick={replay}>
-                <RotateCcw /> Replay
-              </Button>
-              <Button onClick={onExit}>Exit</Button>
+              <button
+                type="button"
+                onClick={replay}
+                className="flex items-center gap-2 border-[1.5px] border-ink bg-label px-4 py-2 font-display text-[16px] font-semibold uppercase tracking-[0.04em]"
+              >
+                <RotateCcw size={14} aria-hidden /> {t("yo.replay")}
+              </button>
+              <button
+                type="button"
+                onClick={onExit}
+                className="flex items-center gap-2 border-[1.5px] border-ink bg-ink px-4 py-2 font-display text-[16px] font-semibold uppercase tracking-[0.04em] text-label"
+              >
+                <X size={14} aria-hidden /> {t("yo.exit")}
+              </button>
             </div>
           </div>
         </div>

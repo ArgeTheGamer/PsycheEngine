@@ -166,3 +166,6 @@ export type RunInfo = {
 export type RunsFile = { runs: RunInfo[] };
 
 export type RunId = "psyche" | "baseline";
+
+/** Jump to a section: which version, which document, which section. */
+export type OpenSection = (run: RunId, doc: string, sectionId: string) => void;

@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { Shell, type Tab } from "@/components/shell";
 import { ProductionView } from "@/components/production-view";
-import { CanonPanel } from "@/components/canon-panel";
-import { ChartsPanel } from "@/components/charts-panel";
-import { AgentsPanel } from "@/components/agents-panel";
-import { MaintenanceTab } from "@/components/maintenance-tab";
+import { BenchmarkView } from "@/components/benchmark-view";
+import { UsageView } from "@/components/usage-view";
+import { GraphView } from "@/components/graph-view";
+import { LogsView } from "@/components/logs-view";
+import { YearTab } from "@/components/year-tab";
 import { ChangeReplay } from "@/components/change-replay";
 import { PlaybackView } from "@/components/playback-view";
 import { YearView } from "@/components/year-view";
@@ -24,6 +25,11 @@ export default function Home() {
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
   const [playing, setPlaying] = useState(false);
   const [yearOpen, setYearOpen] = useState(false);
+  const [focus, setFocus] = useState<{ doc: string; sectionId: string } | null>(null);
+  const openSection = (doc: string, sectionId: string) => {
+    setFocus({ doc, sectionId });
+    setTab("production");
+  };
 
   useEffect(() => {
     loadRuns()
@@ -74,7 +80,8 @@ export default function Home() {
       {!error && !data && <p className="m-6 text-[14px] text-ink-soft">{t("state.loading")}</p>}
       {data && tab === "production" && (
         <ProductionView
-          key={runId}
+          key={`${runId}:${focus?.sectionId ?? ""}`}
+          focus={focus}
           documents={data.documents}
           sectionsPsyche={data.sectionsPsyche}
           sectionsBaseline={data.sectionsBaseline}
@@ -82,44 +89,47 @@ export default function Home() {
           contradictionsBaseline={data.contradictionsBaseline}
         />
       )}
-      {/* The tabs below reuse the previous panels until they are restyled to the new system. */}
-      {data && tab !== "production" && (
-        <div className="dark grid gap-4 bg-zinc-950 p-4 text-zinc-200">
-          {(tab === "benchmark" || tab === "usage") && (
-            <ChartsPanel
-              documents={data.documents}
-              sectionsPsyche={data.sectionsPsyche}
-              sectionsBaseline={data.sectionsBaseline}
-              contradictionsPsyche={data.contradictionsPsyche}
-              contradictionsBaseline={data.contradictionsBaseline}
-              callsPsyche={data.callsPsyche}
-              callsBaseline={data.callsBaseline}
-              mutations={data.mutations}
-              canon={data.canon}
-              onOpenSection={() => setTab("production")}
-            />
-          )}
-          {tab === "year" && data.mutations && (
-            <MaintenanceTab
-              mutations={data.mutations}
-              canon={data.canon}
-              sectionsPsyche={data.sectionsPsyche}
-              sectionsBaseline={data.sectionsBaseline}
-              documents={data.documents}
-            />
-          )}
-          {tab === "graph" && (
-            <CanonPanel
-              canon={data.canon}
-              documents={data.documents}
-              sections={data.sectionsPsyche}
-              changes={data.changes}
-              onReplay={setReplay}
-            />
-          )}
-          {tab === "logs" && <AgentsPanel events={data.events} />}
-        </div>
+      {data && tab === "benchmark" && (
+        <BenchmarkView
+          key={runId}
+          documents={data.documents}
+          sectionsPsyche={data.sectionsPsyche}
+          sectionsBaseline={data.sectionsBaseline}
+          contradictionsPsyche={data.contradictionsPsyche}
+          contradictionsBaseline={data.contradictionsBaseline}
+          auditPsyche={data.audit}
+          auditBaseline={data.auditBaseline}
+        />
       )}
+      {data && tab === "usage" && (
+        <UsageView
+          documents={data.documents}
+          callsPsyche={data.callsPsyche}
+          callsBaseline={data.callsBaseline}
+        />
+      )}
+      {data && tab === "year" && data.mutations && (
+        <YearTab
+          key={runId}
+          mutations={data.mutations}
+          canon={data.canon}
+          sectionsPsyche={data.sectionsPsyche}
+          sectionsBaseline={data.sectionsBaseline}
+          documents={data.documents}
+          onOpenSection={(_version, doc, sectionId) => openSection(doc, sectionId)}
+        />
+      )}
+      {data && tab === "graph" && (
+        <GraphView
+          key={runId}
+          canon={data.canon}
+          documents={data.documents}
+          sections={data.sectionsPsyche}
+          changes={data.changes}
+          onReplay={setReplay}
+        />
+      )}
+      {data && tab === "logs" && <LogsView key={runId} events={data.events} />}
       {data && playing && (
         <PlaybackView
           runLabel={label}
@@ -137,15 +147,15 @@ export default function Home() {
       )}
       {data && replay && (
         <ChangeReplay
-          key={replay.change.fact_id}
+          key={`${replay.change.fact_id}:${replay.change.old_value}`}
           record={replay}
           fact={latestFacts.find((f) => f.id === replay.change.fact_id)}
           sections={data.sectionsPsyche}
           documents={data.documents}
           onClose={() => setReplay(null)}
-          onOpenSection={() => {
+          onOpenSection={(_run, doc, sectionId) => {
             setReplay(null);
-            setTab("production");
+            openSection(doc, sectionId);
           }}
         />
       )}

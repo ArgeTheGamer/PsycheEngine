@@ -54,16 +54,21 @@ export function ProductionView({
   sectionsBaseline,
   contradictionsPsyche,
   contradictionsBaseline,
+  focus,
 }: {
   documents: DocumentInfo[];
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
   contradictionsBaseline: Contradiction[];
+  /** Open on this section, e.g. when another tab links to a stale value or a rewritten section. */
+  focus?: { doc: string; sectionId: string } | null;
 }) {
   const { t } = useT();
-  const [docId, setDocId] = useState(documents[0]?.id ?? "ops");
-  const [sectionId, setSectionId] = useState(sectionsPsyche.find((s) => s.doc === docId)?.id ?? "");
+  const [docId, setDocId] = useState(focus?.doc ?? documents[0]?.id ?? "ops");
+  const [sectionId, setSectionId] = useState(
+    focus?.sectionId ?? sectionsPsyche.find((s) => s.doc === (focus?.doc ?? documents[0]?.id ?? "ops"))?.id ?? "",
+  );
   const [side, setSide] = useState<Side>("baseline");
 
   const docOf = useMemo(() => new Map(sectionsPsyche.map((s) => [s.id, s.doc])), [sectionsPsyche]);

@@ -18,6 +18,8 @@ The dashboard is a control room for warehouse paperwork, so its look comes from 
 
 Rules: no gradients, no shadows, no rounded corners on cards or buttons. Borders are `1.5px` ink between regions and `1px` rule inside them. Hazard orange never decorates; if it is on screen, something is wrong in a document.
 
+Conventions shared by every tab: PsycheEngine is drawn in ink, the one-context baseline in hazard, the per-document baseline in hazard dashed (lines) or faded (bars); cost is never hazard. Removed words are hazard-soft with a strikethrough, added words are bold. Section tiles are hollow when queued, ink-soft while writing, hazard on rejection, ink when accepted.
+
 ## Type
 
 - `font-display`: Barlow Condensed, uppercase, 600/700, for headings, tab names and big numbers. Never for paragraphs.

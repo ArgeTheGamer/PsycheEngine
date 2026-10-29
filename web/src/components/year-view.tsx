@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -19,12 +18,8 @@ import {
   parseMonth,
   stepFactIds,
 } from "@/lib/mutations";
-import { Badge, Button } from "./ui";
-import { VERSION_LABELS } from "./maintenance-tab";
+import { useT } from "@/lib/i18n";
 
-const PSYCHE = "#34d399";
-const BASELINE = "#fb7185";
-const BASELINE_PER_DOC = "#be123c";
 const MONTH_ABBR = [
   "Jan",
   "Feb",
@@ -58,7 +53,7 @@ function Highlighted({ text, match }: { text: string; match: string }) {
   return (
     <span>
       {ex.slice(0, start)}
-      <mark className="rounded bg-amber-400/30 px-0.5 text-amber-200">
+      <mark className="bg-hazard-soft px-0.5 underline decoration-hazard decoration-2 underline-offset-4">
         {ex.slice(start, end)}
       </mark>
       {ex.slice(end)}
@@ -77,6 +72,7 @@ export function YearView({
   sectionsBaseline: Section[];
   onExit: () => void;
 }) {
+  const { t, tn } = useT();
   const hasPerDoc = useMemo(
     () =>
       mutations.steps.some((s) => s.baseline_per_doc) ||
@@ -218,33 +214,41 @@ export function YearView({
   const currentFacts = current ? stepFactIds(current) : [];
   const isBatch = currentFacts.length > 1;
 
+  const versions = useMemo(
+    () => [
+      { key: "psyche", label: t("ver.psyche"), dashed: false },
+      { key: "baseline", label: t("ver.baseline_ctx"), dashed: false },
+      ...(hasPerDoc
+        ? [{ key: "perDoc", label: t("ver.baseline_perdoc"), dashed: true }]
+        : []),
+    ],
+    [hasPerDoc, t]
+  );
+
   const counters = useMemo(() => {
     const slot = revealed > 0 ? slots[revealed - 1] : null;
     return [
       {
-        label: VERSION_LABELS.psyche,
-        color: PSYCHE,
+        label: t("ver.psyche"),
         stale: slot?.psyche ?? 0,
         rewritten: slot?.psycheRewritten ?? 0,
       },
       {
-        label: VERSION_LABELS.baseline,
-        color: BASELINE,
+        label: t("ver.baseline_ctx"),
         stale: slot?.baseline ?? 0,
         rewritten: slot?.baselineRewritten ?? 0,
       },
       ...(hasPerDoc
         ? [
             {
-              label: VERSION_LABELS.perDoc,
-              color: BASELINE_PER_DOC,
+              label: t("ver.baseline_perdoc"),
               stale: slot?.perDoc ?? 0,
               rewritten: slot?.perDocRewritten ?? 0,
             },
           ]
         : []),
     ];
-  }, [slots, revealed, hasPerDoc]);
+  }, [slots, revealed, hasPerDoc, t]);
 
   const summary = useMemo(() => {
     // Stale lists are cumulative (each step holds every value still out of date at that point),
@@ -274,113 +278,108 @@ export function YearView({
 
   const staleCards = useMemo(() => {
     if (!selectedStep) return [];
-    const groups: { label: string; color: string; hits: { fact_id: string; match: string; section_id: string }[] }[] = [
-      { label: VERSION_LABELS.baseline, color: BASELINE, hits: selectedStep.baseline.stale },
+    const groups: { label: string; hits: { fact_id: string; match: string; section_id: string }[] }[] = [
+      { label: t("ver.baseline_ctx"), hits: selectedStep.baseline.stale },
     ];
     if (selectedStep.baseline_per_doc) {
       groups.push({
-        label: VERSION_LABELS.perDoc,
-        color: BASELINE_PER_DOC,
+        label: t("ver.baseline_perdoc"),
         hits: selectedStep.baseline_per_doc.stale,
       });
     }
     return groups;
-  }, [selectedStep]);
+  }, [selectedStep, t]);
+
+  const paused = !playing && !finished;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-zinc-950 p-6 text-zinc-100">
-      <div className="mb-4 flex items-center gap-3">
+    <div
+      className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-concrete"
+      role="dialog"
+      aria-modal="true"
+      aria-label={t("yo.title")}
+    >
+      <div className="flex flex-wrap items-center gap-3 border-b-[1.5px] border-ink bg-label px-6 py-3">
         <div>
-          <div className="text-xl font-semibold">A year of changes</div>
-          <div className="text-sm text-zinc-500">{runLabel} · 12 months</div>
+          <div className="font-display text-[24px] font-semibold uppercase leading-none tracking-[0.02em]">
+            {t("yo.title")}
+          </div>
+          <div className="mt-1 text-[13px] text-ink-soft">
+            {runLabel} · 12 {tn("n.months", 12)}
+          </div>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <Button
-            variant="secondary"
+          <button
+            type="button"
             onClick={() => {
               if (!finished) setPlaying((p) => !p);
             }}
+            className="flex items-center gap-2 border-[1.5px] border-ink bg-label px-3 py-1.5 font-display text-[16px] font-semibold uppercase tracking-[0.04em]"
           >
             {playing && !finished ? (
-              <span className="flex items-center gap-1.5">
-                <Pause size={14} /> Pause
-              </span>
+              <>
+                <Pause size={14} aria-hidden /> {t("yo.pause")}
+              </>
             ) : (
-              <span className="flex items-center gap-1.5">
-                <Play size={14} /> Play
-              </span>
+              <>
+                <Play size={14} aria-hidden /> {t("yo.play")}
+              </>
             )}
-          </Button>
-          <Button
-            variant="secondary"
+          </button>
+          <button
+            type="button"
             onClick={() => {
               setRevealed(0);
               setFinished(false);
               setPlaying(true);
               accRef.current = 0;
             }}
+            className="flex items-center gap-2 border-[1.5px] border-ink bg-label px-3 py-1.5 font-display text-[16px] font-semibold uppercase tracking-[0.04em]"
           >
-            <span className="flex items-center gap-1.5">
-              <RotateCcw size={14} /> Replay
-            </span>
-          </Button>
-          <Button variant="secondary" onClick={onExit}>
-            <span className="flex items-center gap-1.5">
-              <X size={14} /> Exit
-            </span>
-          </Button>
+            <RotateCcw size={14} aria-hidden /> {t("yo.replay")}
+          </button>
+          <button
+            type="button"
+            onClick={onExit}
+            className="flex items-center gap-2 border-[1.5px] border-ink bg-ink px-3 py-1.5 font-display text-[16px] font-semibold uppercase tracking-[0.04em] text-label"
+          >
+            <X size={14} aria-hidden /> {t("yo.exit")}
+          </button>
         </div>
       </div>
 
-      <div className="mb-4">
-        <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
-          <div
-            className="h-full rounded-full bg-emerald-400 transition-[width]"
-            style={{ width: `${(revealed / 12) * 100}%` }}
-          />
+      <div className="border-b-[1.5px] border-ink bg-label px-6 py-3">
+        <div className="h-2 bg-concrete-deep">
+          <div className="h-full bg-ink" style={{ width: `${(revealed / 12) * 100}%` }} />
         </div>
-        <div className="mt-1 text-sm text-zinc-400">
+        <div className="mt-1 text-[14px] text-ink-soft">
           {revealed === 0
-            ? "Press play to run the year"
-            : `Month ${revealed} of 12 · ${MONTHS[revealed - 1]}`}
+            ? t("yo.press_play")
+            : `${t("yo.month")} ${revealed} / 12 · ${MONTHS[revealed - 1]}`}
         </div>
       </div>
 
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="flex min-h-0 flex-col gap-4 lg:col-span-2">
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
-            <div className="mb-1 text-base font-medium text-zinc-200">
-              Out-of-date values in the documents
+      <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-3">
+        <div className="flex min-h-0 flex-col lg:col-span-2">
+          <div className="border-b-[1.5px] border-ink px-6 py-4">
+            <div className="font-display text-[18px] font-semibold uppercase tracking-[0.05em]">
+              {t("year.stale_chart")}
             </div>
-            <div className="mb-2 flex flex-wrap items-center gap-4 text-xs text-zinc-400">
-              <span className="flex items-center gap-1.5">
-                <span
-                  className="inline-block h-2 w-6 rounded-full"
-                  style={{ background: PSYCHE }}
-                />
-                {VERSION_LABELS.psyche}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span
-                  className="inline-block h-2 w-6 rounded-full"
-                  style={{ background: BASELINE }}
-                />
-                {VERSION_LABELS.baseline}
-              </span>
-              {hasPerDoc && (
-                <span className="flex items-center gap-1.5">
+            <div className="mb-2 mt-1 flex flex-wrap items-center gap-4 text-[13px] text-ink-soft">
+              {versions.map((v) => (
+                <span key={v.key} className="flex items-center gap-1.5">
                   <span
-                    className="inline-block h-2 w-6 rounded-full"
-                    style={{ background: BASELINE_PER_DOC }}
+                    className="inline-block h-0 w-6 border-t-[3px]"
+                    style={{
+                      borderColor:
+                        v.key === "psyche" ? "var(--color-ink)" : "var(--color-hazard)",
+                      borderTopStyle: v.dashed ? "dashed" : "solid",
+                    }}
                   />
-                  {VERSION_LABELS.perDoc}
+                  {v.label}
                 </span>
-              )}
-              {!playing && !finished && (
-                <span className="text-zinc-500">
-                  Paused — click a month to inspect its stale values
-                </span>
-              )}
+              ))}
+              {paused && <span>{t("yo.paused_hint")}</span>}
             </div>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -388,7 +387,7 @@ export function YearView({
                   data={chartData}
                   margin={{ left: -12, right: 12, top: 8 }}
                   onClick={(s) => {
-                    if (playing || finished) return;
+                    if (!paused) return;
                     const st = s as unknown as {
                       activeTooltipIndex?: number;
                     } | null;
@@ -397,35 +396,41 @@ export function YearView({
                     setSelectedMonth(i);
                   }}
                 >
-                  <CartesianGrid stroke="#27272a" strokeDasharray="3 3" />
-                  <XAxis dataKey="month" tick={{ fill: "#a1a1aa", fontSize: 12 }} />
+                  <XAxis
+                    dataKey="month"
+                    tick={{ fill: "var(--color-ink-soft)", fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={{ stroke: "var(--color-ink)" }}
+                  />
                   <YAxis
                     domain={[-0.5, maxY + 1]}
-                    tick={{ fill: "#a1a1aa", fontSize: 12 }}
+                    tick={{ fill: "var(--color-ink-soft)", fontSize: 12 }}
+                    tickLine={false}
+                    axisLine={{ stroke: "var(--color-ink)" }}
                     allowDecimals={false}
                     tickFormatter={(v: number) => (v < 0 ? "" : String(v))}
                   />
                   <Tooltip
                     contentStyle={{
-                      background: "#18181b",
-                      border: "1px solid #3f3f46",
-                      borderRadius: 8,
+                      background: "var(--color-label)",
+                      border: "1.5px solid var(--color-ink)",
+                      borderRadius: 0,
                       fontSize: 13,
                     }}
                   />
                   <Line
                     type="monotone"
                     dataKey="psyche"
-                    name={VERSION_LABELS.psyche}
-                    stroke={PSYCHE}
+                    name={t("ver.psyche")}
+                    stroke="var(--color-ink)"
                     strokeWidth={3}
                     dot={{ r: 4 }}
                   />
                   <Line
                     type="monotone"
                     dataKey="baseline"
-                    name={VERSION_LABELS.baseline}
-                    stroke={BASELINE}
+                    name={t("ver.baseline_ctx")}
+                    stroke="var(--color-hazard)"
                     strokeWidth={2.5}
                     dot={{ r: 4 }}
                   />
@@ -433,52 +438,63 @@ export function YearView({
                     <Line
                       type="monotone"
                       dataKey="perDoc"
-                      name={VERSION_LABELS.perDoc}
-                      stroke={BASELINE_PER_DOC}
-                      strokeWidth={2.5}
+                      name={t("ver.baseline_perdoc")}
+                      stroke="var(--color-hazard)"
+                      strokeWidth={2}
+                      strokeDasharray="6 4"
                       dot={{ r: 4 }}
                     />
                   )}
                 </LineChart>
               </ResponsiveContainer>
             </div>
+            {paused && revealed > 0 && (
+              <div className="mt-2 flex flex-wrap gap-1" role="group" aria-label={t("yo.paused_hint")}>
+                {slots.slice(0, revealed).map((s, i) => (
+                  <button
+                    key={s.month}
+                    type="button"
+                    onClick={() => setSelectedMonth(i)}
+                    aria-pressed={selectedMonth === i}
+                    className={`border px-2 py-1 font-mono text-[12px] ${
+                      selectedMonth === i
+                        ? "border-ink bg-ink text-label"
+                        : "border-rule bg-label hover:border-ink"
+                    }`}
+                  >
+                    {s.month}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="overflow-y-auto rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+          <div className="px-6 py-4">
             {current ? (
               <>
                 {isBatch && (
-                  <div className="mb-3 rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-2.5 text-lg font-semibold text-amber-200">
-                    {batchTitle(current.notice)}: {currentFacts.length} facts at
-                    once
+                  <div className="mb-3 bg-ink px-4 py-2.5 font-display text-[20px] font-semibold uppercase tracking-[0.03em] text-label">
+                    {batchTitle(current.notice)}: {currentFacts.length}{" "}
+                    {tn("n.facts_changed", currentFacts.length)}
                   </div>
                 )}
-                <p className="text-xl leading-relaxed text-zinc-100">
-                  {current.notice}
-                </p>
+                <p className="max-w-[72ch] text-[20px] leading-relaxed">{current.notice}</p>
               </>
             ) : (
-              <p className="text-xl text-zinc-500">
-                The year has not started yet — press play.
-              </p>
+              <p className="text-[20px] text-ink-soft">{t("yo.not_started")}</p>
             )}
             {selectedStep && staleCards.length > 0 && (
-              <div className="mt-4 flex flex-col gap-2">
-                <div className="text-sm font-medium text-zinc-300">
-                  {MONTH_ABBR[selectedMonth ?? 0]} — stale values the baselines
-                  left behind
+              <div className="mt-4 flex flex-col gap-3">
+                <div className="font-display text-[16px] font-semibold uppercase tracking-[0.05em]">
+                  {MONTH_ABBR[selectedMonth ?? 0]} — {t("yo.left_behind")}
                 </div>
                 {staleCards.map((g) => (
                   <div key={g.label}>
-                    <div
-                      className="mb-1 text-xs font-medium"
-                      style={{ color: g.color }}
-                    >
-                      {g.label} · showing {Math.min(3, g.hits.length)} of{" "}
-                      {g.hits.length}
+                    <div className="mb-1 text-[13px] font-medium text-hazard">
+                      {g.label} · {Math.min(3, g.hits.length)} {t("yo.of")} {g.hits.length}
                     </div>
                     {g.hits.length === 0 ? (
-                      <p className="text-sm text-zinc-500">None this month.</p>
+                      <p className="text-[14px] text-ink-soft">{t("yo.none")}</p>
                     ) : (
                       <div className="grid grid-cols-1 gap-2 xl:grid-cols-3">
                         {g.hits.slice(0, 3).map((h, i) => {
@@ -490,25 +506,21 @@ export function YearView({
                           return (
                             <div
                               key={`${h.section_id}-${h.match}-${i}`}
-                              className="rounded-lg border border-zinc-800 bg-zinc-900 p-3"
+                              className="border-[1.5px] border-ink bg-label p-3"
                             >
-                              <div className="mb-1 flex items-center gap-2">
-                                <Badge variant="warn">{h.fact_id}</Badge>
-                                <span className="text-[11px] text-zinc-500">
-                                  still says {h.match}
+                              <div className="mb-1 flex flex-wrap items-center gap-2">
+                                <span className="bg-hazard px-1.5 py-0.5 font-mono text-[11px] uppercase text-label">
+                                  {h.fact_id}
+                                </span>
+                                <span className="text-[12px] text-ink-soft">
+                                  {t("year.still_says")} {h.match}
                                 </span>
                               </div>
-                              <p className="text-sm leading-snug text-zinc-300">
-                                {sec ? (
-                                  <Highlighted text={sec.text} match={h.match} />
-                                ) : (
-                                  h.match
-                                )}
+                              <p className="text-[14px] leading-snug">
+                                {sec ? <Highlighted text={sec.text} match={h.match} /> : h.match}
                               </p>
-                              <p className="mt-1.5 font-mono text-[11px] text-zinc-500">
-                                {sec
-                                  ? `${sec.chapter_title} › ${sec.title}`
-                                  : h.section_id}
+                              <p className="mt-1.5 font-mono text-[12px] text-ink-soft">
+                                {sec ? `${sec.chapter_title} › ${sec.title}` : h.section_id}
                               </p>
                             </div>
                           );
@@ -522,27 +534,20 @@ export function YearView({
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-col gap-3 overflow-y-auto">
-          {counters.map((c) => (
+        <div className="flex flex-col border-l-[1.5px] border-ink bg-label max-lg:border-l-0 max-lg:border-t-[1.5px]">
+          {counters.map((c, i) => (
             <div
               key={c.label}
-              className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4"
+              className={`px-6 py-5 ${i < counters.length - 1 ? "border-b-[1.5px] border-ink" : ""}`}
             >
-              <div
-                className="text-sm font-medium"
-                style={{ color: c.color }}
-              >
+              <div className="font-display text-[16px] font-semibold uppercase tracking-[0.05em]">
                 {c.label}
               </div>
-              <div className="mt-1 text-5xl font-bold tabular-nums">
-                {c.stale}
-              </div>
-              <div className="text-sm text-zinc-500">out-of-date values</div>
-              <div className="mt-2 border-t border-zinc-800 pt-2 text-sm text-zinc-400">
-                <span className="font-mono text-lg text-zinc-200">
-                  {c.rewritten}
-                </span>{" "}
-                sections rewritten
+              <div className="stencil mt-1 text-[76px]">{c.stale}</div>
+              <div className="text-[14px] text-ink-soft">{tn("n.stale", c.stale)}</div>
+              <div className="mt-2 border-t border-rule pt-2 text-[14px]">
+                <span className="font-mono text-[18px] font-semibold">{c.rewritten}</span>{" "}
+                <span className="text-ink-soft">{tn("n.sections_rewritten", c.rewritten)}</span>
               </div>
             </div>
           ))}
@@ -550,37 +555,37 @@ export function YearView({
       </div>
 
       {finished && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-zinc-950/85">
-          <div className="w-[min(680px,90vw)] rounded-2xl border border-zinc-700 bg-zinc-900 p-8 text-center shadow-2xl">
-            <div className="text-3xl font-bold">
-              {mutations.steps.length} changes ·{" "}
-              <span className="text-emerald-300">
-                PsycheEngine {summary.psy} out-of-date values
-              </span>
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-ink/70 p-4">
+          <div className="w-[min(720px,90vw)] border-[1.5px] border-ink bg-label p-8 text-center">
+            <div className="font-display text-[30px] font-semibold uppercase leading-tight tracking-[0.02em]">
+              {mutations.steps.length} {tn("n.changes", mutations.steps.length)} ·{" "}
+              {t("ver.psyche")} {summary.psy} {tn("n.stale", summary.psy)}
             </div>
-            <div className="mt-2 text-xl text-zinc-300">
-              baseline {summary.base}
-              {hasPerDoc ? ` / ${summary.per}` : ""} · cost $
-              {summary.psyCost.toFixed(2)} vs ${summary.baseCost.toFixed(2)}
+            <div className="mt-2 text-[19px]">
+              {t("ver.baseline")} {summary.base}
+              {hasPerDoc ? ` / ${summary.per}` : ""} · {t("yo.cost")} $
+              {summary.psyCost.toFixed(2)} {t("year.vs")} ${summary.baseCost.toFixed(2)}
             </div>
             <div className="mt-6 flex items-center justify-center gap-2">
-              <Button
+              <button
+                type="button"
                 onClick={() => {
                   setRevealed(0);
                   setFinished(false);
                   setPlaying(true);
                   accRef.current = 0;
                 }}
+                className="flex items-center gap-2 border-[1.5px] border-ink bg-label px-4 py-2 font-display text-[16px] font-semibold uppercase tracking-[0.04em]"
               >
-                <span className="flex items-center gap-1.5">
-                  <RotateCcw size={14} /> Replay
-                </span>
-              </Button>
-              <Button variant="secondary" onClick={onExit}>
-                <span className="flex items-center gap-1.5">
-                  <X size={14} /> Exit
-                </span>
-              </Button>
+                <RotateCcw size={14} aria-hidden /> {t("yo.replay")}
+              </button>
+              <button
+                type="button"
+                onClick={onExit}
+                className="flex items-center gap-2 border-[1.5px] border-ink bg-ink px-4 py-2 font-display text-[16px] font-semibold uppercase tracking-[0.04em] text-label"
+              >
+                <X size={14} aria-hidden /> {t("yo.exit")}
+              </button>
             </div>
           </div>
         </div>
