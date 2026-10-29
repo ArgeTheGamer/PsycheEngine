@@ -26,7 +26,7 @@ function FactPane({
   onClose,
 }: {
   fact: Fact;
-  change: FactChangeRecord | null;
+  change: FactChangeRecord[];
   usageByDoc: [string, Section[]][];
   usageCount: number;
   docTitleById: Map<string, string>;
@@ -80,16 +80,18 @@ function FactPane({
             <dd>{fact.source}</dd>
           </div>
         </dl>
-        {change && (
+        {/* A fact can change more than once in a run (the pallet cap does, in January and October). */}
+        {change.map((c, i) => (
           <button
+            key={i}
             type="button"
-            onClick={() => onReplay(change)}
+            onClick={() => onReplay(c)}
             className="mt-3 w-full bg-ink px-4 py-2.5 font-display text-[16px] font-semibold uppercase tracking-[0.04em] text-label"
           >
-            {t("graph.replay")}: {change.change.old_value} → {change.change.new_value}
+            {t("graph.replay")}: {c.change.old_value} → {c.change.new_value}
             {fact.unit ? ` ${fact.unit}` : ""}
           </button>
-        )}
+        ))}
         <h3 className="mb-2 mt-5 font-display text-[16px] font-semibold uppercase tracking-[0.05em]">
           {t("graph.used_in")} {usageCount} {tn("n.sections", usageCount)}
         </h3>
@@ -156,8 +158,8 @@ export function GraphView({
   const selected: Fact | null =
     current?.facts.find((f) => f.id === selectedId) ?? null;
   const selectedChange = selected
-    ? (changes.find((c) => c.change.fact_id === selected.id) ?? null)
-    : null;
+    ? changes.filter((c) => c.change.fact_id === selected.id)
+    : [];
   const selectedUsage = useMemo(
     () =>
       selected

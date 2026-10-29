@@ -154,6 +154,7 @@ const STRINGS = {
   "cat.procedure": { en: "procedure", pl: "procedura" },
   "cat.equipment": { en: "equipment", pl: "sprzęt" },
   "cat.schedule": { en: "schedule", pl: "harmonogram" },
+  "cat.rule": { en: "rule", pl: "zasada" },
   "graph.version": { en: "Canon version", pl: "Wersja kanonu" },
   "graph.search": { en: "Search facts…", pl: "Szukaj faktów…" },
   "graph.col_fact": { en: "Fact", pl: "Fakt" },
@@ -254,7 +255,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const t = useCallback((key: StringKey) => STRINGS[key][lang], [lang]);
+  const t = useCallback((key: StringKey) => STRINGS[key]?.[lang] ?? key, [lang]);
   const tn = useCallback(
     (base: string, n: number) => STRINGS[`${base}.${pluralForm(lang, n)}` as StringKey][lang],
     [lang],

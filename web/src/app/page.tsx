@@ -25,6 +25,11 @@ export default function Home() {
   const [replay, setReplay] = useState<FactChangeRecord | null>(null);
   const [playing, setPlaying] = useState(false);
   const [yearOpen, setYearOpen] = useState(false);
+  const [focus, setFocus] = useState<{ doc: string; sectionId: string } | null>(null);
+  const openSection = (doc: string, sectionId: string) => {
+    setFocus({ doc, sectionId });
+    setTab("production");
+  };
 
   useEffect(() => {
     loadRuns()
@@ -75,7 +80,8 @@ export default function Home() {
       {!error && !data && <p className="m-6 text-[14px] text-ink-soft">{t("state.loading")}</p>}
       {data && tab === "production" && (
         <ProductionView
-          key={runId}
+          key={`${runId}:${focus?.sectionId ?? ""}`}
+          focus={focus}
           documents={data.documents}
           sectionsPsyche={data.sectionsPsyche}
           sectionsBaseline={data.sectionsBaseline}
@@ -110,7 +116,7 @@ export default function Home() {
           sectionsPsyche={data.sectionsPsyche}
           sectionsBaseline={data.sectionsBaseline}
           documents={data.documents}
-          onOpenSection={() => setTab("production")}
+          onOpenSection={(_version, doc, sectionId) => openSection(doc, sectionId)}
         />
       )}
       {data && tab === "graph" && (
@@ -141,15 +147,15 @@ export default function Home() {
       )}
       {data && replay && (
         <ChangeReplay
-          key={replay.change.fact_id}
+          key={`${replay.change.fact_id}:${replay.change.old_value}`}
           record={replay}
           fact={latestFacts.find((f) => f.id === replay.change.fact_id)}
           sections={data.sectionsPsyche}
           documents={data.documents}
           onClose={() => setReplay(null)}
-          onOpenSection={() => {
+          onOpenSection={(_run, doc, sectionId) => {
             setReplay(null);
-            setTab("production");
+            openSection(doc, sectionId);
           }}
         />
       )}
