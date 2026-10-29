@@ -13,12 +13,5 @@
   },
   "calls_baseline_shared": {
     "baseline/meta": 1.0523
-  },
-  "calls_mutations_audit": {
-    "auditor/meta": 2.1351
-  },
-  "calls_mutations_engine": {
-    "writer/meta": 0.7473,
-    "critic/open": 0.8375
   }
 }

@@ -31,6 +31,11 @@ def costs(run_dir) -> dict:
     return {k: {a: round(v, 4) for a, v in d.items()} for k, d in out.items()}
 
 
+def costs_writing(run_dir) -> dict:
+    keep = {"calls", "calls_audit", "calls_baseline_separate", "calls_baseline_shared"}
+    return {k: v for k, v in costs(run_dir).items() if k in keep}
+
+
 def main() -> int:
     runs, dst_root = REPO_ROOT / "runs", REPO_ROOT / "results"
     if dst_root.exists():
@@ -42,17 +47,23 @@ def main() -> int:
 
     for name in WRITING + MUTATIONS + [YEAR]:
         src, dst = runs / name, dst_root / name
-        for f in ["plan.json", "documents.json", "sections.json", "mutation_benchmark.json"]:
+        files = ["plan.json", "documents.json", "sections.json"] + ([] if name in WRITING else ["mutation_benchmark.json"])
+        for f in files:
             if (src / f).exists():
                 copy(src / f, dst / f)
         for f in src.glob("audit_*.json"):
-            copy(f, dst / f.name)
+            if name not in WRITING or f.stem in {"audit_engine", "audit_baseline_separate", "audit_baseline_shared"}:
+                copy(f, dst / f.name)
         for d in src.glob("baseline_*"):
             if (d / "sections.json").exists():
                 copy(d / "sections.json", dst / d.name / "sections.json")
         store = CanonStore(src / "canon")
         if store.versions():
             copy(store.path(store.versions()[-1]), dst / "canon_latest.json")
+        if name in WRITING:
+            # md-v2 was also mutated in an early, pre-fix attempt; only the writing benchmark is published here.
+            (dst / "costs.json").write_text(json.dumps(costs_writing(src), indent=2), encoding="utf-8")
+            continue
         for d in sorted(src.glob("mutations_*")):  # document snapshots after every change
             for f in d.glob("[0-9][0-9].json"):
                 copy(f, dst / d.name / f.name)
