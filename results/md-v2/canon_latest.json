@@ -1,5 +1,5 @@
 {
-  "version": 207,
+  "version": 154,
   "company": {
     "name": "Harborwick 3PL Ltd.",
     "location": "Port Sellow, Alveria",
@@ -11,9 +11,9 @@
       "category": "limit",
       "subject": "forklift",
       "attribute": "max_speed_indoor",
-      "value": "8",
+      "value": "10",
       "unit": "km/h",
-      "statement": "Forklifts must not exceed 8 km/h inside the building.",
+      "statement": "Forklifts must not exceed 10 km/h inside the building.",
       "source": "company",
       "formula": ""
     },
@@ -154,9 +154,9 @@
       "category": "limit",
       "subject": "damaged_goods",
       "attribute": "write_off_threshold",
-      "value": "750",
+      "value": "500",
       "unit": "EUR",
-      "statement": "Damaged-goods write-offs above 750 EUR need warehouse-manager approval.",
+      "statement": "Damaged-goods write-offs above 500 EUR need warehouse-manager approval.",
       "source": "company",
       "formula": ""
     },
@@ -1023,9 +1023,9 @@
       "category": "limit",
       "subject": "pallet",
       "attribute": "max_gross_weight",
-      "value": "800",
+      "value": "1000",
       "unit": "kg",
-      "statement": "A pallet, including its load, may weigh at most 800 kg.",
+      "statement": "A pallet, including its load, may weigh at most 1000 kg.",
       "source": "company",
       "formula": ""
     },
@@ -1034,9 +1034,9 @@
       "category": "equipment",
       "subject": "trailer",
       "attribute": "payload",
-      "value": "22000",
+      "value": "24000",
       "unit": "kg",
-      "statement": "Our contracted curtain-side trailers carry a payload of 22000 kg.",
+      "statement": "Our contracted curtain-side trailers carry a payload of 24000 kg.",
       "source": "company",
       "formula": ""
     },
@@ -1078,9 +1078,9 @@
       "category": "schedule",
       "subject": "outbound_door",
       "attribute": "loads_per_shift",
-      "value": "4",
+      "value": "3",
       "unit": "loads",
-      "statement": "Each outbound door handles 4 trailer loads per shift.",
+      "statement": "Each outbound door handles 3 trailer loads per shift.",
       "source": "company",
       "formula": ""
     },
@@ -1100,9 +1100,9 @@
       "category": "limit",
       "subject": "trailer",
       "attribute": "max_full_pallets",
-      "value": "27",
+      "value": "24",
       "unit": "pallets",
-      "statement": "A trailer takes at most 27 full-weight pallets (payload divided by maximum pallet weight, capped by floor positions).",
+      "statement": "A trailer takes at most 24 full-weight pallets (payload divided by maximum pallet weight, capped by floor positions).",
       "source": "company",
       "formula": "min(floor({F-EQP-11} / {F-LIM-15}), {F-EQP-12})"
     },
@@ -1122,9 +1122,9 @@
       "category": "limit",
       "subject": "dispatch",
       "attribute": "max_pallets_per_shift",
-      "value": "432",
+      "value": "288",
       "unit": "pallets",
-      "statement": "Outbound capacity is at most 432 full-weight pallets per shift (doors x loads per shift x pallets per trailer).",
+      "statement": "Outbound capacity is at most 288 full-weight pallets per shift (doors x loads per shift x pallets per trailer).",
       "source": "company",
       "formula": "{F-EQP-15} * {F-SCH-10} * {F-DRV-01}"
     },
@@ -1133,9 +1133,9 @@
       "category": "limit",
       "subject": "hazmat_cage",
       "attribute": "max_full_pallets",
-      "value": "5",
+      "value": "4",
       "unit": "pallets",
-      "statement": "The hazmat cage holds at most 5 full-weight pallets (hazmat stock limit divided by maximum pallet weight).",
+      "statement": "The hazmat cage holds at most 4 full-weight pallets (hazmat stock limit divided by maximum pallet weight).",
       "source": "company",
       "formula": "floor({F-LIM-10} / {F-LIM-15})"
     },
@@ -2830,12 +2830,12 @@
       "ops.ch09.s2",
       "hs.ch01.s2",
       "hs.ch01.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
-      "roles.ch03.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s1",
+      "roles.ch03.s3"
     ],
     "F-LIM-12": [
       "ops.ch01.s1",
@@ -2843,12 +2843,12 @@
       "ops.ch09.s2",
       "hs.ch01.s2",
       "hs.ch01.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
-      "roles.ch03.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s1",
+      "roles.ch03.s3"
     ],
     "F-LIM-13": [
       "ops.ch01.s1",
@@ -2856,30 +2856,30 @@
       "ops.ch09.s2",
       "hs.ch01.s2",
       "hs.ch01.s3",
+      "roles.ch01.s2",
       "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
       "roles.ch02.s2",
-      "roles.ch01.s2"
+      "roles.ch02.s3",
+      "roles.ch03.s3"
     ],
     "F-ZON-07": [
       "ops.ch01.s1",
-      "sla.ch02.s1",
       "hs.ch02.s3",
-      "roles.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch02.s1"
     ],
     "F-ZON-09": [
       "ops.ch01.s1",
       "ops.ch01.s3",
       "ops.ch08.s3",
-      "sla.ch01.s1",
       "hs.ch01.s3",
       "hs.ch02.s3",
-      "roles.ch02.s1",
       "roles.ch01.s1",
       "roles.ch01.s3",
+      "roles.ch02.s1",
+      "sla.ch01.s1",
       "sla.ch01.s2"
     ],
     "F-ZON-01": [
@@ -2887,53 +2887,53 @@
       "ops.ch01.s3",
       "ops.ch04.s1",
       "ops.ch04.s2",
-      "sla.ch01.s1",
       "hs.ch02.s3",
+      "roles.ch01.s2",
+      "roles.ch01.s3",
       "roles.ch02.s1",
       "roles.ch02.s2",
-      "roles.ch01.s2",
-      "roles.ch01.s3"
+      "sla.ch01.s1"
     ],
     "F-ZON-02": [
       "ops.ch01.s2",
-      "ops.ch06.s1",
-      "sla.ch01.s3",
       "ops.ch05.s1",
-      "hs.ch03.s1",
-      "sla.ch02.s1",
+      "ops.ch06.s1",
       "hs.ch02.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "hs.ch03.s1",
       "roles.ch01.s2",
-      "roles.ch03.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s1",
+      "roles.ch03.s3",
+      "sla.ch01.s3",
+      "sla.ch02.s1"
     ],
     "F-ZON-03": [
       "ops.ch01.s2",
       "ops.ch06.s1",
       "ops.ch06.s2",
-      "sla.ch01.s3",
-      "sla.ch02.s1",
       "hs.ch02.s3",
-      "roles.ch02.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
-      "roles.ch03.s1"
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s1",
+      "sla.ch01.s3",
+      "sla.ch02.s1"
     ],
     "F-ZON-04": [
       "ops.ch01.s2",
       "ops.ch01.s3",
       "ops.ch07.s1",
       "ops.ch07.s2",
-      "sla.ch01.s3",
       "hs.ch02.s3",
-      "roles.ch02.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
-      "roles.ch03.s2",
       "roles.ch01.s3",
-      "sla.ch01.s2"
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s2",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
     ],
     "F-ZON-05": [
       "ops.ch01.s2",
@@ -2941,80 +2941,79 @@
       "ops.ch05.s2",
       "ops.ch12.s1",
       "hs.ch02.s2",
-      "sla.ch03.s3",
       "hs.ch02.s3",
+      "roles.ch01.s2",
       "roles.ch02.s1",
       "roles.ch02.s2",
-      "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch03.s3"
     ],
     "F-ZON-06": [
       "ops.ch01.s2",
+      "ops.ch05.s3",
       "ops.ch11.s1",
       "ops.ch11.s3",
-      "sla.ch03.s2",
-      "ops.ch05.s3",
-      "hs.ch03.s2",
       "hs.ch02.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s2",
+      "hs.ch03.s2",
       "hs.ch03.s3",
       "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
       "roles.ch03.s2",
-      "sla.ch03.s1"
+      "sla.ch03.s1",
+      "sla.ch03.s2"
     ],
     "F-ZON-08": [
       "ops.ch01.s2",
       "ops.ch05.s1",
       "hs.ch03.s1",
-      "sla.ch02.s1",
-      "roles.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch02.s2",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch02.s1"
     ],
     "F-ZON-12": [
       "ops.ch01.s2",
       "ops.ch05.s3",
       "ops.ch12.s2",
       "hs.ch03.s2",
-      "roles.ch03.s3",
       "roles.ch02.s2",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "roles.ch03.s3"
     ],
     "F-ZON-13": [
       "ops.ch01.s2",
       "ops.ch05.s3",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
       "ops.ch11.s2",
       "hs.ch03.s3",
       "roles.ch01.s2",
+      "roles.ch02.s1",
       "roles.ch03.s1",
       "roles.ch03.s2",
+      "roles.ch03.s3",
       "sla.ch03.s1"
     ],
     "F-ZON-14": [
       "ops.ch01.s2",
       "ops.ch11.s1",
       "ops.ch11.s3",
-      "sla.ch03.s2",
-      "ops.ch02.s3",
       "hs.ch03.s3",
       "roles.ch01.s2",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch03.s2"
     ],
     "F-ZON-15": [
       "ops.ch01.s2",
       "ops.ch05.s3",
       "ops.ch12.s2",
       "hs.ch03.s2",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
-      "roles.ch03.s2"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "roles.ch03.s3"
     ],
     "F-ZON-16": [
       "ops.ch01.s2",
@@ -3042,14 +3041,14 @@
       "ops.ch01.s3",
       "ops.ch04.s1",
       "ops.ch08.s3",
-      "sla.ch01.s1",
       "hs.ch01.s2",
       "hs.ch01.s3",
       "hs.ch02.s3",
+      "roles.ch01.s2",
+      "roles.ch01.s3",
       "roles.ch02.s1",
       "roles.ch02.s2",
-      "roles.ch01.s2",
-      "roles.ch01.s3"
+      "sla.ch01.s1"
     ],
     "F-ZON-11": [
       "ops.ch01.s3",
@@ -3059,33 +3058,33 @@
       "hs.ch01.s2",
       "hs.ch01.s3",
       "hs.ch02.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
       "roles.ch01.s3",
+      "roles.ch02.s2",
       "sla.ch01.s2"
     ],
     "F-RSP-06": [
       "ops.ch01.s3",
       "ops.ch02.s2",
+      "ops.ch02.s3",
       "ops.ch04.s1",
       "ops.ch07.s2",
-      "sla.ch01.s1",
-      "sla.ch02.s3",
       "hs.ch01.s3",
       "hs.ch02.s3",
-      "ops.ch02.s3",
-      "roles.ch01.s2",
       "roles.ch01.s1",
+      "roles.ch01.s2",
       "roles.ch01.s3",
-      "sla.ch01.s2"
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch02.s3"
     ],
     "F-EQP-09": [
       "ops.ch01.s3",
       "ops.ch07.s2",
       "ops.ch08.s3",
       "roles.ch02.s1",
-      "roles.ch03.s3",
       "roles.ch02.s2",
+      "roles.ch03.s3",
       "sla.ch01.s2"
     ],
     "F-EQP-15": [
@@ -3106,16 +3105,16 @@
     "F-ROL-01": [
       "ops.ch02.s1",
       "ops.ch12.s3",
+      "hs.ch01.s1",
       "hs.ch02.s1",
+      "hs.ch03.s2",
       "hs.ch04.s1",
       "hs.ch04.s2",
+      "roles.ch01.s1",
       "sla.ch02.s2",
       "sla.ch02.s3",
-      "sla.ch03.s3",
-      "hs.ch01.s1",
-      "hs.ch03.s2",
       "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch03.s3"
     ],
     "F-ROL-02": [
       "ops.ch02.s1",
@@ -3124,28 +3123,28 @@
       "ops.ch03.s3",
       "ops.ch06.s1",
       "ops.ch12.s3",
+      "hs.ch01.s3",
       "hs.ch02.s2",
+      "hs.ch03.s3",
       "hs.ch04.s1",
       "hs.ch04.s2",
       "hs.ch04.s3",
-      "sla.ch02.s3",
-      "sla.ch03.s2",
-      "sla.ch03.s3",
-      "hs.ch01.s3",
-      "hs.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "sla.ch02.s3",
       "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch03.s2",
+      "sla.ch03.s3"
     ],
     "F-RSP-01": [
       "ops.ch02.s1",
-      "ops.ch10.s2",
-      "sla.ch02.s2",
-      "sla.ch02.s3",
       "ops.ch02.s3",
+      "ops.ch10.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch02.s2",
+      "sla.ch02.s3"
     ],
     "F-RSP-03": [
       "ops.ch02.s1",
@@ -3153,122 +3152,121 @@
       "ops.ch10.s3",
       "ops.ch11.s2",
       "hs.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch03.s1"
     ],
     "F-RSP-05": [
       "ops.ch02.s1",
-      "ops.ch03.s1",
       "ops.ch02.s3",
-      "roles.ch01.s2",
-      "roles.ch01.s1"
+      "ops.ch03.s1",
+      "roles.ch01.s1",
+      "roles.ch01.s2"
     ],
     "F-RSP-07": [
       "ops.ch02.s1",
+      "ops.ch02.s3",
       "ops.ch03.s2",
       "ops.ch12.s3",
       "hs.ch04.s1",
       "hs.ch04.s3",
-      "sla.ch02.s3",
-      "ops.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch02.s3",
+      "sla.ch03.s1"
     ],
     "F-RSP-08": [
       "ops.ch02.s1",
-      "hs.ch01.s1",
-      "ops.ch09.s1",
-      "roles.ch02.s2",
       "ops.ch02.s3",
-      "roles.ch01.s1"
+      "ops.ch09.s1",
+      "hs.ch01.s1",
+      "roles.ch01.s1",
+      "roles.ch02.s2"
     ],
     "F-ROL-03": [
       "ops.ch02.s2",
       "ops.ch06.s1",
       "ops.ch08.s1",
-      "hs.ch01.s1",
       "ops.ch09.s1",
-      "roles.ch02.s2",
+      "hs.ch01.s1",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s2"
     ],
     "F-ROL-04": [
       "ops.ch02.s2",
       "ops.ch06.s1",
       "ops.ch06.s2",
-      "sla.ch01.s3",
-      "roles.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s3",
+      "sla.ch01.s3"
     ],
     "F-ROL-05": [
       "ops.ch02.s2",
       "ops.ch04.s2",
       "ops.ch04.s3",
-      "sla.ch01.s1",
-      "roles.ch02.s1",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s1",
+      "sla.ch01.s1"
     ],
     "F-ROL-06": [
       "ops.ch02.s2",
       "ops.ch03.s3",
       "ops.ch10.s1",
       "ops.ch10.s2",
-      "sla.ch02.s2",
-      "sla.ch02.s3",
       "ops.ch10.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch02.s2",
+      "sla.ch02.s3"
     ],
     "F-ROL-07": [
       "ops.ch02.s2",
       "ops.ch11.s1",
-      "ops.ch11.s3",
-      "sla.ch03.s2",
       "ops.ch11.s2",
+      "ops.ch11.s3",
       "hs.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "sla.ch03.s2"
     ],
     "F-ROL-08": [
       "ops.ch02.s2",
+      "ops.ch05.s1",
       "ops.ch08.s1",
       "ops.ch08.s3",
-      "hs.ch04.s3",
-      "ops.ch05.s1",
+      "ops.ch10.s3",
       "hs.ch01.s1",
       "hs.ch03.s1",
-      "roles.ch03.s3",
-      "ops.ch10.s3",
-      "roles.ch01.s1"
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch03.s3"
     ],
     "F-ROL-09": [
       "ops.ch02.s2",
       "ops.ch04.s1",
       "ops.ch07.s1",
       "ops.ch07.s2",
-      "sla.ch01.s1",
-      "sla.ch01.s3",
-      "sla.ch02.s3",
       "hs.ch02.s3",
-      "roles.ch01.s2",
       "roles.ch01.s1",
+      "roles.ch01.s2",
       "roles.ch01.s3",
-      "sla.ch01.s2"
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch01.s3",
+      "sla.ch02.s3"
     ],
     "F-ZON-21": [
       "ops.ch02.s2"
     ],
     "F-ZON-22": [
-      "ops.ch02.s2",
-      "ops.ch02.s3"
+      "ops.ch02.s2"
     ],
     "F-RSP-09": [
       "ops.ch02.s2"
@@ -3278,30 +3276,30 @@
       "ops.ch10.s3",
       "ops.ch11.s2",
       "hs.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch03.s1"
     ],
     "F-RSP-02": [
       "ops.ch02.s3",
       "ops.ch10.s3",
       "ops.ch11.s2",
       "hs.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch03.s1"
     ],
     "F-RSP-04": [
-      "ops.ch11.s1",
-      "sla.ch03.s2",
       "ops.ch02.s3",
+      "ops.ch11.s1",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "sla.ch03.s2"
     ],
     "F-SCH-01": [
       "ops.ch03.s1",
@@ -3310,16 +3308,16 @@
       "hs.ch02.s2",
       "hs.ch04.s1",
       "hs.ch04.s2",
-      "sla.ch01.s1",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1",
-      "roles.ch01.s3",
+      "roles.ch03.s3",
+      "sla.ch01.s1",
       "sla.ch01.s2"
     ],
     "F-SCH-02": [
@@ -3329,16 +3327,16 @@
       "hs.ch02.s2",
       "hs.ch04.s1",
       "hs.ch04.s2",
-      "sla.ch01.s1",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1",
-      "roles.ch01.s3",
+      "roles.ch03.s3",
+      "sla.ch01.s1",
       "sla.ch01.s2"
     ],
     "F-PRC-15": [
@@ -3346,8 +3344,8 @@
       "ops.ch03.s2",
       "ops.ch03.s3",
       "hs.ch04.s3",
-      "roles.ch01.s2",
       "roles.ch01.s1",
+      "roles.ch01.s2",
       "roles.ch01.s3"
     ],
     "F-SCH-11": [
@@ -3380,37 +3378,35 @@
       "ops.ch12.s1",
       "hs.ch02.s2",
       "hs.ch04.s3",
-      "sla.ch02.s3",
-      "sla.ch03.s3",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
       "roles.ch01.s2",
-      "roles.ch03.s1"
+      "roles.ch02.s1",
+      "roles.ch03.s1",
+      "roles.ch03.s3",
+      "sla.ch02.s3",
+      "sla.ch03.s3"
     ],
     "F-PRC-12": [
       "ops.ch03.s3",
       "ops.ch05.s2",
       "ops.ch12.s1",
       "hs.ch02.s2",
-      "sla.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch02.s1",
-      "roles.ch03.s3",
       "roles.ch02.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch03.s3"
     ],
     "F-PRC-08": [
       "ops.ch03.s3",
       "ops.ch10.s1",
       "ops.ch10.s2",
-      "sla.ch02.s2",
-      "sla.ch02.s3",
-      "ops.ch02.s3",
-      "ops.ch10.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch02.s2",
+      "sla.ch02.s3"
     ],
     "F-ORD-14": [
       "ops.ch03.s3"
@@ -3422,97 +3418,95 @@
       "ops.ch04.s1",
       "ops.ch04.s2",
       "ops.ch04.s3",
-      "sla.ch01.s1",
-      "roles.ch02.s1",
-      "ops.ch02.s3",
-      "roles.ch01.s2",
       "roles.ch01.s1",
-      "roles.ch01.s3"
+      "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "sla.ch01.s1"
     ],
     "F-ORD-01": [
       "ops.ch04.s1",
       "ops.ch04.s2",
-      "sla.ch01.s1",
+      "roles.ch01.s3",
       "roles.ch02.s1",
-      "roles.ch01.s3"
+      "sla.ch01.s1"
     ],
     "F-RUL-01": [
       "ops.ch04.s2",
+      "ops.ch09.s2",
       "ops.ch09.s3",
+      "hs.ch01.s3",
       "hs.ch02.s1",
       "hs.ch02.s2",
-      "ops.ch09.s2",
-      "hs.ch01.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1",
-      "roles.ch01.s3"
+      "roles.ch03.s3"
     ],
     "F-RUL-02": [
       "ops.ch04.s2",
+      "ops.ch09.s2",
       "ops.ch09.s3",
+      "hs.ch01.s3",
       "hs.ch02.s1",
       "hs.ch02.s2",
-      "ops.ch09.s2",
-      "hs.ch01.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1",
-      "roles.ch01.s3"
+      "roles.ch03.s3"
     ],
     "F-ORD-02": [
       "ops.ch04.s2",
       "ops.ch04.s3",
-      "sla.ch01.s1",
-      "roles.ch02.s1"
+      "roles.ch02.s1",
+      "sla.ch01.s1"
     ],
     "F-EQP-10": [
       "ops.ch04.s2",
       "ops.ch06.s2",
       "ops.ch08.s1",
       "ops.ch10.s1",
-      "sla.ch01.s1",
-      "sla.ch01.s3",
       "roles.ch02.s1",
-      "roles.ch02.s3",
       "roles.ch02.s2",
+      "roles.ch02.s3",
       "roles.ch03.s1",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch01.s1",
+      "sla.ch01.s3"
     ],
     "F-ZON-23": [
       "ops.ch04.s2"
     ],
     "F-ORD-16": [
-      "ops.ch04.s2",
-      "roles.ch02.s1"
+      "ops.ch04.s2"
     ],
     "F-PRC-02": [
       "ops.ch04.s3",
-      "sla.ch01.s1",
       "ops.ch05.s1",
       "hs.ch03.s1",
-      "sla.ch02.s1",
+      "roles.ch01.s1",
       "roles.ch02.s1",
       "roles.ch02.s2",
-      "roles.ch01.s1"
+      "sla.ch01.s1",
+      "sla.ch02.s1"
     ],
     "F-ORD-03": [
       "ops.ch04.s3",
-      "sla.ch01.s1",
       "ops.ch05.s1",
-      "sla.ch02.s1",
       "roles.ch02.s1",
-      "roles.ch02.s2"
+      "roles.ch02.s2",
+      "sla.ch01.s1",
+      "sla.ch02.s1"
     ],
     "F-ORD-17": [
       "ops.ch04.s3"
@@ -3520,112 +3514,104 @@
     "F-LIM-05": [
       "ops.ch05.s1",
       "hs.ch03.s1",
-      "sla.ch02.s1",
+      "roles.ch01.s2",
       "roles.ch02.s1",
       "roles.ch02.s2",
-      "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch02.s1"
     ],
     "F-LIM-06": [
       "ops.ch05.s1",
       "hs.ch03.s1",
-      "sla.ch02.s1",
+      "roles.ch01.s2",
       "roles.ch02.s1",
       "roles.ch02.s2",
-      "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch02.s1"
     ],
     "F-LIM-07": [
       "ops.ch05.s1",
-      "hs.ch03.s1",
-      "sla.ch02.s1",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
       "ops.ch10.s3",
+      "hs.ch03.s1",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch02.s1"
     ],
     "F-SCH-06": [
-      "hs.ch04.s3",
-      "sla.ch02.s3",
       "ops.ch05.s1",
-      "hs.ch03.s1",
-      "roles.ch03.s3",
       "ops.ch10.s3",
+      "hs.ch03.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch02.s3"
     ],
     "F-LIM-15": [
       "ops.ch05.s1",
       "ops.ch05.s3",
+      "ops.ch07.s3",
       "ops.ch12.s2",
       "hs.ch01.s1",
       "hs.ch03.s1",
       "hs.ch03.s2",
-      "sla.ch02.s1",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "ops.ch07.s3",
-      "roles.ch01.s1",
-      "roles.ch01.s3",
-      "sla.ch01.s2"
-    ],
-    "F-ZON-24": [
-      "ops.ch05.s1",
-      "hs.ch03.s1"
-    ],
-    "F-RUL-05": [
-      "ops.ch05.s1",
-      "hs.ch03.s1",
+      "sla.ch01.s2",
       "sla.ch02.s1"
     ],
+    "F-ZON-24": [
+      "ops.ch05.s1"
+    ],
+    "F-RUL-05": [
+      "ops.ch05.s1"
+    ],
     "F-ZON-25": [
-      "ops.ch05.s1",
-      "hs.ch03.s1"
+      "ops.ch05.s1"
     ],
     "F-RSP-12": [
-      "ops.ch05.s1",
-      "hs.ch03.s1",
-      "ops.ch10.s3"
+      "ops.ch05.s1"
     ],
     "F-RUL-06": [
-      "ops.ch05.s1",
-      "hs.ch03.s1",
-      "ops.ch10.s3"
+      "ops.ch05.s1"
     ],
     "F-LIM-08": [
       "ops.ch05.s2",
       "ops.ch12.s1",
       "hs.ch02.s2",
-      "sla.ch03.s3",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch03.s3"
     ],
     "F-LIM-09": [
       "ops.ch05.s2",
       "ops.ch12.s1",
       "hs.ch02.s2",
-      "sla.ch03.s3",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3",
+      "sla.ch03.s3"
     ],
     "F-ZON-26": [
       "ops.ch05.s2"
@@ -3649,58 +3635,71 @@
       "ops.ch05.s3",
       "ops.ch12.s2",
       "hs.ch03.s2",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
+      "roles.ch02.s2",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3"
     ],
     "F-PRC-13": [
-      "hs.ch04.s1",
       "ops.ch05.s3",
       "ops.ch12.s2",
       "hs.ch03.s2",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
       "hs.ch03.s3",
+      "hs.ch04.s1",
+      "roles.ch01.s1",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3"
     ],
     "F-DRV-04": [
       "ops.ch05.s3",
       "ops.ch12.s2",
       "hs.ch03.s2",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
       "roles.ch01.s2",
-      "roles.ch03.s2"
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "roles.ch03.s3"
+    ],
+    "F-SCH-13": [
+      "ops.ch05.s3"
+    ],
+    "F-ORD-20": [
+      "ops.ch05.s3"
+    ],
+    "F-ORD-21": [
+      "ops.ch05.s3"
+    ],
+    "F-ZON-29": [
+      "ops.ch05.s3"
+    ],
+    "F-ZON-30": [
+      "ops.ch05.s3"
     ],
     "F-PRC-03": [
       "ops.ch06.s1",
       "ops.ch06.s2",
-      "sla.ch01.s3",
-      "roles.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch02.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s3",
+      "sla.ch01.s3"
     ],
     "F-ORD-04": [
       "ops.ch06.s1",
       "ops.ch06.s2",
-      "sla.ch01.s3",
+      "roles.ch02.s2",
       "roles.ch02.s3",
-      "roles.ch02.s2"
+      "sla.ch01.s3"
     ],
     "F-ZON-31": [
-      "ops.ch06.s1",
-      "roles.ch02.s3"
+      "ops.ch06.s1"
     ],
     "F-ZON-32": [
       "ops.ch06.s1"
     ],
     "F-ZON-33": [
-      "ops.ch06.s1",
-      "roles.ch02.s3"
+      "ops.ch06.s1"
     ],
     "F-ORD-22": [
       "ops.ch06.s1"
@@ -3711,64 +3710,60 @@
     "F-PRC-04": [
       "ops.ch06.s2",
       "ops.ch07.s1",
-      "sla.ch01.s3",
-      "roles.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s3",
+      "sla.ch01.s3"
     ],
     "F-ORD-05": [
       "ops.ch06.s2",
       "ops.ch07.s1",
-      "sla.ch01.s3",
       "roles.ch02.s3",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch01.s3"
     ],
     "F-PRC-05": [
       "ops.ch06.s2",
       "ops.ch07.s1",
       "ops.ch08.s3",
       "ops.ch11.s3",
-      "sla.ch01.s3",
+      "roles.ch01.s1",
       "roles.ch02.s3",
       "roles.ch03.s2",
-      "roles.ch01.s1",
-      "sla.ch01.s2"
+      "sla.ch01.s2",
+      "sla.ch01.s3"
     ],
     "F-ORD-24": [
-      "ops.ch06.s2",
-      "roles.ch02.s3"
+      "ops.ch06.s2"
     ],
     "F-RSP-13": [
       "ops.ch06.s2"
     ],
     "F-ZON-34": [
-      "ops.ch06.s2",
-      "roles.ch02.s3"
+      "ops.ch06.s2"
     ],
     "F-ZON-35": [
       "ops.ch06.s2"
     ],
     "F-ZON-36": [
       "ops.ch06.s2",
-      "ops.ch11.s3",
-      "roles.ch02.s3"
+      "ops.ch11.s3"
     ],
     "F-EQP-07": [
       "ops.ch07.s1",
       "ops.ch08.s3",
       "roles.ch02.s3",
-      "roles.ch03.s3",
       "roles.ch03.s2",
+      "roles.ch03.s3",
       "sla.ch01.s2"
     ],
     "F-PRC-06": [
       "ops.ch07.s1",
       "ops.ch07.s2",
-      "ops.ch08.s3",
-      "ops.ch02.s3",
-      "roles.ch01.s2",
       "ops.ch07.s3",
+      "ops.ch08.s3",
       "roles.ch01.s1",
+      "roles.ch01.s2",
       "roles.ch01.s3",
       "sla.ch01.s2"
     ],
@@ -3800,44 +3795,41 @@
       "hs.ch01.s2",
       "hs.ch01.s3",
       "hs.ch02.s3",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-ORD-09": [
       "ops.ch07.s2",
       "ops.ch12.s3",
       "hs.ch04.s2",
-      "roles.ch03.s3",
-      "roles.ch01.s2"
+      "roles.ch01.s2",
+      "roles.ch03.s3"
     ],
     "F-ORD-28": [
-      "ops.ch07.s2",
-      "roles.ch01.s3",
-      "sla.ch01.s2"
+      "ops.ch07.s2"
     ],
     "F-RSP-14": [
       "ops.ch07.s2"
     ],
     "F-RUL-08": [
-      "ops.ch07.s2",
-      "roles.ch02.s3"
+      "ops.ch07.s2"
     ],
     "F-ORD-29": [
       "ops.ch07.s2"
     ],
     "F-EQP-11": [
-      "roles.ch02.s2",
       "ops.ch07.s3",
       "roles.ch01.s3",
+      "roles.ch02.s2",
       "sla.ch01.s2"
     ],
     "F-EQP-12": [
-      "roles.ch02.s2",
       "ops.ch07.s3",
       "roles.ch01.s3",
+      "roles.ch02.s2",
       "sla.ch01.s2"
     ],
     "F-EQP-13": [
@@ -3857,9 +3849,9 @@
       "sla.ch01.s2"
     ],
     "F-DRV-01": [
-      "roles.ch02.s2",
       "ops.ch07.s3",
       "roles.ch01.s3",
+      "roles.ch02.s2",
       "sla.ch01.s2"
     ],
     "F-DRV-02": [
@@ -3876,81 +3868,79 @@
     "F-EQP-01": [
       "ops.ch08.s1",
       "hs.ch01.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2"
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-EQP-02": [
       "ops.ch08.s1",
       "hs.ch01.s1",
       "hs.ch03.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2"
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-EQP-03": [
       "ops.ch08.s1",
       "hs.ch01.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2"
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-EQP-04": [
       "ops.ch08.s1",
       "hs.ch01.s1",
       "hs.ch03.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2"
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-EQP-05": [
       "ops.ch08.s1",
       "hs.ch01.s1",
       "roles.ch02.s1",
+      "roles.ch02.s2",
       "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2"
+      "roles.ch03.s3"
     ],
     "F-EQP-06": [
       "ops.ch08.s1",
       "hs.ch01.s1",
       "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
       "roles.ch02.s2",
-      "roles.ch03.s2"
+      "roles.ch02.s3",
+      "roles.ch03.s2",
+      "roles.ch03.s3"
     ],
     "F-ORD-08": [
       "ops.ch08.s1",
-      "hs.ch04.s3",
-      "hs.ch01.s1",
       "ops.ch09.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2"
+      "hs.ch01.s1",
+      "hs.ch04.s3",
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-PRC-10": [
       "ops.ch08.s1",
-      "hs.ch02.s1",
-      "hs.ch04.s1",
-      "hs.ch04.s3",
-      "hs.ch01.s1",
       "ops.ch08.s2",
       "ops.ch09.s1",
+      "hs.ch01.s1",
       "hs.ch01.s2",
+      "hs.ch02.s1",
       "hs.ch02.s3",
-      "roles.ch03.s3",
+      "hs.ch04.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
       "roles.ch02.s2",
-      "ops.ch02.s3",
-      "roles.ch01.s1"
+      "roles.ch03.s3"
     ],
     "F-SCH-05": [
       "ops.ch08.s1",
-      "hs.ch04.s3",
-      "hs.ch01.s1",
       "ops.ch09.s1",
-      "roles.ch03.s3",
+      "hs.ch01.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s2",
       "roles.ch02.s2",
-      "roles.ch01.s2"
+      "roles.ch03.s3"
     ],
     "F-ZON-39": [
-      "ops.ch08.s1",
-      "hs.ch01.s1"
+      "ops.ch08.s1"
     ],
     "F-ZON-40": [
       "ops.ch08.s1"
@@ -3959,12 +3949,10 @@
       "ops.ch08.s1"
     ],
     "F-SCH-14": [
-      "ops.ch08.s1",
-      "hs.ch01.s1"
+      "ops.ch08.s1"
     ],
     "F-SCH-15": [
-      "ops.ch08.s1",
-      "hs.ch01.s1"
+      "ops.ch08.s1"
     ],
     "F-LIM-01": [
       "ops.ch08.s2",
@@ -3973,12 +3961,12 @@
       "hs.ch01.s2",
       "hs.ch01.s3",
       "hs.ch02.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s3"
     ],
     "F-LIM-02": [
       "ops.ch08.s2",
@@ -3986,11 +3974,11 @@
       "ops.ch09.s2",
       "hs.ch01.s2",
       "hs.ch02.s3",
-      "roles.ch02.s1",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-LIM-03": [
       "ops.ch08.s2",
@@ -3998,25 +3986,25 @@
       "ops.ch09.s2",
       "hs.ch01.s2",
       "hs.ch01.s3",
-      "roles.ch02.s1",
-      "roles.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s3"
     ],
     "F-PRC-11": [
-      "hs.ch02.s1",
-      "hs.ch04.s1",
       "ops.ch08.s2",
       "ops.ch09.s2",
       "hs.ch01.s2",
       "hs.ch01.s3",
+      "hs.ch02.s1",
       "hs.ch02.s3",
-      "roles.ch03.s3",
-      "roles.ch02.s2",
+      "hs.ch04.s1",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch02.s2",
+      "roles.ch03.s3"
     ],
     "F-RUL-09": [
       "ops.ch08.s2"
@@ -4024,8 +4012,8 @@
     "F-EQP-08": [
       "ops.ch08.s3",
       "ops.ch11.s3",
-      "roles.ch03.s3",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "roles.ch03.s3"
     ],
     "F-ORD-30": [
       "ops.ch08.s3"
@@ -4048,14 +4036,14 @@
       "ops.ch08.s3"
     ],
     "F-RUL-03": [
-      "ops.ch09.s3",
-      "hs.ch02.s1",
-      "hs.ch01.s1",
       "ops.ch09.s1",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
       "hs.ch01.s2",
-      "roles.ch03.s3",
+      "hs.ch02.s1",
+      "roles.ch01.s2",
       "roles.ch02.s2",
-      "roles.ch01.s2"
+      "roles.ch03.s3"
     ],
     "F-RSP-18": [
       "ops.ch09.s2"
@@ -4075,18 +4063,18 @@
     "F-ORD-07": [
       "ops.ch10.s1",
       "ops.ch10.s2",
-      "sla.ch02.s2",
       "ops.ch10.s3",
       "roles.ch01.s2",
-      "roles.ch03.s1"
+      "roles.ch03.s1",
+      "sla.ch02.s2"
     ],
     "F-SCH-03": [
       "ops.ch10.s1",
-      "sla.ch02.s2",
-      "sla.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch02.s2",
+      "sla.ch02.s3"
     ],
     "F-ORD-35": [
       "ops.ch10.s1"
@@ -4095,37 +4083,34 @@
       "ops.ch10.s1"
     ],
     "F-PRC-16": [
-      "ops.ch10.s1",
-      "ops.ch10.s3"
+      "ops.ch10.s1"
     ],
     "F-SCH-16": [
       "ops.ch10.s1"
     ],
     "F-SCH-04": [
       "ops.ch10.s2",
-      "sla.ch02.s2",
-      "sla.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch02.s2",
+      "sla.ch02.s3"
     ],
     "F-ORD-36": [
       "ops.ch10.s2"
     ],
     "F-ORD-37": [
-      "ops.ch10.s2",
-      "ops.ch10.s3"
+      "ops.ch10.s2"
     ],
     "F-PRC-09": [
-      "ops.ch11.s3",
-      "ops.ch02.s3",
       "ops.ch10.s3",
       "ops.ch11.s2",
+      "ops.ch11.s3",
       "hs.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s1",
       "roles.ch03.s2",
-      "sla.ch03.s1",
-      "roles.ch01.s1"
+      "sla.ch03.s1"
     ],
     "F-ORD-38": [
       "ops.ch10.s3"
@@ -4134,8 +4119,7 @@
       "ops.ch10.s3"
     ],
     "F-RUL-11": [
-      "ops.ch10.s3",
-      "hs.ch03.s3"
+      "ops.ch10.s3"
     ],
     "F-ORD-40": [
       "ops.ch10.s3"
@@ -4143,25 +4127,24 @@
     "F-PRC-07": [
       "ops.ch11.s1",
       "ops.ch11.s3",
-      "sla.ch03.s2",
-      "ops.ch02.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "sla.ch03.s2"
     ],
     "F-ORD-06": [
       "ops.ch11.s1",
-      "sla.ch03.s2",
       "ops.ch11.s2",
       "roles.ch01.s2",
-      "roles.ch03.s2"
+      "roles.ch03.s2",
+      "sla.ch03.s2"
     ],
     "F-SCH-08": [
       "ops.ch11.s1",
-      "sla.ch03.s2",
+      "roles.ch01.s1",
       "roles.ch01.s2",
       "roles.ch03.s2",
-      "roles.ch01.s1"
+      "sla.ch03.s2"
     ],
     "F-ORD-41": [
       "ops.ch11.s1"
@@ -4206,17 +4189,17 @@
       "hs.ch04.s1",
       "hs.ch04.s2",
       "hs.ch04.s3",
-      "roles.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3"
     ],
     "F-SCH-07": [
       "ops.ch12.s3",
       "hs.ch04.s2",
       "hs.ch04.s3",
-      "roles.ch03.s3",
+      "roles.ch01.s1",
       "roles.ch01.s2",
-      "roles.ch01.s1"
+      "roles.ch03.s3"
     ],
     "F-RSP-21": [
       "ops.ch12.s3"
@@ -4309,8 +4292,13 @@
       "hs.ch04.s2"
     ],
     "F-RSP-30": [
-      "hs.ch04.s3",
-      "hs.ch01.s1"
+      "hs.ch04.s3"
+    ],
+    "F-RSP-31": [
+      "roles.ch01.s3"
+    ],
+    "F-RSP-32": [
+      "roles.ch01.s3"
     ],
     "F-RUL-16": [
       "sla.ch01.s1"
@@ -4322,6 +4310,9 @@
       "sla.ch01.s1"
     ],
     "F-RUL-17": [
+      "sla.ch01.s2"
+    ],
+    "F-ORD-53": [
       "sla.ch01.s2"
     ],
     "F-PRC-20": [
@@ -4351,6 +4342,18 @@
     "F-PRC-22": [
       "sla.ch02.s2"
     ],
+    "F-SCH-24": [
+      "sla.ch03.s1"
+    ],
+    "F-SCH-25": [
+      "sla.ch03.s1"
+    ],
+    "F-SCH-26": [
+      "sla.ch03.s1"
+    ],
+    "F-PRC-23": [
+      "sla.ch03.s1"
+    ],
     "F-RSP-37": [
       "sla.ch03.s2"
     ],
@@ -4362,22 +4365,7 @@
     ],
     "F-RSP-39": [
       "sla.ch03.s3"
-    ],
-    "F-ORD-20": [
-      "hs.ch03.s2"
-    ],
-    "F-ZON-29": [
-      "hs.ch03.s2"
-    ],
-    "F-RSP-31": [
-      "roles.ch01.s3"
-    ],
-    "F-RSP-32": [
-      "roles.ch01.s3"
-    ],
-    "F-ORD-53": [
-      "sla.ch01.s2"
     ]
   },
-  "note": "section sla.ch01.s2 accepted"
+  "note": "section sla.ch03.s3 accepted"
 }

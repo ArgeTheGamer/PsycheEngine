@@ -58,8 +58,12 @@ def main() -> int:
             if (d / "sections.json").exists():
                 copy(d / "sections.json", dst / d.name / "sections.json")
         store = CanonStore(src / "canon")
-        if store.versions():
-            copy(store.path(store.versions()[-1]), dst / "canon_latest.json")
+        versions = store.versions()
+        if name in WRITING:  # the canon as writing left it, before any fact change
+            first_change = next((v for v in versions if store.load(v).note.startswith("F-")), None)
+            versions = [v for v in versions if first_change is None or v < first_change]
+        if versions:
+            copy(store.path(versions[-1]), dst / "canon_latest.json")
         if name in WRITING:
             # md-v2 was also mutated in an early, pre-fix attempt; only the writing benchmark is published here.
             (dst / "costs.json").write_text(json.dumps(costs_writing(src), indent=2), encoding="utf-8")
