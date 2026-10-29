@@ -1,32 +1,78 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    sans-serif;
-  --font-mono: ui-monospace, "Cascadia Mono", "JetBrains Mono", Consolas,
-    monospace;
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --font-display: var(--font-barlow), "Arial Narrow", sans-serif;
+
+  /* Warehouse floor palette: concrete, label stock, ink, and one hazard colour for problems only. */
+  --color-concrete: #e4e6e3;
+  --color-concrete-deep: #d3d6d2;
+  --color-label: #fbfbf9;
+  --color-ink: #1b2330;
+  --color-ink-soft: #4a5463;
+  --color-rule: #b9beb8;
+  --color-hazard: #e8590c;
+  --color-hazard-soft: #fde4d3;
+  --color-steady: #2f6f5e;
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  background-color: #09090b;
-  color: #e4e4e7;
+  background-color: var(--color-concrete);
+  color: var(--color-ink);
+}
+
+/* Rack-location label: the identity device for sections and facts. */
+.loc-label {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-label);
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.loc-label > b {
+  background: var(--color-ink);
+  color: var(--color-label);
+  font-weight: 600;
+  padding: 0.3em 0.45em 0.25em;
+}
+.loc-label > span {
+  padding: 0.3em 0.5em 0.25em;
+  font-weight: 600;
+}
+
+/* Floor-stencil numerals for the counts that matter. */
+.stencil {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-hazard);
+  outline-offset: 2px;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3f3f46 transparent;
+  scrollbar-color: var(--color-rule) transparent;
 }
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 4px;
+  background: var(--color-rule);
+  border-radius: 0;
 }
 *::-webkit-scrollbar-track {
   background: transparent;
