@@ -100,9 +100,10 @@ export async function loadMutations(
 
 export async function loadAudit(
   runId: string,
+  which: RunId = "psyche",
 ): Promise<MutationAudit | null> {
   const data = await getOptionalJSON<MutationAudit>(
-    `/runs/${runId}/audit_psyche.json`,
+    `/runs/${runId}/audit_${which}.json`,
   );
   return data ?? null;
 }
@@ -112,6 +113,7 @@ export type RunData = {
   documents: DocumentInfo[];
   mutations: MutationsFile | null;
   audit: MutationAudit | null;
+  auditBaseline: MutationAudit | null;
   sectionsPsyche: Section[];
   sectionsBaseline: Section[];
   contradictionsPsyche: Contradiction[];
@@ -128,6 +130,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     documents,
     mutations,
     audit,
+    auditBaseline,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,
@@ -140,7 +143,8 @@ export async function loadRun(runId: string): Promise<RunData> {
     loadCanon(runId),
     loadDocuments(runId),
     loadMutations(runId),
-    loadAudit(runId),
+    loadAudit(runId, "psyche"),
+    loadAudit(runId, "baseline"),
     loadSections(runId, "psyche"),
     loadSections(runId, "baseline"),
     loadContradictions(runId, "psyche"),
@@ -155,6 +159,7 @@ export async function loadRun(runId: string): Promise<RunData> {
     documents,
     mutations,
     audit,
+    auditBaseline,
     sectionsPsyche,
     sectionsBaseline,
     contradictionsPsyche,

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Shell, type Tab } from "@/components/shell";
 import { ProductionView } from "@/components/production-view";
+import { BenchmarkView } from "@/components/benchmark-view";
 import { CanonPanel } from "@/components/canon-panel";
 import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
@@ -82,10 +83,22 @@ export default function Home() {
           contradictionsBaseline={data.contradictionsBaseline}
         />
       )}
+      {data && tab === "benchmark" && (
+        <BenchmarkView
+          key={runId}
+          documents={data.documents}
+          sectionsPsyche={data.sectionsPsyche}
+          sectionsBaseline={data.sectionsBaseline}
+          contradictionsPsyche={data.contradictionsPsyche}
+          contradictionsBaseline={data.contradictionsBaseline}
+          auditPsyche={data.audit}
+          auditBaseline={data.auditBaseline}
+        />
+      )}
       {/* The tabs below reuse the previous panels until they are restyled to the new system. */}
-      {data && tab !== "production" && (
+      {data && tab !== "production" && tab !== "benchmark" && (
         <div className="dark grid gap-4 bg-zinc-950 p-4 text-zinc-200">
-          {(tab === "benchmark" || tab === "usage") && (
+          {tab === "usage" && (
             <ChartsPanel
               documents={data.documents}
               sectionsPsyche={data.sectionsPsyche}

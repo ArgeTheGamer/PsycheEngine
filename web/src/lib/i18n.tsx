@@ -44,11 +44,45 @@ const STRINGS = {
   "cat.role": { en: "role", pl: "rola" },
   "cat.step_order": { en: "step order", pl: "kolejność kroków" },
   "cat.reference": { en: "reference", pl: "odwołanie" },
+  "ver.psyche": { en: "PsycheEngine", pl: "PsycheEngine" },
+  "ver.baseline": { en: "Baseline", pl: "Baseline" },
+  "ver.baseline_ctx": { en: "Baseline · one context", pl: "Baseline · jeden kontekst" },
+  "ver.baseline_perdoc": { en: "Baseline · each document separately", pl: "Baseline · każdy dokument osobno" },
+  "bench.total": { en: "in total", pl: "łącznie" },
+  "bench.of_which": { en: "of which", pl: "w tym" },
+  "bench.details": { en: "Details", pl: "Szczegóły" },
+  "bench.bars": { en: "Contradictions by kind", pl: "Sprzeczności według rodzaju" },
+  "bench.matrix": { en: "Between which documents", pl: "Między którymi dokumentami" },
+  "bench.violations": { en: "Fact violations", pl: "Naruszenia faktów" },
+  "n.contradictions.one": { en: "contradiction", pl: "sprzeczność" },
+  "n.contradictions.few": { en: "contradictions", pl: "sprzeczności" },
+  "n.contradictions.many": { en: "contradictions", pl: "sprzeczności" },
+  "n.violations.one": { en: "fact violation", pl: "naruszenie faktu" },
+  "n.violations.few": { en: "fact violations", pl: "naruszenia faktów" },
+  "n.violations.many": { en: "fact violations", pl: "naruszeń faktów" },
 } as const;
 
 export type StringKey = keyof typeof STRINGS;
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (key: StringKey) => string };
+/** "one" | "few" | "many" for count-prefixed nouns ("3 sections"). English never uses "few". */
+export function pluralForm(lang: Lang, n: number): "one" | "few" | "many" {
+  if (lang === "pl") {
+    if (n === 1) return "one";
+    const m10 = n % 10;
+    const m100 = n % 100;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return "few";
+    return "many";
+  }
+  return n === 1 ? "one" : "many";
+}
+
+type Ctx = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (key: StringKey) => string;
+  /** t() for a counted noun: keys `${base}.one` / `.few` / `.many` must exist. */
+  tn: (base: string, n: number) => string;
+};
 const LangContext = createContext<Ctx | null>(null);
 
 export function LangProvider({ children }: { children: ReactNode }) {
@@ -77,7 +111,11 @@ export function LangProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback((key: StringKey) => STRINGS[key][lang], [lang]);
-  return <LangContext.Provider value={{ lang, setLang, t }}>{children}</LangContext.Provider>;
+  const tn = useCallback(
+    (base: string, n: number) => STRINGS[`${base}.${pluralForm(lang, n)}` as StringKey][lang],
+    [lang],
+  );
+  return <LangContext.Provider value={{ lang, setLang, t, tn }}>{children}</LangContext.Provider>;
 }
 
 export function useT(): Ctx {
