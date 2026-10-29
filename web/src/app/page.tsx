@@ -6,7 +6,7 @@ import { ProductionView } from "@/components/production-view";
 import { BenchmarkView } from "@/components/benchmark-view";
 import { UsageView } from "@/components/usage-view";
 import { GraphView } from "@/components/graph-view";
-import { AgentsPanel } from "@/components/agents-panel";
+import { LogsView } from "@/components/logs-view";
 import { YearTab } from "@/components/year-tab";
 import { ChangeReplay } from "@/components/change-replay";
 import { PlaybackView } from "@/components/playback-view";
@@ -123,12 +123,7 @@ export default function Home() {
           onReplay={setReplay}
         />
       )}
-      {/* The tabs below reuse the previous panels until they are restyled to the new system. */}
-      {data && tab !== "production" && tab !== "benchmark" && tab !== "usage" && tab !== "year" && tab !== "graph" && (
-        <div className="dark grid gap-4 bg-zinc-950 p-4 text-zinc-200">
-          {tab === "logs" && <AgentsPanel events={data.events} />}
-        </div>
-      )}
+      {data && tab === "logs" && <LogsView key={runId} events={data.events} />}
       {data && playing && (
         <PlaybackView
           runLabel={label}

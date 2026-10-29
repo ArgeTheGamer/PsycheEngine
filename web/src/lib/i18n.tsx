@@ -198,6 +198,12 @@ const STRINGS = {
   "replay.after": { en: "After", pl: "Po" },
   "replay.in": { en: "in", pl: "w" },
   "replay.depend_on": { en: "depend on", pl: "zależy od" },
+  "logs.title": { en: "Agent log", pl: "Dziennik agentów" },
+  "logs.empty": { en: "No agent events in this run.", pl: "Ten przebieg nie ma zdarzeń agentów." },
+  "logs.expand": { en: "Expand details", pl: "Rozwiń szczegóły" },
+  "logs.collapse": { en: "Collapse details", pl: "Zwiń szczegóły" },
+  "logs.rewrite": { en: "rewrite", pl: "przepisz" },
+  "logs.canon_slice": { en: "canon slice", pl: "wycinek kanonu" },
 } as const;
 
 export type StringKey = keyof typeof STRINGS;
