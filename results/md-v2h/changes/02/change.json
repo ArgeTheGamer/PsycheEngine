@@ -1,0 +1,21 @@
+{
+  "fact_id": "F-LIM-01",
+  "old_value": "10",
+  "new_value": "8",
+  "affected_sections": [
+    "ops.ch08.s2",
+    "ops.ch09.s1",
+    "ops.ch09.s2",
+    "hs.ch01.s2",
+    "hs.ch01.s3",
+    "hs.ch02.s3",
+    "roles.ch01.s1",
+    "roles.ch01.s2",
+    "roles.ch02.s1",
+    "roles.ch02.s2",
+    "roles.ch02.s3",
+    "roles.ch03.s3"
+  ],
+  "derived": [],
+  "quoting": []
+}

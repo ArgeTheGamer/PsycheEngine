@@ -1,0 +1,2153 @@
+{
+  "baseline_variant": "shared",
+  "per_doc_baseline_variant": "separate",
+  "steps": [
+    {
+      "step": 1,
+      "fact": "F-LIM-15",
+      "facts": [
+        "F-LIM-15"
+      ],
+      "notice": "January: our new insurer caps pallets at 900 kg including the load (was 1,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "24",
+          "new_value": "26"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "288",
+          "new_value": "312"
+        }
+      ],
+      "engine": {
+        "sections_changed": 16,
+        "chars_changed": 68,
+        "cost_usd": 0.4594,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 47,
+        "chars_changed": 436,
+        "cost_usd": 0.2553,
+        "stale": [],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 45,
+        "chars_changed": 587,
+        "cost_usd": 0.2837,
+        "stale": [],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 2,
+      "fact": "F-LIM-01",
+      "facts": [
+        "F-LIM-01"
+      ],
+      "notice": "February: after a near-miss the indoor forklift speed limit is now 8 km/h (was 10 km/h).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 7,
+        "chars_changed": 14,
+        "cost_usd": 0.198,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 36,
+        "chars_changed": 76,
+        "cost_usd": 0.2112,
+        "stale": [],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 43,
+        "chars_changed": 86,
+        "cost_usd": 0.2487,
+        "stale": [],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 3,
+      "fact": "F-LIM-09",
+      "facts": [
+        "F-LIM-09"
+      ],
+      "notice": "March: a new pharma client requires the cold zone to stay at or below +6 °C (was +8 °C).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 10,
+        "chars_changed": 21,
+        "cost_usd": 0.2979,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 33,
+        "chars_changed": 40,
+        "cost_usd": 0.2011,
+        "stale": [],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 35,
+        "chars_changed": 41,
+        "cost_usd": 0.2273,
+        "stale": [],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 4,
+      "fact": "F-LIM-14",
+      "facts": [
+        "F-LIM-14"
+      ],
+      "notice": "April: shift supervisors may now approve damaged-goods write-offs up to 750 EUR; above that the warehouse manager approves (was 500 EUR).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 10,
+        "chars_changed": 55,
+        "cost_usd": 0.3036,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 22,
+        "chars_changed": 100,
+        "cost_usd": 0.162,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 24,
+        "chars_changed": 100,
+        "cost_usd": 0.18,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 5,
+      "fact": "F-EQP-01",
+      "facts": [
+        "F-EQP-01",
+        "F-EQP-02",
+        "F-EQP-03",
+        "F-EQP-04",
+        "F-EQP-05",
+        "F-EQP-13",
+        "F-EQP-11"
+      ],
+      "notice": "May: fleet modernisation. We replaced the whole forklift fleet and the van, and our haulier moved to new trailers: 9 counterbalance forklifts rated 3.0 t (were 6 rated 2.5 t), 5 reach trucks rated 2.0 t (were 4 rated 1.6 t), 11 electric pallet jacks (were 8), a new van with a 1,800 kg payload (was 1,200 kg) and trailers with a 26,000 kg payload (was 24,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-02",
+          "old_value": "1",
+          "new_value": "2"
+        },
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "26",
+          "new_value": "28"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "312",
+          "new_value": "336"
+        }
+      ],
+      "engine": {
+        "sections_changed": 11,
+        "chars_changed": 354,
+        "cost_usd": 0.3606,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 27,
+        "chars_changed": 307,
+        "cost_usd": 0.1817,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 29,
+        "chars_changed": 271,
+        "cost_usd": 0.2209,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 6,
+      "fact": "F-SCH-10",
+      "facts": [
+        "F-SCH-10"
+      ],
+      "notice": "June: with the new loading crew each outbound door handles 4 trailer loads per shift (was 3).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "336",
+          "new_value": "448"
+        }
+      ],
+      "engine": {
+        "sections_changed": 4,
+        "chars_changed": 17,
+        "cost_usd": 0.1149,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 4,
+        "chars_changed": 50,
+        "cost_usd": 0.0907,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 5,
+        "chars_changed": 143,
+        "cost_usd": 0.1146,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 7,
+      "fact": "F-LIM-02",
+      "facts": [
+        "F-LIM-02"
+      ],
+      "notice": "July: the yard was resurfaced and the outdoor forklift speed limit is now 12 km/h (was 15 km/h).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 8,
+        "chars_changed": 8,
+        "cost_usd": 0.2328,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 19,
+        "chars_changed": 32,
+        "cost_usd": 0.1508,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 28,
+        "chars_changed": 121,
+        "cost_usd": 0.1937,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 8,
+      "fact": "F-LIM-10",
+      "facts": [
+        "F-LIM-10"
+      ],
+      "notice": "August: the fire inspection lowered the hazmat cage limit to 3,000 kg (was 4,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-04",
+          "old_value": "4",
+          "new_value": "3"
+        }
+      ],
+      "engine": {
+        "sections_changed": 7,
+        "chars_changed": 474,
+        "cost_usd": 0.2091,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 32,
+        "chars_changed": 72,
+        "cost_usd": 0.1976,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          },
+          {
+            "fact_id": "F-LIM-10",
+            "old": "4000",
+            "section_id": "ops.ch02.s3",
+            "match": "4,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 27,
+        "chars_changed": 65,
+        "cost_usd": 0.1903,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 9,
+      "fact": "F-LIM-05",
+      "facts": [
+        "F-LIM-05"
+      ],
+      "notice": "September: block-stacked pallets may now be at most 3.5 m high (was 4.0 m).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 5,
+        "chars_changed": 10,
+        "cost_usd": 0.1482,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 13,
+        "chars_changed": 32,
+        "cost_usd": 0.1286,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          },
+          {
+            "fact_id": "F-LIM-10",
+            "old": "4000",
+            "section_id": "ops.ch02.s3",
+            "match": "4,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 16,
+        "chars_changed": 36,
+        "cost_usd": 0.1527,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 10,
+      "fact": "F-LIM-15",
+      "facts": [
+        "F-LIM-15"
+      ],
+      "notice": "October: the insurer tightened the pallet cap again, to 800 kg including the load (was 900 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "28",
+          "new_value": "32"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "448",
+          "new_value": "512"
+        }
+      ],
+      "engine": {
+        "sections_changed": 16,
+        "chars_changed": 161,
+        "cost_usd": 0.4983,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 46,
+        "chars_changed": 144,
+        "cost_usd": 0.262,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "900",
+            "section_id": "ops.ch11.s2",
+            "match": "900 kg"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          },
+          {
+            "fact_id": "F-LIM-10",
+            "old": "4000",
+            "section_id": "ops.ch02.s3",
+            "match": "4,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 45,
+        "chars_changed": 216,
+        "cost_usd": 0.2741,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 11,
+      "fact": "F-EQP-15",
+      "facts": [
+        "F-EQP-15"
+      ],
+      "notice": "November: a fifth outbound dock door is in service (was 4).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "512",
+          "new_value": "640"
+        }
+      ],
+      "engine": {
+        "sections_changed": 6,
+        "chars_changed": 20,
+        "cost_usd": 0.1901,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 29,
+        "chars_changed": 119,
+        "cost_usd": 0.1847,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "900",
+            "section_id": "ops.ch11.s2",
+            "match": "900 kg"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          },
+          {
+            "fact_id": "F-LIM-10",
+            "old": "4000",
+            "section_id": "ops.ch02.s3",
+            "match": "4,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 38,
+        "chars_changed": 133,
+        "cost_usd": 0.2466,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 12,
+      "fact": "F-LIM-07",
+      "facts": [
+        "F-LIM-07"
+      ],
+      "notice": "December: after the racking upgrade each rack bay may carry up to 3,000 kg (was 2,700 kg).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 8,
+        "chars_changed": 63,
+        "cost_usd": 0.2775,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 20,
+        "chars_changed": 42,
+        "cost_usd": 0.1537,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "900",
+            "section_id": "ops.ch11.s2",
+            "match": "900 kg"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-02",
+            "old": "2.5",
+            "section_id": "ops.ch02.s3",
+            "match": "2.5 t"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch02.s3",
+            "match": "1.6 t"
+          },
+          {
+            "fact_id": "F-LIM-10",
+            "old": "4000",
+            "section_id": "ops.ch02.s3",
+            "match": "4,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-07",
+            "old": "2700",
+            "section_id": "ops.ch07.s1",
+            "match": "2,700 kg"
+          }
+        ],
+        "unknown_ids": []
+      },
+      "baseline_per_doc": {
+        "sections_changed": 17,
+        "chars_changed": 44,
+        "cost_usd": 0.158,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "roles.ch03.s2",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-EQP-04",
+            "old": "1.6",
+            "section_id": "ops.ch04.s1",
+            "match": "1.6 t"
+          }
+        ],
+        "unknown_ids": []
+      }
+    }
+  ],
+  "final_audit": {
+    "engine": {
+      "label": "engine_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch07.s2",
+          "quote_a": "There are 5 outbound dock doors.",
+          "section_b": "ops.ch10.s2",
+          "quote_b": "Release outbound dispatch traffic only through dock doors 5-8.",
+          "explanation": "Doors 5-8 are four doors, which cannot at the same time be five outbound dock doors."
+        }
+      ],
+      "violations": [
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "including 5 outbound dock doors available for loading.",
+          "explanation": "Fact F-ZON-11 says outbound dispatch uses dock doors 5-8, which is four doors, not five.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-EQP-15",
+          "quote": "Release outbound dispatch traffic only through dock doors 5-8.",
+          "explanation": "The fact states there are 5 outbound dock doors, not the 4 doors numbered 5-8.",
+          "section_id": "ops.ch10.s2"
+        }
+      ],
+      "discarded": 0,
+      "within": {
+        "ops": 1
+      },
+      "between": {},
+      "violations_per_doc": {
+        "ops": 2
+      }
+    },
+    "baseline": {
+      "label": "baseline_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch07.s1",
+          "quote_a": "A pallet, load included, may weigh at most 800 kg.",
+          "section_b": "ops.ch11.s2",
+          "quote_b": "The 3,000 kg bay limit, the 900 kg pallet limit and the 3.0 t and 2.0 t truck ratings are never exceeded to compensate for a faulty truck.",
+          "explanation": "One passage sets the maximum pallet weight at 800 kg while the other sets a 900 kg pallet limit, which cannot both be true."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch02.s3",
+          "quote_a": "safe driving of the 2.5 t counterbalance forklifts, 1.6 t reach trucks, electric and hand pallet jacks.",
+          "section_b": "ops.ch11.s1",
+          "quote_b": "Nine counterbalance forklifts rated at 3.0 t provide general work across the site.",
+          "explanation": "The same counterbalance forklift fleet is rated at 2.5 t in one passage and at 3.0 t in the other."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch02.s3",
+          "quote_a": "1.6 t reach trucks, electric and hand pallet jacks.",
+          "section_b": "ops.ch04.s1",
+          "quote_b": "High-bay work in Zone B is performed with the 5 reach trucks rated at 2.0 t.",
+          "explanation": "The same reach trucks are rated at 1.6 t in one passage and at 2.0 t in the other."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch07.s1",
+          "quote_a": "Because the 800 kg pallet limit protects rack bays at 2,700 kg, reach trucks at 2.0 t, counterbalance trucks at 3.0 t and manual handling,",
+          "section_b": "ops.ch04.s1",
+          "quote_b": "Each rack bay carries at most 3,000 kg, including pallets and loads.",
+          "explanation": "One passage sets the rack bay limit at 2,700 kg while the other sets it at 3,000 kg."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch02.s3",
+          "quote_a": "storage only in the 60 m2 ventilated cage in Zone F up to 4,000 kg,",
+          "section_b": "ops.ch04.s4",
+          "quote_b": "Total storage in the hazmat cage never exceeds 3,000 kg at a time.",
+          "explanation": "One passage allows up to 4,000 kg in the hazmat cage while the other caps total storage at 3,000 kg."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch08.s1",
+          "quote_a": "Zone B counts cover the 2,400 high-bay positions and marked block areas limited to 3 pallets high and 4.0 m.",
+          "section_b": "ops.ch04.s1",
+          "quote_b": "is limited to 3 pallets high and 3.5 m stacking height.",
+          "explanation": "One passage limits block areas to 4.0 m height while the other limits the same stacking to 3.5 m height."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch12.s3",
+          "quote_a": "Write-offs follow the 500 EUR authority rule, with the shift supervisor approving up to 500 EUR and the warehouse manager approving above 500 EUR.",
+          "section_b": "ops.ch02.s2",
+          "quote_b": "The shift supervisor approves damaged-goods write-offs up to and including 750 EUR per case.",
+          "explanation": "One passage sets the write-off authority threshold at 500 EUR while the other sets it at 750 EUR per case."
+        },
+        {
+          "category": "limit",
+          "section_a": "roles.ch01.s1",
+          "quote_a": "the 8 levellers at 1.2 m dock height,",
+          "section_b": "ops.ch11.s1",
+          "quote_b": "Each of the 9 dock doors has its own leveller for the 1.2 m dock height.",
+          "explanation": "One passage states there are 8 levellers while the other states each of the 9 dock doors has its own leveller."
+        },
+        {
+          "category": "zone",
+          "section_a": "roles.ch03.s2",
+          "quote_a": "levellers at doors 1-4 inbound only and doors 5-8 outbound only,",
+          "section_b": "ops.ch01.s1",
+          "quote_b": "Doors 5-9 are outbound only and serve dispatch.",
+          "explanation": "One passage defines outbound doors as 5-8 while the other defines them as 5-9."
+        },
+        {
+          "category": "role",
+          "section_a": "roles.ch02.s1",
+          "quote_a": "They use hand pallet jacks and, where instructed, electric pallet jacks,",
+          "section_b": "hs.ch01.s3",
+          "quote_b": "No other role operates forklifts, reach trucks or electric pallet jacks.",
+          "explanation": "One passage allows inbound operators to use electric pallet jacks while the other reserves electric pallet jacks exclusively to forklift operators."
+        }
+      ],
+      "violations": [
+        {
+          "category": "limit",
+          "fact_id": "F-ZON-09",
+          "quote": "The building is served by 9 dock doors at 1.2 m dock height, each equipped with its own leveller.",
+          "explanation": "The fact states the building has 8 dock doors.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and serve dispatch.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-04",
+          "quote": "Zone D — dispatch, 900 m2, is the outbound staging area in front of outbound docks 5-9.",
+          "explanation": "The fact states Zone D is the outbound staging area in front of docks 5-8.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "picking, packing and dispatch at doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "outbound work uses doors 5-9, as assigned by the dispatcher.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "They book transport, assign every carrier a door and time slot, manage the driver waiting area discipline, and release outbound loads from Zone D at docks 5-9.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Inbound work is assigned only to doors 1-4 and outbound work only to doors 5-9.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "enforces the split of doors 1-4 inbound only and doors 5-9 outbound only",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "ops.ch02.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "enforces the split of doors 1-4 inbound only and doors 5-9 outbound only",
+          "explanation": "The fact states the building has 8 dock doors, so there is no door 9.",
+          "section_id": "ops.ch02.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "loading and sealing at doors 5-9.",
+          "explanation": "The fact says dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch02.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-02",
+          "quote": "the 2.5 t counterbalance forklifts",
+          "explanation": "The fact says counterbalance forklifts are rated at 3.0 t.",
+          "section_id": "ops.ch02.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-04",
+          "quote": "1.6 t reach trucks",
+          "explanation": "The fact says reach trucks are rated at 2.0 t.",
+          "section_id": "ops.ch02.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-10",
+          "quote": "up to 4,000 kg",
+          "explanation": "The fact says no more than 3,000 kg of hazmat may be stored in the hazmat cage.",
+          "section_id": "ops.ch02.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "no inbound truck is directed to outbound doors 5-9.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch03.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "coordinates with outbound work at doors 5-9 so that yard movements do not conflict.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch03.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Only wrapped and labelled pallets are staged in Zone D in front of outbound docks 5-9.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch06.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-04",
+          "quote": "in front of outbound docks 5-9",
+          "explanation": "The fact states Zone D is outbound staging in front of docks 5-8, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "assigns every carrier a specific door from doors 5-9",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "placed only in the marked door lanes for doors 5-9",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Dock doors 5-9 are outbound only",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "that the assigned carrier, door from doors 5-9 and time slot match the booking.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch06.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Only pallets staged in the marked door lanes for doors 5-9 are loaded.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch06.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-07",
+          "quote": "Because the 800 kg pallet limit protects rack bays at 2,700 kg, reach trucks at 2.0 t, counterbalance trucks at 3.0 t and manual handling,",
+          "explanation": "The fact states each rack bay may carry at most 3,000 kg.",
+          "section_id": "ops.ch07.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "positions used against the 33 positions, door from doors 5-9, carrier and time.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch07.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Five outbound doors are available, doors 5-9 outbound only, each handling 4 trailer loads per shift.",
+          "explanation": "The fact says dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch07.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Vans are assigned to doors 5-9 by the dispatcher,",
+          "explanation": "The fact says dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch07.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "write-offs within the 500 EUR authority rule",
+          "explanation": "The fact sets the damaged-goods write-off threshold at 750 EUR, not 500 EUR.",
+          "section_id": "ops.ch07.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-05",
+          "quote": "marked block areas limited to 3 pallets high and 4.0 m",
+          "explanation": "The fact limits free block-stacked pallets to a maximum height of 3.5 m instead of 4.0 m.",
+          "section_id": "ops.ch08.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "dispatch at doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch08.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "the dock ramps at doors 1-9.",
+          "explanation": "The fact states the building has only 8 dock doors.",
+          "section_id": "ops.ch10.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "It contains the dock apron at the 9 dock doors",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "departures for doors 5-9",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only for staging release, loading and sealing.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "No inbound truck is directed to doors 5-9",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "all dock ramps and aprons at doors 1-9",
+          "explanation": "The fact states the building has only 8 dock doors, so there is no door 9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "Each of the 9 dock doors is at 1.2 m dock height and has its own leveller.",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "outbound work uses doors 5-9 only.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "ops.ch10.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "outbound work uses doors 5-9 only.",
+          "explanation": "The fact states the building has 8 dock doors, so door 9 does not exist.",
+          "section_id": "ops.ch10.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Zone D staging lanes for doors 5-9",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "ops.ch11.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-09",
+          "quote": "Each of the 9 dock doors has its own leveller for the 1.2 m dock height.",
+          "explanation": "The fact states each of the 8 dock doors has a leveller for a total of 8 units.",
+          "section_id": "ops.ch11.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 1-4 are inbound only and doors 5-9 outbound only.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "ops.ch11.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-15",
+          "quote": "The 3,000 kg bay limit, the 900 kg pallet limit and the 3.0 t and 2.0 t truck ratings are never exceeded to compensate for a faulty truck.",
+          "explanation": "The fact states a pallet including its load may weigh at most 800 kg.",
+          "section_id": "ops.ch11.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "door from doors 1-9 where applicable",
+          "explanation": "The fact states the building has only 8 dock doors.",
+          "section_id": "ops.ch12.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "Write-offs follow the 500 EUR authority rule",
+          "explanation": "Fact F-LIM-14 sets the damaged-goods write-off threshold at 750 EUR, not 500 EUR.",
+          "section_id": "ops.ch12.s3"
+        },
+        {
+          "category": "role",
+          "fact_id": "F-RSP-02",
+          "quote": "with the shift supervisor approving up to 500 EUR",
+          "explanation": "Fact F-RSP-02 says the shift supervisor approves write-offs up to 750 EUR, not up to 500 EUR.",
+          "section_id": "ops.ch12.s3"
+        },
+        {
+          "category": "role",
+          "fact_id": "F-RSP-03",
+          "quote": "the warehouse manager approving above 500 EUR",
+          "explanation": "Fact F-RSP-03 says the warehouse manager approves write-offs above 750 EUR, not above 500 EUR.",
+          "section_id": "ops.ch12.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "carriers at inbound doors 1-4 and outbound doors 5-9",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "ops.ch12.s4"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "the dock apron at the 9 dock doors",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "hs.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "and all dock ramps and aprons at doors 1-9.",
+          "explanation": "The fact states the building has only 8 dock doors, with 1-4 inbound and 5-8 outbound, so there is no door 9.",
+          "section_id": "hs.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "The building is served by 9 dock doors at 1.2 m dock height, each with its own leveller.",
+          "explanation": "The fact states the building has 8 dock doors.",
+          "section_id": "hs.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "doors 5-9 are outbound only for Zone D",
+          "explanation": "The fact states only dock doors 5-8 serve outbound dispatch.",
+          "section_id": "hs.ch01.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "Matters exceeding supervisor authority, including overtime, write-offs above 500 EUR, stocktake sign-off and temporary departures from procedure, are escalated to the warehouse manager the same shift.",
+          "explanation": "The fact sets the damaged-goods write-off threshold requiring warehouse-manager approval at above 750 EUR.",
+          "section_id": "hs.ch02.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "on dock ramps at doors 1-9",
+          "explanation": "The fact states the building has only 8 dock doors, so there is no door 9.",
+          "section_id": "hs.ch04.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "clear of dock aprons at doors 1-9, manoeuvring areas and access routes for emergency services.",
+          "explanation": "The fact states the building has only 8 dock doors, with doors 1-4 inbound and 5-8 outbound.",
+          "section_id": "hs.ch04.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "to dispatch at doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "roles.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "the dispatcher booking lists for doors 1-4 inbound only and doors 5-9 outbound only",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "roles.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "ensures labour, scanners and equipment cover at doors 1-4 inbound and doors 5-9 outbound",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "roles.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "for doors 1-4 inbound only and doors 5-9 outbound only",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "roles.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "doors 5-9 outbound only",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "no inbound truck is directed to outbound doors 5-9 and no outbound truck to inbound doors 1-4",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not doors 5-9.",
+          "section_id": "roles.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "door from doors 5-9 and time slot",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not doors 5-9.",
+          "section_id": "roles.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "carriers at doors 1-9",
+          "explanation": "The fact states the building has 8 dock doors in total, so there is no door 9.",
+          "section_id": "roles.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "provides outbound dispatch at doors 5-9, outbound only, within the Monday to Friday shifts 06:00-14:00 and 14:00-22:00.",
+          "explanation": "Fact F-ZON-11 states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "sla.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "The dispatcher sequences doors 5-9 against Zone D staging capacity of 900 m2",
+          "explanation": "Fact F-ZON-11 states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "sla.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "door from doors 5-9 and time slot",
+          "explanation": "Fact F-ZON-11 states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "sla.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "outbound dispatch at doors 5-9 take place within these shifts.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8 only.",
+          "section_id": "sla.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "Five outbound doors 5-9 each handle 4 trailer loads per shift, totalling 20 trailer loads per shift.",
+          "explanation": "The fact states the building has only 8 dock doors, so door 9 does not exist.",
+          "section_id": "sla.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "dispatch at doors 5-9 are stopped.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "sla.ch02.s3"
+        }
+      ],
+      "discarded": 0,
+      "within": {
+        "ops": 7
+      },
+      "between": {
+        "ops|roles": 2,
+        "hs|roles": 1
+      },
+      "violations_per_doc": {
+        "ops": 47,
+        "hs": 7,
+        "roles": 8,
+        "sla": 6
+      }
+    },
+    "baseline_per_doc": {
+      "label": "baseline_per_doc_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch04.s1",
+          "quote_a": "They serve the high bays and are used by reach trucks rated at 1.6 t and by order of put-away tasks.",
+          "section_b": "ops.ch04.s2",
+          "quote_b": "Counterbalance forklifts rated at 3.0 t handle general moves, reach trucks rated at 2.0 t handle the high bays in Zone B,",
+          "explanation": "One section rates reach trucks at 1.6 t while another rates the same reach trucks at 2.0 t; both cannot be true."
+        },
+        {
+          "category": "zone",
+          "section_a": "ops.ch06.s2",
+          "quote_a": "Zone D is the outbound staging area and covers 900 m2 in front of docks 5-9.",
+          "section_b": "hs.ch02.s2",
+          "quote_b": "Staging in Zone D in front of doors 5-8 shall use wrapped, labelled pallets only and shall not obstruct dock manoeuvres.",
+          "explanation": "One section places Zone D staging in front of docks 5-9 while another places the same staging in front of doors 5-8."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch02.s2",
+          "quote_a": "The shift supervisor approves write-offs up to and including 750 EUR.",
+          "section_b": "roles.ch03.s2",
+          "quote_b": "Write-offs up to 500 EUR are approved by the Shift Supervisor and above 750 EUR exclusively by the Warehouse Manager.",
+          "explanation": "One section sets supervisor write-off authority up to 750 EUR while another sets it up to 500 EUR, leaving 500-750 EUR conflicting."
+        },
+        {
+          "category": "role",
+          "section_a": "roles.ch01.s1",
+          "quote_a": "no operation of the 3.0 t counterbalance forklifts, 2.0 t reach trucks, electric or hand pallet jacks without this authorisation.",
+          "section_b": "ops.ch11.s2",
+          "quote_b": "Electric pallet jacks, hand pallet jacks, stretch wrappers and the cardboard baler require instruction, not manager authorisation.",
+          "explanation": "One section requires Warehouse Manager authorisation for electric and hand pallet jacks while another says they require instruction, not manager authorisation."
+        },
+        {
+          "category": "step_order",
+          "section_a": "ops.ch06.s1",
+          "quote_a": "no unwrapped or unlabelled pallet to Zone D.",
+          "section_b": "sla.ch01.s2",
+          "quote_b": "(b) labelling and transfer to Zone D, (c) wrapping,",
+          "explanation": "One section requires wrapping before entry to Zone D while another orders transfer to Zone D before wrapping."
+        }
+      ],
+      "violations": [
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "The yard contains our 9 dock doors at 1.2 m dock height,",
+          "explanation": "The fact says the building has 8 dock doors, not 9.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and serve dispatch.",
+          "explanation": "The fact says dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-04",
+          "quote": "This is the outbound staging area in front of docks 5-9.",
+          "explanation": "The fact says Zone D is outbound staging in front of docks 5-8, not 5-9.",
+          "section_id": "ops.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "They own the dock schedule for doors 1-4 inbound and doors 5-9 outbound",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "ops.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "They own the dock schedule for doors 1-4 inbound and doors 5-9 outbound",
+          "explanation": "The fact states the building has 8 dock doors, so there is no door 9.",
+          "section_id": "ops.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "doors 5-9 outbound only.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch02.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "doors 5-9 outbound only.",
+          "explanation": "The fact states the building has 8 dock doors, so there is no door 9.",
+          "section_id": "ops.ch02.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "staging in front of doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch02.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and must never be used for inbound unloading.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not doors 5-9.",
+          "section_id": "ops.ch03.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-09",
+          "quote": "Each of the 9 dock doors has its own leveller at 1.2 m dock height",
+          "explanation": "The fact states each of the 8 dock doors has a dock leveller, not 9 doors.",
+          "section_id": "ops.ch03.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-04",
+          "quote": "are used by reach trucks rated at 1.6 t",
+          "explanation": "The fact states reach trucks are rated at 2.0 t.",
+          "section_id": "ops.ch04.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-04",
+          "quote": "Zone D is the outbound staging area and covers 900 m2 in front of docks 5-9.",
+          "explanation": "The fact states Zone D is outbound staging in front of docks 5-8, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Dispatchers assign each carrier doors 5-9 with a date and time slot and release the build by WMS scanner task.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Pallets are placed only to the marked floor field for their door 5, 6, 7, 8 or 9.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and are controlled by the dispatcher.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "No wrappers, baler waste, spare pallets or parked jacks may block doors 5-9, their approaches or emergency routes.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch06.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Release covers a fixed load for a fixed door 5, 6, 7, 8 or 9,",
+          "explanation": "The fact states that only dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch06.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Released and unreleased loads per door 5-9,",
+          "explanation": "The fact states that only dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch06.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Planned and released pallet counts per door 5-9",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not doors 5-9.",
+          "section_id": "ops.ch07.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Vans are loaded at an assigned door 5-9 by scanner task, confirmed by scan, checked and sealed before departure.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8.",
+          "section_id": "ops.ch07.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "The site operates 5 outbound doors, doors 5-9, for shift dispatch.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8.",
+          "section_id": "ops.ch07.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "trailers loaded per door 5-9 against the 4-per-door rate",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8.",
+          "section_id": "ops.ch07.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "It applies from the gate to the manoeuvring area, the driver waiting area and the approaches to all 9 dock doors.",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "ops.ch10.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "This covers all marked pedestrian zones, walkway crossings, aisle entries and junctions, dock ramps at doors 1-9, Zone A inspection space and Zone D staging fronts.",
+          "explanation": "The fact states the building has 8 dock doors, so there is no door 9.",
+          "section_id": "ops.ch10.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-ZON-09",
+          "quote": "the approaches to all 9 dock doors",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and serve Zone D dispatch.",
+          "explanation": "The fact states only dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-09",
+          "quote": "Each of the 9 dock doors has its own leveller at 1.2 m dock height.",
+          "explanation": "The fact states each of the 8 dock doors has a dock leveller.",
+          "section_id": "ops.ch10.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "a dock approach at doors 1-9, Zone A inspection space or Zone D staging outside a crossing is forbidden.",
+          "explanation": "The fact states the building has only 8 dock doors, with 1-4 inbound and 5-8 outbound.",
+          "section_id": "ops.ch10.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "Each of the 9 dock doors has its own leveller",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "ops.ch11.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "outbound doors 5-9 serve Zone D",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "ops.ch11.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-LIM-03",
+          "quote": "5 km/h at meeting points",
+          "explanation": "The fact states the 5 km/h limit applies in marked pedestrian zones and crossings, not at meeting points.",
+          "section_id": "ops.ch11.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "and the dock ramps at doors 1-9.",
+          "explanation": "The fact states the building has only 8 dock doors, so there is no door 9.",
+          "section_id": "ops.ch11.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Trucks approach doors 1-4 inbound and doors 5-9 outbound at 5 km/h at the ramp,",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "ops.ch11.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "The roll call must be complete and the cause resolved before any put-away, replenishment, picking, packing or loading resumes at doors 1-9.",
+          "explanation": "The official fact states the building has only 8 dock doors, so doors 1-9 does not exist.",
+          "section_id": "ops.ch12.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-09",
+          "quote": "The 9 levellers at 1.2 m dock height",
+          "explanation": "The fact states there are 8 dock levellers, one for each of the 8 dock doors.",
+          "section_id": "ops.ch12.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "doors 1-9",
+          "explanation": "The fact states the building has 8 dock doors.",
+          "section_id": "ops.ch12.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Trucks on ramps at doors 1-4 inbound and doors 5-9 outbound",
+          "explanation": "The official fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "ops.ch12.s4"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "This applies to all movements between the gate, the marked waiting area, the parking positions and dock doors 1-9, and to manoeuvring of trailers at the 1.2 m high docks.",
+          "explanation": "The facts state the building has only 8 dock doors, with 1-4 inbound and 5-8 outbound.",
+          "section_id": "hs.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "A second person shall guide the manoeuvre where visibility is restricted, particularly at dock doors 1-9.",
+          "explanation": "The facts state the building has only 8 dock doors, with 1-4 inbound and 5-8 outbound.",
+          "section_id": "hs.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "in Zone D at doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "hs.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and serve Zone D dispatch.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "hs.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Inbound operators at doors 1-4 and dispatchers at doors 5-9 call drivers forward only",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "hs.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "dock areas at doors 1-9",
+          "explanation": "The facts state the building has only 8 dock doors.",
+          "section_id": "hs.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "doors 5-9 outbound",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "hs.ch02.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "dock leveller at doors 1-9",
+          "explanation": "The fact states the building has only 8 dock doors, so doors 1-9 does not exist.",
+          "section_id": "hs.ch04.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "the dispatcher holds any outbound load from doors 5-9",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "hs.ch04.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "dock loading and unloading at doors 1-9 stops.",
+          "explanation": "The fact states the building has only 8 dock doors.",
+          "section_id": "hs.ch04.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "carriers signed in for doors 1-4 inbound and doors 5-9 outbound.",
+          "explanation": "The fact states dock doors 5-8 serve outbound dispatch.",
+          "section_id": "hs.ch04.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "dock levellers at doors 1-9",
+          "explanation": "The fact states the building has only 8 dock doors.",
+          "section_id": "hs.ch04.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "the division of inbound Doors 1-4 and outbound Doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "the division of inbound Doors 1-4 and outbound Doors 5-9",
+          "explanation": "The fact states the building has 8 dock doors, so there is no door 9.",
+          "section_id": "roles.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "only wrapped and labelled pallets are staged at outbound Doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "roles.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "outbound Doors 5-9 only in the 3,500 m2 fenced yard",
+          "explanation": "Fact F-ZON-11 states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "outbound carriers only to Doors 5-9 in Zone D",
+          "explanation": "Fact F-ZON-11 states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "inbound Doors 1-4 in Zone A and outbound Doors 5-9 in Zone D at 1.2 m dock height",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch02.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "moved to the Zone D staging area in front of outbound Doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "roles.ch02.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "are staged at outbound Doors 5-9",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch02.s4"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "staging in Zone D in front of outbound Doors 5-9.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "roles.ch03.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "staging at outbound Doors 5-9",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "roles.ch03.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "Each of the 9 dock doors at 1.2 m dock height has its own leveller",
+          "explanation": "The fact states the building has 8 dock doors, not 9.",
+          "section_id": "roles.ch03.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-EQP-09",
+          "quote": "Each of the 9 dock doors at 1.2 m dock height has its own leveller",
+          "explanation": "The fact states each of the 8 dock doors has a leveller for 8 units total, not 9.",
+          "section_id": "roles.ch03.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Faults that block Doors 1-4 inbound or Doors 5-9 outbound are escalated immediately",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "roles.ch03.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-RSP-02",
+          "quote": "Write-offs up to 500 EUR are approved by the Shift Supervisor",
+          "explanation": "The fact states the shift supervisor approves write-offs up to 750 EUR, not 500 EUR.",
+          "section_id": "roles.ch03.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "inbound Doors 1-4 and outbound Doors 5-9 are used only as assigned by the Dispatcher.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "roles.ch03.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "Doors 5-9 are outbound only and shall not be used for intake.",
+          "explanation": "The fact states the building has only 8 dock doors, not 9.",
+          "section_id": "sla.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 5-9 are outbound only and shall not be used for intake.",
+          "explanation": "The fact states outbound dispatch uses dock doors 5-8, not 5-9.",
+          "section_id": "sla.ch01.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Harborwick 3PL Ltd. provides outbound dispatch through Doors 5-9, which are designated outbound only.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not 5-9.",
+          "section_id": "sla.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-04",
+          "quote": "All outbound staging takes place in Zone D dispatch (900 m2) in front of docks 5-9 at 1.2 m dock height with dedicated dock levellers.",
+          "explanation": "The fact states Zone D outbound staging is in front of docks 5-8, not 5-9.",
+          "section_id": "sla.ch01.s2"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "No unloading at Doors 1-4 and no loading at Doors 5-9 takes place overnight, on Saturdays outside agreed overtime, or on Sundays, unless agreed as peak-season overtime.",
+          "explanation": "Fact F-ZON-11 states dock doors 5-8 serve outbound dispatch.",
+          "section_id": "sla.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "Doors 1-4 are inbound only and Doors 5-9 are outbound only, and every carrier is assigned a door and time slot by the dispatcher, who owns the dock schedule.",
+          "explanation": "Fact F-ZON-11 states dock doors 5-8 serve outbound dispatch.",
+          "section_id": "sla.ch01.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "only wrapped, labelled pallets are permitted in Zone D for staging in front of Doors 5-9.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch.",
+          "section_id": "sla.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "staged for Doors 5-9 following dispatcher release in accordance with PR-06 Outbound dispatch.",
+          "explanation": "The fact says dock doors 5-8 serve outbound dispatch, not doors 5-9.",
+          "section_id": "sla.ch03.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-09",
+          "quote": "staged for Doors 5-9 following dispatcher release in accordance with PR-06 Outbound dispatch.",
+          "explanation": "The fact says the building has 8 dock doors, so there is no door 9.",
+          "section_id": "sla.ch03.s3"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-04",
+          "quote": "staged for Doors 5-9 following dispatcher release in accordance with PR-06 Outbound dispatch.",
+          "explanation": "The fact says Zone D is outbound staging in front of docks 5-8, not doors 5-9.",
+          "section_id": "sla.ch03.s3"
+        }
+      ],
+      "discarded": 0,
+      "within": {
+        "ops": 1
+      },
+      "between": {
+        "hs|ops": 1,
+        "ops|roles": 2,
+        "ops|sla": 1
+      },
+      "violations_per_doc": {
+        "ops": 37,
+        "hs": 12,
+        "roles": 15,
+        "sla": 10
+      }
+    }
+  },
+  "stale_scan_version": 2
+}

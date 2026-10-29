@@ -1,0 +1,58 @@
+{
+  "label": "baseline_separate",
+  "contradictions": [
+    {
+      "category": "role",
+      "section_a": "ops.ch11.s2",
+      "quote_a": "Electric pallet jacks, hand pallet jacks, stretch wrappers and the cardboard baler require instruction, not manager authorisation.",
+      "section_b": "roles.ch03.s3",
+      "quote_b": "the 8 electric pallet jacks or the 12 hand pallet jacks without individual authorisation by the Warehouse Manager.",
+      "explanation": "One section states electric and hand pallet jacks need only instruction and explicitly not manager authorisation, while the other requires individual Warehouse Manager authorisation for the same equipment."
+    },
+    {
+      "category": "zone",
+      "section_a": "ops.ch11.s1",
+      "quote_a": "They run on the 4.0 m main transport aisles and never enter the 3.0 m high-bay aisles for high lifting.",
+      "section_b": "hs.ch01.s3",
+      "quote_b": "Counterbalance forklifts shall not be used for high-level put-away or retrieval in the high bays except where the maintenance technician and shift supervisor have expressly confirmed suitability",
+      "explanation": "One section imposes an absolute ban on counterbalance forklifts entering high-bay aisles, while the other permits their use there when suitability is confirmed."
+    },
+    {
+      "category": "step_order",
+      "section_a": "ops.ch06.s2",
+      "quote_a": "Only wrapped and labelled pallets enter Zone D.",
+      "section_b": "sla.ch01.s2",
+      "quote_b": "(a) scanner-verified picking in Zone C, (b) labelling and transfer to Zone D, (c) wrapping, (d) staging by outbound door",
+      "explanation": "One section requires pallets to be already wrapped before entering Zone D, while the other orders transfer to Zone D before wrapping."
+    },
+    {
+      "category": "zone",
+      "section_a": "ops.ch04.s4",
+      "quote_a": "pick faces in Zone C are never supplied from Zone F.",
+      "section_b": "ops.ch09.s2",
+      "quote_b": "operators place to Zone B, Zone E or Zone C feed only by task.",
+      "explanation": "One section forbids ever supplying Zone C pick faces from Zone F, while the other directs operators in Zone F to place restocked goods to Zone C feed."
+    }
+  ],
+  "violations": [
+    {
+      "category": "zone",
+      "fact_id": "F-LIM-03",
+      "quote": "the 10 km/h indoor limit with 5 km/h at meeting points",
+      "explanation": "The fact requires 5 km/h in marked pedestrian zones and crossings, not at meeting points.",
+      "section_id": "ops.ch02.s3"
+    }
+  ],
+  "discarded": 0,
+  "within": {
+    "ops": 1
+  },
+  "between": {
+    "ops|roles": 1,
+    "hs|ops": 1,
+    "ops|sla": 1
+  },
+  "violations_per_doc": {
+    "ops": 1
+  }
+}

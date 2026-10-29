@@ -1,0 +1,198 @@
+{
+  "planted": [
+    {
+      "section": "ch14.s3",
+      "old": "10 km/h",
+      "new": "12 km/h"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "15 km/h",
+      "new": "20 km/h"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "2,700 kg",
+      "new": "3,000 kg"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "500 EUR",
+      "new": "300 EUR"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "PR-14",
+      "new": "PR-16"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "PR-09",
+      "new": "PR-11"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "06:00",
+      "new": "07:00"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "4,000 kg",
+      "new": "5,000 kg"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "2,400",
+      "new": "2,600"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "+2",
+      "new": "+4"
+    }
+  ],
+  "detected": [
+    {
+      "section": "ch14.s3",
+      "old": "10 km/h",
+      "new": "12 km/h"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "15 km/h",
+      "new": "20 km/h"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "2,700 kg",
+      "new": "3,000 kg"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "500 EUR",
+      "new": "300 EUR"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "PR-14",
+      "new": "PR-16"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "PR-09",
+      "new": "PR-11"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "06:00",
+      "new": "07:00"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "4,000 kg",
+      "new": "5,000 kg"
+    },
+    {
+      "section": "ch14.s3",
+      "old": "2,400",
+      "new": "2,600"
+    },
+    {
+      "section": "ch14.s2",
+      "old": "+2",
+      "new": "+4"
+    }
+  ],
+  "recall": 1.0,
+  "other_reports": 1,
+  "contradictions": [
+    {
+      "category": "limit",
+      "section_a": "ch01.s1",
+      "quote_a": "10 km/h inside the building;",
+      "section_b": "ch14.s3",
+      "quote_b": "observe 12 km/h inside,",
+      "explanation": "The indoor speed limit cannot be both 10 km/h and 12 km/h for the same warehouse at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch01.s1",
+      "quote_a": "15 km/h in the yard;",
+      "section_b": "ch14.s3",
+      "quote_b": "20 km/h in the yard",
+      "explanation": "The yard speed limit cannot be both 15 km/h and 20 km/h for the same warehouse at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch04.s2",
+      "quote_a": "The high-bay racking provides 2,400 pallet positions within the 2,200 m2 Zone B footprint.",
+      "section_b": "ch14.s3",
+      "quote_b": "High-bay racking in Zone B with 2,600 pallet positions receives a documented safety inspection every month.",
+      "explanation": "Zone B cannot have both 2,400 and 2,600 high-bay pallet positions at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch04.s2",
+      "quote_a": "Each rack bay carries at most 2,700 kg total, including all pallet levels in that bay and the weight of the pallets themselves.",
+      "section_b": "ch14.s3",
+      "quote_b": "Any bay found damaged, overloaded above 3,000 kg, or unsafe is system-blocked",
+      "explanation": "The same rack bay maximum cannot be both 2,700 kg and 3,000 kg at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch07.s1",
+      "quote_a": "It is a thermally separated, insulated enclosure of 300 m2 held continuously between +2 °C and +8 °C.",
+      "section_b": "ch14.s2",
+      "quote_b": "Zone E temperature status with automatic and manual readings between +4 °C and +8 °C,",
+      "explanation": "Zone E cannot be required to stay between both +2 °C to +8 °C and +4 °C to +8 °C at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch08.s1",
+      "quote_a": "Total quantity in the cage never exceeds 4,000 kg at a time.",
+      "section_b": "ch14.s2",
+      "quote_b": "hazmat cage total against the 5,000 kg limit",
+      "explanation": "The hazmat cage maximum cannot be both 4,000 kg and 5,000 kg at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch02.s1",
+      "quote_a": "approval of damaged-goods write-offs up to and including 500 EUR;",
+      "section_b": "ch14.s2",
+      "quote_b": "dispositions and write-offs awaiting supervisor decision up to 300 EUR or manager decision above 500 EUR.",
+      "explanation": "The supervisor write-off approval threshold cannot be both up to 500 EUR and up to 300 EUR at the same time."
+    },
+    {
+      "category": "limit",
+      "section_a": "ch01.s1",
+      "quote_a": "The hall operates Monday to Friday on two shifts, 06:00-14:00 and 14:00-22:00, with Saturday morning overtime in peak season.",
+      "section_b": "ch14.s2",
+      "quote_b": "The site operates Monday to Friday on two fixed shifts, mornings 07:00-14:00 and afternoons 14:00-22:00, under PR-15 End-of-shift handover.",
+      "explanation": "The morning shift cannot start at both 06:00 and 07:00 for the same warehouse at the same time."
+    },
+    {
+      "category": "zone",
+      "section_a": "ch01.s3",
+      "quote_a": "Returns come back through Zone F only",
+      "section_b": "ch09.s1",
+      "quote_b": "The dispatcher books the return, assigns an inbound door from doors 1-4 and a time slot,",
+      "explanation": "Returns cannot be received through Zone F only while also being assigned to inbound doors 1-4 that serve Zone A."
+    },
+    {
+      "category": "reference",
+      "section_a": "ch02.s1",
+      "quote_a": "The warehouse manager owns the system of fifteen written procedures, PR-01 to PR-15.",
+      "section_b": "ch14.s3",
+      "quote_b": "Maintenance under PR-10, PR-16 and PR-15 covers all trucks, racking and dock equipment on site.",
+      "explanation": "The manual cannot contain only procedures PR-01 to PR-15 while also requiring maintenance under PR-16."
+    },
+    {
+      "category": "reference",
+      "section_a": "ch04.s3",
+      "quote_a": "system-blocked from picking for disposition under PR-09.",
+      "section_b": "ch14.s3",
+      "quote_b": "system-blocked from picking for disposition under PR-11.",
+      "explanation": "Quarantine disposition for the same stock at risk cannot be under both PR-09 and PR-11 at the same time."
+    }
+  ]
+}

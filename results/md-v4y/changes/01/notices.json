@@ -1,0 +1,41 @@
+[
+  {
+    "audience": "client",
+    "subject": "Update to maximum pallet weight and outbound capacity",
+    "body": "Dear clients,\n\nPlease note a change to our handling limits. The maximum pallet gross weight, including its load, has reduced from 1,000 kg to 900 kg.\n\nFor outbound transport, our contracted curtain-side trailers carry a payload of 24000 kg with 33 floor pallet positions. At 900 kg per pallet, a trailer takes at most 26 full-weight pallets. With 4 outbound dock doors each handling 3 trailer loads per shift, outbound capacity is at most 312 full-weight pallets per shift.\n\nPlease continue to build pallets within the 900 kg limit; overweight pallets will be split or reconfigured before staging.\n\nThese rules are now set out in the Client Service Level Agreement in Dispatch Capacity and Release, Operating Hours and Cut-offs, Picking and Packing Accuracy, and Put-away and Storage Accuracy.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3",
+      "sla.ch02.s1",
+      "sla.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-15",
+      "F-EQP-11",
+      "F-EQP-12",
+      "F-DRV-01",
+      "F-EQP-15",
+      "F-SCH-10",
+      "F-DRV-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "New maximum pallet weight 900 kg – trailer and shift limits updated",
+    "body": "All site staff – follow the new weight limits with immediate effect.\n\nA pallet, including its load, may weigh at most 900 kg, reduced from 1000 kg. Check weight before put-away, stacking, packing and loading. Reject and rework any overweight pallet. Do not place it in high-bay racking or send it for dispatch.\n\nBecause pallets are lighter, the calculated limits have changed: a trailer takes at most 26 full-weight pallets, previously 24, and outbound capacity is at most 312 full-weight pallets per shift, previously 288. Weight still limits loading before floor space does. Do not load a 27th full-weight pallet even where empty floor space remains.\n\nThis affects inbound, forklift, picking, stock control and dispatch work in Zones A to D. Weigh, split and rebook heavy builds and verify totals at wrapping, staging and departure.\n\nThe rules are now set in Operations Manual, Bulk storage in Zone B and Pallet weight and trailer capacity, and Health & Safety Instruction, Racking and stacking limits.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch04.s1",
+      "ops.ch07.s1",
+      "hs.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-15",
+      "F-DRV-01",
+      "F-DRV-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

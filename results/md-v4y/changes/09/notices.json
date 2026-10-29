@@ -1,0 +1,36 @@
+[
+  {
+    "audience": "client",
+    "subject": "Change to free block stacking height limit – now 3.5 m",
+    "body": "Dear Clients,\n\nWe are writing to advise of a change to our storage limits for free block-stacked pallets in bulk storage.\n\nThe maximum stack height has been reduced from 4.0 m to 3.5 m. Any free block stack found above 3.5 m will now be corrected and rebooked before acceptance as stored.\n\nIn practice, please plan inbound pallet heights so that stacked consignments remain within 3.5 m. The separate limit of 3 pallets high continues to apply, and both limits are applied together during put-away planning and floor verification, so the lower of the two controls the stack.\n\nThis commitment is set out in the Client Service Level Agreement, section Put-away and Storage Accuracy, which warrants put-away to the assigned Zone B location within stated rack and stacking limits with system traceability from dock receipt to final storage location.\n\nThank you for your cooperation.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-05",
+      "F-LIM-06"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Staff memo: lower maximum height for free block stacks in Zone B – 3.5 m",
+    "body": "From today all free block stacks in Zone B must not exceed 3.5 m in height. This replaces the previous 4.0 m limit.\n\nWhat this means in practice: Free block-stacked pallets must not exceed 3.5 m in height. Free block-stacked pallets must not exceed 3 pallets high. Apply both limits together, so the lower of the two controls the stack. Even where three low pallets would remain below that height, do not add a fourth pallet. Check stack stability, pallet quality and load overhang before adding the second or third pallet. Report leaning stacks, broken boards or shifted loads to the shift supervisor.\n\nWho is affected: everyone working on site in Zone B, in particular forklift operators doing put-away and retrieval and stock controllers monitoring bay utilisation.\n\nThis rule is now written in Bulk storage in Zone B of the Operations Manual, Racking and stacking limits of the Health and Safety Instruction, Forklift Operators and Stock Controllers of the Job Descriptions, and Put-away and Storage Accuracy of the Client Service Level Agreement.\n\nUnchanged limits still apply: Each rack bay may carry at most 2,700 kg. A pallet, including its load, may weigh at most 900 kg.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "hs.ch02.s2",
+      "ops.ch04.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s1",
+      "sla.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-05",
+      "F-LIM-06",
+      "F-LIM-07",
+      "F-LIM-15"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

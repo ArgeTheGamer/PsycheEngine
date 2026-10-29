@@ -1,0 +1,28 @@
+{
+  "calls": {
+    "planner/meta": 0.1408,
+    "writer/meta": 0.8294,
+    "critic/open": 0.8121,
+    "canon_editor/meta": 0.9568
+  },
+  "calls_audit": {
+    "auditor/meta": 3.5602
+  },
+  "calls_baseline_separate": {
+    "baseline/meta": 1.3061
+  },
+  "calls_baseline_shared": {
+    "baseline/meta": 2.6165
+  },
+  "calls_mutations_audit": {
+    "auditor/meta": 4.0064
+  },
+  "calls_mutations_engine": {
+    "writer/meta": 1.7888,
+    "critic/open": 1.5019
+  },
+  "calls_notices": {
+    "writer/meta": 0.0366,
+    "critic/open": 0.2915
+  }
+}

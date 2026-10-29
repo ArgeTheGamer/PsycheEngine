@@ -1,0 +1,43 @@
+[
+  {
+    "audience": "client",
+    "subject": "Reduced hazmat cage capacity - 3,000 kg / 3 pallets",
+    "body": "Dear clients,\n\nWe have reduced the maximum quantity that may be held in our fenced hazmat cage. The limit has changed from 4,000 kg to no more than 3,000 kg of hazmat at one time.\n\nIn practice, the cage holds at most 3 full-weight pallets. We must check hazmat cage stock weight before every put-away and any receipt exceeding 3000 kg rejected. If your incoming delivery would push the cage total above 3,000 kg, we will have to reject or hold the excess until allowance becomes available, which may delay put-away under our Client Service Level Agreement.\n\nPlease plan hazmat consignments against remaining weight allowance and contact us before sending larger volumes.\n\nThis rule is now set out in the Operations Manual sections Hazmat cage and quarantine in Zone F, Hazmat cage pallet limit, and Cold-chain and hazmat controls, and in the Health & Safety Instruction section Hazmat storage rules.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch04.s4",
+      "ops.ch07.s3",
+      "ops.ch12.s3",
+      "hs.ch03.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-10",
+      "F-DRV-04",
+      "F-ORD-37"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "New hazmat cage limit: 3,000 kg - max 3 pallets - check weight before every put-away",
+    "body": "From now on all staff working on site must follow the lower hazmat cage limit in Zone F.\n\nThe maximum has changed from 4,000 kg to no more than 3,000 kg of hazmat may be stored in the hazmat cage at one time. In practice the hazmat cage holds at most 3 full-weight pallets (hazmat stock limit divided by maximum pallet weight), down from 4 pallets. A pallet, including its load, may weigh at most 900 kg.\n\nWhat you must do differently:\n- Check hazmat cage stock weight before every put-away and reject any receipt exceeding 3000 kg.\n- Plan put-away on remaining weight allowance, not floor space. Withdraw stock first if an inbound delivery would breach the limit.\n- Keep the cage locked, segregated and clear, and work under PR-13 Hazmat handling and spill response.\n\nThis applies to everyone on site, especially forklift operators and stock controllers handling receipts, put-away and counts.\n\nThe rule is now written in Operations Manual - Hazmat cage and quarantine in Zone F, Hazmat cage pallet limit, and Cold-chain and hazmat controls; Health & Safety Instruction - Hazmat storage rules; and Job Descriptions - Forklift Operators, Stock Controllers, and Common Rules and Training.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch04.s4",
+      "ops.ch07.s3",
+      "ops.ch12.s3",
+      "hs.ch03.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s1",
+      "roles.ch03.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-10",
+      "F-DRV-04",
+      "F-LIM-15",
+      "F-ZON-15",
+      "F-ORD-37"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

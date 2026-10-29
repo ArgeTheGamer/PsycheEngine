@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="Arial, sans-serif">
+<rect width="900" height="400" fill="#fbfbf9"/>
+<text x="60" y="28" font-size="18" font-weight="700" fill="#1b2330">Out-of-date values left in the documents, month by month</text>
+<line x1="60" x2="650" y1="350.0" y2="350.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="354.0" font-size="12" text-anchor="end" fill="#4a5463">0</text>
+<line x1="60" x2="650" y1="300.0" y2="300.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="304.0" font-size="12" text-anchor="end" fill="#4a5463">2</text>
+<line x1="60" x2="650" y1="250.0" y2="250.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="254.0" font-size="12" text-anchor="end" fill="#4a5463">4</text>
+<line x1="60" x2="650" y1="200.0" y2="200.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="204.0" font-size="12" text-anchor="end" fill="#4a5463">6</text>
+<line x1="60" x2="650" y1="150.0" y2="150.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="154.0" font-size="12" text-anchor="end" fill="#4a5463">8</text>
+<line x1="60" x2="650" y1="100.0" y2="100.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="104.0" font-size="12" text-anchor="end" fill="#4a5463">10</text>
+<line x1="60" x2="650" y1="50.0" y2="50.0" stroke="#b9beb8" stroke-width="1"/>
+<text x="50" y="54.0" font-size="12" text-anchor="end" fill="#4a5463">12</text>
+<text x="60.0" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Jan</text>
+<text x="113.6" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Feb</text>
+<text x="167.3" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Mar</text>
+<text x="220.9" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Apr</text>
+<text x="274.5" y="372" font-size="12" text-anchor="middle" fill="#4a5463">May</text>
+<text x="328.2" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Jun</text>
+<text x="381.8" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Jul</text>
+<text x="435.5" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Aug</text>
+<text x="489.1" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Sep</text>
+<text x="542.7" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Oct</text>
+<text x="596.4" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Nov</text>
+<text x="650.0" y="372" font-size="12" text-anchor="middle" fill="#4a5463">Dec</text>
+<rect x="247.7" y="50" width="53.6" height="300" fill="#e8590c" opacity="0.08"/>
+<text x="274.5" y="64" font-size="11" text-anchor="middle" fill="#4a5463">fleet replaced</text>
+<polyline points="60.0,348.5 113.6,348.5 167.3,348.5 220.9,348.5 274.5,348.5 328.2,348.5 381.8,348.5 435.5,348.5 489.1,348.5 542.7,348.5 596.4,348.5 650.0,348.5" fill="none" stroke="#1b2330" stroke-width="4"/>
+<text x="660.0" y="354.0" font-size="13" font-weight="700" fill="#1b2330">0</text>
+<line x1="695" x2="725" y1="80" y2="80" stroke="#1b2330" stroke-width="4"/>
+<text x="732" y="84" font-size="12" fill="#1b2330">PsycheEngine</text>
+<polyline points="60.0,350.0 113.6,350.0 167.3,350.0 220.9,225.0 274.5,175.0 328.2,175.0 381.8,175.0 435.5,150.0 489.1,150.0 542.7,125.0 596.4,125.0 650.0,100.0" fill="none" stroke="#e8590c" stroke-width="2.5"/>
+<text x="660.0" y="104.0" font-size="13" font-weight="700" fill="#e8590c">10</text>
+<line x1="695" x2="725" y1="102" y2="102" stroke="#e8590c" stroke-width="2.5"/>
+<text x="732" y="106" font-size="12" fill="#1b2330">Muse Spark,</text>
+<text x="732" y="120" font-size="12" fill="#1b2330">every document in one context</text>
+<polyline points="60.0,350.0 113.6,350.0 167.3,350.0 220.9,325.0 274.5,300.0 328.2,300.0 381.8,300.0 435.5,300.0 489.1,300.0 542.7,300.0 596.4,300.0 650.0,300.0" fill="none" stroke="#e8590c" stroke-width="2.5" stroke-dasharray="6 5"/>
+<text x="660.0" y="304.0" font-size="13" font-weight="700" fill="#e8590c">2</text>
+<line x1="695" x2="725" y1="124" y2="124" stroke="#e8590c" stroke-width="2.5" stroke-dasharray="6 5"/>
+<text x="732" y="128" font-size="12" fill="#1b2330">Muse Spark,</text>
+<text x="732" y="142" font-size="12" fill="#1b2330">each document on its own</text>
+<text x="60" y="390" font-size="11" fill="#4a5463">Run md-v4y: 12 changes, 4 documents, 69 sections. Deterministic scan, no model involved.</text>
+</svg>

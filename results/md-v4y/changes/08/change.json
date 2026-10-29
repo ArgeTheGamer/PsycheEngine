@@ -1,0 +1,25 @@
+{
+  "fact_id": "F-LIM-10",
+  "old_value": "4000",
+  "new_value": "3000",
+  "affected_sections": [
+    "ops.ch04.s4",
+    "ops.ch07.s3",
+    "hs.ch03.s2",
+    "ops.ch12.s3",
+    "roles.ch03.s1",
+    "roles.ch02.s2",
+    "roles.ch03.s3"
+  ],
+  "derived": [
+    {
+      "fact_id": "F-DRV-04",
+      "old_value": "4",
+      "new_value": "3"
+    }
+  ],
+  "quoting": [
+    "F-ORD-37"
+  ],
+  "also": []
+}

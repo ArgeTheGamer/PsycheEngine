@@ -1,0 +1,45 @@
+[
+  {
+    "audience": "client",
+    "subject": "Update to outbound dispatch capacity - 336 pallets per shift",
+    "body": "Dear customers,\n\nWe have updated our outbound dispatch limits, now set out in the Client Service Level Agreement, Dispatch Capacity and Release and Operating Hours and Cut-offs.\n\nFor full-weight pallets, where a pallet, including its load, may weigh at most 900 kg:\n- A trailer takes at most 28 full-weight pallets, increased from 26. Our contracted curtain-side trailers carry a payload of 26000 kg with 33 floor pallet positions, and weight remains the binding limit.\n- The van takes at most 2 full-weight pallets, increased from 1. Our delivery van carries a payload of 1800 kg with 6 pallet positions; heavier orders go by trailer.\n- Outbound capacity is at most 336 full-weight pallets per shift, increased from 312. There are 4 outbound dock doors, and each outbound door handles 3 trailer loads per shift.\n\nIn practice, you can now book heavier loads per trailer and more pallets per shift up to the new ceiling. Where volumes exceed the per-shift limit, the excess will be scheduled across following shifts.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-15",
+      "F-DRV-01",
+      "F-EQP-11",
+      "F-EQP-12",
+      "F-DRV-02",
+      "F-EQP-13",
+      "F-EQP-14",
+      "F-DRV-03",
+      "F-EQP-15",
+      "F-SCH-10"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "More counterbalance forklifts - new fleet and dispatch limits",
+    "body": "From now on we operate with 9 electric counterbalance forklifts, increased from 6. The fleet has 9 electric counterbalance forklifts.\n\nThis affects forklift operators, dispatchers and everyone handling staging and loading. Do not work to the old fleet and load figures. Plan heavier outbound work by trailer and use the updated limits at wrapping, staging and dispatch release.\n\nKnock-on limits have changed with the fleet update:\n- The van takes at most 2 full-weight pallets; heavier orders go by trailer. This is up from 1.\n- A trailer takes at most 28 full-weight pallets (payload divided by maximum pallet weight, capped by floor positions). This is up from 26.\n- Outbound capacity is at most 336 full-weight pallets per shift (doors x loads per shift x pallets per trailer). This is up from 312.\n\nThese rules are now written in the Operations Manual in Electric fleet overview, Van and shift dispatch limit, and Pallet weight and trailer capacity, in the Health & Safety Instruction in Driver authorisation and truck checks, and in the Job Descriptions in Forklift Operators.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch11.s1",
+      "ops.ch07.s2",
+      "ops.ch07.s1",
+      "hs.ch01.s3",
+      "roles.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-EQP-01",
+      "F-DRV-02",
+      "F-DRV-01",
+      "F-DRV-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

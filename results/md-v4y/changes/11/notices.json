@@ -1,0 +1,42 @@
+[
+  {
+    "audience": "client",
+    "subject": "Increased outbound dispatch capacity - 5 outbound doors",
+    "body": "Dear clients,\n\nWe have increased our outbound dispatch capacity. The number of outbound dock doors has changed from 4 to 5 doors, and the resulting maximum outbound capacity has changed from 512 to 640 full-weight pallets per shift.\n\nIn practice, this means we can handle more trailer loads and pallets within each staffed shift when orders and transport meet the agreed cut-offs. Volumes above the per-shift limit will continue to be scheduled across following shifts or agreed overtime.\n\nThese rules are now set out in the Client Service Level Agreement, in the sections Dispatch Capacity and Release and Operating Hours and Cut-offs, which confirm dock allocation, loads per door and the per-shift pallet ceiling.\n\nPlease continue to meet order cut-offs and carrier slots so we can release your loads promptly.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-EQP-15",
+      "F-DRV-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "More outbound doors: 5 doors, 640 pallets per shift",
+    "body": "From now on use 5 outbound dock doors instead of 4. Outbound capacity is now at most 640 full-weight pallets per shift instead of 512 full-weight pallets per shift (doors x loads per shift x pallets per trailer).\n\nWhat this means for you: Zone D dispatch staging in front of docks 5-8 has an extra door to stage, load and keep clear. Each outbound door still handles 4 trailer loads per shift, and a trailer still takes at most 32 full-weight pallets. Dispatchers will assign the extra door and time slots, cap bookings at the new ceiling, and control release in door call order. Everyone else must follow dispatcher door allocations, keep leveller approaches clear, and report door faults immediately.\n\nThis rule is now written in the Operations Manual in Hall, yard and zones overview, Dispatch staging in Zone D, and Van and shift dispatch limit, and in Job Descriptions in Dispatchers. The building still has 8 dock doors, with dock doors 5-8 serving outbound dispatch.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch01.s1",
+      "ops.ch06.s2",
+      "ops.ch07.s2",
+      "roles.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-EQP-15",
+      "F-DRV-03",
+      "F-SCH-10",
+      "F-DRV-01",
+      "F-ZON-04",
+      "F-ZON-09",
+      "F-ZON-11",
+      "F-ROL-09",
+      "F-RSP-06",
+      "F-ORD-44"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

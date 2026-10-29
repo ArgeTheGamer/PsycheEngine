@@ -1,0 +1,24 @@
+{
+  "fact_id": "F-EQP-11",
+  "old_value": "24000",
+  "new_value": "22000",
+  "affected_sections": [
+    "ops.ch07.s3",
+    "roles.ch01.s3",
+    "sla.ch01.s2",
+    "roles.ch02.s2",
+    "roles.ch01.s1"
+  ],
+  "derived": [
+    {
+      "fact_id": "F-DRV-01",
+      "old_value": "30",
+      "new_value": "27"
+    },
+    {
+      "fact_id": "F-DRV-03",
+      "old_value": "360",
+      "new_value": "324"
+    }
+  ]
+}

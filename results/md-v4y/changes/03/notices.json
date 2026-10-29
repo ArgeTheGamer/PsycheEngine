@@ -1,0 +1,43 @@
+[
+  {
+    "audience": "client",
+    "subject": "Update to chilled storage temperature in Zone E – now +2 to +6 °C",
+    "body": "Dear Clients,\n\nWe have tightened our chilled storage standard in Zone E. The maximum compliant temperature has changed from 8 °C to 6 °C. Zone E remains the cold zone: chilled storage held at +2 to +6 °C.\n\nIn practice, your temperature-controlled stock will now be stored continuously at or above +2 °C and at or below +6 °C. We manually verify cold-zone temperature each shift, maintain continuous monitoring, and under PR-12 Cold-chain handling we immediately contain, isolate and report any excursion below +2 °C or above +6 °C. No compromised stock is released for fulfilment without agreed disposition, and verification records are available on request.\n\nThe updated +2 to +6 °C commitment is now set out in the Client Service Level Agreement, section Temperature-Controlled Storage, which governs receipt, storage, monitoring and escalation for chilled goods.\n\nThank you for your continued trust.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch03.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-09",
+      "F-LIM-08",
+      "F-ZON-05",
+      "F-SCH-09",
+      "F-PRC-12"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Staff memo: Zone E cold limit lowered to +6 °C – keep +2 to +6 °C",
+    "body": "From today the cold-zone upper limit is lower. Old limit: +8 °C. New limit: +6 °C. Zone E is the cold zone: chilled storage held at +2 to +6 °C.\n\nWhat this means for you: keep Zone E at or above +2 °C and at or below +6 °C at all times. Treat any reading below +2 °C or above +6 °C as a breach. On a breach, stop normal put-away into Zone E, isolate affected stock and report to the shift supervisor without delay. Keep doors closed except for put-away and retrieval, move chilled pallets to Zone E without delay, do not stage them in ambient aisles, and manually verify temperature each shift and log time and initials.\n\nThis applies to everyone working on site, including inbound operators, forklift operators, pickers, stock controllers and shift supervisors.\n\nThe rule is now written in Operations Manual: Hall, yard and zones overview; Put-away process; Cold storage in Zone E; Cold-chain and hazmat controls; Health & Safety Instruction: Cold zone rules; and Job Descriptions: Shift Supervisors, Inbound Operators, Stock Controllers and Common Rules and Training.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch01.s1",
+      "ops.ch04.s2",
+      "ops.ch04.s3",
+      "ops.ch12.s3",
+      "hs.ch03.s1",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s1",
+      "roles.ch03.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-09",
+      "F-LIM-08",
+      "F-ZON-05",
+      "F-SCH-09"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

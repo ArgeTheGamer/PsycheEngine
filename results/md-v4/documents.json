@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ops",
+    "title": "Operations Manual",
+    "scope": "the warehouse operations manual: receiving, storage, picking, dispatch, stocktaking, internal transport and forklifts, returns, responsibilities and emergency procedures",
+    "chapters": 12
+  },
+  {
+    "id": "hs",
+    "title": "Health & Safety Instruction",
+    "scope": "the site health and safety instruction: forklift and pedestrian rules, PPE, hazardous goods, cold zone work, incident reporting and emergency procedures",
+    "chapters": 4
+  },
+  {
+    "id": "roles",
+    "title": "Job Descriptions",
+    "scope": "job descriptions for every role on site: duties, what each role may authorise or sign off, who they report to, required licences and training",
+    "chapters": 3
+  },
+  {
+    "id": "sla",
+    "title": "Client Service Level Agreement",
+    "scope": "the service level agreement offered to warehouse clients: receiving and dispatch times, cut-offs, order accuracy, stock counts and reporting, damaged goods and returns handling, temperature-controlled storage",
+    "chapters": 3
+  }
+]
