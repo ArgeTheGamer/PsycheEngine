@@ -82,7 +82,7 @@ The benchmark also found four bugs in PsycheEngine before I could claim anything
 - Old values came back after being fixed, because the canon editor had recorded facts like "check the load against 24000 kg" without a link to the base fact. Such facts are now linked automatically.
 - In the first attempt at the year run, that last-resort substitution rewrote "4.0 m wide main aisles" to 3.5 m when the stacking height changed. Values another fact still holds are now never touched. I threw that run away (it is kept as `runs/md-v4y-broken`) and re-ran the year from a clean copy.
 
-PsycheEngine costs about 1.4 to 2.4 times as much as the baselines on the standard tier. A change costs roughly $0.10 to $0.40 depending on how many sections depend on it.
+PsycheEngine costs more than the baselines on the standard tier: about 1.3 to 1.5 times as much over the year, up to 2.4 times in the five-change runs. A change costs roughly $0.10 to $0.40 depending on how many sections depend on it.
 
 ## How it works
 
@@ -152,6 +152,8 @@ engine/.venv/Scripts/python engine/scripts/mutate.py --run demo-copy --mutations
 engine/.venv/Scripts/python engine/scripts/export_web.py --run demo --label "my run"
 cd web && npm install && npm run dev
 ```
+
+Every command, its options, cost and output files are described in [docs/USAGE.md](docs/USAGE.md).
 
 The critic runs on Muse Spark 1.3 by default. The reported runs used Muse Spark Open: set `CRITIC_PROVIDER=open`, `OPEN_WEIGHTS_BASE_URL` and `OPEN_WEIGHTS_API_KEY` in `.env` to reproduce them.
 
