@@ -34,15 +34,15 @@ Out-of-date values left in the documents after each month (run md-v4y):
 |---|---|---|---|
 | Jan–Mar | 0 | 0 | 0 |
 | Apr: write-off threshold | 0 | 5 | 1 |
-| **May: fleet modernisation (7 facts)** | **0** | **11** | **4** |
-| Jun–Sep | 0 | 11–12 | 4 |
-| Oct: pallet cap 900 → 800 kg | 0 | 13 | 4 |
-| Nov: fifth outbound door | 0 | 13 | 4 |
-| **Dec: racking upgrade** | **0** | **14** | **4** |
+| **May: fleet modernisation (7 facts)** | **0** | **7** | **2** |
+| Jun–Sep | 0 | 7–8 | 2 |
+| Oct: pallet cap 900 → 800 kg | 0 | 9 | 2 |
+| Nov: fifth outbound door | 0 | 9 | 2 |
+| **Dec: racking upgrade** | **0** | **10** | **2** |
 | sections rewritten over the year | 108 | 328 | 352 |
 | cost of the year | $3.29 | $2.18 | $2.49 |
 
-An out-of-date value is any earlier value of a changed fact, computed ones included, still written with its unit somewhere in the documents. A plain regex scan finds them, no model involved. Values that another fact still holds (the stacking height used to be 4.0 m, and so are the main aisles) are left out, because text alone cannot tell them apart. The scan errs on the side of missing things: an earlier, looser version also read "doors 1-4 inbound and doors 5-9" as four doors, and I re-scored every run with the stricter one (`engine/scripts/rescore.py`), which lowered the baselines' counts, never PsycheEngine's.
+An out-of-date value is any earlier value of a changed fact, computed ones included, still written with its unit somewhere in the documents. A plain regex scan finds them, no model involved. Values that another fact still holds (the stacking height used to be 4.0 m, and so are the main aisles) are left out, because text alone cannot tell them apart. The scan errs on the side of missing things: earlier, looser versions also read "doors 1-4 inbound and doors 5-9" as four doors and "8 forklift operators" as eight trucks, and I re-scored every run with the stricter one (`engine/scripts/rescore.py`), which lowered the baselines' counts, never PsycheEngine's.
 
 Neither baseline repairs what it missed: an old value that survives one month is still there in December. PsycheEngine rewrites a third as many sections, which is what someone has to re-read and sign off before the next audit.
 

@@ -16,8 +16,8 @@ _UNITS = {
     "pallets": r"\s+(full[- ]weight\s+|full\s+)?pallets?\b",
     "loads": r"\s+(trailer\s+)?loads?\b",
     # Count units allow at most two describing words ("6 electric counterbalance forklifts") so that
-    # "6 dock doors serve all trucks" is not read as six trucks.
-    "trucks": r"\s+([\w-]+\s+){0,2}(trucks?|forklifts?|jacks?)\b",
+    # "6 dock doors serve all trucks" is not read as six trucks, and "8 forklift operators" counts people.
+    "trucks": r"\s+([\w-]+\s+){0,2}(trucks?|forklifts?|jacks?)\b(?!\s+(operators?|drivers?|licen[cs]es?))",
     "doors": r"\s+(\w+\s+)?(dock\s+)?doors?\b",
     "t": r"\s*(t|tonnes?|tons?)\b(?!/)",
     "m": r"\s*m\b(?!/)",

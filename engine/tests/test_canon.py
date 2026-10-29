@@ -182,3 +182,10 @@ def test_quoting_fact_rewrites_only_the_quoted_value():
     canon = canon.with_new_facts("ops.ch01.s1", [rule])
     changed, _ = canon.with_change("F-LIM-06", "14", "Max 14 pallets.")
     assert changed.fact("F-SCH-50").statement == "Night shift is 12 hours, max 14 pallets per run."
+
+
+def test_truck_counts_do_not_match_people():
+    from psyche.stale import value_pattern
+
+    assert not value_pattern("8", "trucks").search("The 8 forklift operators hold powered-truck authorisation.")
+    assert value_pattern("8", "trucks").search("The fleet has 8 electric pallet jacks.")
