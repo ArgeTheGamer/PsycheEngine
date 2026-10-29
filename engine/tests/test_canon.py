@@ -189,3 +189,21 @@ def test_truck_counts_do_not_match_people():
 
     assert not value_pattern("8", "trucks").search("The 8 forklift operators hold powered-truck authorisation.")
     assert value_pattern("8", "trucks").search("The fleet has 8 electric pallet jacks.")
+
+
+def test_change_request_keeps_only_settable_facts():
+    from psyche.agents import ChangeRequest, RequestedChange, interpret_request
+
+    spec = CompanySpec(company=COMPANY, facts=[
+        fact("F-LIM-01"), fact("F-CAP-01", "20", formula="{F-LIM-01} * 2", statement="Capacity is 20.")])
+    canon = Canon.from_spec(spec)
+
+    class Model:
+        def structured(self, **_):
+            return ChangeRequest(unclear=["which zone?"], changes=[
+                RequestedChange(fact_id=i, new_value=v, new_statement="s", reason="r")
+                for i, v in [("F-LIM-01", "8"), ("F-CAP-01", "16"), ("F-XXX-01", "1"), ("F-LIM-01", "10")]])
+
+    request, refused = interpret_request(Model(), canon, "slower forklifts")
+    assert [c.fact_id for c in request.changes] == ["F-LIM-01"]
+    assert len(refused) == 3 and request.unclear == ["which zone?"]

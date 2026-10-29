@@ -258,3 +258,40 @@ def extract_new_facts(llm: LLM, canon: Canon, section: Section, text: str) -> li
         taken.add(fact_id)
         facts.append(Fact(id=fact_id, **new.model_dump()))
     return facts
+
+
+# --- change requests -------------------------------------------------------
+
+
+class RequestedChange(BaseModel):
+    fact_id: str
+    new_value: str
+    new_statement: str
+    reason: str
+
+
+class ChangeRequest(BaseModel):
+    changes: list[RequestedChange]
+    unclear: list[str]
+
+
+def interpret_request(llm: LLM, canon: Canon, message: str) -> tuple[ChangeRequest, list[str]]:
+    """Turn the manager's own words into fact changes. Returns the request and the changes code refused."""
+    listed = "\n".join(f.render() + (" (computed)" if f.formula else "") for f in canon.facts)
+    request = llm.structured(
+        agent="change_request",
+        messages=[{"role": "user", "content": prompt("change_request", company=canon.company.name, canon=listed, message=message)}],
+        schema=ChangeRequest,
+        reasoning_effort="medium",
+    )
+    kept, refused = [], []
+    for c in request.changes:
+        if not canon.has(c.fact_id):
+            refused.append(f"{c.fact_id}: no such fact")
+        elif canon.fact(c.fact_id).formula:
+            refused.append(f"{c.fact_id}: computed in code, change its inputs instead")
+        elif c.new_value == canon.fact(c.fact_id).value:
+            refused.append(f"{c.fact_id}: already {c.new_value}")
+        else:
+            kept.append(c)
+    return ChangeRequest(changes=kept, unclear=request.unclear), refused
