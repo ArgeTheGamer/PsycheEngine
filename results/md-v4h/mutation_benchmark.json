@@ -1,0 +1,279 @@
+{
+  "baseline_variant": "shared",
+  "steps": [
+    {
+      "step": 1,
+      "fact": "F-LIM-15",
+      "notice": "New insurance terms: from now on a pallet, load included, may weigh at most 800 kg (was 1,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "24",
+          "new_value": "30"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "288",
+          "new_value": "360"
+        },
+        {
+          "fact_id": "F-DRV-04",
+          "old_value": "4",
+          "new_value": "5"
+        }
+      ],
+      "engine": {
+        "sections_changed": 17,
+        "chars_changed": 85,
+        "cost_usd": 0.5012,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 47,
+        "chars_changed": 366,
+        "cost_usd": 0.267,
+        "stale": [],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 2,
+      "fact": "F-LIM-01",
+      "notice": "After a near-miss we are lowering the indoor forklift speed limit to 8 km/h (was 10 km/h).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 7,
+        "chars_changed": 14,
+        "cost_usd": 0.1976,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 36,
+        "chars_changed": 76,
+        "cost_usd": 0.2128,
+        "stale": [],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 3,
+      "fact": "F-EQP-11",
+      "notice": "Our haulier switched to a lighter trailer fleet: trailer payload is now 22,000 kg (was 24,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "30",
+          "new_value": "27"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "360",
+          "new_value": "324"
+        }
+      ],
+      "engine": {
+        "sections_changed": 5,
+        "chars_changed": 42,
+        "cost_usd": 0.1455,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 6,
+        "chars_changed": 142,
+        "cost_usd": 0.1026,
+        "stale": [],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 4,
+      "fact": "F-LIM-14",
+      "notice": "Shift supervisors may now approve damaged-goods write-offs up to 750 EUR; above that the warehouse manager approves (was 500 EUR).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 10,
+        "chars_changed": 55,
+        "cost_usd": 0.2934,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 22,
+        "chars_changed": 104,
+        "cost_usd": 0.1592,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 5,
+      "fact": "F-SCH-10",
+      "notice": "With the new loading crew each outbound door now handles 4 trailer loads per shift (was 3).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "324",
+          "new_value": "432"
+        }
+      ],
+      "engine": {
+        "sections_changed": 4,
+        "chars_changed": 13,
+        "cost_usd": 0.1095,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 4,
+        "chars_changed": 39,
+        "cost_usd": 0.0907,
+        "stale": [
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch02.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch07.s3",
+            "match": "500 EUR"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "hs.ch02.s3",
+            "match": "500 EUR"
+          }
+        ],
+        "unknown_ids": []
+      }
+    }
+  ],
+  "final_audit": {
+    "engine": {
+      "label": "engine_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch11.s2",
+          "quote_a": "A truck changing hands during the day does not require a second full documented check unless it has been tagged, repaired or involved in an incident",
+          "section_b": "hs.ch04.s3",
+          "quote_b": "Instruct replacement drivers to perform their own documented pre-use check each day even where the truck was already checked earlier on the same shift roster.",
+          "explanation": "The first passage allows a single documented check per truck per day, while the second requires each replacement driver to complete a new documented check even when the truck was already checked."
+        }
+      ],
+      "violations": [],
+      "discarded": 0,
+      "within": {},
+      "between": {
+        "hs|ops": 1
+      },
+      "violations_per_doc": {}
+    },
+    "baseline": {
+      "label": "baseline_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch02.s2",
+          "quote_a": "The shift supervisor approves damaged-goods write-offs up to and including 750 EUR per case.",
+          "section_b": "ops.ch02.s3",
+          "quote_b": "PR-09 Damaged-goods handling covers quarantine on the same day damage is found, inspection, write-off within the 500 EUR authority rule, and final disposition.",
+          "explanation": "One section sets the write-off authority threshold at 750 EUR while the other sets it at 500 EUR, which cannot both be true."
+        },
+        {
+          "category": "zone",
+          "section_a": "hs.ch03.s1",
+          "quote_a": "and no chilled goods are stored in Zones A, B, C, D or F.",
+          "section_b": "ops.ch04.s3",
+          "quote_b": "Pick-face replenishment from Zone E to Zone C under PR-03 takes place before each picking shift and only against active scanner tasks.",
+          "explanation": "One section forbids any chilled storage in Zone C while the other requires regular replenishment of chilled goods from Zone E to Zone C."
+        },
+        {
+          "category": "role",
+          "section_a": "hs.ch01.s3",
+          "quote_a": "No other role operates forklifts, reach trucks or electric pallet jacks.",
+          "section_b": "roles.ch02.s1",
+          "quote_b": "They use hand pallet jacks and, where instructed, electric pallet jacks, place pallets only in marked Zone A lanes",
+          "explanation": "One section says no role other than forklift operators operates electric pallet jacks while the other says inbound operators use electric pallet jacks."
+        }
+      ],
+      "violations": [
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "write-off within the 500 EUR authority rule",
+          "explanation": "The fact sets the damaged-goods write-off threshold at 750 EUR, not 500 EUR.",
+          "section_id": "ops.ch02.s3"
+        },
+        {
+          "category": "step_order",
+          "fact_id": "F-ORD-03",
+          "quote": "Booking is performed in Zone A immediately after release under PR-01, using the handheld WMS scanners.",
+          "explanation": "The fact states goods are booked into the system BEFORE put-away release to storage.",
+          "section_id": "ops.ch03.s3"
+        },
+        {
+          "category": "reference",
+          "fact_id": "F-PRC-02",
+          "quote": "immediately after release under PR-01",
+          "explanation": "The fact states PR-02 is titled Put-away to storage, so release to put-away belongs under PR-02 not PR-01.",
+          "section_id": "ops.ch03.s3"
+        },
+        {
+          "category": "step_order",
+          "fact_id": "F-ORD-03",
+          "quote": "The inbound operator scans each released pallet and carton label, confirms client, product, quantity, batch or expiry date, and storage requirement.",
+          "explanation": "The fact states goods are booked into the system BEFORE put-away release to storage.",
+          "section_id": "ops.ch03.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "write-offs within the 500 EUR authority rule",
+          "explanation": "The fact sets the damaged-goods write-off threshold at 750 EUR, not 500 EUR.",
+          "section_id": "ops.ch07.s3"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "write-offs above 500 EUR",
+          "explanation": "The fact sets the damaged-goods write-off threshold at 750 EUR.",
+          "section_id": "hs.ch02.s3"
+        }
+      ],
+      "discarded": 0,
+      "within": {
+        "ops": 1
+      },
+      "between": {
+        "hs|ops": 1,
+        "hs|roles": 1
+      },
+      "violations_per_doc": {
+        "ops": 5,
+        "hs": 1
+      }
+    }
+  },
+  "stale_scan_version": 2
+}

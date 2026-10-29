@@ -1,0 +1,39 @@
+[
+  {
+    "audience": "client",
+    "subject": "Increased outbound dispatch capacity per shift",
+    "body": "Dear clients,\n\nWe have increased our outbound dispatch throughput. Each outbound door now handles 4 trailer loads per shift, up from 3 loads per shift.\n\nIn practice, this raises our committed outbound capacity to at most 448 full-weight pallets per shift, up from 336 pallets. Capacity is calculated from 4 outbound dock doors multiplied by loads per shift multiplied by 28 full-weight pallets per trailer. Orders received before the agreed order cut-off will be wrapped, staged and loaded within that ceiling; volumes above the ceiling will be scheduled across following shifts or agreed overtime.\n\nThe updated limits are set out in the Client Service Level Agreement, in Dispatch Capacity and Release and Operating Hours and Cut-offs.\n\nPlease continue to book transport through the dispatcher and arrive within assigned slots, as late arrival may require rescheduling.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-SCH-10",
+      "F-DRV-03",
+      "F-EQP-15",
+      "F-DRV-01"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Outbound dispatch now 4 loads per door - 448 pallets per shift",
+    "body": "From now on, plan and execute outbound dispatch to the higher throughput.\n\nEach outbound door now handles 4 trailer loads per shift, up from 3 loads. There are 4 outbound dock doors, docks 5-8. Total capacity is therefore at most 448 full-weight pallets per shift, up from 336, calculated as doors x loads per shift x 28 pallets per trailer.\n\nThis affects dispatchers, shift supervisors and all floor staff on staging, wrapping and loading. Dispatchers will book to the 448-pallet ceiling and assign doors and time slots. Do not accept extra bookings for the same shift unless a booked load cancels and the dispatcher releases the slot.\n\nIn practice, sequence staging, wrapping checks and reconciliation so each door completes its 4 loads within the shift. Hold late-arriving trailers for the following shift. Report any door out of service, trailer rejection or labour shortfall to the dispatcher immediately so the promise can be reduced and rebooked.\n\nThis rule is now written in the Operations Manual, Van and shift dispatch limit, in Job Descriptions, Dispatchers, and in the Client Service Level Agreement, Dispatch Capacity and Release and Operating Hours and Cut-offs.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch07.s2",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-SCH-10",
+      "F-EQP-15",
+      "F-ZON-11",
+      "F-DRV-03",
+      "F-DRV-01"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

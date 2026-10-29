@@ -1,0 +1,38 @@
+[
+  {
+    "audience": "client",
+    "subject": "Update to rack bay weight limit – now 3,000 kg",
+    "body": "Dear Clients,\n\nWe have increased the structural limit for each rack bay in Zone B bulk storage from 2,700 kg to 3,000 kg.\n\nIn practice, this means we can store more weight per bay when putting away your inventory under Put-away to storage, while continuing to split any consignment that would overload a single bay across two or more bays. The pallet limit is unchanged: a pallet, including its load, may weigh at most 800 kg. Free block-stacking limits are also unchanged.\n\nThe updated bay limit is now reflected in the Client Service Level Agreement, section Put-away and Storage Accuracy, which governs storage accuracy and weight control for your stock in the high-bay racking providing 2,400 pallet positions.\n\nNo action is required from you. Storage planning will apply the new limit automatically.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-07",
+      "F-LIM-15",
+      "F-ZON-02",
+      "F-ZON-08",
+      "F-PRC-02",
+      "F-ZON-19"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "New rack bay limit in Zone B: 3,000 kg maximum",
+    "body": "From now on, every bay in the Zone B high-bay racking may carry at most 3,000 kg. This replaces the previous limit of 2,700 kg.\n\nWhat this means for you: add up the gross weight of all pallets in the bay before you put away another pallet. A pallet, including its load, may weigh at most 800 kg. Split any consignment that would overload one bay across two or more bays in the same aisle. Do not use a bay showing damage or deformation. Any overloaded rack bay must be marked out of service immediately until the load is corrected.\n\nThis applies to everyone working on site, especially forklift operators doing put-away and retrieval, stock controllers monitoring bay utilisation, and the maintenance technician doing the monthly safety inspection.\n\nThe rule is now written in the Operations Manual in Bulk storage in Zone B, Racking care and stock accuracy and Safety inspections and incidents, and in the Health & Safety Instruction in Racking and stacking limits. The high-bay racking provides 2,400 pallet positions.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "hs.ch02.s2",
+      "ops.ch04.s1",
+      "ops.ch08.s3",
+      "ops.ch12.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-07",
+      "F-LIM-15",
+      "F-ZON-08"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

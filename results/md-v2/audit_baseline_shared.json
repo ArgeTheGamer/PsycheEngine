@@ -1,0 +1,34 @@
+{
+  "label": "baseline_shared",
+  "contradictions": [],
+  "violations": [
+    {
+      "category": "reference",
+      "fact_id": "F-PRC-08",
+      "quote": "uses high-bay pallet racking with 2,400 pallet positions under PR-08.",
+      "explanation": "The fact states that PR-08 is titled Stocktaking and cycle counts, not bulk storage or put-away.",
+      "section_id": "hs.ch03.s1"
+    },
+    {
+      "category": "reference",
+      "fact_id": "F-PRC-05",
+      "quote": "Value-added packing is performed only at the Zone F workstations under PR-07 and PR-09.",
+      "explanation": "The fact states PR-05 is titled Packing and labelling, not PR-07 and PR-09.",
+      "section_id": "roles.ch03.s2"
+    },
+    {
+      "category": "reference",
+      "fact_id": "F-PRC-08",
+      "quote": "Racking stays in use only with a documented safety inspection every month under PR-08.",
+      "explanation": "Fact states PR-08 is titled Stocktaking and cycle counts, not racking safety inspection.",
+      "section_id": "roles.ch03.s3"
+    }
+  ],
+  "discarded": 0,
+  "within": {},
+  "between": {},
+  "violations_per_doc": {
+    "hs": 1,
+    "roles": 2
+  }
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "audience": "client",
+    "subject": "Notice: Indoor forklift speed limit reduced - no change to service levels",
+    "body": "Dear Clients,\n\nWe have reduced our indoor forklift speed limit from 10 km/h to 8 km/h. Forklifts must not exceed 8 km/h inside the building.\n\nIn practice, this is an internal safety measure and does not change service to you. Handling procedures, storage, service times and capacities under the Client Service Level Agreement are unchanged.\n\nThe updated 8 km/h limit is now carried in the Operations Manual in Aisles, walkways and speed limits and Safe operation rules, in the Health & Safety Instruction in Speed limits and shared areas, Walkways, aisles and dock areas and Driver authorisation and truck checks, and in the Job Descriptions in Forklift Operators and Common Rules and Training.\n\nThank you for your continued cooperation.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch01.s3",
+      "ops.ch10.s1",
+      "ops.ch11.s3",
+      "roles.ch02.s2",
+      "roles.ch03.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-01"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Indoor forklift speed limit reduced to 8 km/h",
+    "body": "From now on, all indoor forklift travel must not exceed 8 km/h, reduced from 10 km/h.\n\nThis applies to everyone working on site, and in particular to forklift operators operating forklifts, reach trucks and pallet jacks. Drive at no more than 8 km/h in all indoor aisles, storage areas and handling zones, slow early for doorways, bends, intersections and restricted visibility, and always give way to pedestrians.\n\nThe rule is now written in the Operations Manual in Aisles, walkways and speed limits and Safe operation rules, in the Health & Safety Instruction in Speed limits and shared areas, Walkways, aisles and dock areas and Driver authorisation and truck checks, and in the Job Descriptions in Forklift Operators and Common Rules and Training.\n\nReport faded markings, blocked walkways and speeding immediately to the shift supervisor. No excuses for exceeding the posted limit.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch10.s1",
+      "ops.ch11.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch01.s3",
+      "roles.ch02.s2",
+      "roles.ch03.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-01",
+      "F-ROL-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

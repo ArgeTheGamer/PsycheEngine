@@ -1,0 +1,330 @@
+{
+  "baseline_variant": "shared",
+  "steps": [
+    {
+      "step": 1,
+      "fact": "F-LIM-15",
+      "notice": "New insurance terms: from now on a pallet, load included, may weigh at most 800 kg (was 1,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "24",
+          "new_value": "30"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "288",
+          "new_value": "360"
+        },
+        {
+          "fact_id": "F-DRV-04",
+          "old_value": "4",
+          "new_value": "5"
+        }
+      ],
+      "engine": {
+        "sections_changed": 18,
+        "chars_changed": 70,
+        "cost_usd": 0.5718,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 47,
+        "chars_changed": 223,
+        "cost_usd": 0.2392,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch11.s2",
+            "match": "1,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 2,
+      "fact": "F-LIM-01",
+      "notice": "After a near-miss we are lowering the indoor forklift speed limit to 8 km/h (was 10 km/h).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 7,
+        "chars_changed": 22,
+        "cost_usd": 0.2158,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 30,
+        "chars_changed": 64,
+        "cost_usd": 0.1841,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch11.s2",
+            "match": "1,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "ops.ch05.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "hs.ch02.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "sla.ch03.s3",
+            "match": "10 km/h"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 3,
+      "fact": "F-EQP-11",
+      "notice": "Our haulier switched to a lighter trailer fleet: trailer payload is now 22,000 kg (was 24,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "30",
+          "new_value": "27"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "360",
+          "new_value": "324"
+        }
+      ],
+      "engine": {
+        "sections_changed": 3,
+        "chars_changed": 148,
+        "cost_usd": 0.1021,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 3,
+        "chars_changed": 27,
+        "cost_usd": 0.0802,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch11.s2",
+            "match": "1,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "ops.ch05.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "hs.ch02.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "sla.ch03.s3",
+            "match": "10 km/h"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 4,
+      "fact": "F-LIM-14",
+      "notice": "Shift supervisors may now approve damaged-goods write-offs up to 750 EUR; above that the warehouse manager approves (was 500 EUR).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 9,
+        "chars_changed": 70,
+        "cost_usd": 0.3313,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 20,
+        "chars_changed": 104,
+        "cost_usd": 0.1404,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch11.s2",
+            "match": "1,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "ops.ch05.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "hs.ch02.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "sla.ch03.s3",
+            "match": "10 km/h"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 5,
+      "fact": "F-SCH-10",
+      "notice": "With the new loading crew each outbound door now handles 4 trailer loads per shift (was 3).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "324",
+          "new_value": "432"
+        }
+      ],
+      "engine": {
+        "sections_changed": 3,
+        "chars_changed": 12,
+        "cost_usd": 0.0959,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 3,
+        "chars_changed": 15,
+        "cost_usd": 0.0791,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch11.s2",
+            "match": "1,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "ops.ch05.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "hs.ch02.s1",
+            "match": "10 km/h"
+          },
+          {
+            "fact_id": "F-LIM-01",
+            "old": "10",
+            "section_id": "sla.ch03.s3",
+            "match": "10 km/h"
+          }
+        ],
+        "unknown_ids": []
+      }
+    }
+  ],
+  "final_audit": {
+    "engine": {
+      "label": "engine_final",
+      "contradictions": [],
+      "violations": [],
+      "discarded": 0,
+      "within": {},
+      "between": {},
+      "violations_per_doc": {}
+    },
+    "baseline": {
+      "label": "baseline_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch11.s2",
+          "quote_a": "Inside the 6,000 m2 hall the limit is 8 km/h.",
+          "section_b": "hs.ch02.s1",
+          "quote_b": "Speed discipline of 10 km/h inside, 15 km/h in the yard and 5 km/h in shared areas continues in parallel.",
+          "explanation": "Both state the general inside speed limit but give different numbers, 8 km/h versus 10 km/h, which cannot both be true."
+        },
+        {
+          "category": "limit",
+          "section_a": "ops.ch04.s1",
+          "quote_a": "The governing load figure for all storage on site is 800 kg per pallet, load included.",
+          "section_b": "ops.ch11.s2",
+          "quote_b": "Operators reduce below the posted limit with full-weight 1,000 kg pallets, at blind corners, aisle intersections, Zone E and Zone F doors,",
+          "explanation": "One defines a full-weight pallet as 800 kg while the other describes 1,000 kg pallets as full-weight, which cannot both be true."
+        }
+      ],
+      "violations": [
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-01",
+          "quote": "10 km/h inside and 5 km/h at pedestrian zones and ramps.",
+          "explanation": "The official fact requires forklifts to not exceed 8 km/h inside the building.",
+          "section_id": "ops.ch05.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "and loading at docks 1-8.",
+          "explanation": "The fact states that dock doors 5-8 serve outbound dispatch, not doors 1-8.",
+          "section_id": "ops.ch10.s1"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-15",
+          "quote": "Operators reduce below the posted limit with full-weight 1,000 kg pallets",
+          "explanation": "The fact states a pallet including its load may weigh at most 800 kg.",
+          "section_id": "ops.ch11.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-01",
+          "quote": "Speed discipline of 10 km/h inside, 15 km/h in the yard and 5 km/h in shared areas continues in parallel.",
+          "explanation": "The fact states forklifts must not exceed 8 km/h inside the building, not 10 km/h.",
+          "section_id": "hs.ch02.s1"
+        },
+        {
+          "category": "zone",
+          "fact_id": "F-ZON-11",
+          "quote": "transfer to Zone D and loading at doors 1–8",
+          "explanation": "The fact states that only dock doors 5-8 serve outbound dispatch, not doors 1-8.",
+          "section_id": "roles.ch01.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-01",
+          "quote": "observing 10 km/h inside and 5 km/h at pedestrian zones, crossings and ramps.",
+          "explanation": "The fact limits forklifts to 8 km/h inside the building, not 10 km/h.",
+          "section_id": "sla.ch03.s3"
+        }
+      ],
+      "discarded": 0,
+      "within": {
+        "ops": 1
+      },
+      "between": {
+        "hs|ops": 1
+      },
+      "violations_per_doc": {
+        "ops": 3,
+        "hs": 1,
+        "roles": 1,
+        "sla": 1
+      }
+    }
+  },
+  "stale_scan_version": 2
+}

@@ -1,0 +1,17 @@
+{
+  "calls": {
+    "planner/meta": 0.1298,
+    "writer/meta": 0.8809,
+    "critic/open": 0.8828,
+    "canon_editor/meta": 0.9451
+  },
+  "calls_audit": {
+    "auditor/meta": 3.3351
+  },
+  "calls_baseline_separate": {
+    "baseline/meta": 1.1754
+  },
+  "calls_baseline_shared": {
+    "baseline/meta": 2.196
+  }
+}

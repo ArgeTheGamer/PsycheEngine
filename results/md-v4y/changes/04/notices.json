@@ -1,0 +1,39 @@
+[
+  {
+    "audience": "client",
+    "subject": "Update to damaged-goods write-off approval threshold",
+    "body": "Dear clients,\n\nWe have updated the damaged-goods write-off threshold from 500 EUR to 750 EUR.\n\nIn practice, the shift supervisor now approves damaged-goods write-offs up to 750 EUR, with quantity, value and disposition documented before system posting. Damaged-goods write-offs above 750 EUR need warehouse-manager approval, and no adjustment above that threshold will be posted without that approval.\n\nAll damaged goods continue to be managed under PR-09 Damaged-goods handling, segregated immediately and transferred to quarantine in Zone F, with photographic evidence and valuation at cost price in EUR completed before any proposal. You will continue to receive prompt notification of damage affecting your stock, including quantity, cause and approved disposition.\n\nThis rule is now set out in the Client Service Level Agreement, Damaged Goods and Quarantine.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch03.s1"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-14",
+      "F-RSP-02",
+      "F-RSP-03",
+      "F-ZON-13"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Staff notice: damaged-goods write-off threshold now 750 EUR",
+    "body": "From now on use the new damaged-goods write-off threshold.\n\nOld limit: 500 EUR. New limit: 750 EUR.\n\nWhat this means in practice:\n- For any damaged-goods write-off valued up to 750 EUR, get approval from the shift supervisor before you scrap, destroy or post any system adjustment.\n- For any damaged-goods write-off valued above 750 EUR, you must get approval from the warehouse manager before any adjustment or destruction. Hold the goods in quarantine in Zone F until that decision is recorded.\n- Value every proposal at cost price in EUR and attach quantity, cause and photos.\n\nThis applies to everyone handling damaged goods, returns inspection and quarantine work, and to shift supervisors and the warehouse manager who grant approvals.\n\nThe rule is now written in the Operations Manual in Approvals and ownership, Restock, rework or scrap decisions, and Damaged goods and quarantine; in the Health & Safety Instruction in Spills, quarantine and damage and Reporting incidents; and in the Job Descriptions for Warehouse Manager and Shift Supervisors.\n\nDo not split cases to stay below the threshold.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "hs.ch03.s3",
+      "hs.ch04.s1",
+      "ops.ch02.s2",
+      "ops.ch09.s2",
+      "ops.ch09.s3",
+      "roles.ch01.s1",
+      "roles.ch01.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-14",
+      "F-RSP-02",
+      "F-RSP-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

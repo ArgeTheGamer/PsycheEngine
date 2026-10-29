@@ -1,0 +1,27 @@
+{
+  "label": "baseline_shared",
+  "contradictions": [],
+  "violations": [
+    {
+      "category": "zone",
+      "fact_id": "F-ZON-11",
+      "quote": "and loading at docks 1-8.",
+      "explanation": "The fact states that only dock doors 5-8 serve outbound dispatch.",
+      "section_id": "ops.ch10.s1"
+    },
+    {
+      "category": "zone",
+      "fact_id": "F-ZON-11",
+      "quote": "transfer to Zone D and loading at doors 1–8",
+      "explanation": "The fact states that only dock doors 5-8 serve outbound dispatch, not doors 1-8.",
+      "section_id": "roles.ch01.s2"
+    }
+  ],
+  "discarded": 0,
+  "within": {},
+  "between": {},
+  "violations_per_doc": {
+    "ops": 1,
+    "roles": 1
+  }
+}

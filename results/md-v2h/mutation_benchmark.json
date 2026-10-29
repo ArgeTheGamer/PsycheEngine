@@ -1,0 +1,229 @@
+{
+  "baseline_variant": "shared",
+  "steps": [
+    {
+      "step": 1,
+      "fact": "F-LIM-15",
+      "notice": "New insurance terms: from now on a pallet, load included, may weigh at most 800 kg (was 1,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "24",
+          "new_value": "30"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "288",
+          "new_value": "360"
+        },
+        {
+          "fact_id": "F-DRV-04",
+          "old_value": "4",
+          "new_value": "5"
+        }
+      ],
+      "engine": {
+        "sections_changed": 18,
+        "chars_changed": 70,
+        "cost_usd": 0.6808,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 41,
+        "chars_changed": 242,
+        "cost_usd": 0.2323,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch08.s2",
+            "match": "1,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 2,
+      "fact": "F-LIM-01",
+      "notice": "After a near-miss we are lowering the indoor forklift speed limit to 8 km/h (was 10 km/h).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 12,
+        "chars_changed": 30,
+        "cost_usd": 0.4301,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 38,
+        "chars_changed": 92,
+        "cost_usd": 0.2203,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch08.s2",
+            "match": "1,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 3,
+      "fact": "F-EQP-11",
+      "notice": "Our haulier switched to a lighter trailer fleet: trailer payload is now 22,000 kg (was 24,000 kg).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-01",
+          "old_value": "30",
+          "new_value": "27"
+        },
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "360",
+          "new_value": "324"
+        }
+      ],
+      "engine": {
+        "sections_changed": 5,
+        "chars_changed": 24,
+        "cost_usd": 0.1846,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 4,
+        "chars_changed": 107,
+        "cost_usd": 0.0886,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch08.s2",
+            "match": "1,000 kg"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 4,
+      "fact": "F-LIM-14",
+      "notice": "Shift supervisors may now approve damaged-goods write-offs up to 750 EUR; above that the warehouse manager approves (was 500 EUR).",
+      "derived": [],
+      "engine": {
+        "sections_changed": 10,
+        "chars_changed": 50,
+        "cost_usd": 0.3809,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 15,
+        "chars_changed": 50,
+        "cost_usd": 0.1229,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch08.s2",
+            "match": "1,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s2",
+            "match": "500 EUR"
+          }
+        ],
+        "unknown_ids": []
+      }
+    },
+    {
+      "step": 5,
+      "fact": "F-SCH-10",
+      "notice": "With the new loading crew each outbound door now handles 4 trailer loads per shift (was 3).",
+      "derived": [
+        {
+          "fact_id": "F-DRV-03",
+          "old_value": "324",
+          "new_value": "432"
+        }
+      ],
+      "engine": {
+        "sections_changed": 4,
+        "chars_changed": 15,
+        "cost_usd": 0.1449,
+        "stale": []
+      },
+      "baseline": {
+        "sections_changed": 4,
+        "chars_changed": 24,
+        "cost_usd": 0.0867,
+        "stale": [
+          {
+            "fact_id": "F-LIM-15",
+            "old": "1000",
+            "section_id": "ops.ch08.s2",
+            "match": "1,000 kg"
+          },
+          {
+            "fact_id": "F-LIM-14",
+            "old": "500",
+            "section_id": "ops.ch12.s2",
+            "match": "500 EUR"
+          }
+        ],
+        "unknown_ids": []
+      }
+    }
+  ],
+  "final_audit": {
+    "engine": {
+      "label": "engine_final",
+      "contradictions": [],
+      "violations": [],
+      "discarded": 0,
+      "within": {},
+      "between": {},
+      "violations_per_doc": {}
+    },
+    "baseline": {
+      "label": "baseline_final",
+      "contradictions": [
+        {
+          "category": "limit",
+          "section_a": "ops.ch12.s2",
+          "quote_a": "No unit leaves quarantine until the shift supervisor approves final disposition, and cases needing write-off above 500 EUR are passed to the warehouse manager the same day.",
+          "section_b": "ops.ch10.s3",
+          "quote_b": "The shift supervisor in charge approves damaged-goods write-offs up to and including 750 EUR under PR-09.",
+          "explanation": "The two sections set different monetary thresholds for mandatory escalation to the warehouse manager, 500 EUR versus 750 EUR, which cannot both apply at the same time."
+        }
+      ],
+      "violations": [
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-15",
+          "quote": "with passing clearance for the widest 1,000 kg pallet.",
+          "explanation": "The fact limits any pallet including its load to at most 800 kg.",
+          "section_id": "ops.ch08.s2"
+        },
+        {
+          "category": "limit",
+          "fact_id": "F-LIM-14",
+          "quote": "cases needing write-off above 500 EUR are passed to the warehouse manager the same day.",
+          "explanation": "The fact states that only damaged-goods write-offs above 750 EUR need warehouse-manager approval.",
+          "section_id": "ops.ch12.s2"
+        }
+      ],
+      "discarded": 0,
+      "within": {
+        "ops": 1
+      },
+      "between": {},
+      "violations_per_doc": {
+        "ops": 2
+      }
+    }
+  },
+  "stale_scan_version": 2
+}

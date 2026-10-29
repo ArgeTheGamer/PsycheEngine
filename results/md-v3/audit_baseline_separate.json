@@ -1,0 +1,55 @@
+{
+  "label": "baseline_separate",
+  "contradictions": [
+    {
+      "category": "zone",
+      "section_a": "ops.ch09.s3",
+      "quote_a": "Hazardous quarantine stays inside the ventilated 60 m2 hazmat cage within its 4,000 kg limit and is never mixed with general quarantine.",
+      "section_b": "hs.ch03.s3",
+      "quote_b": "They are never placed back in the hazmat cage, in Zone B racking, in Zone C pick faces, or in general waste or the cardboard baler.",
+      "explanation": "One section requires hazardous quarantine to stay inside the cage while the other forbids placing contaminated hazmat back in the cage."
+    },
+    {
+      "category": "zone",
+      "section_a": "ops.ch07.s2",
+      "quote_a": "Unwrapped, part-wrapped, unstable or unlabelled pallets never enter Zone D.",
+      "section_b": "sla.ch01.s3",
+      "quote_b": "Labelled packs are moved to Zone D dispatch staging, where pallets are wrapped on the semi-automatic stretch wrappers and staged for their assigned outbound door.",
+      "explanation": "One section forbids unwrapped pallets from entering Zone D while the other moves labelled packs into Zone D staging to be wrapped there."
+    },
+    {
+      "category": "zone",
+      "section_a": "ops.ch09.s2",
+      "quote_a": "General ambient lines go to bulk storage in Zone B, chilled lines go to Zone E, and hazardous lines go only to the ventilated 60 m2 hazmat cage",
+      "section_b": "sla.ch03.s1",
+      "quote_b": "Restock from quarantine to Zone B, E or compliant Zone C locations is executed only after approval",
+      "explanation": "One section limits restock to Zone B, Zone E and the hazmat cage while the other allows restock to compliant Zone C locations."
+    }
+  ],
+  "violations": [
+    {
+      "category": "step_order",
+      "fact_id": "F-ORD-01",
+      "quote": "inbound trucks unloaded and awaiting paperwork check",
+      "explanation": "The fact requires the document check to happen before unloading.",
+      "section_id": "hs.ch04.s3"
+    },
+    {
+      "category": "role",
+      "fact_id": "F-RSP-06",
+      "quote": "refer overtime, door changes and policy exceptions to the Shift Supervisor and Warehouse Manager",
+      "explanation": "The fact says the dispatcher assigns dock doors and time slots to carriers, not the Shift Supervisor and Warehouse Manager.",
+      "section_id": "roles.ch02.s1"
+    }
+  ],
+  "discarded": 0,
+  "within": {},
+  "between": {
+    "hs|ops": 1,
+    "ops|sla": 2
+  },
+  "violations_per_doc": {
+    "hs": 1,
+    "roles": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "label": "baseline_shared",
+  "contradictions": [
+    {
+      "category": "role",
+      "section_a": "hs.ch01.s3",
+      "quote_a": "No other role operates forklifts, reach trucks or electric pallet jacks.",
+      "section_b": "roles.ch02.s1",
+      "quote_b": "They use hand pallet jacks and, where instructed, electric pallet jacks",
+      "explanation": "Both cannot be true because one forbids any role except forklift operators from operating electric pallet jacks while the other assigns inbound operators to use them."
+    }
+  ],
+  "violations": [],
+  "discarded": 0,
+  "within": {},
+  "between": {
+    "hs|roles": 1
+  },
+  "violations_per_doc": {}
+}

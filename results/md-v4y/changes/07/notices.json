@@ -1,0 +1,36 @@
+[
+  {
+    "audience": "client",
+    "subject": "Outdoor yard forklift speed reduced to 12 km/h - no change to client services",
+    "body": "Dear clients,\n\nWe have reduced the maximum forklift speed in the outdoor yard from 15 km/h to 12 km/h. In practice our trucks will travel more slowly in the yard and on dock approaches for safety.\n\nThis change does not affect service to you. Receiving, storage, picking, packing and outbound dispatch times, handling, storage capacities, quality standards and charges all remain unchanged under the Client Service Level Agreement. There is no change to bookings, dock slots, loading procedures or documentation for your goods.\n\nThe lower limit is an internal safety measure only. No action is required from you, and your day-to-day contact and service arrangements stay the same.\n\nThank you for your continued trust.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [],
+    "cited_fact_ids": [
+      "F-LIM-02"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Change to outdoor yard forklift speed limit - now 12 km/h",
+    "body": "From immediate effect, all forklift travel in the outdoor yard must stay at or below 12 km/h. This replaces the previous 15 km/h limit. Slow down further for wet surfaces, darkness, glare, congestion and poor visibility, and keep to marked lanes and longer following distances.\n\nThis applies to all forklift operators on every trip in the yard, including trailer manoeuvring areas and routes to dock approaches, and to all other staff using yard crossings and dock approaches on foot.\n\nOther limits are unchanged: 8 km/h inside the building, 5 km/h in marked pedestrian zones and crossings, and 5 km/h on dock ramps and leveller approaches, always giving way to pedestrians.\n\nThe new 12 km/h yard limit is now written in the Operations Manual in Aisles, walkways and speed limits, Yard, docks and ramps, and Safe operation rules; in the Health & Safety Instruction in Speed limits and shared areas, Walkways, aisles and dock areas, and Driver authorisation and truck checks; and in the Job Descriptions in Forklift Operators and Common Rules and Training.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch10.s1",
+      "ops.ch10.s2",
+      "ops.ch11.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch01.s3",
+      "roles.ch02.s2",
+      "roles.ch03.s3"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-02",
+      "F-LIM-01",
+      "F-LIM-03",
+      "F-LIM-04"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]

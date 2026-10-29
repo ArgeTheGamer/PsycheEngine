@@ -20,13 +20,15 @@ When a fact changes, the fact-to-sections map says exactly which sections to rev
 
 ## Results
 
-The numbers below come from real runs in `runs/`. An independent auditor scores every version with the same prompts (Muse Spark 1.3 at high reasoning, separate from the engine's agents). It has to quote both passages of a contradiction word for word, or the report is thrown away. Before trusting it, I planted 10 contradictions in a finished manual by hand. It found all 10.
+The numbers below come from real runs; the documents, the auditor's raw JSON, the mutation snapshots and the costs behind every table are in [`results/`](results/). An independent auditor scores every version with the same prompts (Muse Spark 1.3 at high reasoning, separate from the engine's agents). It has to quote both passages of a contradiction word for word, or the report is thrown away. Before trusting it, I planted 10 contradictions in a finished manual by hand. It found all 10. A random sample of 20 of its 24 reports on the four-document runs is listed in [`results/AUDITOR_CHECK.md`](results/AUDITOR_CHECK.md) for a manual check by someone who has worked in a warehouse.
 
 ### A year of changes
 
 This is the test that matters most to me, because it is how documentation actually goes wrong. The four documents are written once, then the owner announces twelve changes over a year, one per month: a lower pallet weight cap (twice), a lower indoor speed limit, a colder cold zone, a new write-off threshold, more loads per dock door, a lower yard speed, a smaller hazmat limit, a lower stacking height, a fifth outbound door, stronger racking. In May the whole fleet is replaced: seven facts change at once (forklift and reach-truck counts and ratings, pallet jacks, the van and the trailers), and the computed capacities move with them.
 
 PsycheEngine applies each change through the canon. It is compared with two baselines on the same model. In the first, Muse Spark gets every current document plus the owner's notice in one long-context request and returns the sections it decides to update. In the second, each document is updated on its own, the way its owner would do it.
+
+![Out-of-date values left in the documents, month by month](docs/year.svg)
 
 Out-of-date values left in the documents after each month (run md-v4y):
 

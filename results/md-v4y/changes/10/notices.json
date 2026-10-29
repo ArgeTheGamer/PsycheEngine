@@ -1,0 +1,52 @@
+[
+  {
+    "audience": "client",
+    "subject": "Change to maximum pallet weight and outbound capacity",
+    "body": "Dear clients,\n\nWe have reduced the maximum pallet gross weight, including its load, from 900 kg to 800 kg. All order building, weighing and dispatch planning now uses 800 kg per pallet.\n\nIn practice, any build that would exceed 800 kg will be split or reconfigured before staging, and load totals are assessed against this limit.\n\nFor transport, our contracted curtain-side trailers carry a payload of 26000 kg with 33 floor pallet positions. A trailer therefore takes at most 32 full-weight pallets, increased from 28, because weight remains the binding limit.\n\nPer-shift outbound capacity is consequently at most 512 full-weight pallets per shift, increased from 448, based on 4 outbound dock doors each handling 4 trailer loads per shift.\n\nThese rules are now set out in the Client Service Level Agreement in Dispatch Capacity and Release, Operating Hours and Cut-offs, Picking and Packing Accuracy, and Put-away and Storage Accuracy.\n\nPlease plan orders and bookings within these limits; excess volumes will be scheduled across following shifts.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3",
+      "sla.ch02.s1",
+      "sla.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-15",
+      "F-EQP-11",
+      "F-EQP-12",
+      "F-DRV-01",
+      "F-DRV-03",
+      "F-EQP-15",
+      "F-SCH-10"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Maximum pallet weight reduced to 800 kg - trailer takes 32 pallets, shift takes 512 pallets",
+    "body": "From now on no pallet, including its load, may weigh more than 800 kg. The previous limit was 900 kg. Weigh-check every build, reject overweight pallets for rework, and verify weight before high-bay put-away, wrapping, staging and loading.\n\nThis changes full-weight trailer and shift limits. Our contracted curtain-side trailers carry a payload of 26000 kg and have 33 floor pallet positions. A trailer takes at most 32 full-weight pallets. Weight now restricts the load before space does, so one floor position stays empty on full-weight loads. Do not load a 33rd full-weight pallet.\n\nThere are 4 outbound dock doors and each outbound door handles 4 trailer loads per shift. Outbound capacity is at most 512 full-weight pallets per shift. Do not promise or stage beyond that ceiling. In the hazmat cage, no more than 3,000 kg may be stored at one time, which is at most 3 full-weight pallets.\n\nThis applies to everyone on site, especially forklift operators, inbound operators, pickers, stock controllers and dispatchers. The rules are now written in the Operations Manual Bulk storage in Zone B, Pallet weight and trailer capacity, Van and shift dispatch limit and Hazmat cage pallet limit, in the Health & Safety Instruction Racking and stacking limits and Hazmat storage rules, and in Job Descriptions for Forklift Operators and Dispatchers.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch04.s1",
+      "ops.ch07.s1",
+      "ops.ch07.s2",
+      "ops.ch07.s3",
+      "hs.ch02.s2",
+      "hs.ch03.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-LIM-15",
+      "F-DRV-01",
+      "F-DRV-03",
+      "F-EQP-11",
+      "F-EQP-12",
+      "F-EQP-15",
+      "F-SCH-10",
+      "F-LIM-10",
+      "F-DRV-04"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]
