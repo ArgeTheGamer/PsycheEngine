@@ -20,7 +20,7 @@ import {
   stepFactIds,
 } from "@/lib/mutations";
 import { Badge, Button } from "./ui";
-import { VERSION_LABELS } from "./maintenance-tab";
+import { useT } from "@/lib/i18n";
 
 const PSYCHE = "#34d399";
 const BASELINE = "#fb7185";
@@ -77,6 +77,7 @@ export function YearView({
   sectionsBaseline: Section[];
   onExit: () => void;
 }) {
+  const { t } = useT();
   const hasPerDoc = useMemo(
     () =>
       mutations.steps.some((s) => s.baseline_per_doc) ||
@@ -222,13 +223,13 @@ export function YearView({
     const slot = revealed > 0 ? slots[revealed - 1] : null;
     return [
       {
-        label: VERSION_LABELS.psyche,
+        label: t("ver.psyche"),
         color: PSYCHE,
         stale: slot?.psyche ?? 0,
         rewritten: slot?.psycheRewritten ?? 0,
       },
       {
-        label: VERSION_LABELS.baseline,
+        label: t("ver.baseline_ctx"),
         color: BASELINE,
         stale: slot?.baseline ?? 0,
         rewritten: slot?.baselineRewritten ?? 0,
@@ -236,7 +237,7 @@ export function YearView({
       ...(hasPerDoc
         ? [
             {
-              label: VERSION_LABELS.perDoc,
+              label: t("ver.baseline_perdoc"),
               color: BASELINE_PER_DOC,
               stale: slot?.perDoc ?? 0,
               rewritten: slot?.perDocRewritten ?? 0,
@@ -244,7 +245,7 @@ export function YearView({
           ]
         : []),
     ];
-  }, [slots, revealed, hasPerDoc]);
+  }, [slots, revealed, hasPerDoc, t]);
 
   const summary = useMemo(() => {
     // Stale lists are cumulative (each step holds every value still out of date at that point),
@@ -275,17 +276,17 @@ export function YearView({
   const staleCards = useMemo(() => {
     if (!selectedStep) return [];
     const groups: { label: string; color: string; hits: { fact_id: string; match: string; section_id: string }[] }[] = [
-      { label: VERSION_LABELS.baseline, color: BASELINE, hits: selectedStep.baseline.stale },
+      { label: t("ver.baseline_ctx"), color: BASELINE, hits: selectedStep.baseline.stale },
     ];
     if (selectedStep.baseline_per_doc) {
       groups.push({
-        label: VERSION_LABELS.perDoc,
+        label: t("ver.baseline_perdoc"),
         color: BASELINE_PER_DOC,
         hits: selectedStep.baseline_per_doc.stale,
       });
     }
     return groups;
-  }, [selectedStep]);
+  }, [selectedStep, t]);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-zinc-950 p-6 text-zinc-100">
@@ -358,14 +359,14 @@ export function YearView({
                   className="inline-block h-2 w-6 rounded-full"
                   style={{ background: PSYCHE }}
                 />
-                {VERSION_LABELS.psyche}
+                {t("ver.psyche")}
               </span>
               <span className="flex items-center gap-1.5">
                 <span
                   className="inline-block h-2 w-6 rounded-full"
                   style={{ background: BASELINE }}
                 />
-                {VERSION_LABELS.baseline}
+                {t("ver.baseline_ctx")}
               </span>
               {hasPerDoc && (
                 <span className="flex items-center gap-1.5">
@@ -373,7 +374,7 @@ export function YearView({
                     className="inline-block h-2 w-6 rounded-full"
                     style={{ background: BASELINE_PER_DOC }}
                   />
-                  {VERSION_LABELS.perDoc}
+                  {t("ver.baseline_perdoc")}
                 </span>
               )}
               {!playing && !finished && (
@@ -416,7 +417,7 @@ export function YearView({
                   <Line
                     type="monotone"
                     dataKey="psyche"
-                    name={VERSION_LABELS.psyche}
+                    name={t("ver.psyche")}
                     stroke={PSYCHE}
                     strokeWidth={3}
                     dot={{ r: 4 }}
@@ -424,7 +425,7 @@ export function YearView({
                   <Line
                     type="monotone"
                     dataKey="baseline"
-                    name={VERSION_LABELS.baseline}
+                    name={t("ver.baseline_ctx")}
                     stroke={BASELINE}
                     strokeWidth={2.5}
                     dot={{ r: 4 }}
@@ -433,7 +434,7 @@ export function YearView({
                     <Line
                       type="monotone"
                       dataKey="perDoc"
-                      name={VERSION_LABELS.perDoc}
+                      name={t("ver.baseline_perdoc")}
                       stroke={BASELINE_PER_DOC}
                       strokeWidth={2.5}
                       dot={{ r: 4 }}

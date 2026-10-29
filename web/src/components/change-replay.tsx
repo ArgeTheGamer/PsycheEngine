@@ -8,12 +8,12 @@ import type {
   DocumentInfo,
   Fact,
   FactChangeRecord,
+  OpenSection,
   Section,
 } from "@/lib/types";
 import { Badge, Button } from "./ui";
 import { ChangeGraph } from "./change-graph";
 import { ChangeDiff } from "./change-diff";
-import type { OpenSection } from "./maintenance-tab";
 import { cn } from "@/lib/utils";
 
 const BASE_STEPS = ["Dependencies", "Rewrite log", "Before / after"] as const;

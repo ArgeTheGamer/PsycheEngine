@@ -7,7 +7,7 @@ import { BenchmarkView } from "@/components/benchmark-view";
 import { UsageView } from "@/components/usage-view";
 import { CanonPanel } from "@/components/canon-panel";
 import { AgentsPanel } from "@/components/agents-panel";
-import { MaintenanceTab } from "@/components/maintenance-tab";
+import { YearTab } from "@/components/year-tab";
 import { ChangeReplay } from "@/components/change-replay";
 import { PlaybackView } from "@/components/playback-view";
 import { YearView } from "@/components/year-view";
@@ -102,18 +102,20 @@ export default function Home() {
           callsBaseline={data.callsBaseline}
         />
       )}
+      {data && tab === "year" && data.mutations && (
+        <YearTab
+          key={runId}
+          mutations={data.mutations}
+          canon={data.canon}
+          sectionsPsyche={data.sectionsPsyche}
+          sectionsBaseline={data.sectionsBaseline}
+          documents={data.documents}
+          onOpenSection={() => setTab("production")}
+        />
+      )}
       {/* The tabs below reuse the previous panels until they are restyled to the new system. */}
-      {data && tab !== "production" && tab !== "benchmark" && tab !== "usage" && (
+      {data && tab !== "production" && tab !== "benchmark" && tab !== "usage" && tab !== "year" && (
         <div className="dark grid gap-4 bg-zinc-950 p-4 text-zinc-200">
-          {tab === "year" && data.mutations && (
-            <MaintenanceTab
-              mutations={data.mutations}
-              canon={data.canon}
-              sectionsPsyche={data.sectionsPsyche}
-              sectionsBaseline={data.sectionsBaseline}
-              documents={data.documents}
-            />
-          )}
           {tab === "graph" && (
             <CanonPanel
               canon={data.canon}
