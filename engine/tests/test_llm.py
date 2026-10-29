@@ -92,3 +92,13 @@ def test_open_critic_without_host_settings_fails_loudly(monkeypatch):
     with pytest.raises(RuntimeError, match="OPEN_WEIGHTS_BASE_URL"):
         provider_for("critic")
     assert provider_for("writer").name == "meta"
+
+
+def test_agent_provider_open_moves_every_agent_but_the_auditor(monkeypatch):
+    from psyche.config import provider_for
+
+    monkeypatch.setenv("AGENT_PROVIDER", "open")
+    monkeypatch.setenv("OPEN_WEIGHTS_BASE_URL", "https://example.test/v1")
+    monkeypatch.setenv("OPEN_WEIGHTS_API_KEY", "test")
+    assert {provider_for(a).name for a in ("planner", "writer", "critic", "canon_editor", "baseline")} == {"open"}
+    assert provider_for("auditor").name == "meta"

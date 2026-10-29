@@ -64,11 +64,16 @@ def open_weights_provider() -> Provider:
 
 
 def provider_for(agent: str) -> Provider:
-    """Pick the provider for an agent; only the critic can be switched to open weights."""
-    if agent == "critic" and os.environ.get("CRITIC_PROVIDER", "meta") == "open":
+    """Pick the provider for an agent.
+
+    CRITIC_PROVIDER=open moves only the critic to open weights. AGENT_PROVIDER=open moves every agent
+    except the benchmark auditor, which stays on Muse Spark 1.3 so scores remain comparable across runs.
+    """
+    everyone = os.environ.get("AGENT_PROVIDER", "meta") == "open" and agent != "auditor"
+    if everyone or (agent == "critic" and os.environ.get("CRITIC_PROVIDER", "meta") == "open"):
         provider = open_weights_provider()
         if not (provider.base_url and provider.api_key):
-            raise RuntimeError("CRITIC_PROVIDER=open needs OPEN_WEIGHTS_BASE_URL and OPEN_WEIGHTS_API_KEY")
+            raise RuntimeError("open weights need OPEN_WEIGHTS_BASE_URL and OPEN_WEIGHTS_API_KEY")
         return provider
     return meta_provider()
 
