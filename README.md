@@ -153,6 +153,8 @@ engine/.venv/Scripts/python engine/scripts/export_web.py --run demo --label "my 
 cd web && npm install && npm run dev
 ```
 
+Every command, its options, cost and output files are described in [docs/USAGE.md](docs/USAGE.md).
+
 The critic runs on Muse Spark 1.3 by default. The reported runs used Muse Spark Open: set `CRITIC_PROVIDER=open`, `OPEN_WEIGHTS_BASE_URL` and `OPEN_WEIGHTS_API_KEY` in `.env` to reproduce them.
 
 The company lives in [`data/company/`](data/company/): `brief.md` is how the owner describes the site, `company.json` holds the facts (computed ones included), `documents.json` lists the documents to write and `mutations.json` and `mutations_year.json` the two change scenarios.
