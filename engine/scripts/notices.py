@@ -31,7 +31,11 @@ def main() -> int:
 
     for change_dir in sorted((run_dir / "changes").glob("*")):
         change = FactChange.model_validate_json((change_dir / "change.json").read_text(encoding="utf-8"))
-        note = f"{change.fact_id}: {change.old_value} -> {change.new_value}"
+        if (change_dir / "notices.json").exists():
+            continue  # already drafted; rerunning only fills in what is missing
+        # A batch (e.g. the fleet modernisation) is saved once, after its last fact changed.
+        last = change.also[-1] if change.also else change
+        note = f"{last.fact_id}: {last.old_value} -> {last.new_value}"
         canon = next(c for c in canons if c.note == note)
         diff_ids = {d["section_id"] for d in json.loads((change_dir / "diff.json").read_text(encoding="utf-8"))}
         sections = [AcceptedSection(**s) for s in json.loads((change_dir / "sections.json").read_text(encoding="utf-8"))]
