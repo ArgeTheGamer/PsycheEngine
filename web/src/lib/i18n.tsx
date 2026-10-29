@@ -60,6 +60,20 @@ const STRINGS = {
   "n.violations.one": { en: "fact violation", pl: "naruszenie faktu" },
   "n.violations.few": { en: "fact violations", pl: "naruszenia faktów" },
   "n.violations.many": { en: "fact violations", pl: "naruszeń faktów" },
+  "usage.totals": { en: "Totals", pl: "Łącznie" },
+  "usage.cost": { en: "Cost", pl: "Koszt" },
+  "usage.tokens": { en: "Tokens", pl: "Tokeny" },
+  "usage.per_doc": { en: "Cost and tokens per document", pl: "Koszt i tokeny na dokument" },
+  "usage.per_agent": { en: "Cost and tokens per agent", pl: "Koszt i tokeny na agenta" },
+  "usage.document": { en: "Document", pl: "Dokument" },
+  "usage.agent": { en: "Agent", pl: "Agent" },
+  "usage.total": { en: "Total", pl: "Razem" },
+  "usage.not_tagged": { en: "not tagged", pl: "bez etykiety" },
+  "usage.untagged": {
+    en: "Planning and audit calls carry no document tag; they count towards the totals only.",
+    pl: "Wywołania planowania i audytu nie mają etykiety dokumentu; liczą się tylko do sum.",
+  },
+  "usage.chart": { en: "Cost per document", pl: "Koszt na dokument" },
 } as const;
 
 export type StringKey = keyof typeof STRINGS;

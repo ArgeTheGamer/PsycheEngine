@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Shell, type Tab } from "@/components/shell";
 import { ProductionView } from "@/components/production-view";
 import { BenchmarkView } from "@/components/benchmark-view";
+import { UsageView } from "@/components/usage-view";
 import { CanonPanel } from "@/components/canon-panel";
-import { ChartsPanel } from "@/components/charts-panel";
 import { AgentsPanel } from "@/components/agents-panel";
 import { MaintenanceTab } from "@/components/maintenance-tab";
 import { ChangeReplay } from "@/components/change-replay";
@@ -95,23 +95,16 @@ export default function Home() {
           auditBaseline={data.auditBaseline}
         />
       )}
+      {data && tab === "usage" && (
+        <UsageView
+          documents={data.documents}
+          callsPsyche={data.callsPsyche}
+          callsBaseline={data.callsBaseline}
+        />
+      )}
       {/* The tabs below reuse the previous panels until they are restyled to the new system. */}
-      {data && tab !== "production" && tab !== "benchmark" && (
+      {data && tab !== "production" && tab !== "benchmark" && tab !== "usage" && (
         <div className="dark grid gap-4 bg-zinc-950 p-4 text-zinc-200">
-          {tab === "usage" && (
-            <ChartsPanel
-              documents={data.documents}
-              sectionsPsyche={data.sectionsPsyche}
-              sectionsBaseline={data.sectionsBaseline}
-              contradictionsPsyche={data.contradictionsPsyche}
-              contradictionsBaseline={data.contradictionsBaseline}
-              callsPsyche={data.callsPsyche}
-              callsBaseline={data.callsBaseline}
-              mutations={data.mutations}
-              canon={data.canon}
-              onOpenSection={() => setTab("production")}
-            />
-          )}
           {tab === "year" && data.mutations && (
             <MaintenanceTab
               mutations={data.mutations}
