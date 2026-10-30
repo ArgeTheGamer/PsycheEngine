@@ -6,6 +6,10 @@ PsycheEngine writes all of these documents from one shared canon of company fact
 
 I worked as a warehouse operative before this. The contradictions above are the kind I used to find on real notice boards. The company in this repository, Harborwick 3PL, is made up.
 
+Live dashboard: **https://psycheengine-argethegamers-projects.vercel.app**
+
+After a year of twelve changes, Muse Spark left 10 out-of-date values in the four documents and PsycheEngine left none. With every agent on Meta's open-weights Muse Spark Open, the same year ends 0 for PsycheEngine against 7 and 43 for the model on its own.
+
 ## What it does
 
 The canon is a versioned list of facts about the company: zones, limits, roles, approvals, procedure numbers, the order of steps. Each fact has an id and a list of the sections that rely on it. Four documents are written from it (operations manual, H&S instruction, job descriptions, client SLA), 65 sections in total.
@@ -17,6 +21,8 @@ The canon grows while the documents are being written. When a section commits to
 Some facts are computed. Pallets per trailer, outbound capacity per shift and hazmat cage capacity are formulas over other facts, evaluated in code rather than by the model. Lower the maximum pallet weight and those numbers move on their own, the way a spreadsheet would.
 
 When a fact changes, the fact-to-sections map says exactly which sections to revise, and each revision goes back through the critic. After that PsycheEngine drafts a notice for clients (pointing to the SLA) and a memo for staff (pointing to the manual and the H&S instruction). The critic checks those too.
+
+Two more ways in. A manager can describe a change in plain words ("we bought two more reach trucks, and the insurer caps pallets at 850 kg") and an agent maps it to the facts it changes, waits for a yes, then hands it to the same propagation. And a company that already has documents doesn't have to start over: PsycheEngine reads them, builds the canon from what they say, turns every conflict between them into a question for the manager, and rewrites the sections the answers affect.
 
 ## Results
 
@@ -49,6 +55,43 @@ An out-of-date value is any earlier value of a changed fact, computed ones inclu
 Neither baseline repairs what it missed: an old value that survives one month is still there in December. PsycheEngine rewrites a third as many sections, which is what someone has to re-read and sign off before the next audit.
 
 The final audit agrees once one flaw of mine is set aside. My November change added a fifth outbound door but did not update the facts that number the doors ("8 doors", "doors 5–8"), so the auditor counted "doors 5–9" as a violation even though it is the sensible reading. Leaving those door-numbering facts out, the final fact violations are 0 for PsycheEngine, 11 for the one-context baseline and 3 for the per-document one (with them: 2, 68 and 74). I kept the input file as it was run so the numbers can be reproduced.
+
+### The same year on open weights
+
+To see whether this depends on a closed model, I ran everything again with every agent (planner, writer, critic, canon editor) on Muse Spark Open, the 816B open-weights model, served from a Modal shared endpoint. Both baselines ran on Muse Spark Open too. Only the auditor stayed on Muse Spark 1.3, so the scores compare with the runs above.
+
+| | PsycheEngine | baseline, one context | baseline, each document separately |
+|---|---|---|---|
+| out-of-date values after January | 0 | 84 | 0 |
+| after May (fleet replaced) | 0 | 51 | 42 |
+| after December | **0** | **7** | **43** |
+| final audit: fact violations, door numbering left out | 0 | 2 | 42 |
+| final audit: contradictions between documents | 0 | 0 | 9 |
+| sections rewritten over the year | 127 | 148 | 237 |
+| cost of the year | $3.65 | $0.97 | $2.45 |
+
+The one-context baseline on Muse Spark Open handles the long prompt badly at first: in January it rewrote one section and left 84 old values, and it only caught up when the pallet cap changed again in October. The per-document baseline starts clean and loses ground every month. PsycheEngine stays at zero because the canon and the code do the remembering, not the model. Writing the four documents from scratch on Muse Spark Open went the same way as on Muse Spark 1.3: 64 sections, none left with an unresolved critic issue, 0 fact violations against 4 and 3 for the baselines, and 1 contradiction between documents against 3 for separate sessions (run `open-v1`, $2.87).
+
+Stale scan v3 is used here; it no longer reads "dock doors 1-4 and dock doors 5-8" as a count of four doors. Re-scoring every earlier run with it changed nothing in the tables above.
+
+### How good is the critic
+
+Everything above rests on the critic noticing when a section disagrees with the canon, so I measured it. Code planted 30 errors in accepted sections, one per section: 10 wrong values of a cited fact (10 km/h became 12 km/h), 10 wrong zones and 10 wrong procedure numbers. A plant counts as caught only if the critic rejects the section and quotes the planted words. Ten untouched sections measure false alarms.
+
+| critic | wrong values | wrong zones | wrong procedures | false alarms |
+|---|---|---|---|---|
+| Muse Spark Open | 10/10 | 9/10 | 10/10 | 2/10 |
+| Muse Spark 1.3 | 10/10 | 9/10 | 10/10 | 1/10 |
+
+Both missed the same plant, a zone swap that still reads plausibly ("bulk holdings outside Zone F"). The untouched sections had been accepted by the Muse Spark Open critic when they were written, which favours it slightly on false alarms. Raw cases: [`results/md-v4/critic_bench.json`](results/md-v4/critic_bench.json), script [`critic_bench.py`](engine/scripts/critic_bench.py).
+
+### Taking over documents a company already has
+
+The four documents Muse Spark wrote in separate sessions in run md-v2 stand in for a company's existing paperwork. PsycheEngine read all 65 sections and built a canon of 370 facts from them ($0.07). The auditor had found 6 conflicts, and each became a question for the manager: version a, version b, "not a real conflict", or the right rule in your own words. I answered them as the warehouse manager would. One was the report I had already judged a false alarm in the spot check, so I dismissed it. The other five became decisions in the canon, and the writer and critic revised the 10 sections involved. A fresh audit found 0 conflicts. The whole run cost $0.57. Questions, answers and before/after text: [`results/adopt-v2/`](results/adopt-v2/).
+
+### A change in the manager's own words
+
+Given "We bought two more reach trucks last week, and our new insurer caps pallets at 850 kg including the load", the change agent proposed two fact changes: reach trucks 4 → 6 ("4 + 2 = 6") and the pallet cap 1,000 → 850 kg. Code refuses changes to computed facts and recalculated them instead: a trailer now takes 28 full-weight pallets instead of 24, and outbound capacity rose from 288 to 336 pallets per shift. 18 sections were rewritten and both notices drafted, for $0.30. See [`results/request-demo/`](results/request-demo/).
 
 ### The same five changes, three runs
 
@@ -107,6 +150,7 @@ flowchart LR
 | Planner | Muse Spark 1.3 via Meta Model API | table of contents per document and the facts each section needs |
 | Writer | Muse Spark 1.3 | writes or revises one section from the canon |
 | Critic | Muse Spark Open (open weights, Modal shared endpoint) | checks a section or notice against the canon and quotes every conflict |
+| Change agent | Muse Spark 1.3 | turns a manager's message, or an answer to a conflict, into fact changes |
 | Canon editor | Muse Spark 1.3 | records new checkable facts from accepted sections |
 | Auditor, benchmark only | Muse Spark 1.3, high reasoning | independent counts of contradictions and fact violations |
 
@@ -155,7 +199,7 @@ cd web && npm install && npm run dev
 
 Every command, its options, cost and output files are described in [docs/USAGE.md](docs/USAGE.md).
 
-The critic runs on Muse Spark 1.3 by default. The reported runs used Muse Spark Open: set `CRITIC_PROVIDER=open`, `OPEN_WEIGHTS_BASE_URL` and `OPEN_WEIGHTS_API_KEY` in `.env` to reproduce them.
+The critic runs on Muse Spark 1.3 by default. The reported runs used Muse Spark Open: set `CRITIC_PROVIDER=open`, `OPEN_WEIGHTS_BASE_URL` and `OPEN_WEIGHTS_API_KEY` in `.env` to reproduce them. `AGENT_PROVIDER=open` moves every agent except the auditor to Muse Spark Open, as in runs `open-v1` and `open-v1y`.
 
 The company lives in [`data/company/`](data/company/): `brief.md` is how the owner describes the site, `company.json` holds the facts (computed ones included), `documents.json` lists the documents to write and `mutations.json` and `mutations_year.json` the two change scenarios.
 
