@@ -1,0 +1,34 @@
+{
+  "label": "baseline_shared",
+  "contradictions": [],
+  "violations": [
+    {
+      "category": "reference",
+      "fact_id": "F-PRC-05",
+      "quote": "Every picked item is scan-verified before it is packed under PR-04.",
+      "explanation": "The official facts state that Procedure PR-05 is titled Packing and labelling, not PR-04.",
+      "section_id": "ops.ch06.s2"
+    },
+    {
+      "category": "role",
+      "fact_id": "F-RSP-01",
+      "quote": "Adjustments arising from the daily cycle count are prepared by the stock controllers and approved only by the shift supervisor.",
+      "explanation": "Fact F-RSP-01 requires only the warehouse manager to sign off stocktake results.",
+      "section_id": "ops.ch11.s1"
+    },
+    {
+      "category": "zone",
+      "fact_id": "F-ZON-06",
+      "quote": "Zone F holds only quarantine, returns and hazmat in the cage",
+      "explanation": "The fact states Zone F holds the value-added services area, not only those three uses.",
+      "section_id": "roles.ch01.s1"
+    }
+  ],
+  "discarded": 0,
+  "within": {},
+  "between": {},
+  "violations_per_doc": {
+    "ops": 2,
+    "roles": 1
+  }
+}

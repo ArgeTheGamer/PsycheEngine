@@ -16,9 +16,9 @@ from collections import defaultdict
 from psyche.canon import CanonStore
 from psyche.config import REPO_ROOT
 
-WRITING = ["md-v2", "md-v3", "md-v4"]  # four documents, three independent runs
+WRITING = ["md-v2", "md-v3", "md-v4", "open-v1"]  # four documents; open-v1 runs every agent on Muse Spark Open
 MUTATIONS = ["md-v2h", "md-v3h", "md-v4h"]  # the same five changes on each of them
-YEAR = "md-v4y"  # twelve changes, the demo run
+YEARS = ["md-v4y", "open-v1y"]  # twelve changes: the demo run, and the same year on Muse Spark Open
 EXTRA = {"recall": "full-v2/baseline_brief/audit_recall.json", "polish": "md-pl-hs"}
 
 
@@ -38,19 +38,18 @@ def costs_writing(run_dir) -> dict:
 
 def main() -> int:
     runs, dst_root = REPO_ROOT / "runs", REPO_ROOT / "results"
-    if dst_root.exists():
-        # Rebuild the copied run data but keep hand-written files such as AUDITOR_CHECK.md.
-        for child in dst_root.iterdir():
-            if child.is_dir():
-                shutil.rmtree(child)
-            elif child.suffix == ".json":
-                child.unlink()
+    # Rebuild only the runs this script copies; hand-written files (AUDITOR_CHECK.md) and results
+    # written by other scripts (adopt-v2/, request-demo/, critic_bench.json) stay.
+    for name in WRITING + MUTATIONS + YEARS + ["polish-hs"]:
+        for f in (dst_root / name).glob("**/*") if (dst_root / name).exists() else []:
+            if f.is_file() and f.name != "critic_bench.json":
+                f.unlink()
 
     def copy(src, dst):
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
 
-    for name in WRITING + MUTATIONS + [YEAR]:
+    for name in WRITING + MUTATIONS + YEARS:
         src, dst = runs / name, dst_root / name
         files = ["plan.json", "documents.json", "sections.json"] + ([] if name in WRITING else ["mutation_benchmark.json"])
         for f in files:

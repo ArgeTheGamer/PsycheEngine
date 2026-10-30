@@ -18,7 +18,8 @@ from psyche.canon import Canon, load_spec
 from psyche.config import REPO_ROOT
 from psyche.engine import AcceptedSection
 
-SCAN_VERSION = 2  # 2: count units allow at most two describing words; EUR/m/t no longer match inside other numbers
+SCAN_VERSION = 3  # 2: count units allow at most two describing words; EUR/m/t no longer match inside other numbers
+# 3: "4 and dock doors" (the end of a door range) is no longer read as 4 doors
 
 
 def main() -> int:

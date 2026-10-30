@@ -17,7 +17,8 @@ Settings in `.env`:
 | `MODEL_API_KEY` | Meta Model API key. Every agent uses it. |
 | `META_MODEL` | Model for the agents, default `muse-spark-1.3`. `muse-spark-1.3-contributor` is far cheaper and was as good in our tests. |
 | `CRITIC_PROVIDER` | `meta` (default) or `open`: run the critic on Muse Spark Open instead. The reported runs used `open`. |
-| `OPEN_WEIGHTS_BASE_URL`, `OPEN_WEIGHTS_API_KEY`, `OPEN_WEIGHTS_MODEL` | Where Muse Spark Open is hosted. Needed only with `CRITIC_PROVIDER=open`. |
+| `AGENT_PROVIDER` | `open` runs every agent except the auditor on Muse Spark Open (runs `open-v1`, `open-v1y`). |
+| `OPEN_WEIGHTS_BASE_URL`, `OPEN_WEIGHTS_API_KEY`, `OPEN_WEIGHTS_MODEL` | Where Muse Spark Open is hosted. Needed only with `CRITIC_PROVIDER=open` or `AGENT_PROVIDER=open`. |
 | `PSYCHE_BUDGET_USD` | Spending cap per agent team in one process, default `5`. The command stops when it is reached; `--resume` (where available) continues later. Meta's own spend limit only sends an email. |
 
 ## Checks
@@ -70,6 +71,28 @@ engine/.venv/Scripts/python engine/scripts/notices.py --run demo
 
 Drafts the notices again for every change already applied to a run, skipping the ones that already have them. Useful after an interruption.
 
+### A change in plain words
+
+```bash
+engine/.venv/Scripts/python engine/scripts/request_change.py --run demo --message "We bought two more reach trucks, and the insurer now caps pallets at 850 kg."
+```
+
+The change agent maps the message to fact changes and prints them with the words that justify each one. Facts computed in code are never set directly, and anything ambiguous comes back as a question. Nothing changes until you type `y` (or pass `--yes`); then the changes go through the same propagation as `change_fact.py`, as one batch. The message and the agent's reading are saved in `changes/NN/request.json`. Around $0.30 for two changes.
+
+## Taking over existing documents
+
+```bash
+engine/.venv/Scripts/python engine/scripts/adopt.py --run adopt-demo --source results/md-v2/baseline_separate --plan-dir results/md-v2 --audit results/md-v2/audit_baseline_separate.json
+```
+
+For a company that already has documents. The first run reads every section, builds a canon from it and writes the conflicts between passages to `runs/adopt-demo/questions.json` and an empty `answers.json`. Answer each with `a`, `b`, `ok` (not a real conflict) or the right rule in your own words, and run the same command again: each decision updates the canon, the affected sections are revised and checked by the critic, and a fresh audit counts what is left. `adopt.json` has the before/after counts. Without `--audit` the auditor reads the documents first. Under $1 for four documents on the contributor tier.
+
+| option | meaning |
+|---|---|
+| `--source DIR` | Folder with the existing documents as `sections.json`. |
+| `--plan-dir DIR` | Folder with the matching `plan.json` and `documents.json`. |
+| `--audit FILE` | A saved audit of the source documents, instead of auditing them again. |
+
 ## Benchmarks
 
 ### Baselines and audit
@@ -109,11 +132,12 @@ Repeats the stale scan on the saved snapshots with the current patterns. No mode
 
 ### Other measurements
 
-Both live in `engine/scripts/`.
+They live in `engine/scripts/`.
 
 | command | what it does |
 |---|---|
 | `audit_recall.py --sections PATH` | Plants known contradictions in a set of sections and counts how many the auditor finds (10 of 10 in the reported test). |
+| `critic_bench.py --run-dir results/md-v4 --cases 10` | Plants wrong values, zones and procedure numbers in accepted sections and counts what the critic catches on Muse Spark Open and on Muse Spark 1.3, plus false alarms on untouched sections. About $0.60. |
 | `pilot_multidoc.py --manual PATH --out DIR` | The first pilot: separately written documents checked for contradictions between them. |
 
 ## Publishing results

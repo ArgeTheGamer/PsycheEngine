@@ -1,0 +1,3125 @@
+{
+  "version": 91,
+  "company": {
+    "name": "Harborwick 3PL Ltd.",
+    "location": "Port Sellow, Alveria",
+    "summary": "Fictional 3PL/distribution warehouse: 6,000 m2, about 40 staff, two shifts, six zones A-F, electric MHE fleet."
+  },
+  "facts": [
+    {
+      "id": "F-LIM-01",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_indoor",
+      "value": "10",
+      "unit": "km/h",
+      "statement": "Forklifts must not exceed 10 km/h inside the building.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-02",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_outdoor",
+      "value": "15",
+      "unit": "km/h",
+      "statement": "Forklifts must not exceed 15 km/h in the outdoor yard.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-03",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_pedestrian_zone",
+      "value": "5",
+      "unit": "km/h",
+      "statement": "Forklifts must slow to 5 km/h in marked pedestrian zones and crossings.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-04",
+      "category": "limit",
+      "subject": "forklift",
+      "attribute": "max_speed_dock_ramp",
+      "value": "5",
+      "unit": "km/h",
+      "statement": "Forklifts must not exceed 5 km/h on dock ramps and leveller approaches.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-05",
+      "category": "limit",
+      "subject": "pallet_stack",
+      "attribute": "max_height",
+      "value": "4.0",
+      "unit": "m",
+      "statement": "Free block-stacked pallets must not exceed 4.0 m in height.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-06",
+      "category": "limit",
+      "subject": "pallet_stack",
+      "attribute": "max_pallets",
+      "value": "3",
+      "unit": "pallets",
+      "statement": "Free block-stacked pallets must not exceed 3 pallets high.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-07",
+      "category": "limit",
+      "subject": "rack_bay",
+      "attribute": "max_load",
+      "value": "2700",
+      "unit": "kg",
+      "statement": "Each rack bay may carry at most 2,700 kg.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-08",
+      "category": "limit",
+      "subject": "cold_zone",
+      "attribute": "min_temperature",
+      "value": "2",
+      "unit": "°C",
+      "statement": "The cold zone must stay at or above +2 °C.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-09",
+      "category": "limit",
+      "subject": "cold_zone",
+      "attribute": "max_temperature",
+      "value": "8",
+      "unit": "°C",
+      "statement": "The cold zone must stay at or below +8 °C.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-10",
+      "category": "limit",
+      "subject": "hazmat_cage",
+      "attribute": "max_stock",
+      "value": "4000",
+      "unit": "kg",
+      "statement": "No more than 4,000 kg of hazmat may be stored in the hazmat cage at one time.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-11",
+      "category": "limit",
+      "subject": "main_aisle",
+      "attribute": "width",
+      "value": "4.0",
+      "unit": "m",
+      "statement": "Main transport aisles are 4.0 m wide.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-12",
+      "category": "limit",
+      "subject": "storage_aisle",
+      "attribute": "width",
+      "value": "3.0",
+      "unit": "m",
+      "statement": "Rack storage aisles are 3.0 m wide.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-13",
+      "category": "limit",
+      "subject": "pedestrian_walkway",
+      "attribute": "width",
+      "value": "1.2",
+      "unit": "m",
+      "statement": "Segregated pedestrian walkways are 1.2 m wide.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-14",
+      "category": "limit",
+      "subject": "damaged_goods",
+      "attribute": "write_off_threshold",
+      "value": "500",
+      "unit": "EUR",
+      "statement": "Damaged-goods write-offs above 500 EUR need warehouse-manager approval.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-01",
+      "category": "zone",
+      "subject": "zone_a",
+      "attribute": "purpose",
+      "value": "receiving",
+      "unit": "",
+      "statement": "Zone A is the receiving zone: inbound docks 1-4, unloading and goods inspection.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-02",
+      "category": "zone",
+      "subject": "zone_b",
+      "attribute": "purpose",
+      "value": "bulk_storage",
+      "unit": "",
+      "statement": "Zone B is the bulk storage zone: high-bay pallet racking.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-03",
+      "category": "zone",
+      "subject": "zone_c",
+      "attribute": "purpose",
+      "value": "picking",
+      "unit": "",
+      "statement": "Zone C is the picking zone: ground-level pick faces and flow racks.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-04",
+      "category": "zone",
+      "subject": "zone_d",
+      "attribute": "purpose",
+      "value": "dispatch",
+      "unit": "",
+      "statement": "Zone D is the dispatch zone: outbound staging in front of docks 5-8.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-05",
+      "category": "zone",
+      "subject": "zone_e",
+      "attribute": "purpose",
+      "value": "cold_storage",
+      "unit": "",
+      "statement": "Zone E is the cold zone: chilled storage held at +2 to +8 °C.",
+      "source": "company",
+      "formula": "",
+      "refs": [
+        "F-LIM-08",
+        "F-LIM-09"
+      ]
+    },
+    {
+      "id": "F-ZON-06",
+      "category": "zone",
+      "subject": "zone_f",
+      "attribute": "purpose",
+      "value": "value_added_services",
+      "unit": "",
+      "statement": "Zone F holds the value-added services area.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-07",
+      "category": "zone",
+      "subject": "warehouse",
+      "attribute": "total_floor_area",
+      "value": "6000",
+      "unit": "m2",
+      "statement": "The warehouse floor covers 6,000 m2.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-08",
+      "category": "zone",
+      "subject": "racking",
+      "attribute": "pallet_positions",
+      "value": "2400",
+      "unit": "positions",
+      "statement": "The high-bay racking provides 2,400 pallet positions.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-09",
+      "category": "zone",
+      "subject": "docks",
+      "attribute": "door_count",
+      "value": "8",
+      "unit": "doors",
+      "statement": "The building has 8 dock doors.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-10",
+      "category": "zone",
+      "subject": "docks",
+      "attribute": "inbound_doors",
+      "value": "1-4",
+      "unit": "",
+      "statement": "Dock doors 1-4 serve inbound receiving.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-11",
+      "category": "zone",
+      "subject": "docks",
+      "attribute": "outbound_doors",
+      "value": "5-8",
+      "unit": "",
+      "statement": "Dock doors 5-8 serve outbound dispatch.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-12",
+      "category": "zone",
+      "subject": "hazmat_cage",
+      "attribute": "floor_area",
+      "value": "60",
+      "unit": "m2",
+      "statement": "The hazmat cage inside Zone F covers 60 m2.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-13",
+      "category": "zone",
+      "subject": "quarantine_area",
+      "attribute": "location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "The quarantine area is in Zone F.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-14",
+      "category": "zone",
+      "subject": "returns_inspection",
+      "attribute": "location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "Returns are inspected in Zone F.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-15",
+      "category": "zone",
+      "subject": "hazmat_cage",
+      "attribute": "location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "The hazmat cage is inside Zone F.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-01",
+      "category": "role",
+      "subject": "warehouse_manager",
+      "attribute": "duty",
+      "value": "Accountable for the whole site: operations, safety and final sign-offs.",
+      "unit": "",
+      "statement": "The warehouse manager is accountable for the whole site: operations, safety and final sign-offs.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-02",
+      "category": "role",
+      "subject": "shift_supervisor",
+      "attribute": "duty",
+      "value": "Runs one shift: floor staff and incident response.",
+      "unit": "",
+      "statement": "The shift supervisor runs one shift: floor staff and incident response.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-03",
+      "category": "role",
+      "subject": "forklift_operator",
+      "attribute": "duty",
+      "value": "Operates forklifts, reach trucks and pallet jacks.",
+      "unit": "",
+      "statement": "Forklift operators operate forklifts, reach trucks and pallet jacks.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-04",
+      "category": "role",
+      "subject": "picker",
+      "attribute": "duty",
+      "value": "Picks customer orders in Zone C against scanner tasks.",
+      "unit": "",
+      "statement": "Pickers pick customer orders in Zone C against scanner tasks.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-05",
+      "category": "role",
+      "subject": "inbound_operator",
+      "attribute": "duty",
+      "value": "Unloads, counts and inspects inbound goods in Zone A.",
+      "unit": "",
+      "statement": "Inbound operators unload, count and inspect inbound goods in Zone A.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-06",
+      "category": "role",
+      "subject": "stock_controller",
+      "attribute": "duty",
+      "value": "Owns inventory accuracy: cycle counts, recounts and adjustments.",
+      "unit": "",
+      "statement": "Stock controllers own inventory accuracy: cycle counts, recounts and adjustments.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-07",
+      "category": "role",
+      "subject": "returns_staff",
+      "attribute": "duty",
+      "value": "Inspects returns in Zone F and proposes restock, rework or scrap.",
+      "unit": "",
+      "statement": "Returns staff inspect returns in Zone F and propose restock, rework or scrap.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-08",
+      "category": "role",
+      "subject": "maintenance_technician",
+      "attribute": "duty",
+      "value": "Maintains MHE, racking and dock equipment and logs all repairs.",
+      "unit": "",
+      "statement": "The maintenance technician maintains MHE, racking and dock equipment and logs all repairs.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ROL-09",
+      "category": "role",
+      "subject": "dispatcher",
+      "attribute": "duty",
+      "value": "Books transport, assigns dock doors and releases outbound loads.",
+      "unit": "",
+      "statement": "Dispatchers book transport, assign dock doors and release outbound loads.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-01",
+      "category": "responsibility",
+      "subject": "stocktake",
+      "attribute": "sign_off_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Only the warehouse manager may sign off stocktake results.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-02",
+      "category": "responsibility",
+      "subject": "damaged_goods",
+      "attribute": "write_off_approver_small",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "The shift supervisor approves damaged-goods write-offs up to 500 EUR.",
+      "source": "company",
+      "formula": "",
+      "refs": [
+        "F-LIM-14"
+      ]
+    },
+    {
+      "id": "F-RSP-03",
+      "category": "responsibility",
+      "subject": "damaged_goods",
+      "attribute": "write_off_approver_large",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "The warehouse manager approves damaged-goods write-offs above 500 EUR.",
+      "source": "company",
+      "formula": "",
+      "refs": [
+        "F-LIM-14"
+      ]
+    },
+    {
+      "id": "F-RSP-04",
+      "category": "responsibility",
+      "subject": "returns",
+      "attribute": "disposition_approver",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "The shift supervisor approves the final disposition of inspected returns.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-05",
+      "category": "responsibility",
+      "subject": "overtime",
+      "attribute": "approval_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Only the warehouse manager may approve overtime.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-06",
+      "category": "responsibility",
+      "subject": "docks",
+      "attribute": "scheduling_owner",
+      "value": "dispatcher",
+      "unit": "",
+      "statement": "The dispatcher assigns dock doors and time slots to carriers.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-07",
+      "category": "responsibility",
+      "subject": "incidents",
+      "attribute": "review_owner",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "The shift supervisor reviews every incident report.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-08",
+      "category": "responsibility",
+      "subject": "forklift",
+      "attribute": "authorisation_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Only the warehouse manager may authorise new forklift operators.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-01",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-01",
+      "value": "Inbound receiving",
+      "unit": "",
+      "statement": "Procedure PR-01 is titled Inbound receiving.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-02",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-02",
+      "value": "Put-away to storage",
+      "unit": "",
+      "statement": "Procedure PR-02 is titled Put-away to storage.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-03",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-03",
+      "value": "Replenishment of pick faces",
+      "unit": "",
+      "statement": "Procedure PR-03 is titled Replenishment of pick faces.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-04",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-04",
+      "value": "Order picking",
+      "unit": "",
+      "statement": "Procedure PR-04 is titled Order picking.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-05",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-05",
+      "value": "Packing and labelling",
+      "unit": "",
+      "statement": "Procedure PR-05 is titled Packing and labelling.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-06",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-06",
+      "value": "Outbound dispatch",
+      "unit": "",
+      "statement": "Procedure PR-06 is titled Outbound dispatch.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-07",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-07",
+      "value": "Returns handling",
+      "unit": "",
+      "statement": "Procedure PR-07 is titled Returns handling.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-08",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-08",
+      "value": "Stocktaking and cycle counts",
+      "unit": "",
+      "statement": "Procedure PR-08 is titled Stocktaking and cycle counts.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-09",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-09",
+      "value": "Damaged-goods handling",
+      "unit": "",
+      "statement": "Procedure PR-09 is titled Damaged-goods handling.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-10",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-10",
+      "value": "Forklift and MHE operation",
+      "unit": "",
+      "statement": "Procedure PR-10 is titled Forklift and MHE operation.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-11",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-11",
+      "value": "Pedestrian safety in the warehouse",
+      "unit": "",
+      "statement": "Procedure PR-11 is titled Pedestrian safety in the warehouse.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-12",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-12",
+      "value": "Cold-chain handling",
+      "unit": "",
+      "statement": "Procedure PR-12 is titled Cold-chain handling.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-13",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-13",
+      "value": "Hazmat handling and spill response",
+      "unit": "",
+      "statement": "Procedure PR-13 is titled Hazmat handling and spill response.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-14",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-14",
+      "value": "Emergency evacuation",
+      "unit": "",
+      "statement": "Procedure PR-14 is titled Emergency evacuation.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-PRC-15",
+      "category": "procedure",
+      "subject": "procedure",
+      "attribute": "PR-15",
+      "value": "End-of-shift handover",
+      "unit": "",
+      "statement": "Procedure PR-15 is titled End-of-shift handover.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RUL-01",
+      "category": "rule",
+      "subject": "ppe",
+      "attribute": "hi_vis_vest",
+      "value": "mandatory",
+      "unit": "",
+      "statement": "High-visibility vests are mandatory for everyone on the warehouse floor.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RUL-02",
+      "category": "rule",
+      "subject": "ppe",
+      "attribute": "safety_footwear",
+      "value": "S3",
+      "unit": "",
+      "statement": "Safety footwear class S3 is mandatory on the warehouse floor.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RUL-03",
+      "category": "rule",
+      "subject": "forklift",
+      "attribute": "seatbelt",
+      "value": "mandatory",
+      "unit": "",
+      "statement": "Forklift operators must wear seat belts whenever the truck is moving.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-01",
+      "category": "step_order",
+      "subject": "receiving",
+      "attribute": "unloading_order",
+      "value": "Document check, then unloading",
+      "unit": "",
+      "statement": "At receiving, the document check happens BEFORE unloading (PR-01).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-02",
+      "category": "step_order",
+      "subject": "receiving",
+      "attribute": "booking_order",
+      "value": "Inspection, then system booking",
+      "unit": "",
+      "statement": "Inbound goods are inspected BEFORE they are booked into the system (PR-01).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-03",
+      "category": "step_order",
+      "subject": "putaway",
+      "attribute": "release_order",
+      "value": "System booking, then put-away",
+      "unit": "",
+      "statement": "Goods are booked into the system BEFORE put-away to storage (PR-02).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-04",
+      "category": "step_order",
+      "subject": "picking",
+      "attribute": "replenishment_order",
+      "value": "Replenishment, then picking",
+      "unit": "",
+      "statement": "Pick faces are replenished BEFORE the picking shift starts (PR-03).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-05",
+      "category": "step_order",
+      "subject": "packing",
+      "attribute": "verification_order",
+      "value": "Scan verification, then packing",
+      "unit": "",
+      "statement": "Picked items are scan-verified BEFORE packing (PR-04, PR-05).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-06",
+      "category": "step_order",
+      "subject": "returns",
+      "attribute": "decision_order",
+      "value": "Inspection, then disposition",
+      "unit": "",
+      "statement": "Returns are inspected BEFORE any restock, rework or scrap decision (PR-07).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-07",
+      "category": "step_order",
+      "subject": "stocktaking",
+      "attribute": "adjustment_order",
+      "value": "Recount, then adjustment",
+      "unit": "",
+      "statement": "A second count happens BEFORE any stock adjustment is posted (PR-08).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-08",
+      "category": "step_order",
+      "subject": "forklift",
+      "attribute": "inspection_order",
+      "value": "Daily check, then first use",
+      "unit": "",
+      "statement": "The daily forklift check happens BEFORE first use each day (PR-10).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-09",
+      "category": "step_order",
+      "subject": "evacuation",
+      "attribute": "reentry_order",
+      "value": "Roll call, then re-entry",
+      "unit": "",
+      "statement": "Roll call at the assembly point happens BEFORE anyone re-enters the building (PR-14).",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-01",
+      "category": "equipment",
+      "subject": "forklift",
+      "attribute": "counterbalance_count",
+      "value": "6",
+      "unit": "trucks",
+      "statement": "The fleet has 6 electric counterbalance forklifts.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-02",
+      "category": "equipment",
+      "subject": "forklift",
+      "attribute": "counterbalance_capacity",
+      "value": "2.5",
+      "unit": "t",
+      "statement": "Counterbalance forklifts are rated at 2.5 t.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-03",
+      "category": "equipment",
+      "subject": "reach_truck",
+      "attribute": "count",
+      "value": "4",
+      "unit": "trucks",
+      "statement": "The fleet has 4 reach trucks for the high bays.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-04",
+      "category": "equipment",
+      "subject": "reach_truck",
+      "attribute": "capacity",
+      "value": "1.6",
+      "unit": "t",
+      "statement": "Reach trucks are rated at 1.6 t.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-05",
+      "category": "equipment",
+      "subject": "pallet_jack",
+      "attribute": "electric_count",
+      "value": "8",
+      "unit": "trucks",
+      "statement": "The fleet has 8 electric pallet jacks.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-06",
+      "category": "equipment",
+      "subject": "pallet_jack",
+      "attribute": "hand_count",
+      "value": "12",
+      "unit": "trucks",
+      "statement": "The site has 12 hand pallet jacks.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-07",
+      "category": "equipment",
+      "subject": "wrapper",
+      "attribute": "stretch_count",
+      "value": "2",
+      "unit": "units",
+      "statement": "Dispatch uses 2 semi-automatic stretch wrappers.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-08",
+      "category": "equipment",
+      "subject": "baler",
+      "attribute": "count",
+      "value": "1",
+      "unit": "units",
+      "statement": "The site has 1 cardboard baler.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-09",
+      "category": "equipment",
+      "subject": "dock",
+      "attribute": "leveller_count",
+      "value": "8",
+      "unit": "units",
+      "statement": "Each of the 8 dock doors has a dock leveller.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-10",
+      "category": "equipment",
+      "subject": "scanner",
+      "attribute": "handheld_count",
+      "value": "20",
+      "unit": "units",
+      "statement": "Pickers and inbound staff share 20 handheld WMS scanners.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-01",
+      "category": "schedule",
+      "subject": "shift_1",
+      "attribute": "hours",
+      "value": "06:00-14:00",
+      "unit": "",
+      "statement": "Shift 1 runs 06:00-14:00, Monday to Friday.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-02",
+      "category": "schedule",
+      "subject": "shift_2",
+      "attribute": "hours",
+      "value": "14:00-22:00",
+      "unit": "",
+      "statement": "Shift 2 runs 14:00-22:00, Monday to Friday.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-03",
+      "category": "schedule",
+      "subject": "cycle_count",
+      "attribute": "frequency",
+      "value": "daily",
+      "unit": "",
+      "statement": "Cycle counts run every working day on a rotating zone schedule.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-04",
+      "category": "schedule",
+      "subject": "stocktake",
+      "attribute": "full_frequency",
+      "value": "annual",
+      "unit": "",
+      "statement": "A full wall-to-wall stocktake runs once a year.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-05",
+      "category": "schedule",
+      "subject": "forklift",
+      "attribute": "daily_check",
+      "value": "daily",
+      "unit": "",
+      "statement": "Every forklift gets a documented pre-use check each day.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-06",
+      "category": "schedule",
+      "subject": "racking",
+      "attribute": "safety_inspection",
+      "value": "monthly",
+      "unit": "",
+      "statement": "Racking gets a documented safety inspection every month.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-07",
+      "category": "schedule",
+      "subject": "evacuation",
+      "attribute": "drill",
+      "value": "quarterly",
+      "unit": "",
+      "statement": "An evacuation drill runs every quarter.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-08",
+      "category": "schedule",
+      "subject": "returns",
+      "attribute": "acceptance_window",
+      "value": "14",
+      "unit": "days",
+      "statement": "Returns are accepted within 14 days of delivery.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-09",
+      "category": "schedule",
+      "subject": "cold_zone",
+      "attribute": "temp_verification",
+      "value": "each shift",
+      "unit": "",
+      "statement": "Cold-zone temperature is manually verified each shift.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-LIM-15",
+      "category": "limit",
+      "subject": "pallet",
+      "attribute": "max_gross_weight",
+      "value": "1000",
+      "unit": "kg",
+      "statement": "A pallet, including its load, may weigh at most 1000 kg.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-11",
+      "category": "equipment",
+      "subject": "trailer",
+      "attribute": "payload",
+      "value": "24000",
+      "unit": "kg",
+      "statement": "Our contracted curtain-side trailers carry a payload of 24000 kg.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-12",
+      "category": "equipment",
+      "subject": "trailer",
+      "attribute": "pallet_positions",
+      "value": "33",
+      "unit": "pallets",
+      "statement": "A trailer has 33 floor pallet positions.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-13",
+      "category": "equipment",
+      "subject": "van",
+      "attribute": "payload",
+      "value": "1200",
+      "unit": "kg",
+      "statement": "Our delivery van carries a payload of 1200 kg.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-14",
+      "category": "equipment",
+      "subject": "van",
+      "attribute": "pallet_positions",
+      "value": "6",
+      "unit": "pallets",
+      "statement": "The delivery van has 6 pallet positions.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-10",
+      "category": "schedule",
+      "subject": "outbound_door",
+      "attribute": "loads_per_shift",
+      "value": "3",
+      "unit": "loads",
+      "statement": "Each outbound door handles 3 trailer loads per shift.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-EQP-15",
+      "category": "equipment",
+      "subject": "docks",
+      "attribute": "outbound_door_count",
+      "value": "4",
+      "unit": "doors",
+      "statement": "There are 4 outbound dock doors.",
+      "source": "company",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-DRV-01",
+      "category": "limit",
+      "subject": "trailer",
+      "attribute": "max_full_pallets",
+      "value": "24",
+      "unit": "pallets",
+      "statement": "A trailer takes at most 24 full-weight pallets (payload divided by maximum pallet weight, capped by floor positions).",
+      "source": "company",
+      "formula": "min(floor({F-EQP-11} / {F-LIM-15}), {F-EQP-12})",
+      "refs": []
+    },
+    {
+      "id": "F-DRV-02",
+      "category": "limit",
+      "subject": "van",
+      "attribute": "max_full_pallets",
+      "value": "1",
+      "unit": "pallets",
+      "statement": "The van takes at most 1 full-weight pallets; heavier orders go by trailer.",
+      "source": "company",
+      "formula": "min(floor({F-EQP-13} / {F-LIM-15}), {F-EQP-14})",
+      "refs": []
+    },
+    {
+      "id": "F-DRV-03",
+      "category": "limit",
+      "subject": "dispatch",
+      "attribute": "max_pallets_per_shift",
+      "value": "288",
+      "unit": "pallets",
+      "statement": "Outbound capacity is at most 288 full-weight pallets per shift (doors x loads per shift x pallets per trailer).",
+      "source": "company",
+      "formula": "{F-EQP-15} * {F-SCH-10} * {F-DRV-01}",
+      "refs": []
+    },
+    {
+      "id": "F-DRV-04",
+      "category": "limit",
+      "subject": "hazmat_cage",
+      "attribute": "max_full_pallets",
+      "value": "4",
+      "unit": "pallets",
+      "statement": "The hazmat cage holds at most 4 full-weight pallets (hazmat stock limit divided by maximum pallet weight).",
+      "source": "company",
+      "formula": "floor({F-LIM-10} / {F-LIM-15})",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-16",
+      "category": "zone",
+      "subject": "handover",
+      "attribute": "location",
+      "value": "warehouse_floor",
+      "unit": "",
+      "statement": "PR-15 End-of-shift handover must be conducted face-to-face on the warehouse floor (not by phone/message/note alone).",
+      "source": "section:ops.ch03.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-11",
+      "category": "schedule",
+      "subject": "handover",
+      "attribute": "frequency",
+      "value": "every_supervisor_change",
+      "unit": "",
+      "statement": "Procedure PR-15 must be applied at every change of supervisor.",
+      "source": "section:ops.ch03.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-09",
+      "category": "responsibility",
+      "subject": "handover",
+      "attribute": "accountability_holder",
+      "value": "outgoing_shift_supervisor_until_acceptance",
+      "unit": "",
+      "statement": "The outgoing shift supervisor remains accountable until the incoming shift supervisor confirms acceptance of the handover.",
+      "source": "section:ops.ch03.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-10",
+      "category": "responsibility",
+      "subject": "handover",
+      "attribute": "sign_off",
+      "value": "both_supervisors",
+      "unit": "",
+      "statement": "Both outgoing and incoming shift supervisors must sign the handover record.",
+      "source": "section:ops.ch03.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-10",
+      "category": "step_order",
+      "subject": "handover",
+      "attribute": "briefing_order",
+      "value": "staffing_incidents_then_cycle_counts_then_mhe_availability_then_cold_zone",
+      "unit": "",
+      "statement": "Handover briefing must be delivered in order: staffing/incidents, then cycle counts, then MHE availability, then cold zone.",
+      "source": "section:ops.ch03.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-17",
+      "category": "zone",
+      "subject": "unverified_picks",
+      "attribute": "location",
+      "value": "zone_c",
+      "unit": "",
+      "statement": "All unverified picks must be held inside Zone C until WMS verification passes and must not be moved to Zone D.",
+      "source": "section:ops.ch06.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-11",
+      "category": "responsibility",
+      "subject": "scan_verification",
+      "attribute": "performer",
+      "value": "picker",
+      "unit": "",
+      "statement": "Scan verification for PR-04 orders must be performed by the picker who picked the order on their own picks, with no delegation.",
+      "source": "section:ops.ch06.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-11",
+      "category": "step_order",
+      "subject": "scan_verification",
+      "attribute": "scan_sequence",
+      "value": "order_barcode_then_item_barcodes",
+      "unit": "",
+      "statement": "Verification must be executed by scanning the order/tote barcode first, then scanning each item barcode individually.",
+      "source": "section:ops.ch06.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-12",
+      "category": "responsibility",
+      "subject": "persistent_scan_failure",
+      "attribute": "notify_roles",
+      "value": "shift_supervisor, stock_controller",
+      "unit": "",
+      "statement": "Any persistent scan failure must be escalated to the shift supervisor and stock controller and the affected tote kept in Zone C.",
+      "source": "section:ops.ch06.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-18",
+      "category": "zone",
+      "subject": "packing",
+      "attribute": "location",
+      "value": "zone_d",
+      "unit": "",
+      "statement": "All packing for PR-05 must be performed in Zone D.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-19",
+      "category": "zone",
+      "subject": "labelling",
+      "attribute": "location",
+      "value": "zone_d",
+      "unit": "",
+      "statement": "All labelling for PR-05 must be performed in Zone D.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-20",
+      "category": "zone",
+      "subject": "wrapping",
+      "attribute": "location",
+      "value": "zone_d",
+      "unit": "",
+      "statement": "All wrapping of outbound pallets must be performed in Zone D.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-21",
+      "category": "zone",
+      "subject": "stretch_wrapper",
+      "attribute": "location",
+      "value": "zone_d",
+      "unit": "",
+      "statement": "The 2 semi-automatic stretch wrappers used for dispatch are located in Zone D.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-12",
+      "category": "step_order",
+      "subject": "pr05_pr06",
+      "attribute": "execution_order",
+      "value": "pr05_before_pr06",
+      "unit": "",
+      "statement": "PR-05 Packing and labelling must be completed in full before any load is released under PR-06 Outbound dispatch.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-13",
+      "category": "step_order",
+      "subject": "outbound_pallet",
+      "attribute": "wrapping_staging_order",
+      "value": "wrapping_before_staging",
+      "unit": "",
+      "statement": "Every outbound pallet must be stretch-wrapped prior to placement in outbound staging.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-14",
+      "category": "step_order",
+      "subject": "outbound_pallet",
+      "attribute": "door_confirmation_order",
+      "value": "door_confirmation_before_dock_move",
+      "unit": "",
+      "statement": "Door assignment for docks 5-8 must be confirmed before pallets are moved to the dock.",
+      "source": "section:ops.ch07.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-22",
+      "category": "zone",
+      "subject": "pr06_outbound_dispatch",
+      "attribute": "location",
+      "value": "zone_d",
+      "unit": "",
+      "statement": "All outbound movements under PR-06 Outbound dispatch are executed from Zone D.",
+      "source": "section:ops.ch07.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-15",
+      "category": "step_order",
+      "subject": "vehicle_release",
+      "attribute": "wms_record_order",
+      "value": "record_before_release",
+      "unit": "",
+      "statement": "Trailer and van loads, door numbers and pallet counts must be recorded in the WMS before the vehicle is released.",
+      "source": "section:ops.ch07.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-13",
+      "category": "responsibility",
+      "subject": "overweight_pallet",
+      "attribute": "report_recipient",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Any overweight pallet or over-limit staging must be reported to the shift supervisor immediately.",
+      "source": "section:ops.ch07.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-23",
+      "category": "zone",
+      "subject": "returns",
+      "attribute": "receiving_location",
+      "value": "zone_a",
+      "unit": "",
+      "statement": "All customer returns must be received in Zone A through dock doors 1-4 and must not be received in Zone D.",
+      "source": "section:ops.ch10.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-24",
+      "category": "zone",
+      "subject": "returns",
+      "attribute": "post_inspection_holding_location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "Inspected returns must be kept physically in Zone F until disposition is approved and posted in the WMS and must not be moved to bulk storage, picking or dispatch staging before approval.",
+      "source": "section:ops.ch10.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-25",
+      "category": "zone",
+      "subject": "hazmat_return",
+      "attribute": "segregation_location",
+      "value": "zone_f_adjacent_to_hazmat_cage",
+      "unit": "",
+      "statement": "Any return marked hazmat, leaking or odorous must be segregated adjacent to the hazmat cage in Zone F for specialist assessment and not opened on the general inspection bench.",
+      "source": "section:ops.ch10.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-14",
+      "category": "responsibility",
+      "subject": "returns_exception",
+      "attribute": "notification_recipient",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Any return that cannot be identified, is contaminated or presents a safety risk must be held in Zone F and the shift supervisor notified for instruction.",
+      "source": "section:ops.ch10.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-16",
+      "category": "step_order",
+      "subject": "returns_inspection",
+      "attribute": "duty_sequence",
+      "value": "verify_return_and_window_then_open_count_examine_then_photograph_retain_labels_then_propose_disposition",
+      "unit": "",
+      "statement": "Returns staff must execute PR-07 inspection in order: verify return against delivery and 14-day window, then open/count/examine condition, then photograph damage and retain labels, then propose restock/rework/scrap.",
+      "source": "section:ops.ch10.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-17",
+      "category": "step_order",
+      "subject": "returns_handling",
+      "attribute": "wms_record_before_move_order",
+      "value": "record_inspection_outcome_before_moving",
+      "unit": "",
+      "statement": "The inspection outcome must be recorded in the WMS before the physical return is moved from Zone F.",
+      "source": "section:ops.ch10.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-26",
+      "category": "zone",
+      "subject": "damaged_goods",
+      "attribute": "quarantine_location",
+      "value": "zone_f_quarantine_area",
+      "unit": "",
+      "statement": "All goods awaiting disposition under PR-09 Damaged-goods handling must be held in the quarantine area in Zone F.",
+      "source": "section:ops.ch10.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-27",
+      "category": "zone",
+      "subject": "rework_goods",
+      "attribute": "destination_location",
+      "value": "zone_f",
+      "unit": "",
+      "statement": "Approved rework goods under PR-07/PR-09 must be routed to the designated work area in Zone F.",
+      "source": "section:ops.ch10.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-15",
+      "category": "responsibility",
+      "subject": "damaged_goods",
+      "attribute": "large_write_off_endorser",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "For damaged-goods write-offs above 500 EUR the shift supervisor must endorse the request and forward it to the warehouse manager for final decision.",
+      "source": "section:ops.ch10.s2",
+      "formula": "",
+      "refs": [
+        "F-LIM-14"
+      ]
+    },
+    {
+      "id": "F-RSP-16",
+      "category": "responsibility",
+      "subject": "stocktake",
+      "attribute": "recount_performer",
+      "value": "different_counter_than_first_count",
+      "unit": "",
+      "statement": "A stocktake recount must be assigned to a different counter than the first count.",
+      "source": "section:ops.ch11.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-17",
+      "category": "responsibility",
+      "subject": "stocktake",
+      "attribute": "recount_verifier",
+      "value": "stock_controller",
+      "unit": "",
+      "statement": "The stock controller must verify the recount result before any adjustment is posted.",
+      "source": "section:ops.ch11.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-18",
+      "category": "responsibility",
+      "subject": "stocktake",
+      "attribute": "count_team_independence",
+      "value": "independent_from_normal_operating_area",
+      "unit": "",
+      "statement": "Counting teams must be independent from the stockholding area they normally operate.",
+      "source": "section:ops.ch11.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-18",
+      "category": "step_order",
+      "subject": "stocktake",
+      "attribute": "system_release_order",
+      "value": "sign_off_before_release",
+      "unit": "",
+      "statement": "The WMS/system must not be released for normal operations until the warehouse manager sign-off is recorded.",
+      "source": "section:ops.ch11.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-28",
+      "category": "zone",
+      "subject": "hazmat",
+      "attribute": "staging_location",
+      "value": "hazmat_cage",
+      "unit": "",
+      "statement": "Hazmat must be staged only inside the hazmat cage in Zone F.",
+      "source": "section:ops.ch12.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-29",
+      "category": "zone",
+      "subject": "cold_chain_affected_stock",
+      "attribute": "holding_location",
+      "value": "zone_e",
+      "unit": "",
+      "statement": "Affected chilled stock subject to a temperature alarm must be held inside Zone E and tagged pending decision.",
+      "source": "section:ops.ch12.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-19",
+      "category": "responsibility",
+      "subject": "chilled_goods",
+      "attribute": "release_authoriser",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Chilled goods must not be moved to another zone until the shift supervisor authorises release.",
+      "source": "section:ops.ch12.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-20",
+      "category": "responsibility",
+      "subject": "cold_zone_temperature_alarm",
+      "attribute": "notification_recipient",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Any cold-zone temperature alarm or out-of-range reading must be notified to the shift supervisor without delay.",
+      "source": "section:ops.ch12.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-19",
+      "category": "step_order",
+      "subject": "hazmat_spill_response",
+      "attribute": "execution_order",
+      "value": "stop_work_and_alert > notify_shift_supervisor > ventilate_and_isolate > don_ppe_and_deploy_spill_kit > contain_absorb_collect_and_log",
+      "unit": "",
+      "statement": "Spill response under PR-13 must be executed in order: stop work and alert, notify shift supervisor, ventilate and isolate, don PPE and deploy spill kit, contain/absorb/collect and log.",
+      "source": "section:ops.ch12.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-20",
+      "category": "step_order",
+      "subject": "cold_chain_alarm_response",
+      "attribute": "execution_order",
+      "value": "recheck_at_calibrated_display_in_zone_e > keep_doors_closed_and_restrict_entry > notify_shift_supervisor > hold_and_tag_stock_in_zone_e > await_authorised_release",
+      "unit": "",
+      "statement": "Cold-chain alarm response under PR-12 must be executed in order: recheck at calibrated display inside Zone E, keep doors closed/restrict entry, notify shift supervisor, hold and tag affected stock inside Zone E, do not move until shift supervisor authorises release.",
+      "source": "section:ops.ch12.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-30",
+      "category": "zone",
+      "subject": "assembly_point",
+      "attribute": "location",
+      "value": "north fence",
+      "unit": "",
+      "statement": "The evacuation assembly point is at the north fence outside the building.",
+      "source": "section:ops.ch12.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-21",
+      "category": "responsibility",
+      "subject": "evacuation",
+      "attribute": "roll_call_conductor",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Evacuation roll call at the assembly point is conducted by the shift supervisor.",
+      "source": "section:ops.ch12.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-22",
+      "category": "responsibility",
+      "subject": "evacuation",
+      "attribute": "reentry_authoriser",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Re-entry after evacuation must be confirmed/authorised by the shift supervisor after building is declared safe.",
+      "source": "section:ops.ch12.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-SCH-12",
+      "category": "schedule",
+      "subject": "damaged_goods",
+      "attribute": "quarantine_deadline",
+      "value": "same_day",
+      "unit": "",
+      "statement": "Damaged, leaking or suspected non-conforming stock must be moved to the quarantine area in Zone F on the same day it is identified.",
+      "source": "section:hs.ch04.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-23",
+      "category": "responsibility",
+      "subject": "returns",
+      "attribute": "acceptance_window_exception_authority",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "Returns outside the 14-day acceptance window may only be accepted if the shift supervisor instructs otherwise.",
+      "source": "section:hs.ch04.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-31",
+      "category": "zone",
+      "subject": "scrap_stock",
+      "attribute": "quarantine_location",
+      "value": "zone_f_quarantine_area",
+      "unit": "",
+      "statement": "Scrap stock from returns must be held in the quarantine area in Zone F until approved for disposal.",
+      "source": "section:hs.ch04.s2",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-24",
+      "category": "responsibility",
+      "subject": "dispatcher",
+      "attribute": "door_assignment_notification_recipients",
+      "value": "shift_supervisor, forklift_operator, carrier",
+      "unit": "",
+      "statement": "The dispatcher must communicate door assignments to the shift supervisor, forklift operators and carriers before loading.",
+      "source": "section:roles.ch01.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-25",
+      "category": "responsibility",
+      "subject": "outbound_capacity",
+      "attribute": "excess_capacity_approval_authority",
+      "value": "warehouse_manager",
+      "unit": "",
+      "statement": "Adding trailer capacity beyond the 288 full-weight pallet per shift limit requires warehouse manager agreement.",
+      "source": "section:roles.ch01.s3",
+      "formula": "",
+      "refs": [
+        "F-DRV-03"
+      ]
+    },
+    {
+      "id": "F-ORD-21",
+      "category": "step_order",
+      "subject": "pr06_outbound_dispatch",
+      "attribute": "door_assignment_order",
+      "value": "confirm_order_completeness_and_packing_before_door_assignment",
+      "unit": "",
+      "statement": "Under PR-06 order completeness and packing completion must be confirmed before a door is assigned.",
+      "source": "section:roles.ch01.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-22",
+      "category": "step_order",
+      "subject": "pr06_outbound_dispatch",
+      "attribute": "release_order",
+      "value": "loading_and_door_checks_before_release",
+      "unit": "",
+      "statement": "Under PR-06 a load may only be released after loading and door checks are complete.",
+      "source": "section:roles.ch01.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-26",
+      "category": "responsibility",
+      "subject": "handover",
+      "attribute": "dispatcher_participation",
+      "value": "required_with_outgoing_and_incoming_shift_supervisors",
+      "unit": "",
+      "statement": "The dispatcher must participate in PR-15 End-of-shift handover with the outgoing and incoming shift supervisors.",
+      "source": "section:roles.ch01.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-23",
+      "category": "step_order",
+      "subject": "pr04_order_picking",
+      "attribute": "execution_order",
+      "value": "scan_location_then_scan_item_then_confirm_quantity_then_place_to_tote_cart",
+      "unit": "",
+      "statement": "PR-04 Order picking must be executed in sequence: scan location, scan item, confirm quantity, place to tote/cart.",
+      "source": "section:roles.ch02.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-27",
+      "category": "responsibility",
+      "subject": "picking",
+      "attribute": "replenishment_exception_notify_recipient",
+      "value": "shift_supervisor",
+      "unit": "",
+      "statement": "If pick faces are incomplete or flagged as not replenished before PR-04, the picker must notify the shift supervisor and await replenishment.",
+      "source": "section:roles.ch02.s3",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ZON-32",
+      "category": "zone",
+      "subject": "overweight_pallet",
+      "attribute": "weigh_check_location",
+      "value": "zone_a",
+      "unit": "",
+      "statement": "Overweight pallets are weigh-checked and rejected or reworked in Zone A.",
+      "source": "section:sla.ch01.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-ORD-24",
+      "category": "step_order",
+      "subject": "overweight_pallet",
+      "attribute": "handling_order",
+      "value": "weigh_check_before_system_booking",
+      "unit": "",
+      "statement": "Overweight pallets must be weigh-checked and rejected or reworked before system booking.",
+      "source": "section:sla.ch01.s1",
+      "formula": "",
+      "refs": []
+    },
+    {
+      "id": "F-RSP-28",
+      "category": "responsibility",
+      "subject": "inbound_non_conformance",
+      "attribute": "notification_recipient",
+      "value": "client",
+      "unit": "",
+      "statement": "The client must be notified of any non-conformance identified during inbound inspection.",
+      "source": "section:sla.ch01.s1",
+      "formula": "",
+      "refs": []
+    }
+  ],
+  "usage": {
+    "F-ZON-07": [
+      "ops.ch01.s1",
+      "ops.ch11.s2",
+      "ops.ch12.s3",
+      "hs.ch01.s1",
+      "hs.ch02.s1",
+      "hs.ch03.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch03.s3",
+      "sla.ch01.s1",
+      "sla.ch02.s1",
+      "sla.ch02.s2"
+    ],
+    "F-ZON-08": [
+      "ops.ch01.s1",
+      "ops.ch05.s1",
+      "hs.ch03.s3",
+      "roles.ch01.s1",
+      "roles.ch02.s1",
+      "roles.ch03.s1",
+      "sla.ch02.s1"
+    ],
+    "F-ZON-09": [
+      "ops.ch01.s1",
+      "ops.ch01.s3",
+      "ops.ch04.s1",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-ZON-12": [
+      "ops.ch01.s1",
+      "ops.ch01.s2",
+      "ops.ch05.s3",
+      "ops.ch12.s2",
+      "hs.ch03.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1"
+    ],
+    "F-SCH-01": [
+      "ops.ch01.s1",
+      "ops.ch02.s3",
+      "ops.ch03.s1",
+      "hs.ch02.s2",
+      "hs.ch04.s1",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s4",
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch02.s3",
+      "sla.ch03.s3"
+    ],
+    "F-SCH-02": [
+      "ops.ch01.s1",
+      "ops.ch02.s3",
+      "ops.ch03.s1",
+      "hs.ch02.s2",
+      "hs.ch04.s1",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s4",
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch02.s3",
+      "sla.ch03.s3"
+    ],
+    "F-LIM-11": [
+      "ops.ch01.s2",
+      "ops.ch01.s3",
+      "ops.ch05.s1",
+      "ops.ch06.s1",
+      "ops.ch08.s1",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "sla.ch02.s1"
+    ],
+    "F-LIM-12": [
+      "ops.ch01.s2",
+      "ops.ch05.s1",
+      "ops.ch06.s1",
+      "ops.ch08.s1",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "sla.ch02.s1"
+    ],
+    "F-LIM-13": [
+      "ops.ch01.s2",
+      "ops.ch08.s1",
+      "ops.ch08.s3",
+      "ops.ch12.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "sla.ch02.s1"
+    ],
+    "F-ZON-01": [
+      "ops.ch01.s2",
+      "ops.ch04.s1",
+      "ops.ch04.s2",
+      "ops.ch08.s1",
+      "hs.ch01.s2",
+      "roles.ch01.s2",
+      "roles.ch02.s2",
+      "sla.ch01.s1"
+    ],
+    "F-ZON-02": [
+      "ops.ch01.s2",
+      "ops.ch04.s3",
+      "ops.ch05.s1",
+      "ops.ch06.s1",
+      "ops.ch08.s1",
+      "ops.ch11.s1",
+      "hs.ch03.s3",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s1",
+      "sla.ch02.s1"
+    ],
+    "F-ZON-03": [
+      "ops.ch01.s2",
+      "ops.ch06.s1",
+      "ops.ch06.s2",
+      "ops.ch06.s3",
+      "ops.ch08.s1",
+      "ops.ch11.s1",
+      "roles.ch01.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s1",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-ZON-04": [
+      "ops.ch01.s2",
+      "ops.ch06.s3",
+      "ops.ch07.s1",
+      "ops.ch07.s2",
+      "ops.ch08.s1",
+      "ops.ch10.s1",
+      "hs.ch01.s2",
+      "hs.ch04.s3",
+      "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s3",
+      "sla.ch01.s2"
+    ],
+    "F-ZON-05": [
+      "ops.ch01.s2",
+      "ops.ch04.s3",
+      "ops.ch05.s2",
+      "ops.ch11.s1",
+      "ops.ch12.s2",
+      "hs.ch03.s1",
+      "roles.ch01.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s4",
+      "sla.ch03.s3"
+    ],
+    "F-ZON-06": [
+      "ops.ch01.s2",
+      "ops.ch04.s3",
+      "ops.ch05.s3",
+      "ops.ch07.s1",
+      "ops.ch10.s1",
+      "ops.ch10.s2",
+      "ops.ch11.s1",
+      "hs.ch03.s2",
+      "hs.ch04.s2",
+      "roles.ch01.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1",
+      "sla.ch03.s2"
+    ],
+    "F-ZON-13": [
+      "ops.ch01.s2",
+      "ops.ch04.s3",
+      "ops.ch05.s3",
+      "ops.ch10.s2",
+      "hs.ch03.s2",
+      "hs.ch04.s2",
+      "roles.ch01.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1",
+      "sla.ch03.s2"
+    ],
+    "F-ZON-14": [
+      "ops.ch01.s2",
+      "ops.ch05.s3",
+      "ops.ch10.s1",
+      "hs.ch04.s2",
+      "roles.ch01.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s2"
+    ],
+    "F-ZON-15": [
+      "ops.ch01.s2",
+      "ops.ch04.s3",
+      "ops.ch05.s3",
+      "ops.ch10.s1",
+      "ops.ch12.s2",
+      "hs.ch03.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1"
+    ],
+    "F-LIM-01": [
+      "ops.ch01.s3",
+      "ops.ch04.s1",
+      "ops.ch06.s1",
+      "ops.ch06.s2",
+      "ops.ch07.s2",
+      "ops.ch08.s2",
+      "ops.ch08.s3",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4",
+      "sla.ch01.s3"
+    ],
+    "F-LIM-02": [
+      "ops.ch01.s3",
+      "ops.ch04.s1",
+      "ops.ch08.s2",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4",
+      "sla.ch01.s3"
+    ],
+    "F-LIM-04": [
+      "ops.ch01.s3",
+      "ops.ch04.s1",
+      "ops.ch07.s2",
+      "ops.ch08.s2",
+      "ops.ch08.s3",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4",
+      "sla.ch01.s3"
+    ],
+    "F-ZON-10": [
+      "ops.ch01.s3",
+      "ops.ch02.s3",
+      "ops.ch04.s1",
+      "ops.ch10.s1",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s2",
+      "sla.ch01.s1",
+      "sla.ch01.s3"
+    ],
+    "F-ZON-11": [
+      "ops.ch01.s3",
+      "ops.ch02.s3",
+      "ops.ch07.s1",
+      "ops.ch07.s2",
+      "ops.ch07.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch02.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-ROL-09": [
+      "ops.ch01.s3",
+      "ops.ch02.s1",
+      "ops.ch02.s3",
+      "ops.ch04.s1",
+      "ops.ch07.s2",
+      "hs.ch02.s2",
+      "roles.ch01.s3",
+      "roles.ch03.s4",
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-RSP-06": [
+      "ops.ch01.s3",
+      "ops.ch02.s3",
+      "ops.ch04.s1",
+      "ops.ch07.s2",
+      "hs.ch01.s2",
+      "hs.ch02.s2",
+      "roles.ch01.s3",
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-PRC-01": [
+      "ops.ch01.s3",
+      "ops.ch04.s1",
+      "ops.ch04.s2",
+      "ops.ch04.s3",
+      "roles.ch02.s2",
+      "sla.ch01.s1"
+    ],
+    "F-PRC-06": [
+      "ops.ch01.s3",
+      "ops.ch07.s1",
+      "ops.ch07.s2",
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "roles.ch02.s3",
+      "sla.ch01.s2"
+    ],
+    "F-EQP-09": [
+      "ops.ch01.s3",
+      "ops.ch07.s2",
+      "ops.ch12.s1",
+      "hs.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "sla.ch01.s1",
+      "sla.ch01.s3"
+    ],
+    "F-SCH-10": [
+      "ops.ch01.s3",
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-EQP-15": [
+      "ops.ch01.s3",
+      "ops.ch05.s3",
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-ROL-01": [
+      "ops.ch02.s1",
+      "ops.ch02.s2",
+      "ops.ch03.s1",
+      "ops.ch09.s2",
+      "ops.ch10.s2",
+      "ops.ch11.s2",
+      "ops.ch12.s3",
+      "hs.ch01.s3",
+      "hs.ch02.s1",
+      "hs.ch02.s2",
+      "hs.ch03.s1",
+      "hs.ch03.s2",
+      "hs.ch04.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch03.s4",
+      "sla.ch02.s2",
+      "sla.ch02.s3",
+      "sla.ch03.s1",
+      "sla.ch03.s3"
+    ],
+    "F-ROL-02": [
+      "ops.ch02.s1",
+      "ops.ch02.s2",
+      "ops.ch02.s3",
+      "ops.ch03.s1",
+      "ops.ch03.s2",
+      "ops.ch08.s3",
+      "ops.ch10.s2",
+      "ops.ch12.s2",
+      "ops.ch12.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch02.s1",
+      "hs.ch02.s2",
+      "hs.ch03.s1",
+      "hs.ch04.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s2",
+      "roles.ch03.s4",
+      "sla.ch02.s2",
+      "sla.ch02.s3",
+      "sla.ch03.s1",
+      "sla.ch03.s2"
+    ],
+    "F-ROL-03": [
+      "ops.ch02.s1",
+      "ops.ch06.s1",
+      "ops.ch09.s1",
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s3",
+      "hs.ch02.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s4"
+    ],
+    "F-ROL-04": [
+      "ops.ch02.s1",
+      "ops.ch06.s1",
+      "ops.ch06.s2",
+      "ops.ch06.s3",
+      "roles.ch02.s3",
+      "roles.ch03.s4",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-ROL-05": [
+      "ops.ch02.s1",
+      "ops.ch04.s1",
+      "ops.ch04.s2",
+      "ops.ch04.s3",
+      "ops.ch05.s2",
+      "hs.ch01.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s4",
+      "sla.ch01.s1"
+    ],
+    "F-ROL-06": [
+      "ops.ch02.s1",
+      "ops.ch11.s1",
+      "ops.ch11.s2",
+      "ops.ch11.s3",
+      "roles.ch03.s1",
+      "roles.ch03.s4",
+      "sla.ch02.s1",
+      "sla.ch02.s2"
+    ],
+    "F-ROL-07": [
+      "ops.ch02.s1",
+      "ops.ch05.s3",
+      "ops.ch10.s1",
+      "ops.ch10.s2",
+      "hs.ch04.s2",
+      "roles.ch03.s2",
+      "roles.ch03.s4",
+      "sla.ch03.s2"
+    ],
+    "F-ROL-08": [
+      "ops.ch02.s1",
+      "ops.ch09.s2",
+      "ops.ch12.s1",
+      "hs.ch01.s3",
+      "hs.ch02.s2",
+      "hs.ch03.s2",
+      "hs.ch03.s3",
+      "roles.ch03.s3",
+      "roles.ch03.s4",
+      "sla.ch03.s3"
+    ],
+    "F-LIM-14": [
+      "ops.ch02.s2",
+      "ops.ch10.s2",
+      "ops.ch11.s3",
+      "hs.ch04.s2",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1"
+    ],
+    "F-RSP-01": [
+      "ops.ch02.s2",
+      "ops.ch10.s2",
+      "ops.ch11.s1",
+      "ops.ch11.s2",
+      "ops.ch11.s3",
+      "roles.ch01.s1",
+      "roles.ch03.s1",
+      "sla.ch02.s2"
+    ],
+    "F-RSP-02": [
+      "ops.ch02.s2",
+      "ops.ch02.s3",
+      "ops.ch10.s2",
+      "ops.ch11.s3",
+      "hs.ch04.s2",
+      "roles.ch01.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1"
+    ],
+    "F-RSP-03": [
+      "ops.ch02.s2",
+      "ops.ch10.s2",
+      "ops.ch11.s3",
+      "hs.ch04.s2",
+      "roles.ch01.s1",
+      "sla.ch03.s1"
+    ],
+    "F-RSP-04": [
+      "ops.ch02.s2",
+      "ops.ch02.s3",
+      "ops.ch10.s2",
+      "hs.ch04.s2",
+      "roles.ch01.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s2"
+    ],
+    "F-RSP-05": [
+      "ops.ch02.s2",
+      "ops.ch03.s1",
+      "hs.ch02.s2",
+      "roles.ch01.s1",
+      "roles.ch03.s4",
+      "sla.ch01.s1",
+      "sla.ch02.s3"
+    ],
+    "F-RSP-07": [
+      "ops.ch02.s2",
+      "ops.ch02.s3",
+      "ops.ch03.s2",
+      "ops.ch08.s2",
+      "ops.ch12.s3",
+      "hs.ch02.s2",
+      "hs.ch04.s1",
+      "roles.ch01.s2",
+      "sla.ch02.s2"
+    ],
+    "F-RSP-08": [
+      "ops.ch02.s2",
+      "ops.ch09.s2",
+      "hs.ch01.s1",
+      "hs.ch01.s3",
+      "hs.ch02.s2",
+      "roles.ch01.s1",
+      "roles.ch02.s1",
+      "roles.ch03.s4"
+    ],
+    "F-PRC-07": [
+      "ops.ch02.s2",
+      "ops.ch10.s1",
+      "ops.ch10.s2",
+      "hs.ch04.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s2"
+    ],
+    "F-PRC-08": [
+      "ops.ch02.s2",
+      "ops.ch11.s1",
+      "ops.ch11.s2",
+      "ops.ch11.s3",
+      "roles.ch01.s1",
+      "roles.ch03.s1",
+      "sla.ch02.s2",
+      "sla.ch02.s3"
+    ],
+    "F-PRC-09": [
+      "ops.ch02.s2",
+      "ops.ch05.s3",
+      "ops.ch10.s2",
+      "hs.ch03.s3",
+      "hs.ch04.s2",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s1"
+    ],
+    "F-PRC-15": [
+      "ops.ch02.s2",
+      "ops.ch03.s1",
+      "ops.ch03.s2",
+      "hs.ch02.s2",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch01.s3",
+      "roles.ch03.s4",
+      "sla.ch02.s3"
+    ],
+    "F-ORD-09": [
+      "ops.ch03.s2",
+      "ops.ch12.s3",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s3",
+      "roles.ch03.s4"
+    ],
+    "F-SCH-03": [
+      "ops.ch03.s2",
+      "ops.ch11.s1",
+      "ops.ch11.s3",
+      "roles.ch03.s1",
+      "sla.ch02.s2",
+      "sla.ch02.s3"
+    ],
+    "F-SCH-05": [
+      "ops.ch03.s2",
+      "ops.ch09.s2",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4"
+    ],
+    "F-SCH-09": [
+      "ops.ch03.s2",
+      "ops.ch05.s2",
+      "ops.ch12.s2",
+      "hs.ch03.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s4",
+      "sla.ch02.s3",
+      "sla.ch03.s3"
+    ],
+    "F-ZON-16": [
+      "ops.ch03.s2"
+    ],
+    "F-SCH-11": [
+      "ops.ch03.s2"
+    ],
+    "F-RSP-09": [
+      "ops.ch03.s2"
+    ],
+    "F-RSP-10": [
+      "ops.ch03.s2"
+    ],
+    "F-ORD-10": [
+      "ops.ch03.s2"
+    ],
+    "F-LIM-03": [
+      "ops.ch04.s1",
+      "ops.ch06.s2",
+      "ops.ch07.s2",
+      "ops.ch08.s2",
+      "ops.ch08.s3",
+      "ops.ch09.s3",
+      "ops.ch12.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4",
+      "sla.ch01.s3"
+    ],
+    "F-RUL-01": [
+      "ops.ch04.s1",
+      "ops.ch04.s2",
+      "ops.ch06.s2",
+      "ops.ch07.s1",
+      "ops.ch08.s1",
+      "ops.ch08.s3",
+      "hs.ch01.s2",
+      "hs.ch02.s1",
+      "hs.ch03.s1",
+      "hs.ch03.s2",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s2",
+      "roles.ch03.s4"
+    ],
+    "F-RUL-02": [
+      "ops.ch04.s1",
+      "ops.ch04.s2",
+      "ops.ch06.s2",
+      "ops.ch07.s1",
+      "ops.ch08.s3",
+      "hs.ch01.s2",
+      "hs.ch02.s1",
+      "hs.ch03.s1",
+      "hs.ch03.s2",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s2",
+      "roles.ch03.s4"
+    ],
+    "F-ORD-01": [
+      "ops.ch04.s1",
+      "ops.ch04.s2",
+      "roles.ch02.s2",
+      "sla.ch01.s1"
+    ],
+    "F-ORD-02": [
+      "ops.ch04.s2",
+      "ops.ch04.s3",
+      "roles.ch02.s2",
+      "sla.ch01.s1"
+    ],
+    "F-EQP-10": [
+      "ops.ch04.s2",
+      "ops.ch04.s3",
+      "ops.ch06.s1",
+      "ops.ch06.s2",
+      "ops.ch06.s3",
+      "ops.ch09.s1",
+      "ops.ch11.s1",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch02.s3",
+      "roles.ch03.s1",
+      "sla.ch02.s1",
+      "sla.ch02.s3"
+    ],
+    "F-LIM-15": [
+      "ops.ch04.s2",
+      "ops.ch05.s1",
+      "ops.ch05.s2",
+      "ops.ch05.s3",
+      "ops.ch07.s1",
+      "ops.ch07.s3",
+      "ops.ch09.s1",
+      "ops.ch12.s2",
+      "hs.ch03.s2",
+      "hs.ch03.s3",
+      "roles.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "sla.ch01.s1",
+      "sla.ch01.s2",
+      "sla.ch01.s3",
+      "sla.ch02.s1",
+      "sla.ch03.s1"
+    ],
+    "F-PRC-02": [
+      "ops.ch04.s3",
+      "ops.ch05.s1",
+      "ops.ch05.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "sla.ch01.s1"
+    ],
+    "F-ORD-03": [
+      "ops.ch04.s3",
+      "ops.ch05.s1",
+      "ops.ch05.s2",
+      "ops.ch05.s3",
+      "roles.ch02.s1",
+      "roles.ch02.s2",
+      "sla.ch01.s1"
+    ],
+    "F-LIM-05": [
+      "ops.ch05.s1",
+      "ops.ch12.s1",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "sla.ch02.s1"
+    ],
+    "F-LIM-06": [
+      "ops.ch05.s1",
+      "ops.ch12.s1",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "sla.ch02.s1"
+    ],
+    "F-LIM-07": [
+      "ops.ch05.s1",
+      "ops.ch09.s1",
+      "ops.ch12.s1",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s1",
+      "roles.ch03.s3",
+      "sla.ch02.s1"
+    ],
+    "F-EQP-01": [
+      "ops.ch05.s1",
+      "ops.ch09.s1",
+      "ops.ch09.s2",
+      "ops.ch12.s1",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3"
+    ],
+    "F-EQP-02": [
+      "ops.ch05.s1",
+      "ops.ch09.s1",
+      "ops.ch09.s3",
+      "hs.ch01.s3",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3"
+    ],
+    "F-EQP-03": [
+      "ops.ch05.s1",
+      "ops.ch09.s1",
+      "ops.ch09.s2",
+      "ops.ch12.s1",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3"
+    ],
+    "F-EQP-04": [
+      "ops.ch05.s1",
+      "ops.ch09.s1",
+      "ops.ch09.s3",
+      "hs.ch01.s3",
+      "hs.ch03.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3"
+    ],
+    "F-SCH-06": [
+      "ops.ch05.s1",
+      "ops.ch09.s3",
+      "ops.ch12.s1",
+      "hs.ch03.s3",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "sla.ch02.s2",
+      "sla.ch02.s3"
+    ],
+    "F-LIM-08": [
+      "ops.ch05.s2",
+      "ops.ch12.s2",
+      "hs.ch03.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s4",
+      "sla.ch03.s3"
+    ],
+    "F-LIM-09": [
+      "ops.ch05.s2",
+      "ops.ch12.s2",
+      "hs.ch03.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s4",
+      "sla.ch03.s3"
+    ],
+    "F-PRC-12": [
+      "ops.ch05.s2",
+      "ops.ch12.s2",
+      "hs.ch03.s1",
+      "roles.ch02.s2",
+      "roles.ch03.s4",
+      "sla.ch03.s3"
+    ],
+    "F-LIM-10": [
+      "ops.ch05.s3",
+      "ops.ch07.s3",
+      "ops.ch09.s1",
+      "ops.ch12.s2",
+      "hs.ch03.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s2",
+      "roles.ch03.s4",
+      "sla.ch03.s1"
+    ],
+    "F-PRC-13": [
+      "ops.ch05.s3",
+      "ops.ch12.s2",
+      "hs.ch03.s2",
+      "roles.ch02.s2",
+      "roles.ch03.s4"
+    ],
+    "F-DRV-04": [
+      "ops.ch05.s3",
+      "ops.ch07.s3",
+      "ops.ch12.s2",
+      "hs.ch03.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s2",
+      "sla.ch03.s1"
+    ],
+    "F-PRC-03": [
+      "ops.ch06.s1",
+      "roles.ch02.s1",
+      "roles.ch02.s3",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-ORD-04": [
+      "ops.ch06.s1",
+      "ops.ch06.s2",
+      "roles.ch02.s1",
+      "roles.ch02.s3",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-PRC-04": [
+      "ops.ch06.s2",
+      "ops.ch06.s3",
+      "roles.ch02.s3",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-ORD-05": [
+      "ops.ch06.s2",
+      "ops.ch06.s3",
+      "ops.ch07.s1",
+      "roles.ch01.s3",
+      "roles.ch02.s3",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-PRC-05": [
+      "ops.ch06.s3",
+      "ops.ch07.s1",
+      "roles.ch02.s3",
+      "roles.ch03.s2",
+      "sla.ch01.s2",
+      "sla.ch02.s1"
+    ],
+    "F-ZON-17": [
+      "ops.ch06.s3"
+    ],
+    "F-RSP-11": [
+      "ops.ch06.s3"
+    ],
+    "F-ORD-11": [
+      "ops.ch06.s3"
+    ],
+    "F-RSP-12": [
+      "ops.ch06.s3"
+    ],
+    "F-EQP-07": [
+      "ops.ch07.s1",
+      "roles.ch02.s3",
+      "roles.ch03.s2",
+      "roles.ch03.s3",
+      "sla.ch01.s2"
+    ],
+    "F-EQP-08": [
+      "ops.ch07.s1",
+      "roles.ch03.s2",
+      "roles.ch03.s3"
+    ],
+    "F-ZON-18": [
+      "ops.ch07.s1",
+      "roles.ch03.s2"
+    ],
+    "F-ZON-19": [
+      "ops.ch07.s1",
+      "roles.ch03.s2"
+    ],
+    "F-ZON-20": [
+      "ops.ch07.s1",
+      "roles.ch03.s2"
+    ],
+    "F-ZON-21": [
+      "ops.ch07.s1",
+      "roles.ch03.s2"
+    ],
+    "F-ORD-12": [
+      "ops.ch07.s1"
+    ],
+    "F-ORD-13": [
+      "ops.ch07.s1"
+    ],
+    "F-ORD-14": [
+      "ops.ch07.s1"
+    ],
+    "F-EQP-11": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-EQP-12": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-EQP-13": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-EQP-14": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-DRV-01": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-DRV-02": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-DRV-03": [
+      "ops.ch07.s3",
+      "roles.ch01.s3",
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "F-ZON-22": [
+      "ops.ch07.s3"
+    ],
+    "F-ORD-15": [
+      "ops.ch07.s3"
+    ],
+    "F-RSP-13": [
+      "ops.ch07.s3"
+    ],
+    "F-PRC-11": [
+      "ops.ch08.s1",
+      "ops.ch08.s2",
+      "ops.ch08.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s2",
+      "hs.ch02.s1",
+      "hs.ch02.s2",
+      "hs.ch04.s1",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4"
+    ],
+    "F-PRC-10": [
+      "ops.ch08.s2",
+      "ops.ch09.s2",
+      "ops.ch09.s3",
+      "ops.ch12.s1",
+      "hs.ch01.s1",
+      "hs.ch01.s3",
+      "hs.ch02.s2",
+      "hs.ch04.s1",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4"
+    ],
+    "F-EQP-05": [
+      "ops.ch09.s1",
+      "ops.ch09.s2",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3"
+    ],
+    "F-EQP-06": [
+      "ops.ch09.s1",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3"
+    ],
+    "F-ORD-08": [
+      "ops.ch09.s2",
+      "hs.ch01.s3",
+      "roles.ch02.s1",
+      "roles.ch03.s3",
+      "roles.ch03.s4"
+    ],
+    "F-RUL-03": [
+      "ops.ch09.s3",
+      "hs.ch01.s1",
+      "hs.ch01.s3",
+      "hs.ch02.s1",
+      "roles.ch01.s2",
+      "roles.ch02.s1",
+      "roles.ch03.s4"
+    ],
+    "F-ORD-06": [
+      "ops.ch10.s1",
+      "ops.ch10.s2",
+      "hs.ch04.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s2"
+    ],
+    "F-SCH-08": [
+      "ops.ch10.s1",
+      "hs.ch04.s2",
+      "roles.ch03.s2",
+      "sla.ch03.s2"
+    ],
+    "F-ZON-23": [
+      "ops.ch10.s1",
+      "roles.ch03.s2"
+    ],
+    "F-ZON-24": [
+      "ops.ch10.s1"
+    ],
+    "F-ZON-25": [
+      "ops.ch10.s1"
+    ],
+    "F-RSP-14": [
+      "ops.ch10.s1"
+    ],
+    "F-ORD-16": [
+      "ops.ch10.s1"
+    ],
+    "F-ORD-17": [
+      "ops.ch10.s1"
+    ],
+    "F-ZON-26": [
+      "ops.ch10.s2"
+    ],
+    "F-ZON-27": [
+      "ops.ch10.s2"
+    ],
+    "F-RSP-15": [
+      "ops.ch10.s2"
+    ],
+    "F-ORD-07": [
+      "ops.ch11.s1",
+      "ops.ch11.s2",
+      "ops.ch11.s3",
+      "roles.ch01.s1",
+      "roles.ch03.s1",
+      "sla.ch02.s2"
+    ],
+    "F-SCH-04": [
+      "ops.ch11.s2",
+      "roles.ch01.s1",
+      "roles.ch03.s1",
+      "sla.ch02.s2",
+      "sla.ch02.s3"
+    ],
+    "F-RSP-16": [
+      "ops.ch11.s2"
+    ],
+    "F-RSP-17": [
+      "ops.ch11.s2"
+    ],
+    "F-RSP-18": [
+      "ops.ch11.s2"
+    ],
+    "F-ORD-18": [
+      "ops.ch11.s2"
+    ],
+    "F-ZON-28": [
+      "ops.ch12.s2"
+    ],
+    "F-ZON-29": [
+      "ops.ch12.s2"
+    ],
+    "F-RSP-19": [
+      "ops.ch12.s2"
+    ],
+    "F-RSP-20": [
+      "ops.ch12.s2"
+    ],
+    "F-ORD-19": [
+      "ops.ch12.s2"
+    ],
+    "F-ORD-20": [
+      "ops.ch12.s2"
+    ],
+    "F-PRC-14": [
+      "ops.ch12.s3",
+      "hs.ch04.s1",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s3",
+      "roles.ch03.s4"
+    ],
+    "F-SCH-07": [
+      "ops.ch12.s3",
+      "hs.ch04.s3",
+      "roles.ch01.s1",
+      "roles.ch01.s2",
+      "roles.ch03.s3",
+      "sla.ch02.s3"
+    ],
+    "F-ZON-30": [
+      "ops.ch12.s3"
+    ],
+    "F-RSP-21": [
+      "ops.ch12.s3"
+    ],
+    "F-RSP-22": [
+      "ops.ch12.s3"
+    ],
+    "F-SCH-12": [
+      "hs.ch04.s2"
+    ],
+    "F-RSP-23": [
+      "hs.ch04.s2"
+    ],
+    "F-ZON-31": [
+      "hs.ch04.s2"
+    ],
+    "F-RSP-24": [
+      "roles.ch01.s3"
+    ],
+    "F-RSP-25": [
+      "roles.ch01.s3"
+    ],
+    "F-ORD-21": [
+      "roles.ch01.s3"
+    ],
+    "F-ORD-22": [
+      "roles.ch01.s3"
+    ],
+    "F-RSP-26": [
+      "roles.ch01.s3"
+    ],
+    "F-ORD-23": [
+      "roles.ch02.s3"
+    ],
+    "F-RSP-27": [
+      "roles.ch02.s3"
+    ],
+    "F-ZON-32": [
+      "sla.ch01.s1"
+    ],
+    "F-ORD-24": [
+      "sla.ch01.s1"
+    ],
+    "F-RSP-28": [
+      "sla.ch01.s1"
+    ]
+  },
+  "note": "section sla.ch03.s3 accepted"
+}

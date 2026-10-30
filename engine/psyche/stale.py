@@ -18,7 +18,8 @@ _UNITS = {
     # Count units allow at most two describing words ("6 electric counterbalance forklifts") so that
     # "6 dock doors serve all trucks" is not read as six trucks, and "8 forklift operators" counts people.
     "trucks": r"\s+([\w-]+\s+){0,2}(trucks?|forklifts?|jacks?)\b(?!\s+(operators?|drivers?|licen[cs]es?))",
-    "doors": r"\s+(\w+\s+)?(dock\s+)?doors?\b",
+    # "dock doors 1-4 and dock doors 5-8" is two ranges, not 4 doors.
+    "doors": r"\s+(?!(and|or)\s)(\w+\s+)?(dock\s+)?doors?\b",
     "t": r"\s*(t|tonnes?|tons?)\b(?!/)",
     "m": r"\s*m\b(?!/)",
     "°C": r"\s*°\s*C",

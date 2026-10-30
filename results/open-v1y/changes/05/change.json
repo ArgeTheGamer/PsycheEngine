@@ -1,0 +1,72 @@
+{
+  "fact_id": "F-EQP-01",
+  "old_value": "6",
+  "new_value": "9",
+  "affected_sections": [
+    "ops.ch09.s2",
+    "ops.ch12.s1",
+    "hs.ch01.s3",
+    "ops.ch05.s1",
+    "ops.ch09.s1",
+    "roles.ch02.s1",
+    "roles.ch03.s3",
+    "hs.ch03.s3",
+    "ops.ch09.s3",
+    "ops.ch07.s3",
+    "roles.ch01.s3",
+    "sla.ch01.s2",
+    "sla.ch01.s3"
+  ],
+  "derived": [
+    {
+      "fact_id": "F-DRV-02",
+      "old_value": "1",
+      "new_value": "2"
+    },
+    {
+      "fact_id": "F-DRV-01",
+      "old_value": "26",
+      "new_value": "28"
+    },
+    {
+      "fact_id": "F-DRV-03",
+      "old_value": "312",
+      "new_value": "336"
+    }
+  ],
+  "quoting": [
+    "F-RSP-25"
+  ],
+  "also": [
+    {
+      "fact_id": "F-EQP-02",
+      "old_value": "2.5",
+      "new_value": "3.0"
+    },
+    {
+      "fact_id": "F-EQP-03",
+      "old_value": "4",
+      "new_value": "5"
+    },
+    {
+      "fact_id": "F-EQP-04",
+      "old_value": "1.6",
+      "new_value": "2.0"
+    },
+    {
+      "fact_id": "F-EQP-05",
+      "old_value": "8",
+      "new_value": "11"
+    },
+    {
+      "fact_id": "F-EQP-13",
+      "old_value": "1200",
+      "new_value": "1800"
+    },
+    {
+      "fact_id": "F-EQP-11",
+      "old_value": "24000",
+      "new_value": "26000"
+    }
+  ]
+}

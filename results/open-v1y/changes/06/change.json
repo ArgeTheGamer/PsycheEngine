@@ -1,0 +1,23 @@
+{
+  "fact_id": "F-SCH-10",
+  "old_value": "3",
+  "new_value": "4",
+  "affected_sections": [
+    "ops.ch01.s3",
+    "ops.ch07.s3",
+    "roles.ch01.s3",
+    "sla.ch01.s2",
+    "sla.ch01.s3"
+  ],
+  "derived": [
+    {
+      "fact_id": "F-DRV-03",
+      "old_value": "336",
+      "new_value": "448"
+    }
+  ],
+  "quoting": [
+    "F-RSP-25"
+  ],
+  "also": []
+}

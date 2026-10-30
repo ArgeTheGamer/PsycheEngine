@@ -1,0 +1,24 @@
+{
+  "fact_id": "F-EQP-15",
+  "old_value": "4",
+  "new_value": "5",
+  "affected_sections": [
+    "ops.ch01.s3",
+    "ops.ch05.s3",
+    "ops.ch07.s3",
+    "roles.ch01.s3",
+    "sla.ch01.s2",
+    "sla.ch01.s3"
+  ],
+  "derived": [
+    {
+      "fact_id": "F-DRV-03",
+      "old_value": "512",
+      "new_value": "640"
+    }
+  ],
+  "quoting": [
+    "F-RSP-25"
+  ],
+  "also": []
+}

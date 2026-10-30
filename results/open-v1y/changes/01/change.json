@@ -1,0 +1,42 @@
+{
+  "fact_id": "F-LIM-15",
+  "old_value": "1000",
+  "new_value": "900",
+  "affected_sections": [
+    "ops.ch04.s2",
+    "ops.ch05.s1",
+    "ops.ch05.s2",
+    "ops.ch05.s3",
+    "ops.ch07.s1",
+    "ops.ch07.s3",
+    "ops.ch09.s1",
+    "ops.ch12.s2",
+    "hs.ch03.s2",
+    "hs.ch03.s3",
+    "roles.ch01.s3",
+    "roles.ch02.s1",
+    "roles.ch02.s2",
+    "roles.ch03.s2",
+    "sla.ch01.s1",
+    "sla.ch01.s2",
+    "sla.ch01.s3",
+    "sla.ch02.s1",
+    "sla.ch03.s1"
+  ],
+  "derived": [
+    {
+      "fact_id": "F-DRV-01",
+      "old_value": "24",
+      "new_value": "26"
+    },
+    {
+      "fact_id": "F-DRV-03",
+      "old_value": "288",
+      "new_value": "312"
+    }
+  ],
+  "quoting": [
+    "F-RSP-25"
+  ],
+  "also": []
+}
