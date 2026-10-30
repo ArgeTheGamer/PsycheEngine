@@ -105,10 +105,24 @@ def main() -> int:
 
         events = EventLog(run_dir / "events.jsonl")
         by_id = {s.id: s for s in sections}
-        decisions = []
+        # Progress is saved after every decision, so a run stopped by the budget cap resumes without
+        # applying a decision twice or losing the sections already revised.
+        progress = run_dir / "decisions.json"
+        saved = json.loads(progress.read_text(encoding="utf-8")) if progress.exists() else {"decisions": [], "revised": {}}
+        decisions = saved["decisions"]
+        by_id.update({sid: AcceptedSection(**s) for sid, s in saved["revised"].items()})
+
+        def save_progress() -> None:
+            revised = {sid: s.model_dump() for sid, s in by_id.items() if any(sid in d["rewritten"] for d in decisions)}
+            progress.write_text(json.dumps({"decisions": decisions, "revised": revised}, indent=2, ensure_ascii=False),
+                                encoding="utf-8")
+
         for n, c in questions.items():
+            if any(d["question"] == n for d in decisions):
+                continue
             if answers[n].strip().lower() == "ok":
                 decisions.append({"question": n, "answer": "ok", "rewritten": []})
+                save_progress()
                 continue
             decision = decide(c, answers[n].strip())
             request, refused = agents.interpret_request(team("change_request"), canon, decision)
@@ -120,6 +134,8 @@ def main() -> int:
                 facts = agents.extract_new_facts(team("canon_editor"), canon, plan[c["section_a"]], decision)
                 canon = canon.with_new_facts(c["section_a"], facts) if facts else canon
                 changed, targets = [f.id for f in facts], []
+                if not facts:  # usually the canon already states the chosen rule; only the two sections change
+                    print(f"{n}: no fact changed or added, the canon already agrees or the rule is not checkable")
             targets = list(dict.fromkeys([c["section_a"], c["section_b"], *targets]))
             revision = (
                 "\nThis section comes from documents written before the company settled a conflict between them. "
@@ -134,6 +150,7 @@ def main() -> int:
             CanonStore(run_dir / "canon").save(canon)
             decisions.append({"question": n, "answer": answers[n], "facts": changed, "refused": refused,
                               "unclear": request.unclear, "rewritten": targets})
+            save_progress()
             print(f"{n}: {', '.join(changed) or 'no fact'} -> rewrote {', '.join(targets)}")
 
         after = [by_id[s.id] for s in sections]

@@ -50,12 +50,13 @@ def plant_number(text, facts, canon, rng):
 
 
 def plant_token(text, facts, rx, alphabet, rng, label):
-    cited = " ".join(f.statement for f in facts)
-    options = [m for m in re.finditer(rx, text) if m.group(1) in cited]
+    """Swap a zone or procedure the section's own facts mention for one none of them mention."""
+    named = set(re.findall(rx, " ".join(f.statement for f in facts)))
+    options = [m for m in re.finditer(rx, text) if m.group(1) in named]
     if not options:
         return None
     m = rng.choice(options)
-    free = [a for a in alphabet if a not in re.findall(rx, cited) and a != m.group(1)]
+    free = [a for a in alphabet if a not in named]
     if not free:
         return None
     planted = m.group(0).replace(m.group(1), rng.choice(free))

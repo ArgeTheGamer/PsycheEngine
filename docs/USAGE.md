@@ -18,7 +18,7 @@ Settings in `.env`:
 | `META_MODEL` | Model for the agents, default `muse-spark-1.3`. `muse-spark-1.3-contributor` is far cheaper and was as good in our tests. |
 | `CRITIC_PROVIDER` | `meta` (default) or `open`: run the critic on Muse Spark Open instead. The reported runs used `open`. |
 | `AGENT_PROVIDER` | `open` runs every agent except the auditor on Muse Spark Open (runs `open-v1`, `open-v1y`). |
-| `OPEN_WEIGHTS_BASE_URL`, `OPEN_WEIGHTS_API_KEY`, `OPEN_WEIGHTS_MODEL` | Where Muse Spark Open is hosted. Needed only with `CRITIC_PROVIDER=open`. |
+| `OPEN_WEIGHTS_BASE_URL`, `OPEN_WEIGHTS_API_KEY`, `OPEN_WEIGHTS_MODEL` | Where Muse Spark Open is hosted. Needed only with `CRITIC_PROVIDER=open` or `AGENT_PROVIDER=open`. |
 | `PSYCHE_BUDGET_USD` | Spending cap per agent team in one process, default `5`. The command stops when it is reached; `--resume` (where available) continues later. Meta's own spend limit only sends an email. |
 
 ## Checks
