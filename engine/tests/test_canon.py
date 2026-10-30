@@ -207,3 +207,10 @@ def test_change_request_keeps_only_settable_facts():
     request, refused = interpret_request(Model(), canon, "slower forklifts")
     assert [c.fact_id for c in request.changes] == ["F-LIM-01"]
     assert len(refused) == 3 and request.unclear == ["which zone?"]
+
+
+def test_stale_scan_reads_door_ranges_as_ranges():
+    from psyche.stale import find_stale
+
+    text = "Approach dock doors 1-4 and dock doors 5-8 square-on. We have 4 outbound doors."
+    assert find_stale(text, [("F-EQP-15", "4", "doors")]) == [("F-EQP-15", "4 outbound doors")]
