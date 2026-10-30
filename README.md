@@ -10,7 +10,7 @@ Live dashboard: **https://psycheengine-argethegamers-projects.vercel.app**
 
 After a year of twelve changes, Muse Spark left 10 out-of-date values in the four documents and PsycheEngine left none. With every agent on Meta's open-weights Muse Spark Open, the same year ends 0 for PsycheEngine against 7 and 43 for the model on its own.
 
-Every agent can run on Muse Spark Open, so a company can host the model on its own servers and its documents never leave the building.
+Every agent that writes or checks the documents can run on Muse Spark Open, so a company can host the model on its own servers and its documents never leave the building.
 
 ## What it does
 
@@ -74,7 +74,7 @@ To see whether this depends on a closed model, I ran everything again with every
 
 The one-context baseline on Muse Spark Open handles the long prompt badly at first: in January it rewrote one section and left 84 old values, and it only caught up when the pallet cap changed again in October. The per-document baseline starts clean and loses ground every month. PsycheEngine stays at zero because the canon and the code do the remembering, not the model. Writing the four documents from scratch on Muse Spark Open went the same way as on Muse Spark 1.3: 64 sections, none left with an unresolved critic issue, 0 fact violations against 3 for the one-context baseline and 4 for separate sessions, and 1 contradiction between documents against 3 for separate sessions (run `open-v1`, $2.87).
 
-This is the result I care about most for real warehouses. Operations manuals, client contracts and safety rules are exactly what a company does not want to send to someone else's API. Because every agent runs on open weights, a company with its own IT can serve the model on its own servers or in a private cloud and keep the whole loop in house. I ran it on a Modal shared endpoint, not on my own hardware, so the claim is that it can run there, not that someone already does: Muse Spark Open has 816B parameters (42B active), which means a multi-GPU server.
+This is the result I care about most for real warehouses. Operations manuals, client contracts and safety rules are exactly what a company does not want to send to someone else's API. Because the planner, writer, critic, canon editor and change agent all run on open weights, a company with its own IT can serve the model on its own servers or in a private cloud and keep the whole loop in house. The auditor stayed on Muse Spark 1.3 only so the benchmark scores stay comparable; a company using PsycheEngine doesn't need it. I ran it on a Modal shared endpoint, not on my own hardware, so the claim is that it can run there, not that someone already does: Muse Spark Open has 816B parameters (42B active), which means a multi-GPU server.
 
 Stale scan v3 is used here; it no longer reads "dock doors 1-4 and dock doors 5-8" as a count of four doors. Re-scoring every earlier run with it changed nothing in the tables above.
 
