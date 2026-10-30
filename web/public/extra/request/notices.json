@@ -1,0 +1,37 @@
+[
+  {
+    "audience": "client",
+    "subject": "Notice: Increased outbound trailer and per-shift pallet capacity",
+    "body": "Dear clients,\n\nWe have increased our outbound dispatch capacity for full-weight pallets.\n\nA trailer now takes at most 28 full-weight pallets, increased from 24 pallets. As a result, outbound capacity is now at most 336 full-weight pallets per shift, increased from 288 pallets.\n\nIn practice, we can load more full-weight pallets on each trailer and accept more volume per shift before rolling excess to following shifts or agreed overtime. Orders and transport must still meet the agreed cut-offs, and loads are released in door call order.\n\nThe updated limits are set out in the Client Service Level Agreement, in Dispatch Capacity and Release and Operating Hours and Cut-offs, which now carry the revised trailer and per-shift ceilings.\n\nThank you for your continued business.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-DRV-01",
+      "F-DRV-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "More reach trucks in service - updated trailer and shift limits",
+    "body": "From today, Zone B high-bay put-away and retrieval must allow for our larger fleet. We previously operated with 4 reach trucks. We now have 6 reach trucks for the high bays.\n\nWhat this means in practice:\n- Forklift operators trained on reach-truck work have more trucks available for Zone B put-away and retrieval. Book and confirm put-away as before and report mast, camera or guidance faults for entry in the repair log without delay.\n- Planning figures for full-weight pallets are updated. A trailer takes at most 28 full-weight pallets, previously 24. Outbound capacity is at most 336 full-weight pallets per shift, previously 288. Do not promise, stage or load beyond those ceilings.\n- Everyone working on site must keep rack storage aisles clear and give way to a reach truck already positioned at a bay face so the extra trucks can work safely.\n\nThese rules are now written in the Operations Manual in Bulk storage in Zone B, Electric fleet overview, and Van and shift dispatch limit, in the Health & Safety Instruction in Driver authorisation and truck checks, and in the Job Descriptions for Forklift Operators.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch04.s1",
+      "ops.ch11.s1",
+      "ops.ch07.s2",
+      "hs.ch01.s3",
+      "roles.ch02.s2"
+    ],
+    "cited_fact_ids": [
+      "F-EQP-03",
+      "F-DRV-01",
+      "F-DRV-03",
+      "F-ROL-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]
