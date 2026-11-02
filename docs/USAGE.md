@@ -79,6 +79,14 @@ engine/.venv/Scripts/python engine/scripts/request_change.py --run demo --messag
 
 The change agent maps the message to fact changes and prints them with the words that justify each one. Facts computed in code are never set directly, and anything ambiguous comes back as a question. Nothing changes until you type `y` (or pass `--yes`); then the changes go through the same propagation as `change_fact.py`, as one batch. The message and the agent's reading are saved in `changes/NN/request.json`. Around $0.30 for two changes.
 
+## The whole loop live
+
+```bash
+engine/.venv/Scripts/python engine/scripts/demo_live.py --message "Our haulier switched to new trailers that carry 28,000 kg."
+```
+
+What the demo video shows. It copies the published year run (`results/md-v4y`, so it works from a fresh clone) to `runs/live-demo/` and runs four steps with every model call printed as it happens (agent, model, host, section, latency, tokens, cost): the critic is shown a section with one planted wrong value, the change agent reads the message, the change propagates (computed facts in code, dependent sections rewritten and checked, old values scanned, notices drafted), and a before/after plus the notices are printed. Every call goes to `calls_live_demo.jsonl`, the critic check to `critic_check.json`, the rest to `changes/13/`. About 3 minutes and well under $1. `PSYCHE_LIVE=1` turns the same per-call printing on for any other script.
+
 ## Taking over existing documents
 
 ```bash

@@ -102,3 +102,10 @@ def test_agent_provider_open_moves_every_agent_but_the_auditor(monkeypatch):
     monkeypatch.setenv("OPEN_WEIGHTS_API_KEY", "test")
     assert {provider_for(a).name for a in ("planner", "writer", "critic", "canon_editor", "baseline")} == {"open"}
     assert provider_for("auditor").name == "meta"
+
+
+def test_display_host_drops_the_workspace():
+    from psyche.llm import display_host
+
+    assert display_host("https://api.meta.ai/v1") == "api.meta.ai"
+    assert display_host("https://acme--ep-open-server.us-west.modal.direct/v1") == "ep-open-server.us-west.modal.direct"
