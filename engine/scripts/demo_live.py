@@ -1,9 +1,10 @@
 """The whole loop live, for the demo video: every Meta model call is printed as it happens.
 
-    engine/.venv/Scripts/python engine/scripts/demo_live.py --from runs/md-v4y --run live-demo \
+    engine/.venv/Scripts/python engine/scripts/demo_live.py --run live-demo \
         --message "Our haulier switched to new trailers that carry 28,000 kg."
 
-Works on a fresh copy of a finished run. Four steps:
+Works on a fresh copy of a finished run; the default is the published year run in results/, so it runs
+from a fresh clone. Four steps:
 1. The critic is shown a section with one planted wrong value and has to quote it.
 2. The change agent reads the manager's message and maps it to facts.
 3. Propagation: facts computed in code, only dependent sections rewritten by the writer, each checked by
@@ -25,7 +26,7 @@ import time
 os.environ["PSYCHE_LIVE"] = "1"
 
 from psyche import agents  # noqa: E402
-from psyche.canon import CanonStore  # noqa: E402
+from psyche.canon import Canon, CanonStore  # noqa: E402
 from psyche.config import REPO_ROOT, budget_usd, provider_for  # noqa: E402
 from psyche.engine import Settings, Team  # noqa: E402
 from psyche.llm import Budget, Tracer  # noqa: E402
@@ -49,7 +50,7 @@ def changed_sentence(before: str, after: str) -> tuple[str, str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--from", dest="source", default="runs/md-v4y", help="finished run to copy")
+    parser.add_argument("--from", dest="source", default="results/md-v4y", help="finished run to copy (runs/ or results/)")
     parser.add_argument("--run", default="live-demo")
     parser.add_argument("--message", required=True, help="what changed, in the manager's words")
     args = parser.parse_args()
@@ -58,6 +59,9 @@ def main() -> int:
     if run_dir.exists():
         shutil.rmtree(run_dir)
     shutil.copytree(REPO_ROOT / args.source, run_dir)
+    if not (run_dir / "canon").exists():  # a published run in results/ keeps only its latest canon
+        CanonStore(run_dir / "canon").save(
+            Canon.model_validate_json((run_dir / "canon_latest.json").read_text(encoding="utf-8")))
     team = Team(Budget(budget_usd()), Tracer(run_dir / "calls_live_demo.jsonl"))
     started = time.time()
     writer, critic = provider_for("writer"), provider_for("critic")
