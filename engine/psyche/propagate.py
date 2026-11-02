@@ -19,6 +19,7 @@ from . import agents
 from .agents import Section
 from .canon import CanonStore
 from .engine import AcceptedSection, Event, EventLog, Settings, Team, write_section
+from .llm import live
 from .notices import write_notices
 from .stale import find_stale, replace_stale, unambiguous
 
@@ -51,6 +52,11 @@ def propagate(
     canon.link_quotes()  # also covers canons written before quote linking existed
     canon, change = canon.with_changes([(fact_id, new_value, new_statement), *extra])
     store.save(canon)
+    for m in [change, *change.also]:
+        live(f"canon v{canon.version}: {m.fact_id} {m.old_value} -> {m.new_value}")
+    for d in change.derived:
+        live(f"computed in code: {d.fact_id} {d.old_value} -> {d.new_value}")
+    live(f"sections that depend on it: {len(change.affected_sections)}  {', '.join(change.affected_sections)}")
     (out / "change.json").write_text(change.model_dump_json(indent=2), encoding="utf-8")
 
     # Knock-on changes of derived facts (computed in code) are spelled out for the writer.
@@ -106,6 +112,8 @@ def propagate(
             for fid, match in hits:
                 events.emit(Event("stale_guard", "code", "canon_update", f"replaced old value of {fid} in code", current.id,
                                   quote=match))
+        left = find_stale(done.text, old_values)
+        live(f"          stale scan (code) {current.id}: {len(left)} old values left")
         diff.append({"section_id": current.id, "title": current.title, "before": current.text, "after": done.text})
         sections[i] = done
 

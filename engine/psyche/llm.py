@@ -7,6 +7,7 @@ tokens and dollars per chapter straight from real API responses.
 from __future__ import annotations
 
 import json
+import os
 import time
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -16,6 +17,15 @@ from openai import OpenAI
 from pydantic import BaseModel, ValidationError
 
 from .config import Provider
+
+# PSYCHE_LIVE=1 prints every model call as it happens: which agent, which model on which host, and what it cost.
+LIVE = os.environ.get("PSYCHE_LIVE") == "1"
+
+
+def live(line: str, end: str = "\n") -> None:
+    if LIVE:
+        print(line, end=end, flush=True)
+
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -115,9 +125,16 @@ class LLM:
         if response_format:
             kwargs["response_format"] = response_format
 
+        host = self.provider.base_url.split("//")[-1].split("/")[0]
+        host = host if len(host) <= 28 else "…" + host[-27:]  # keeps the host, hides the account part
+        where = (tags or {}).get("section", "")
+        live(f"{time.strftime('%H:%M:%S')}  {agent:<14} {self.provider.model:<40} {host:<28} {where:<12}", end="")
         started = time.perf_counter()
         response = self.client.chat.completions.create(**kwargs)
         latency = time.perf_counter() - started
+        u = response.usage
+        cost = self.provider.cost(u.prompt_tokens, getattr(getattr(u, "prompt_tokens_details", None), "cached_tokens", 0) or 0, u.completion_tokens)
+        live(f"{latency:5.1f}s  {u.prompt_tokens:>6} in {u.completion_tokens:>5} out  ${cost:.4f}")
 
         self._record(agent, response.usage, latency, tags or {})
         return response.choices[0].message.content or ""

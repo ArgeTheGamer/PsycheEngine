@@ -22,7 +22,7 @@ from . import agents
 from .agents import Section
 from .canon import Canon, CanonStore
 from .config import budget_usd, provider_for
-from .llm import LLM, Budget, Tracer
+from .llm import live, LLM, Budget, Tracer
 
 
 @dataclass
@@ -44,6 +44,11 @@ class EventLog:
 
     def emit(self, event: Event) -> None:
         self.events.append(event)
+        if event.agent == "stale_guard":
+            live(f"          stale guard {event.section_id}: \"{event.quote}\" {event.message}")
+        elif event.agent == "critic":
+            mark = "accepted" if event.accepted else f'REJECTED "{(event.quote or "")[:70]}"'
+            live(f"          critic verdict  {event.section_id}: {mark}")
         if self.path:
             with self.path.open("a", encoding="utf-8") as f:
                 f.write(json.dumps(asdict(event), ensure_ascii=False) + "\n")
