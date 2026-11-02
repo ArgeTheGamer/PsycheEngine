@@ -29,7 +29,7 @@ from psyche import agents  # noqa: E402
 from psyche.canon import Canon, CanonStore  # noqa: E402
 from psyche.config import REPO_ROOT, budget_usd, provider_for  # noqa: E402
 from psyche.engine import Settings, Team  # noqa: E402
-from psyche.llm import Budget, Tracer  # noqa: E402
+from psyche.llm import Budget, Tracer, display_host  # noqa: E402
 from psyche.propagate import propagate  # noqa: E402
 from psyche.stale import replace_stale, value_pattern  # noqa: E402
 
@@ -66,8 +66,8 @@ def main() -> int:
     started = time.time()
     writer, critic = provider_for("writer"), provider_for("critic")
     print(f"{BOLD}PsycheEngine · live run{RESET}  {time.strftime('%Y-%m-%d %H:%M')}")
-    print(f"writer, change agent: {writer.model} via {writer.base_url.split('//')[-1].split('/')[0]}")
-    print(f"critic: {critic.model}")
+    print(f"writer, change agent: {writer.model} via {display_host(writer.base_url)}")
+    print(f"critic: {critic.model} via {display_host(critic.base_url)}")
 
     canon = CanonStore(run_dir / "canon").latest()
     changes = sorted((run_dir / "changes").glob("*/sections.json"))

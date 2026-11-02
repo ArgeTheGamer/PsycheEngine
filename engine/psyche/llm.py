@@ -22,6 +22,12 @@ from .config import Provider
 LIVE = os.environ.get("PSYCHE_LIVE") == "1"
 
 
+def display_host(base_url: str) -> str:
+    """The endpoint's host for printing, without the account part (Modal hosts start with the workspace)."""
+    host = base_url.split("//")[-1].split("/")[0]
+    return host.split("--")[-1] if "--" in host else host
+
+
 def live(line: str, end: str = "\n") -> None:
     if LIVE:
         print(line, end=end, flush=True)
@@ -125,16 +131,19 @@ class LLM:
         if response_format:
             kwargs["response_format"] = response_format
 
-        host = self.provider.base_url.split("//")[-1].split("/")[0]
-        host = host if len(host) <= 28 else "…" + host[-27:]  # keeps the host, hides the account part
-        where = (tags or {}).get("section", "")
-        live(f"{time.strftime('%H:%M:%S')}  {agent:<14} {self.provider.model:<40} {host:<28} {where:<12}", end="")
+        if LIVE:
+            host = display_host(self.provider.base_url)[-28:]
+            where = (tags or {}).get("section", "")
+            live(f"{time.strftime('%H:%M:%S')}  {agent:<14} {self.provider.model:<40} {host:<28} {where:<12}", end="")
         started = time.perf_counter()
         response = self.client.chat.completions.create(**kwargs)
         latency = time.perf_counter() - started
-        u = response.usage
-        cost = self.provider.cost(u.prompt_tokens, getattr(getattr(u, "prompt_tokens_details", None), "cached_tokens", 0) or 0, u.completion_tokens)
-        live(f"{latency:5.1f}s  {u.prompt_tokens:>6} in {u.completion_tokens:>5} out  ${cost:.4f}")
+        if LIVE:
+            u = response.usage
+            prompt_t = getattr(u, "prompt_tokens", 0) or 0
+            out_t = getattr(u, "completion_tokens", 0) or 0
+            cached = getattr(getattr(u, "prompt_tokens_details", None), "cached_tokens", 0) or 0
+            live(f"{latency:5.1f}s  {prompt_t:>6} in {out_t:>5} out  ${self.provider.cost(prompt_t, cached, out_t):.4f}")
 
         self._record(agent, response.usage, latency, tags or {})
         return response.choices[0].message.content or ""
