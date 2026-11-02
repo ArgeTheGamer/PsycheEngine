@@ -1,0 +1,19 @@
+{
+  "message": "We bought two more reach trucks last week, and our new insurer caps pallets at 850 kg including the load.",
+  "changes": [
+    {
+      "fact_id": "F-EQP-03",
+      "new_value": "6",
+      "new_statement": "The fleet has 6 reach trucks for the high bays.",
+      "reason": "\"bought two more reach trucks\" - 4 + 2 = 6"
+    },
+    {
+      "fact_id": "F-LIM-15",
+      "new_value": "850",
+      "new_statement": "A pallet, including its load, may weigh at most 850 kg.",
+      "reason": "\"caps pallets at 850 kg including the load\""
+    }
+  ],
+  "unclear": [],
+  "refused": []
+}

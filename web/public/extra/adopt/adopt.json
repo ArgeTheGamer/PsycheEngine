@@ -1,0 +1,83 @@
+{
+  "facts": 373,
+  "conflicts_before": 6,
+  "dismissed": 1,
+  "conflicts_after": 0,
+  "sections_rewritten": 10,
+  "decisions": [
+    {
+      "question": "1",
+      "answer": "b",
+      "facts": [
+        "F-ZON-41"
+      ],
+      "refused": [],
+      "unclear": [],
+      "rewritten": [
+        "ops.ch12.s3",
+        "hs.ch04.s2"
+      ]
+    },
+    {
+      "question": "2",
+      "answer": "b",
+      "facts": [],
+      "refused": [],
+      "unclear": [],
+      "rewritten": [
+        "ops.ch02.s2",
+        "ops.ch04.s1"
+      ]
+    },
+    {
+      "question": "3",
+      "answer": "a",
+      "facts": [
+        "F-ZON-49"
+      ],
+      "refused": [],
+      "unclear": [],
+      "rewritten": [
+        "ops.ch05.s3",
+        "hs.ch03.s2"
+      ]
+    },
+    {
+      "question": "4",
+      "answer": "a",
+      "facts": [
+        "F-RSP-83",
+        "F-RSP-84"
+      ],
+      "refused": [],
+      "unclear": [
+        "Which canon fact should record that 'Counting is done by staff assigned by the shift supervisor, checked by the stock controllers' - should F-RSP-09 or another count-task fact be rewritten to this wording?"
+      ],
+      "rewritten": [
+        "ops.ch10.s1",
+        "sla.ch02.s2"
+      ]
+    },
+    {
+      "question": "5",
+      "answer": "a",
+      "facts": [
+        "F-PRC-21"
+      ],
+      "refused": [],
+      "unclear": [
+        "The message chooses PR-08 'Racking safety is inspected separately from counting' over PR-10 'Maintenance Technician carries out the documented racking safety inspection every month' - which existing fact(s) should record PR-08, and does the performer or monthly frequency change?"
+      ],
+      "rewritten": [
+        "ops.ch10.s3",
+        "roles.ch03.s3"
+      ]
+    },
+    {
+      "question": "6",
+      "answer": "ok",
+      "rewritten": []
+    }
+  ],
+  "remaining": []
+}
