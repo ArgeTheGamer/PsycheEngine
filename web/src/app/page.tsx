@@ -11,6 +11,7 @@ import { YearTab } from "@/components/year-tab";
 import { ChangeReplay } from "@/components/change-replay";
 import { PlaybackView } from "@/components/playback-view";
 import { YearView } from "@/components/year-view";
+import { AdoptView, CriticCheck, OpenCompare } from "@/components/extra-views";
 import { loadRun, loadRuns, type RunData } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import type { FactChangeRecord, RunInfo } from "@/lib/types";
@@ -55,6 +56,7 @@ export default function Home() {
 
   const label = runs.find((r) => r.id === runId)?.label ?? runId;
   const latestFacts = data?.canon[data.canon.length - 1]?.facts ?? [];
+  const openWeights = data?.events.some((e) => e.agent === "writer" && e.model.includes("Open")) ?? false;
   const betweenDocs = data?.audit ? Object.values(data.audit.between).reduce((a, b) => a + b, 0) : 0;
 
   return (
@@ -71,6 +73,7 @@ export default function Home() {
       canPlay={(data?.events.length ?? 0) > 0}
       onYear={() => setYearOpen(true)}
       canYear={(data?.mutations?.steps.length ?? 0) > 0}
+      openWeights={openWeights}
     >
       {error && (
         <p className="m-6 border-[1.5px] border-hazard bg-label px-4 py-3 text-[14px]">
@@ -101,6 +104,8 @@ export default function Home() {
           auditBaseline={data.auditBaseline}
         />
       )}
+      {data && tab === "benchmark" && <CriticCheck />}
+      {tab === "adopt" && <AdoptView />}
       {data && tab === "usage" && (
         <UsageView
           documents={data.documents}
@@ -108,6 +113,7 @@ export default function Home() {
           callsBaseline={data.callsBaseline}
         />
       )}
+      {data && tab === "year" && <OpenCompare />}
       {data && tab === "year" && data.mutations && (
         <YearTab
           key={runId}

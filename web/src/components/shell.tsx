@@ -1,15 +1,16 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Activity, BarChart3, CalendarRange, FileText, Network, Play, Wallet } from "lucide-react";
+import { Activity, BarChart3, CalendarRange, FileInput, FileText, Network, Play, Wallet } from "lucide-react";
 import { useT, type StringKey } from "@/lib/i18n";
 import type { RunInfo } from "@/lib/types";
 
-export type Tab = "production" | "benchmark" | "year" | "graph" | "logs" | "usage";
+export type Tab = "production" | "benchmark" | "adopt" | "year" | "graph" | "logs" | "usage";
 
 const TABS: { id: Tab; icon: typeof FileText }[] = [
   { id: "production", icon: FileText },
   { id: "benchmark", icon: BarChart3 },
+  { id: "adopt", icon: FileInput },
   { id: "year", icon: CalendarRange },
   { id: "graph", icon: Network },
   { id: "logs", icon: Activity },
@@ -26,6 +27,7 @@ export function Shell({
   canPlay,
   onYear,
   canYear,
+  openWeights = false,
   children,
 }: {
   tab: Tab;
@@ -37,6 +39,7 @@ export function Shell({
   canPlay: boolean;
   onYear: () => void;
   canYear: boolean;
+  openWeights?: boolean;
   children: ReactNode;
 }) {
   const { t, lang, setLang } = useT();
@@ -94,6 +97,9 @@ export function Shell({
               ))}
             </select>
           </label>
+          {openWeights && (
+            <span className="border-[1.5px] border-steady px-2 py-0.5 font-mono text-[12px] uppercase text-steady">{t("top.open")}</span>
+          )}
           <div className="ml-auto flex items-center gap-2">
             <button
               type="button"
