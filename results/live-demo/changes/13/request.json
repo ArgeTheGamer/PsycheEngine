@@ -1,0 +1,13 @@
+{
+  "message": "Our haulier switched to new trailers that carry 28,000 kg.",
+  "changes": [
+    {
+      "fact_id": "F-EQP-11",
+      "new_value": "28000",
+      "new_statement": "Our contracted curtain-side trailers carry a payload of 28000 kg.",
+      "reason": "Message states \"switched to new trailers that carry 28,000 kg\""
+    }
+  ],
+  "unclear": [],
+  "refused": []
+}
