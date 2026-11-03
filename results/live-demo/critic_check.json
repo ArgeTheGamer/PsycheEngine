@@ -1,0 +1,13 @@
+{
+  "section": "ops.ch10.s1",
+  "planted": "8 km/h -> 10 km/h",
+  "accepted": false,
+  "issues": [
+    {
+      "category": "limit",
+      "fact_id": "F-LIM-01",
+      "quote": "Do not exceed 10 km/h inside the building.",
+      "problem": "The canon limits forklifts to 8 km/h inside the building."
+    }
+  ]
+}

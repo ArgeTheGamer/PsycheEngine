@@ -97,6 +97,10 @@ The four documents Muse Spark wrote in separate sessions in run md-v2 stand in f
 
 Given "We bought two more reach trucks last week, and our new insurer caps pallets at 850 kg including the load", the change agent proposed two fact changes: reach trucks 4 → 6 ("4 + 2 = 6") and the pallet cap 1,000 → 850 kg. It left the computed capacities alone, as it should (code would have refused to set them), and code recalculated them: a trailer now takes 28 full-weight pallets instead of 24, and outbound capacity rose from 288 to 336 pallets per shift. 18 sections were rewritten and both notices drafted, for $0.30. See [`results/request-demo/`](results/request-demo/).
 
+### The live run in the video
+
+The terminal part of the demo video is one run of [`demo_live.py`](engine/scripts/demo_live.py) on 2026-11-03, with `PSYCHE_LIVE=1` printing every model call as it happens. Writer and change agent on Muse Spark 1.3 through the Meta API, critic on Muse Spark Open. The critic rejected a planted 10 km/h speed limit and quoted the sentence. The change agent read "Our haulier switched to new trailers that carry 28,000 kg." as trailer payload 26,000 → 28,000 kg, code recalculated pallets per trailer (32 → 33) and outbound capacity per shift (640 → 660), and 5 sections plus both notices were rewritten and checked, with 0 old values left. 16 model calls, 147 s, $0.26. The video speeds up the middle of the run; every call, verdict and before/after text is in [`results/live-demo/`](results/live-demo/).
+
 ### The same five changes, three runs
 
 A shorter scenario (five changes, three of them moving computed values) repeated on three independently written sets of documents (md-v2h, md-v3h, md-v4h), against the one-context baseline:

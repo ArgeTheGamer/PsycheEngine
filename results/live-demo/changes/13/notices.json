@@ -1,0 +1,43 @@
+[
+  {
+    "audience": "client",
+    "subject": "Increased trailer payload and outbound capacity per shift",
+    "body": "Dear clients,\n\nOur contracted curtain-side trailer payload has increased from 26000 kg to 28000 kg.\n\nFor pallets weighing up to 800 kg each, a trailer now takes at most 33 full-weight pallets. Space governs full-weight loads before weight does. Mixed-weight loads must stay within both 28000 kg and 33 pallets on each trailer.\n\nAs a result, our committed outbound capacity per shift has increased from 640 to 660 full-weight pallets per shift. This is calculated from 5 outbound dock doors, each handling 4 trailer loads per shift, with each trailer carrying up to 33 pallets.\n\nThese rules are now set out in the Client Service Level Agreement, in the sections Dispatch Capacity and Release and Operating Hours and Cut-offs.\n\nPlease plan bookings and order cut-offs against the updated 660-pallet shift ceiling. Where volumes exceed the per-shift limit, the excess will be scheduled across following shifts.\n\nWarehouse Management, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "sla.ch01.s2",
+      "sla.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-EQP-11",
+      "F-LIM-15",
+      "F-DRV-01",
+      "F-DRV-03",
+      "F-EQP-12",
+      "F-EQP-15",
+      "F-SCH-10"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  },
+  {
+    "audience": "staff",
+    "subject": "Updated trailer payload and pallet limits - action from now",
+    "body": "From today use the new contracted curtain-side trailer payload of 28000 kg instead of 26000 kg.\n\nPlan every outbound load on a maximum pallet weight of 800 kg. Divide payload by pallet weight and cap by floor space. A trailer has 33 floor pallet positions and now takes at most 33 full-weight pallets, up from 32. Space governs before weight, so do not exceed 33 pallets or 28000 kg on any trailer. Check weights at wrapping, verify at staging and re-confirm before departure.\n\nThe per-shift promise also rises. With 5 outbound dock doors each handling 4 trailer loads per shift, outbound capacity is now at most 660 full-weight pallets per shift, up from 640. Do not book beyond that ceiling.\n\nThis applies to all loading, staging and dispatch staff, with dispatchers controlling door allocation and load release.\n\nThe rules are in Operations Manual sections Pallet weight and trailer capacity and Van and shift dispatch limit, and Job Descriptions section Dispatchers.\n\nWarehouse Manager, Harborwick 3PL Ltd.",
+    "cited_section_ids": [
+      "ops.ch07.s1",
+      "ops.ch07.s2",
+      "roles.ch01.s3"
+    ],
+    "cited_fact_ids": [
+      "F-EQP-11",
+      "F-LIM-15",
+      "F-EQP-12",
+      "F-DRV-01",
+      "F-EQP-15",
+      "F-SCH-10",
+      "F-DRV-03"
+    ],
+    "attempts": 1,
+    "unresolved_issues": []
+  }
+]
