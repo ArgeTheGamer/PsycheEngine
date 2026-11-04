@@ -6,7 +6,7 @@ PsycheEngine writes all of these documents from one shared canon of company fact
 
 I worked as a warehouse operative before this. The contradictions above are the kind I used to find on real notice boards. The company in this repository, Harborwick 3PL, is made up.
 
-Demo video (3 min, live run in the terminal): **https://youtu.be/0RhQB11wbJA**
+Demo video (2.5 min, with a live run in the terminal): **https://youtu.be/0RhQB11wbJA**
 
 Live dashboard: **https://psycheengine-argethegamers-projects.vercel.app**
 
