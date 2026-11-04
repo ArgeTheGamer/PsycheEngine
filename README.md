@@ -6,6 +6,8 @@ PsycheEngine writes all of these documents from one shared canon of company fact
 
 I worked as a warehouse operative before this. The contradictions above are the kind I used to find on real notice boards. The company in this repository, Harborwick 3PL, is made up.
 
+Demo video (2.5 min, with a live run in the terminal): **https://youtu.be/0RhQB11wbJA**
+
 Live dashboard: **https://psycheengine-argethegamers-projects.vercel.app**
 
 After a year of twelve changes, Muse Spark left 10 out-of-date values in the four documents and PsycheEngine left none. With every agent on Meta's open-weights Muse Spark Open, the same year ends 0 for PsycheEngine against 7 and 43 for the model on its own.
